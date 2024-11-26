@@ -5,7 +5,7 @@
 #'
 #' \code{featureImportance} 
 #'
-#' @format A data frame with `r nrow(BIENS::featureImportance)` rows and `r ncol(BIENS::featureImportance)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elemental::featureImportance)` rows and `r ncol(elemental::featureImportance)` columns, the definitions of which are:
 #' \describe{
 #'   \item{species}{The species, represented by a UKSI TVK.}
 #'   \item{variable}{A string representing the names of the model variable (), baseline (_baseline_), and full model (_full_model_)}
@@ -21,7 +21,7 @@
 #'
 #' \code{marginalEffects} 
 #'
-#' @format A data frame with `r nrow(BIENS::marginalEffects)` rows and `r ncol(BIENS::marginalEffects)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elemental::marginalEffects)` rows and `r ncol(elemental::marginalEffects)` columns, the definitions of which are:
 #' \describe{
 #'   \item{species}{The species, represented by a UKSI TVK.}
 #'   \item{variable}{The model variable name ().}
@@ -37,7 +37,7 @@
 #'
 #' \code{performanceMeasures} 
 #'
-#' @format A data frame with `r nrow(BIENS::performanceMeasures)` rows and `r ncol(BIENS::performanceMeasures)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elemental::performanceMeasures)` rows and `r ncol(elemental::performanceMeasures)` columns, the definitions of which are:
 #' \describe{
 #'   \item{species}{The species, represented by a UKSI TVK.}
 #'   \item{bbrier}{Binary Brier score}
@@ -59,5 +59,5 @@
 #'
 #' \code{models} 
 #'
-#' @format A named list with `r nrow(BIENS::models)` elements. Element names are the species, represented by a UKSI TVK..
+#' @format A named list with `r nrow(elemental::models)` elements. Element names are the species, represented by a UKSI TVK..
 "models"

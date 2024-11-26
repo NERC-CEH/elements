@@ -13,7 +13,7 @@
 predict <- function(species, predictors, pa = "Present"){
 
   # Retrieve model for a given species
-  model <- BIENS::models[[species]]
+  model <- elemental::models[[species]]
   
   # Ensure predictors are ordered
   predictors_ordered <- predictors[, dimnames(model$SV)[[2]]]

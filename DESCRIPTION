@@ -1,4 +1,4 @@
-Package: BIENS
+Package: elemental
 Title: Ecological niche models for the plants of Britain and Ireland.
 Version: 0.0.1
 Authors@R: c(person(given = "Zeke",
@@ -19,8 +19,8 @@ RoxygenNote: 7.3.1
 LazyDataCompression: xz
 Imports:
   e1071
-URL: https://github.com/NERC-CEH/BIENS
-BugReports: https://github.com/NERC-CEH/BIENS/issues
+URL: https://github.com/NERC-CEH/elemental
+BugReports: https://github.com/NERC-CEH/elemental/issues
 Depends: 
     R (>= 4.4)
 LazyData: true

@@ -1,19 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# BIENS
+# elemental
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-British and Irish Ecological Niche Models (BIENS) contains ……
+elemental is a R package containing **e**co**l**ogical nich**e**
+**m**od**e**ls for the pla**n**ts of bri**ta**in and ire**l**and.
 
 ## Installation
 
-You can install the development version of BIENS from
-[GitHub](https://github.com/) with:
+You can install the development version of elemental from
+[here](https://github.com/NERC-CEH/elemental) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("NERC-CEH/BIENS")
+remotes::install_github("NERC-CEH/elemental")
 ```
