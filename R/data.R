@@ -25,9 +25,8 @@
 #' \describe{
 #'   \item{species}{The species, represented by a UKSI TVK.}
 #'   \item{variable}{The model variable name ().}
-#'   \item{x}{The model vairable value.}
+#'   \item{x}{The model variable value.}
 #'   \item{y}{The model response value.}
-#'   \item{type}{The marginal effects plot type.}
 #' }
 "marginalEffects"
 
