@@ -1,7 +1,16 @@
+#' Plot the ALE values for a taxon and set of variables
+#' 
+#' Plot the Accumulated Local Effect (ALE) values for a selected taxon and
+#' variables.
+#'
+#' @param taxon A Taxon Version Key (TVK). String.
+#' @param vars A vector of variables. Must include atleast one of the following columns: "DG", "DS", "F", "L/H", "MAP", "N", "R", "S", "Tmax07", and "Tmin01".
+#'
+#' @return A composite plot showing the ALE effects for each model variable
+#' @export
+#'
+#' @examples elemental::plot_ale(taxon = "NBNSYS0000004288", vars = c("L", "F", "N", "R", "DG", "DS", "Tmin01", "Tmax07", "MAP", "S", "WRONGVAR"))
 plot_ale <- function(taxon, vars){
-  
-  # taxon <- "NBNSYS0000004288"
-  # vars <- c("F", "N", "R", "MAP", "L", "WRONG_VAR")
   
   # Retrieve data for taxon
   data <- elemental::marginalEffects
@@ -9,13 +18,27 @@ plot_ale <- function(taxon, vars){
 
   # Retrieve available vars
   available_vars <- intersect(vars, unique(data_taxon$variable))
+  n_vars <- length(available_vars)
   
   # Clear plots
   graphics::plot.new()
   
   # Calculate the number of columns and rows
-  ncols <- ifelse(length(available_vars) > 2, 2, 1)
-  nrows <- ifelse(ncols == 2 & length(available_vars) %% 2 == 0, length(available_vars) / 2, (length(available_vars) + 1) / 2)
+  # There are 10 possible variables: L/H, F, N, R, DG, DS, Tmin01, Tmax07, MAP, S
+  if(n_vars == 1){
+    ncols <- 1
+    nrows <- 1
+  } else if(n_vars %in% c(2, 3, 4, 5)) {
+    ncols <- 2
+    nrows <- 3
+  } else if(n_vars %in% c(6, 7, 8, 9, 10)) {
+    ncols <- 3
+    nrows <- 3
+  } else if(n_vars == 10) {
+    ncols <- 3
+    nrows <- 4
+  }
+  
   par(mfrow = c(nrows, ncols))
   
   # For each variable in available_vars produce a plot
