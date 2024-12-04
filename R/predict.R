@@ -10,7 +10,7 @@
 #' @return A data frame containing the model predictions...
 #' @export
 #' 
-#' @example elemental::predict(taxon = "NBNSYS0000004288", 
+#' @example elements::predict(taxon = "NBNSYS0000004288", 
 #'                             predictors = data.frame("F" = c(3.86, 1),
 #'                                                     "N" = c(2.71, 1),
 #'                                                     "R" = c(6.57, 1),
@@ -25,7 +25,7 @@
 predict <- function(taxon, predictors, pa = "Present"){
 
   # Retrieve model for a given taxon
-  model <- elemental::models[[taxon]]
+  model <- elements::models[[taxon]]
   
   # Retrieve the model variables
   model_vars <- attr(model@terms, "term.labels")

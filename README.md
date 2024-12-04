@@ -1,20 +1,20 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# elemental
+# elements
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-elemental is a R package containing **e**co**l**ogical nich**e**
-**m**od**e**ls for the pla**n**ts of bri**ta**in and ire**l**and.
+elements is a R package containing **e**co**l**ogical nich**e**
+**m**od**e**ls for the pla**n**t**s** of europe.
 
 ## Installation
 
-You can install the development version of elemental from
-[here](https://github.com/NERC-CEH/elemental) with:
+You can install the development version of elements from
+[here](https://github.com/NERC-CEH/elements) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("NERC-CEH/elemental")
+remotes::install_github("NERC-CEH/elements")
 ```

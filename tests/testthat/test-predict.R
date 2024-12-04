@@ -16,6 +16,6 @@ testthat::test_that("predict works", {
   
   test_pa <- c("Present", "Absent")
   
-  actual <- elemental::predict(species = test_species, predictors = test_predictors, pa = test_pa)
+  actual <- elements::predict(species = test_species, predictors = test_predictors, pa = test_pa)
   
 })

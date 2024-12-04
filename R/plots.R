@@ -9,11 +9,11 @@
 #' @return A composite plot showing the ALE effects for each model variable
 #' @export
 #'
-#' @examples elemental::plot_ale(taxon = "NBNSYS0000004288", vars = c("L", "F", "N", "R", "DG", "DS", "Tmin01", "Tmax07", "MAP", "S", "WRONGVAR"))
+#' @examples elements::plot_ale(taxon = "NBNSYS0000004288", vars = c("L", "F", "N", "R", "DG", "DS", "Tmin01", "Tmax07", "MAP", "S", "WRONGVAR"))
 plot_ale <- function(taxon, vars){
   
   # Retrieve data for taxon
-  data <- elemental::marginalEffects
+  data <- elements::marginalEffects
   data_taxon <- data[data[["species"]] == taxon, ]
 
   # Retrieve available vars

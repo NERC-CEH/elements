@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(elemental)
+library(elements)
 
-test_check("elemental")
+test_check("elements")
