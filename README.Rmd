@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-elements is a R package containing **e**co**l**ogical nich**e** **m**od**e**ls for the pla**n**t**s** of europe.
+elements is a R package containing **e**co**l**ogical nich**e** **m**od**e**ls for the pla**n**t**s** of Europe.
 
 ## Installation
 
