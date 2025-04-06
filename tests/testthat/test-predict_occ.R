@@ -1,8 +1,8 @@
 testthat::test_that("predict_occ works", {
   
-  startup()
+  elements::startup()
   
-  test_taxon <- "gymnocarpium_robertianum"
+  test_taxon <- "stellaria_graminea"
   
   test_predictors <- data.frame(L = c(7.8, 7.3), 
                                 M = c(2.9, 5.7),
@@ -17,11 +17,13 @@ testthat::test_that("predict_occ works", {
                                 bio17 = c(45.4, 4.1)
                                 )
   
+  test_predictors <- elements::ExampleData
+  
   test_pa <- c("Present", "Absent")
   
-  actual <- predict_occ(taxon = test_taxon, predictors = test_predictors, pa = test_pa)
+  actual <- elements::predict_occ(taxon = test_taxon, predictors = test_predictors, pa = test_pa, dp = 3)
   
-  shutdown()
+  elements::shutdown()
   
   testthat::expect_equal(colnames(actual), test_pa)
   testthat::expect_equal(nrow(actual), nrow(test_predictors))

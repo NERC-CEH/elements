@@ -9,4 +9,4 @@
 library(testthat)
 library(elements)
 
-test_check("elements")
+testthat::test_check("elements")

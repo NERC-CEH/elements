@@ -1,62 +1,31 @@
-#' Feature importance
-#'
-#' A dataset containing the feature importance of each model variable value for each species model
-#' generated using the `DALEX::model_parts` function.
-#'
-#' \code{featureImportance} 
-#'
-#' @format A data frame with `r nrow(elements::featureImportance)` rows and `r ncol(elements::featureImportance)` columns, the definitions of which are:
-#' \describe{
-#'   \item{species}{The species, represented by a UKSI TVK.}
-#'   \item{variable}{A string representing the names of the model variable (), baseline (_baseline_), and full model (_full_model_)}
-#'   \item{permutation}{The `DALEX::model_parts` permuation}
-#'   \item{dropout_loss}{The dropout loss associated with a particular variable and permuation.}
-#' }
-"featureImportance"
-
-#' Marginal effects plot data
-#'
-#' A dataset containing the marginal effects data produced using the `DALEX::model_profile` function.
-#' Three marginal effect types are provided: Accumulated Local (AL), Partial Dependence (PD), and Local Dependence (LD).
-#'
-#' \code{marginalEffects} 
-#'
-#' @format A data frame with `r nrow(elements::marginalEffects)` rows and `r ncol(elements::marginalEffects)` columns, the definitions of which are:
-#' \describe{
-#'   \item{species}{The species, represented by a UKSI TVK.}
-#'   \item{variable}{The model variable name ().}
-#'   \item{x}{The model variable value.}
-#'   \item{y}{The model response value.}
-#' }
-"marginalEffects"
-
 #' Model performance measures
 #'
-#' A dataset containing a number of performance metrics for each model.
+#' A dataset containing a number of performance measures for each model.
 #'
-#' \code{performanceMeasures} 
+#' \code{PerformanceMeasures} 
 #'
-#' @format A data frame with `r nrow(elements::performanceMeasures)` rows and `r ncol(elements::performanceMeasures)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::PerformanceMeasures)` rows and `r ncol(elements::PerformanceMeasures)` columns, the definitions of which are:
 #' \describe{
-#'   \item{species}{The species, represented by a UKSI TVK.}
-#'   \item{bbrier}{Binary Brier score}
-#'   \item{logloss}{...}
-#'   \item{auc}{Area under the ROC curve}
-#'   \item{prauc}{Area under the precision-recall curve}
-#'   \item{precision}{Positive predictive value}
-#'   \item{recall}{...}
-#'   \item{sensitivity}{True positive rate}
-#'   \item{specificity}{True negative rate}
-#'   \item{acc}{Accuracy}
-#'   \item{bacc}{Balanced accuracy}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingSpecies` and `elements::TaxaBackbone`.}
+#'   \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
+#'   \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
+#'   \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}
+#'   \item{Holdout.Sensitivity}{The Sensitivity, calculated using the random holdout sample test data.}
+#'   \item{Holdout.Specificity}{The Specificity, calculated using the random holdout sample test data.}
+#'   \item{Holdout.BalancedAccuracy}{The Balanced Accuracy, calculated using the random holdout sample test data.}
+#'   \item{STCV.BalancedAccuracy}{The Balanced Accuracy, calculated during the modelling fitting process which used spatio-temporal 10-fold cross-validation.}
 #' }
-"performanceMeasures"
+"PerformanceMeasures"
 
-#' Ecological Niche Models
+#' Example predictor data
 #'
-#' A list of Support Vector Machine (SVM) ecological niche models for each species.
+#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for the Stellaria graminea (stellaria_graminea)
 #'
-#' \code{models} 
+#' \code{ExampleData} 
 #'
-#' @format A named list with `r nrow(elements::models)` elements. Element names are the species, represented by a UKSI TVK..
-"models"
+#' @format A data frame with `r nrow(elements::ExampleData)` rows and `r ncol(elements::ExampleData)` columns, the definitions of which are:
+#' \describe{
+#'   \item{Presence}{A column of type string, containing either "Present" or "Absent".}
+#' }
+"ExampleData"
+

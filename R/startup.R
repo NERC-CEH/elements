@@ -8,7 +8,7 @@
 startup <- function(){
   
   invisible({
-    .GlobalEnv$OccModels <- filehash::dbInit("./data/OccModels")
+    .GlobalEnv$OccModels <- filehash::dbInit(system.file("extdata", "OccModels", package = "elements"))
   })
   
 }
