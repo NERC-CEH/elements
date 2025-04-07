@@ -18,7 +18,7 @@ plot_me(taxon, me_type, free_y, presences, vars)
 \item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".}
 }
 \value{
-A composite plot showing the ALE effects for each model variable
+A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 }
 \description{
 Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP)

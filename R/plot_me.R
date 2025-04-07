@@ -9,7 +9,7 @@
 #' @param presences A boolean. If true a box and whiskers plot showing the distribution of presences along each variable will be displayed.
 #' @param vars A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".
 #'
-#' @return A composite plot showing the ALE effects for each model variable
+#' @return A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 #' @export
 #'
 #' @examples elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
