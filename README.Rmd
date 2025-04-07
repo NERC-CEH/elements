@@ -28,26 +28,30 @@ library(filehash)
 [![R-CMD-check](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`elements` is a R package containing **e**co**l**ogical nich**e** **m**od**e**ls for the pla**n**t**s** of Europe. More specifically, elements contains correlative, realised Ecological Niche Models (ENMs) for the most prevalent vascular plants, bryophytes, and terricolous lichens in the European Vegetation Archive (EVA) (Chytrý et al., 2016).
+`elements` is a R package containing **E**co**L**ogical nich**E** **M**od**E**ls for the pla**NTS** of Europe. More specifically, `elements` contains correlative, realised Ecological Niche Models (ENMs) for the most prevalent vascular plants, bryophytes, and terricolous lichens in the European Vegetation Archive (EVA) (Chytrý et al., 2016).
 
 <details>
 <summary><h2 style="display:inline-block">Methods</h2></summary>
 
 The ENMs adhere to Hutchinsonian conceptualisation of the ecological niche as an n-dimensional hypervolume (Hutchinson, 1957). The environmental variables forming the dimensions of each hypervolume consist of:
 
-* Seven plot-mean ecological indicator values (EIVs): 
-  * **M** - Soil Moisture
-  * **R** - Reaction 
-  * **N** - Soil Nitrogen
-  * **L** - Light (Dengler et al., 2023) 
-  * **GP** - Grazing Pressure
-  * **SD** - Soil Disturbance (Midolo et al., 2023)
-  * **S** - Salinity (Tichy et al., 2023).
+* Seven plot-mean Ecological Indicator Values (EIVs): 
+  * **M** - Soil Moisture<sup>1</sup>
+  * **R** - Reaction<sup>1</sup>
+  * **N** - Soil Nitrogen<sup>1</sup>
+  * **L** - Light<sup>1</sup>
+  * **GP** - Grazing Pressure<sup>2</sup>
+  * **SD** - Soil Disturbance<sup>2</sup>
+  * **S** - Salinity<sup>3</sup>
 * Four bioclimatic variables: 
-  * **bio05** - Maximum temperature in the warmest month
-  * **bio06** - Minimum temperature in the coldest month
-  * **bio16** - Precipitation in the wettest quarter
-  * **bio17** - Precipitation in the driest quarter (Copernicus Climate Change Service, 2021)
+  * **bio05** - Maximum temperature in the warmest month<sup>4</sup>
+  * **bio06** - Minimum temperature in the coldest month<sup>4</sup>
+  * **bio16** - Precipitation in the wettest quarter<sup>4</sup>
+  * **bio17** - Precipitation in the driest quarter<sup>4</sup>
+
+<p style="font-size: small">
+<sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023), <sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change Service, 2021)
+</p>
   
 Support Vector Machine (SVM) models, which form a hyperplane between the presence and absence hypervolumes,
 were trained and tested using using the `mlr3` ecosystem of R packages (Lang et al., 2019).
