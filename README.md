@@ -7,10 +7,10 @@
 
 [![Generic
 badge](https://img.shields.io/badge/Version-0.0.1-green.svg)]()
-[![CI](https://github.com/NERC-CEH/elements/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/NERC-CEH/elements/actions/workflows/ci.yml?query=branch%3Amain)
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-LGPL%203.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
+[![R-CMD-check](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `elements` is a R package containing **e**co**l**ogical nich**e**
