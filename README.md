@@ -7,17 +7,22 @@
 
 [![Generic
 badge](https://img.shields.io/badge/Version-0.0.1-green.svg)]()
+[![CI](https://github.com/NERC-CEH/elements/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/NERC-CEH/elements/actions/workflows/ci.yml?query=branch%3Amain)
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-LGPL%203.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
+[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
 <!-- badges: end -->
 
 `elements` is a R package containing **e**co**l**ogical nich**e**
-**m**od**e**ls for the pla**n**t**s** of Europe.
+**m**od**e**ls for the pla**n**t**s** of Europe. More specifically,
+elements contains Ecological Niche Models (ENMs) for the most prevalent
+vascular plants, bryophytes, and terricolous lichens in the European
+Vegetation Archive.
 
-The Ecological Niche Models (ENMs) adhere to Hutchinsonian
-conceptualisation of the ecological niche as an n-dimensional
-hypervolume (Hutchinson, 1957) and are comprised of `e1071` (Meyer et
-al., 2024) Support Vector Machine (SVM) models.
+The ENMs adhere to Hutchinsonian conceptualisation of the ecological
+niche as an n-dimensional hypervolume (Hutchinson, 1957) and are
+comprised of `e1071` (Meyer et al., 2024) Support Vector Machine (SVM)
+models.
 
 For more information please see Marshall et al (in prep).
 
