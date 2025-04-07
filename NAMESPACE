@@ -2,5 +2,6 @@
 
 export(plot_me)
 export(predict_occ)
+export(predict_occ_taxon)
 export(shutdown)
 export(startup)

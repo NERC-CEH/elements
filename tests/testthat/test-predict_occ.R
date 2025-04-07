@@ -2,30 +2,32 @@ testthat::test_that("predict_occ works", {
   
   elements::startup()
   
-  test_taxon <- "stellaria_graminea"
+  test_taxa <- c("stellaria_graminea", "silene_flos-cuculi")
   
-  test_predictors <- data.frame(L = c(7.8, 7.3), 
-                                M = c(2.9, 5.7),
-                                N = c(3.4, 5.7), 
-                                R = c(6.1, 6.5), 
-                                S = c(0.2, 0.9), 
-                                SD = c(0.1, 0.3), 
-                                GP = c(0.3, 0.3), 
-                                bio05 = c(26.2, 26.2), 
-                                bio06 = c(16.1, 18.2), 
-                                bio16 = c(363.6, 267.5),
-                                bio17 = c(45.4, 4.1)
-                                )
-  
-  test_predictors <- elements::ExampleData
+  test_predictors_1 <- elements::ExampleData1
+  test_predictors_2 <- elements::ExampleData2
   
   test_pa <- c("Present", "Absent")
   
-  actual <- elements::predict_occ(taxon = test_taxon, predictors = test_predictors, pa = test_pa, dp = 3)
+  # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
+  actual <- elements::predict_occ(taxa_codes = NULL, predictors = test_predictors_2, pa = test_pa, dp = 3, append = TRUE)
+  
+  testthat::expect_equal(colnames(actual), c(colnames(test_predictors_2), test_pa))
+  testthat::expect_equal(nrow(actual), nrow(test_predictors_2))
+  
+  # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
+  actual <- elements::predict_occ(taxa_codes = test_taxa, predictors = test_predictors_1, pa = test_pa, dp = 3, append = TRUE)
+  
+  testthat::expect_equal(colnames(actual), c(colnames(test_predictors_1), "taxon_code", test_pa))
+  testthat::expect_equal(nrow(actual), nrow(test_predictors_1) * 2)
+  
+  # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
+  actual <- elements::predict_occ(taxa_codes = test_taxa, predictors = test_predictors_2, pa = test_pa, dp = 3, append = TRUE)
+  
+  testthat::expect_equal(colnames(actual), c(colnames(test_predictors_2), test_pa))
+  testthat::expect_equal(nrow(actual), nrow(test_predictors_2) * 2)
+  
   
   elements::shutdown()
-  
-  testthat::expect_equal(colnames(actual), test_pa)
-  testthat::expect_equal(nrow(actual), nrow(test_predictors))
   
 })

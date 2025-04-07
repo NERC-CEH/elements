@@ -21,26 +21,42 @@ al., 2024) Support Vector Machine (SVM) models.
 
 For more information please see Marshall et al (in prep).
 
-## Installation
+The code used to produce the models is available here
+<https://github.com/NERC-CEH/elementsAnalysis>.
 
-You can install the development version of elements from
-[Github](https://github.com/NERC-CEH/elements) with:
+<details>
+<summary>
+<h2 style="display:inline-block">
+Installation
+</h2>
+</summary>
+
+You can install the development version of elements from Github with:
 
 ``` r
-# install.packages("remotes")
+if(!require("remotes")) install.packages("remotes")
 remotes::install_github("NERC-CEH/elements")
 ```
 
-## Usage
+Note: `elements` has two dependencies, `e1071` and `filehash`, which
+must also be installed.
+
+</details>
+<details>
+<summary>
+<h2 style="display:inline-block">
+Usage
+</h2>
+</summary>
 
 ### Retrieving models
 
-Due to the total size of the 128 ENMs currently included in the
-`elements` r package the ENMs are not exported as a .rda object. Instead
-they are made available through a `filehash` (Peng, 2005) database. To
-access the ENMs a connection to this database must be initialised, the
-ENMs can then be accessed like as a list but without loading all ENMs
-into memory.
+Due to the total size of the 128 ENMs currently included in `elements`
+the ENMs are not exported in a .rda object. Instead they are made
+available through a `filehash` (Peng, 2005) database, which provides
+access to the ENMs without loading all models into memory. To access the
+ENMs a connection to this database must be initialised using
+`elements::startup`.
 
 ``` r
 elements::startup()
@@ -65,20 +81,50 @@ model <- OccModels[["stellaria_graminea"]]
 
 The raw ENMs retrieved using the method above can be used as regular
 `e1071` SVM model objects. Alternatively, the helper function
-`elements::predict_occ` retrieves these models using the method above,
-and eases access to the results.
+`elements::predict_occ_taxon` retrieves a model using the method above,
+generates predictions, and formats the results as a data frame.
 
 ``` r
-results <- elements::predict_occ(taxon = "stellaria_graminea", predictors = elements::ExampleData, pa = "Present", dp = 2)
+results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
 ```
 
     #>   Present
     #> 1    0.00
-    #> 2    0.90
-    #> 3    0.58
-    #> 4    0.01
-    #> 5    0.00
-    #> 6    0.00
+    #> 2    0.40
+    #> 3    0.26
+    #> 4    0.74
+    #> 5    0.06
+    #> 6    0.02
+
+An additional helper function `elements::predict_occ` can generate
+predictions for multiple taxa, by either specifing the taxa to model in
+the ‘taxa_codes’ argument, or by setting ‘taxa_codes’ to NULL and
+including an additional column in the predictors data frame named
+‘taxon_code’.
+
+``` r
+results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 2, append_predictors = FALSE)
+```
+
+    #>     Present         taxon_code
+    #> 201    0.01 silene_flos-cuculi
+    #> 202    0.01 silene_flos-cuculi
+    #> 203    0.00 silene_flos-cuculi
+    #> 204    0.01 silene_flos-cuculi
+    #> 205    0.00 silene_flos-cuculi
+    #> 206    0.97 silene_flos-cuculi
+
+``` r
+results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
+```
+
+    #>   Present         taxon_code
+    #> 1    0.00 stellaria_graminea
+    #> 2    0.40 stellaria_graminea
+    #> 3    0.26 stellaria_graminea
+    #> 4    0.74 stellaria_graminea
+    #> 5    0.06 stellaria_graminea
+    #> 6    0.02 stellaria_graminea
 
 ### Shutting down
 
@@ -89,7 +135,13 @@ connection to the filehash database.
 elements::shutdown()
 ```
 
-## Inspecting models
+</details>
+<details>
+<summary>
+<h2 style="display:inline-block">
+Inspecting Models
+</h2>
+</summary>
 
 Several datasets are available to examine the ENM model performance and
 aid in model interpretation.
@@ -121,6 +173,8 @@ elements::plot_me(taxon = "stellaria_graminea",
 ```
 
 <img src="man/figures/README-me_plot_print-1.png" width="100%" />
+
+</details>
 
 ## References
 

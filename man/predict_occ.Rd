@@ -2,32 +2,57 @@
 % Please edit documentation in R/predict_occ.R
 \name{predict_occ}
 \alias{predict_occ}
-\title{Generate predictions for the probability of occurrence}
+\title{Generate predictions for the probability of occurrence for specified taxa}
 \usage{
-predict_occ(taxon, predictors, pa = "Present", dp = 3)
+predict_occ(
+  taxa_codes,
+  predictors,
+  pa = "Present",
+  dp = 3,
+  append_predictors = TRUE
+)
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::ModellingSpecies} and \code{elements::TaxaBackbone}.}
+\item{taxa_codes}{A vector of strings containing one or more taxa to generate predictions for. Optional.}
 
-\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17}
+\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and taxon}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 
 \item{dp}{The number of decimal places to round the probability values to.}
+
+\item{append_predictors}{A boolean. If TRUE return the predictors data frame with the results in an additional column.}
 }
 \value{
-A data frame containing the probability of occurrence.
+A data frame containing the probability of occurrence (Present and/or Absent) for each taxon, if specified, appended to the predictorsS data.
 }
 \description{
-Generate predictions for the probability of occurrence (presence and/or absence) for a given taxon.
+Generate predictions for the probability of occurrence (presence and/or absence) using a data frame of predictors for a one or more taxa specified in either:
+\enumerate{
+\item the 'taxa_codes' argument, or
+\item a column in the predictors data frame named 'taxon_code'
+}
 }
 \details{
+If taxon codes are supplied in the 'taxa_codes' argument and there is a column in the predictors data frame named 'taxon_code',
+the taxa present in the 'taxa_codes' argument will be used and results will be calculated using the entire predictors data frame
+and the 'taxon_code' column will be replaced.
+
 NOTE: to use this function you must first run \code{elements::startup()}
 }
 \examples{
 \dontrun{
 elements::startup()
-elements::predict_occ(taxon = "stellaria_graminea",  predictors = elements::ExampleData, pa = "Present")
+
+# Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
+elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = FALSE)
+
+# Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 3, append_predictors = TRUE)
+
+# Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = TRUE)
+
 elements::shutdown() 
 }
 }

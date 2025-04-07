@@ -1,35 +1,86 @@
-#' Generate predictions for the probability of occurrence
+#' Generate predictions for the probability of occurrence for specified taxa
 #' 
-#' Generate predictions for the probability of occurrence (presence and/or absence) for a given taxon.
+#' Generate predictions for the probability of occurrence (presence and/or absence) using a data frame of predictors for a one or more taxa specified in either:
+#' 1) the 'taxa_codes' argument, or
+#' 2) a column in the predictors data frame named 'taxon_code'
+#' 
+#' If taxon codes are supplied in the 'taxa_codes' argument and there is a column in the predictors data frame named 'taxon_code', 
+#' the taxa present in the 'taxa_codes' argument will be used and results will be calculated using the entire predictors data frame
+#' and the 'taxon_code' column will be replaced.
 #'
 #' NOTE: to use this function you must first run `elements::startup()`
 #'
-#' @param taxon The taxon_code, see `elements::ModellingSpecies` and `elements::TaxaBackbone`.
-#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
+#' @param taxa_codes A vector of strings containing one or more taxa to generate predictions for. Optional.
+#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and taxon
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
 #' @param dp The number of decimal places to round the probability values to.
+#' @param append_predictors A boolean. If TRUE return the predictors data frame with the results in an additional column.
 #'
-#' @return A data frame containing the probability of occurrence.
+#' @return A data frame containing the probability of occurrence (Present and/or Absent) for each taxon, if specified, appended to the predictorsS data.
 #' @export
 #' 
 #' @examples
 #' \dontrun{
 #' elements::startup()
-#' elements::predict_occ(taxon = "stellaria_graminea",  predictors = elements::ExampleData, pa = "Present")
+#' 
+#' # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
+#' elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = FALSE)
+#' 
+#' # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
+#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 3, append_predictors = TRUE)
+#' 
+#' # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
+#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = TRUE)
+#' 
 #' elements::shutdown() 
 #' }
-predict_occ <- function(taxon, predictors, pa = "Present", dp = 3){
+predict_occ <- function(taxa_codes, predictors, pa = "Present", dp = 3, append_predictors = TRUE){
   
   if(isFALSE(exists(x = "OccModels", envir = .GlobalEnv))){
-    
     stop("Please run elements::startup() before using elements::predict_occ.")
   }
-
-  model <- .GlobalEnv$OccModels[[taxon]]
   
-  predictions <- e1071:::predict.svm(object = model, predictors, probability = TRUE)
+  if(is.null(taxa_codes) & "taxon_code" %in% colnames(predictors)){
+    
+    # Split
+    predictors_list <- split(predictors, predictors[["taxon_code"]])
+    
+    # Apply
+    results_list <- lapply(X = names(predictors_list), 
+                           FUN = function(taxon){
+                             result <- elements::predict_occ_taxon(taxon = taxon,
+                                                                   predictors = predictors_list[[taxon]],
+                                                                   pa = pa, 
+                                                                   dp = dp,
+                                                                   append_predictors = append_predictors)
+                             result[["taxon_code"]] <- taxon
+                             return(result)
+                           }
+    )
+    
+  } else if(!is.null(taxa_codes)){
+    
+    # Apply
+    results_list <- lapply(X = taxa_codes, 
+                           FUN = function(taxon){
+                             result <- elements::predict_occ_taxon(taxon = taxon,
+                                                                   predictors = predictors,
+                                                                   pa = pa, 
+                                                                   dp = dp,
+                                                                   append_predictors = append_predictors)
+                             result[["taxon_code"]] <- taxon
+                             return(result)
+                           }
+    )
+    
+  } else if(is.null(taxa_codes) & !("taxon" %in% colnames(predictors))) {
+    
+    stop("The taxa to model must be specified in either: 1) the 'taxa_codes' argument, 2) or present in a column in the predictors data frame named 'taxon_code'")
+    
+  }
   
-  results <- round(as.data.frame(attr(predictions, "probabilities")[, pa, drop = FALSE]), digits = dp)
+  # Combine
+  results <- do.call(rbind, results_list)
   
   return(results)
   

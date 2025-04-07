@@ -19,13 +19,48 @@
 
 #' Example predictor data
 #'
-#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for the Stellaria graminea (stellaria_graminea)
+#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for one taxon: 
+#' Stellaria graminea (stellaria_graminea)
 #'
-#' \code{ExampleData} 
+#' \code{ExampleData1} 
 #'
-#' @format A data frame with `r nrow(elements::ExampleData)` rows and `r ncol(elements::ExampleData)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::ExampleData1)` rows and `r ncol(elements::ExampleData1)` columns, the definitions of which are:
 #' \describe{
-#'   \item{Presence}{A column of type string, containing either "Present" or "Absent".}
+#'   \item{L}{}
+#'   \item{M}{}
+#'   \item{N}{}
+#'   \item{R}{}
+#'   \item{S}{}
+#'   \item{SD}{}
+#'   \item{GP}{}
+#'   \item{bio05}{}
+#'   \item{bio06}{}
+#'   \item{bio16}{}
+#'   \item{bio17}{}
 #' }
-"ExampleData"
+"ExampleData1"
+
+#' Example predictor data
+#'
+#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for two taxa: 
+#' Stellaria graminea (stellaria_graminea) and Silene flos-cuculi (silene_flos-cuculi).
+#'
+#' \code{ExampleData2} 
+#'
+#' @format A data frame with `r nrow(elements::ExampleData2)` rows and `r ncol(elements::ExampleData2)` columns, the definitions of which are:
+#' \describe{
+#'   \item{L}{}
+#'   \item{M}{}
+#'   \item{N}{}
+#'   \item{R}{}
+#'   \item{S}{}
+#'   \item{SD}{}
+#'   \item{GP}{}
+#'   \item{bio05}{}
+#'   \item{bio06}{}
+#'   \item{bio16}{}
+#'   \item{bio17}{}
+#'   \item{taxon_code}{}
+#' }
+"ExampleData2"
 
