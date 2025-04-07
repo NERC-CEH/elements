@@ -14,8 +14,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 LazyDataCompression: xz
 Imports:
-  e1071,
-  filehash
+  e1071 (>= 1.7-16),
+  filehash (>= 2.4-6)
 Suggests:
   testthat
 URL: https://github.com/NERC-CEH/elements

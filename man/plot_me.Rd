@@ -22,8 +22,24 @@ A composite plot showing the marginal effects and optionally the distribution of
 }
 \description{
 Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP)
-marginal effect values for a selected taxon and variables.
+marginal effect/univariate response curves for a selected taxon and variables.
+}
+\details{
+The presence-absence imbalance in the training data varies by taxon.
+This 'ghost of imbalance' (Jiménez-Valverde & Lobo, 2006)
+has several impacts on the PDP plots:
+\enumerate{
+\item the optimum value of the PDP curve may be less than 1.
+\item the entire PDP curve may sit below y = 0.5 (the presence-absence threshold).
+}
+
+When inspecting the PDP plots, it is therefore important to pay more attention
+to the shape of the response, rather than the absolute PDP value.
 }
 \examples{
 elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+
+}
+\references{
+Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
 }

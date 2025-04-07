@@ -1,7 +1,17 @@
 #' Plot the marginal effect values for a taxon and set of variables
 #' 
 #' Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP)
-#' marginal effect values for a selected taxon and variables.
+#' marginal effect/univariate response curves for a selected taxon and variables.
+#' 
+#' The presence-absence imbalance in the training data varies by taxon.
+#' This 'ghost of imbalance' (Jiménez-Valverde & Lobo, 2006)
+#' has several impacts on the PDP plots:
+#' 
+#' 1) the optimum value of the PDP curve may be less than 1.
+#' 2) the entire PDP curve may sit below y = 0.5 (the presence-absence threshold).
+#' 
+#' When inspecting the PDP plots, it is therefore important to pay more attention 
+#' to the shape of the response, rather than the absolute PDP value.
 #'
 #' @param taxon The taxon_code, see `elements::ModellingSpecies` and `elements::TaxaBackbone`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
@@ -13,6 +23,8 @@
 #' @export
 #'
 #' @examples elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' 
+#' @references Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
 plot_me <- function(taxon, me_type, free_y, presences, vars){
   
   # Clear plots
@@ -62,7 +74,7 @@ plot_me <- function(taxon, me_type, free_y, presences, vars){
     nrows <- 4
   }
   
-  graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), mar = c(3, 3, 1, 1) + 0.1, din = c(5, 5))
+  suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), mar = c(3, 3, 1, 1) + 0.1, din = c(5, 5), no.readonly = TRUE))
   
   max_y_taxon <- max(data_taxon[["y"]])
   min_y_taxon <- min(data_taxon[["y"]])

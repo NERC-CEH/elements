@@ -10,10 +10,13 @@ devtools::build()
 devtools::test()
 
 # 4) install package
-devtools::install()
+devtools::install(pkg = ".")
 
-# 5) load package
+# 5) restart R
+.rs.restartR()
+
+# 6) load package
 library(elements)
 
-# 6) check the package
+# 7) check the package
 devtools::check(document = FALSE)

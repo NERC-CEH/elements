@@ -172,7 +172,7 @@ can also be viewed using the `elements::plot_me` function.
 ``` r
 elements::plot_me(taxon = "stellaria_graminea", 
                   me_type = "ale", 
-                  free_y = FALSE, 
+                  free_y = TRUE, 
                   presences = TRUE,
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```

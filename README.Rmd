@@ -132,7 +132,7 @@ The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) 
 ```{r me_plot_create, include=FALSE}
 me_plot <- elements::plot_me(taxon = "stellaria_graminea", 
                              me_type = "ale", 
-                             free_y = FALSE, 
+                             free_y = TRUE, 
                              presences = TRUE,
                              vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
@@ -140,7 +140,7 @@ me_plot <- elements::plot_me(taxon = "stellaria_graminea",
 ```{r me_plot_code, eval=FALSE}
 elements::plot_me(taxon = "stellaria_graminea", 
                   me_type = "ale", 
-                  free_y = FALSE, 
+                  free_y = TRUE, 
                   presences = TRUE,
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
