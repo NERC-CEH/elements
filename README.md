@@ -44,12 +44,6 @@ consist of:
   - **bio16** - Precipitation in the wettest quarter<sup>4</sup>
   - **bio17** - Precipitation in the driest quarter<sup>4</sup>
 
-<p style="font-size: small !important">
-<sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023),
-<sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
-Service, 2021)
-</p>
-
 Support Vector Machine (SVM) models, which form a hyperplane between the
 presence and absence hypervolumes, were trained and tested using using
 the `mlr3` ecosystem of R packages (Lang et al., 2019). The raw `e1071`
@@ -60,6 +54,12 @@ The code used to produce the models is available here
 
 For more information please see Marshall et al (in prep).
 
+<hr width="100%" size="1">
+<p style="font-size: small !important">
+<sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023),
+<sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
+Service, 2021)
+</p>
 </details>
 <details>
 <summary>
