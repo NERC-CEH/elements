@@ -74,6 +74,7 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, d
   } else {
     
     results_final <- predictions_df
+    
   }
   
   if(isTRUE(append_predictors)){

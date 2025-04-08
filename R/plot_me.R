@@ -152,7 +152,7 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
       if(nrow(eiv_vals_taxon) > 0 & var %in% c("M", "N", "R", "L")){
         eiv_val <- eiv_vals_taxon[[var]]
         eiv_nw <- eiv_vals_taxon[[paste0(var, ".nw")]] / 2
-      } else if(nrow(eiv_vals_taxon) > 0 & var %in% c("GP", "SD")){
+      } else if(nrow(eiv_vals_taxon) > 0 & var %in% c("GP", "SD", "S")){
         eiv_val <- eiv_vals_taxon[[var]]
         eiv_nw <- NULL
       } else {
