@@ -13,7 +13,7 @@ predict_occ_taxon(
 )
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::ModellingSpecies} and \code{elements::TaxaBackbone}.}
+\item{taxon}{The taxon_code, see \code{elements::TaxaBackbone}.}
 
 \item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17}
 

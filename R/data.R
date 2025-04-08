@@ -6,7 +6,7 @@
 #'
 #' @format A data frame with `r nrow(elements::PerformanceMeasures)` rows and `r ncol(elements::PerformanceMeasures)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::ModellingSpecies` and `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
 #'   \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 #'   \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}

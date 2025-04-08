@@ -4,16 +4,18 @@
 \alias{plot_me}
 \title{Plot the marginal effect values for a taxon and set of variables}
 \usage{
-plot_me(taxon, me_type, free_y, presences, vars)
+plot_me(taxon, me_type, free_y, presences, eivs, vars)
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::ModellingSpecies} and \code{elements::TaxaBackbone}.}
+\item{taxon}{The taxon_code, see \code{elements::TaxaBackbone}.}
 
 \item{me_type}{A string representing the marginal effect plot type, one of "ale" or "pdp".}
 
 \item{free_y}{A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.}
 
-\item{presences}{A boolean. If true a box and whiskers plot showing the distribution of presences along each variable will be displayed.}
+\item{presences}{A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.}
+
+\item{eivs}{A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in \code{elements::VariableData}.}
 
 \item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".}
 }
@@ -37,7 +39,7 @@ When inspecting the PDP plots, it is therefore important to pay more attention
 to the shape of the response, rather than the absolute PDP value.
 }
 \examples{
-elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 
 }
 \references{

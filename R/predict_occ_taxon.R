@@ -4,7 +4,7 @@
 #'
 #' NOTE: to use this function you must first run `elements::startup()`
 #'
-#' @param taxon The taxon_code, see `elements::ModellingSpecies` and `elements::TaxaBackbone`.
+#' @param taxon The taxon_code, see `elements::TaxaBackbone`.
 #' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
 #' @param dp The number of decimal places to round the probability values to.

@@ -7,7 +7,7 @@
 \format{
 A data frame with 128 rows and 8 columns, the definitions of which are:
 \describe{
-\item{taxon_code}{The taxon, see \code{elements::ModellingSpecies} and \code{elements::TaxaBackbone}.}
+\item{taxon_code}{The taxon, see \code{elements::TaxaBackbone}.}
 \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}

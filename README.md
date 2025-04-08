@@ -13,11 +13,10 @@ badge](https://img.shields.io/badge/Version-0.0.1-green.svg)]()
 [![R-CMD-check](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/NERC-CEH/elements/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-`elements` is a R package containing **E**co**L**ogical nich**E**
-**M**od**E**ls for the pla**NTS** of Europe. More specifically,
-`elements` contains correlative, realised Ecological Niche Models (ENMs)
-for the most prevalent vascular plants, bryophytes, and terricolous
-lichens in the European Vegetation Archive (EVA) (Chytrý et al., 2016).
+`elements` is a R package containing correlative, realised Ecological
+Niche Models (ENMs) for the most prevalent vascular plants, bryophytes,
+and terricolous lichens in the European Vegetation Archive (EVA) (Chytrý
+et al., 2016).
 
 <details>
 <summary>
@@ -31,7 +30,7 @@ niche as an n-dimensional hypervolume (Hutchinson, 1957). The
 environmental variables forming the dimensions of each hypervolume
 consist of:
 
-- Seven plot-mean Ecological Indicator Values (EIVs):
+- Seven unweighted, plot-mean Ecological Indicator Values (EIVs):
   - **M** - Soil Moisture<sup>1</sup>
   - **R** - Reaction<sup>1</sup>
   - **N** - Soil Nitrogen<sup>1</sup>
@@ -45,7 +44,7 @@ consist of:
   - **bio16** - Precipitation in the wettest quarter<sup>4</sup>
   - **bio17** - Precipitation in the driest quarter<sup>4</sup>
 
-<p style="font-size: small">
+<p style="font-size: small !important">
 <sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023),
 <sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
 Service, 2021)
@@ -89,11 +88,11 @@ Usage
 
 ### Retrieving models
 
-Due to the total size of the 128 ENMs currently included in `elements`
-the ENMs are not exported in a .rda object. Instead they are made
-available through a `filehash` (Peng, 2005) database, which provides
-access to the ENMs without loading all models into memory. To access the
-ENMs a connection to this database must be initialised using
+Due to the total size of the ENMs currently included in `elements` the
+ENMs are not exported in a .rda object. Instead they are made available
+through a `filehash` (Peng, 2005) database, which provides access to the
+ENMs without loading all models into memory. To access the ENMs a
+connection to this database must be initialised using
 `elements::startup`.
 
 ``` r
@@ -200,13 +199,18 @@ pm_taxon <- pm[pm[["taxon_code"]] == "stellaria_graminea", c(1, 7, 8)]
 
 The marginal effects of an ENM, in the form of Partial Dependency
 Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018)
-can also be viewed using the `elements::plot_me` function.
+can also be viewed using the `elements::plot_me` function. By setting
+the ‘presences’ argument is TRUE a box and whiskers plot showing the
+distribution of presences is overlaid and by setting the ‘eivs’ argument
+to TRUE a point and arrows showing the EIV and niche width values are
+overlaid, where available in `elements::VariableData`.
 
 ``` r
 elements::plot_me(taxon = "stellaria_graminea", 
                   me_type = "ale", 
                   free_y = TRUE, 
                   presences = TRUE,
+                  eivs = TRUE,
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
 
