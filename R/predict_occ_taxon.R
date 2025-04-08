@@ -34,7 +34,7 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, d
   
   if(!is.null(limit) & isTRUE(pa == "Present")){
     
-    nw <- elements::NicheWidthsAllData
+    nw <- elements::NicheWidthData
     nw_taxon <- subset(nw[nw[["taxon_code"]] == taxon, ], select = -taxon_code)
     nw_taxon <- setNames(data.frame(t(nw_taxon[,-1])), nw_taxon[[1]])
     

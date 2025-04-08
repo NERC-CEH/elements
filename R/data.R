@@ -1,3 +1,107 @@
+#' ALE data
+#'
+#' A dataset containing the Accumulated Local Effect (ALE) (Molnar, 2018) data for the models, generated using 1000 samples from the training data.
+#'
+#' \code{ALEData} 
+#'
+#' @format A data frame with `r nrow(elements::ALEData)` rows and `r ncol(elements::ALEData)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{x}{The variable value.}
+#'   \item{y}{The ALE value.}
+#'   \item{variable}{The variable name.}
+#' }
+"ALEData"
+
+#' Example predictor data
+#'
+#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for one taxon: 
+#' Stellaria graminea (stellaria_graminea)
+#'
+#' \code{ExampleData1} 
+#'
+#' @format A data frame with `r nrow(elements::ExampleData1)` rows and `r ncol(elements::ExampleData1)` columns, the definitions of which are:
+#' \describe{
+#'   \item{L}{Light}
+#'   \item{M}{Soil Moisture}
+#'   \item{N}{Soil Nitrogen}
+#'   \item{R}{Reaction}
+#'   \item{S}{Salinity}
+#'   \item{SD}{Soil Disturbance}
+#'   \item{GP}{Grazing Pressure}
+#'   \item{bio05}{Maximum temperature in the warmest month}
+#'   \item{bio06}{Minimum temperature in the coldest month}
+#'   \item{bio16}{Precipitation in the wettest quarter}
+#'   \item{bio17}{Precipitation in the driest quarter}
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#' }
+#' @references{
+#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' 
+#' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
+#' 
+#' Midolo, G., Herben, T., Axmanová, I., Marcenò, C., Pätsch, R., Bruelheide, H., Karger, D.N., Aćić, S., Bergamini, A., Bergmeier, E., Biurrun, I., Bonari, G., Čarni, A., Chiarucci, A., De Sanctis, M., Demina, O., Dengler, J., Dziuba, T., Fanelli, G., Garbolino, E., Giusso del Galdo, G., Goral, F., Güler, B., Hinojos-Mendoza, G., Jansen, F., Jiménez-Alfaro, B., Lengyel, A., Lenoir, J., Pérez-Haase, A., Pielech, R., Prokhorov, V., Rašomavičius, V., Ruprecht, E., Rūsiņa, S., Šilc, U., Škvorc, Ž., Stančić, Z., Tatarenko, I., Chytrý, M., 2023. Disturbance indicator values for European plants. Global Ecology and Biogeography 32, 24–34. https://doi.org/10.1111/geb.13603
+#' 
+#' Tichý, L., Axmanová, I., Dengler, J., Guarino, R., Jansen, F., Midolo, G., Nobis, M.P., Van Meerbeek, K., Aćić, S., Attorre, F., Bergmeier, E., Biurrun, I., Bonari, G., Bruelheide, H., Campos, J.A., Čarni, A., Chiarucci, A., Ćuk, M., Ćušterevska, R., Didukh, Y., Dítě, D., Dítě, Z., Dziuba, T., Fanelli, G., Fernández-Pascual, E., Garbolino, E., Gavilán, R.G., Gégout, J.-C., Graf, U., Güler, B., Hájek, M., Hennekens, S.M., Jandt, U., Jašková, A., Jiménez-Alfaro, B., Julve, P., Kambach, S., Karger, D.N., Karrer, G., Kavgacı, A., Knollová, I., Kuzemko, A., Küzmič, F., Landucci, F., Lengyel, A., Lenoir, J., Marcenò, C., Moeslund, J.E., Novák, P., Pérez-Haase, A., Peterka, T., Pielech, R., Pignatti, A., Rašomavičius, V., Rūsiņa, S., Saatkamp, A., Šilc, U., Škvorc, Ž., Theurillat, J.-P., Wohlgemuth, T., Chytrý, M., 2023. Ellenberg-type indicator values for European vascular plant species. Journal of Vegetation Science 34, e13168. https://doi.org/10.1111/jvs.13168
+#' }
+"ExampleData1"
+
+#' Example predictor data
+#'
+#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for two taxa: 
+#' Stellaria graminea (stellaria_graminea) and Silene flos-cuculi (silene_flos-cuculi).
+#'
+#' \code{ExampleData2} 
+#'
+#' @format A data frame with `r nrow(elements::ExampleData2)` rows and `r ncol(elements::ExampleData2)` columns, the definitions of which are:
+#' \describe{
+#'   \item{L}{Light}
+#'   \item{M}{Soil Moisture}
+#'   \item{N}{Soil Nitrogen}
+#'   \item{R}{Reaction}
+#'   \item{S}{Salinity}
+#'   \item{SD}{Soil Disturbance}
+#'   \item{GP}{Grazing Pressure}
+#'   \item{bio05}{Maximum temperature in the warmest month}
+#'   \item{bio06}{Minimum temperature in the coldest month}
+#'   \item{bio16}{Precipitation in the wettest quarter}
+#'   \item{bio17}{Precipitation in the driest quarter}
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#' }
+#' @references{
+#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' 
+#' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
+#' 
+#' Midolo, G., Herben, T., Axmanová, I., Marcenò, C., Pätsch, R., Bruelheide, H., Karger, D.N., Aćić, S., Bergamini, A., Bergmeier, E., Biurrun, I., Bonari, G., Čarni, A., Chiarucci, A., De Sanctis, M., Demina, O., Dengler, J., Dziuba, T., Fanelli, G., Garbolino, E., Giusso del Galdo, G., Goral, F., Güler, B., Hinojos-Mendoza, G., Jansen, F., Jiménez-Alfaro, B., Lengyel, A., Lenoir, J., Pérez-Haase, A., Pielech, R., Prokhorov, V., Rašomavičius, V., Ruprecht, E., Rūsiņa, S., Šilc, U., Škvorc, Ž., Stančić, Z., Tatarenko, I., Chytrý, M., 2023. Disturbance indicator values for European plants. Global Ecology and Biogeography 32, 24–34. https://doi.org/10.1111/geb.13603
+#' 
+#' Tichý, L., Axmanová, I., Dengler, J., Guarino, R., Jansen, F., Midolo, G., Nobis, M.P., Van Meerbeek, K., Aćić, S., Attorre, F., Bergmeier, E., Biurrun, I., Bonari, G., Bruelheide, H., Campos, J.A., Čarni, A., Chiarucci, A., Ćuk, M., Ćušterevska, R., Didukh, Y., Dítě, D., Dítě, Z., Dziuba, T., Fanelli, G., Fernández-Pascual, E., Garbolino, E., Gavilán, R.G., Gégout, J.-C., Graf, U., Güler, B., Hájek, M., Hennekens, S.M., Jandt, U., Jašková, A., Jiménez-Alfaro, B., Julve, P., Kambach, S., Karger, D.N., Karrer, G., Kavgacı, A., Knollová, I., Kuzemko, A., Küzmič, F., Landucci, F., Lengyel, A., Lenoir, J., Marcenò, C., Moeslund, J.E., Novák, P., Pérez-Haase, A., Peterka, T., Pielech, R., Pignatti, A., Rašomavičius, V., Rūsiņa, S., Saatkamp, A., Šilc, U., Škvorc, Ž., Theurillat, J.-P., Wohlgemuth, T., Chytrý, M., 2023. Ellenberg-type indicator values for European vascular plant species. Journal of Vegetation Science 34, e13168. https://doi.org/10.1111/jvs.13168
+#' }
+"ExampleData2"
+
+#' Niche width data
+#'
+#' A dataset Niche width data for the modelled taxa.
+#'
+#' \code{NicheWidthData} 
+#'
+#' @format A data frame with `r nrow(elements::NicheWidthData)` rows and `r ncol(elements::NicheWidthData)`, the definitions of which are:
+#' \describe{
+#'   \item{variable}{The variable name.}
+#'   \item{mean}{The mean variable value.}
+#'   \item{min}{The minimum variable value.}
+#'   \item{max}{The maximum variable value.}
+#'   \item{median}{The median variable value.}
+#'   \item{q01}{The 1% quantile value.}
+#'   \item{q05}{The 5% quantile value.}
+#'   \item{q25}{The 25% quantile value.}
+#'   \item{q75}{The 75% quantile value.}
+#'   \item{q95}{The 95% quantile value.}
+#'   \item{q99}{The 99% quantile value.}
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#' }
+"NicheWidthData"
+
 #' Model performance measures
 #'
 #' A dataset containing a number of performance measures for each model.
@@ -17,50 +121,54 @@
 #' }
 "PerformanceMeasures"
 
-#' Example predictor data
+#' PDP data
 #'
-#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for one taxon: 
-#' Stellaria graminea (stellaria_graminea)
+#' A dataset containing the Partial Dependency Profile (PDP) (Molnar, 2018) data for the models, generated using 1000 samples from the training data.
 #'
-#' \code{ExampleData1} 
+#' \code{PDPData} 
 #'
-#' @format A data frame with `r nrow(elements::ExampleData1)` rows and `r ncol(elements::ExampleData1)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::PDPData)` rows and `r ncol(elements::PDPData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{L}{}
-#'   \item{M}{}
-#'   \item{N}{}
-#'   \item{R}{}
-#'   \item{S}{}
-#'   \item{SD}{}
-#'   \item{GP}{}
-#'   \item{bio05}{}
-#'   \item{bio06}{}
-#'   \item{bio16}{}
-#'   \item{bio17}{}
+#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{x}{The variable value.}
+#'   \item{y}{The PDP value.}
+#'   \item{variable}{The variable name.}
 #' }
-"ExampleData1"
+"PDPData"
 
-#' Example predictor data
+#' Environmental indicator value data
 #'
-#' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for two taxa: 
-#' Stellaria graminea (stellaria_graminea) and Silene flos-cuculi (silene_flos-cuculi).
+#' A dataset containing a combined dataset of Environmental Indicator Values (EIVs) from Dengler et al (2023), Midolo et al (2023), and Tichý et al (2023).
 #'
-#' \code{ExampleData2} 
+#' \code{VariableData} 
 #'
-#' @format A data frame with `r nrow(elements::ExampleData2)` rows and `r ncol(elements::ExampleData2)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::VariableData)` rows and `r ncol(elements::VariableData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{L}{}
-#'   \item{M}{}
-#'   \item{N}{}
-#'   \item{R}{}
-#'   \item{S}{}
-#'   \item{SD}{}
-#'   \item{GP}{}
-#'   \item{bio05}{}
-#'   \item{bio06}{}
-#'   \item{bio16}{}
-#'   \item{bio17}{}
-#'   \item{taxon_code}{}
+#'   \item{taxon_name}{The taxon name.}
 #' }
-"ExampleData2"
+#' @references{
+#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' 
+#' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
+#' 
+#' Midolo, G., Herben, T., Axmanová, I., Marcenò, C., Pätsch, R., Bruelheide, H., Karger, D.N., Aćić, S., Bergamini, A., Bergmeier, E., Biurrun, I., Bonari, G., Čarni, A., Chiarucci, A., De Sanctis, M., Demina, O., Dengler, J., Dziuba, T., Fanelli, G., Garbolino, E., Giusso del Galdo, G., Goral, F., Güler, B., Hinojos-Mendoza, G., Jansen, F., Jiménez-Alfaro, B., Lengyel, A., Lenoir, J., Pérez-Haase, A., Pielech, R., Prokhorov, V., Rašomavičius, V., Ruprecht, E., Rūsiņa, S., Šilc, U., Škvorc, Ž., Stančić, Z., Tatarenko, I., Chytrý, M., 2023. Disturbance indicator values for European plants. Global Ecology and Biogeography 32, 24–34. https://doi.org/10.1111/geb.13603
+#' 
+#' Tichý, L., Axmanová, I., Dengler, J., Guarino, R., Jansen, F., Midolo, G., Nobis, M.P., Van Meerbeek, K., Aćić, S., Attorre, F., Bergmeier, E., Biurrun, I., Bonari, G., Bruelheide, H., Campos, J.A., Čarni, A., Chiarucci, A., Ćuk, M., Ćušterevska, R., Didukh, Y., Dítě, D., Dítě, Z., Dziuba, T., Fanelli, G., Fernández-Pascual, E., Garbolino, E., Gavilán, R.G., Gégout, J.-C., Graf, U., Güler, B., Hájek, M., Hennekens, S.M., Jandt, U., Jašková, A., Jiménez-Alfaro, B., Julve, P., Kambach, S., Karger, D.N., Karrer, G., Kavgacı, A., Knollová, I., Kuzemko, A., Küzmič, F., Landucci, F., Lengyel, A., Lenoir, J., Marcenò, C., Moeslund, J.E., Novák, P., Pérez-Haase, A., Peterka, T., Pielech, R., Pignatti, A., Rašomavičius, V., Rūsiņa, S., Saatkamp, A., Šilc, U., Škvorc, Ž., Theurillat, J.-P., Wohlgemuth, T., Chytrý, M., 2023. Ellenberg-type indicator values for European vascular plant species. Journal of Vegetation Science 34, e13168. https://doi.org/10.1111/jvs.13168
+#' }
+"VariableData"
 
+#' Environmental indicator value names
+#'
+#' A dataset containing a lookup for the Ecological Indicator Value (EIV) codes used throughout the `elements` package and full variable namesnames.
+#'
+#' \code{VariableNames} 
+#'
+#' @format A data frame with `r nrow(elements::VariableNames)` rows and `r ncol(elements::VariableNames)` columns, the definitions of which are:
+#' \describe{
+#'   \item{raw_name}{The raw name of the variable as present in the parent dataset.}
+#'   \item{variable_code}{The variable code, used throughout the `elements` R package.}
+#'   \item{variable_name}{A 'tidy' variable name without spaces.}
+#'   \item{variable_plot_name}{A 'tidy' variable name with spaces.}
+#'   \item{model_var}{A boolean indicating whether the variable was included as a predictor.}
+#' }
+"VariableNames"

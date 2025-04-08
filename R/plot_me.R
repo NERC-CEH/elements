@@ -56,7 +56,7 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
   data_taxon <- data[data[["taxon_code"]] == taxon, ]
   
   if(isTRUE(presences)){
-    nw <- elements::NicheWidthsAllData
+    nw <- elements::NicheWidthData
     nw_taxon <- nw[nw[["taxon_code"]] == taxon, ]
   }
   
