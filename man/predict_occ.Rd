@@ -8,6 +8,7 @@ predict_occ(
   taxa_codes,
   predictors,
   pa = "Present",
+  limit = NULL,
   dp = 3,
   append_predictors = TRUE
 )
@@ -18,6 +19,8 @@ predict_occ(
 \item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and taxon}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
+
+\item{limit}{A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Only applied if pa = "Present". Optional.}
 
 \item{dp}{The number of decimal places to round the probability values to.}
 
@@ -45,13 +48,13 @@ NOTE: to use this function you must first run \code{elements::startup()}
 elements::startup()
 
 # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
-elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = FALSE)
+elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = FALSE)
 
 # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 3, append_predictors = TRUE)
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 
 # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = TRUE)
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 
 elements::shutdown() 
 }

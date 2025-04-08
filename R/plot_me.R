@@ -98,20 +98,6 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
   
   # For each variable in available_vars produce a plot
   for(var in available_vars){
-    
-    # var <- available_vars[1]
-    if(isTRUE(eivs)){
-      if(var %in% c("M", "N", "R", "L")){
-        eiv_val <- eiv_vals_taxon[[var]]
-        eiv_nw <- eiv_vals_taxon[[paste0(var, ".nw")]] / 2
-      } else if(var %in% c("GP", "SD")){
-        eiv_val <- eiv_vals_taxon[[var]]
-        eiv_nw <- NULL
-      } else {
-        eiv_val <- NULL
-        eiv_nw <- NULL
-      }
-    }
       
     data_var <- data_taxon[data_taxon[["variable"]] == var, ]
     
@@ -120,17 +106,59 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
     
     if(isTRUE(free_y)){
       
-      bp_width <- diff(c(min_y_var, max_y_var)) / 10
-      bp_hwidth <- bp_width / 2
-      bp_centre <- max_y_var + bp_hwidth * 1.5
-      ylim <- c(min_y_var - bp_width, max_y_var + (bp_width * 1.5))
+      if(me_type == "pdp"){
+        
+        bp_width <- diff(c(min_y_var, max_y_var)) / 10
+        bp_hwidth <- bp_width / 2
+        bp_centre <- max_y_var + bp_width
+        ylim_upper <- max_y_var + (bp_width * 2)
+        ylim <- c(0, ylim_upper)
+        
+      } else if(me_type == "ale"){
+        
+        bp_width <- diff(c(min_y_var, max_y_var)) / 10
+        bp_hwidth <- bp_width / 2
+        bp_centre <- max_y_var + bp_width
+        ylim <- c(min_y_var - bp_width, max_y_var + (bp_width * 2))
+        
+      }
+      
+      eiv_y <- (max_y_var + (bp_centre - bp_hwidth)) / 2
       
     } else if(isFALSE(free_y)){
       
-      bp_width <- diff(c(min_y_taxon, max_y_taxon)) / 10
-      bp_hwidth <- bp_width / 2
-      bp_centre <- max_y_var + bp_hwidth * 1.5
-      ylim <- c(min_y_taxon - bp_width, max_y_taxon + (bp_width * 1.5))
+      if(me_type == "pdp"){
+        
+        bp_width <- diff(c(min_y_taxon, max_y_taxon)) / 10
+        bp_hwidth <- bp_width / 2
+        bp_centre <- max_y_var + bp_width
+        ylim <- c(0, max_y_taxon + (bp_width * 2))
+        
+      } else if(me_type == "ale"){
+        
+        bp_width <- diff(c(min_y_taxon, max_y_taxon)) / 10
+        bp_hwidth <- bp_width / 2
+        bp_centre <- max_y_var + bp_width
+        ylim <- c(min_y_taxon - bp_width, max_y_taxon + (bp_width * 2))
+        
+      }
+      
+      eiv_y <- (max_y_var + (bp_centre - bp_hwidth)) / 2
+      
+    }
+    
+    if(isTRUE(eivs)){
+      
+      if(nrow(eiv_vals_taxon) > 0 & var %in% c("M", "N", "R", "L")){
+        eiv_val <- eiv_vals_taxon[[var]]
+        eiv_nw <- eiv_vals_taxon[[paste0(var, ".nw")]] / 2
+      } else if(nrow(eiv_vals_taxon) > 0 & var %in% c("GP", "SD")){
+        eiv_val <- eiv_vals_taxon[[var]]
+        eiv_nw <- NULL
+      } else {
+        eiv_val <- NULL
+        eiv_nw <- NULL
+      }
       
     }
     
@@ -148,11 +176,11 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
       graphics::abline(h = ab_line)
       
       if(!is.null(eiv_val)){
-        graphics::points(x = eiv_val, y = ab_line, col = "blue", bg = "blue", pch = 21)
+        graphics::points(x = eiv_val, y = eiv_y, col = "blue", bg = "blue", pch = 21)
       }
       if(!is.null(eiv_nw)){
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = ab_line, y1 = ab_line, col = "blue", bg = "blue", angle = 30, length = 0.1)
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = ab_line, y1 = ab_line, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
       }
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
@@ -196,11 +224,11 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
       graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$max, y0 = bp_centre, y1 = bp_centre) # Centre line from 75th percentile
       
       if(!is.null(eiv_val)){
-        graphics::points(x = eiv_val, y = ab_line, col = "blue", bg = "blue", pch = 21)
+        graphics::points(x = eiv_val, y = eiv_y, col = "blue", bg = "blue", pch = 21, )
       }
       if(!is.null(eiv_nw)){
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = ab_line, y1 = ab_line, col = "blue", bg = "blue", angle = 30, length = 0.1)
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = ab_line, y1 = ab_line, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
       }
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])

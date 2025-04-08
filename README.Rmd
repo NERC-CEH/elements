@@ -101,7 +101,7 @@ print(model)
 The raw ENMs retrieved using the method above can be used as regular `e1071` SVM model objects. Alternatively, the helper function `elements::predict_occ_taxon` retrieves a model using the method above, generates predictions, and formats the results as a data frame.
 
 ```{r use_predict_occ}
-results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
 ```{r print_predict_occ_results, echo=FALSE}
@@ -111,7 +111,7 @@ head(results)
 An additional helper function `elements::predict_occ` can generate predictions for multiple taxa, by either specifing the taxa to model in the 'taxa_codes' argument, or by setting 'taxa_codes' to NULL and including an additional column in the predictors data frame named 'taxon_code'.
 
 ```{r use_predict_occ_dfr_1}
-results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
 ```{r print_predict_occ_dfr_1_results, echo=FALSE}
@@ -119,7 +119,7 @@ head(results)
 ```
 
 ```{r use_predict_occ_dfr_2}
-results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
 ```{r print_predict_occ_dfr_2_results, echo=FALSE}

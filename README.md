@@ -122,7 +122,7 @@ The raw ENMs retrieved using the method above can be used as regular
 generates predictions, and formats the results as a data frame.
 
 ``` r
-results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
     #>   Present
@@ -140,7 +140,7 @@ including an additional column in the predictors data frame named
 ‘taxon_code’.
 
 ``` r
-results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
     #>     Present         taxon_code
@@ -152,7 +152,7 @@ results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::Examp
     #> 206    0.97 silene_flos-cuculi
 
 ``` r
-results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 2, append_predictors = FALSE)
+results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
     #>   Present         taxon_code

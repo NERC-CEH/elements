@@ -13,6 +13,7 @@
 #' @param taxa_codes A vector of strings containing one or more taxa to generate predictions for. Optional.
 #' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and taxon
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
+#' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Only applied if pa = "Present". Optional.
 #' @param dp The number of decimal places to round the probability values to.
 #' @param append_predictors A boolean. If TRUE return the predictors data frame with the results in an additional column.
 #'
@@ -24,17 +25,17 @@
 #' elements::startup()
 #' 
 #' # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
-#' elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = FALSE)
+#' elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = FALSE)
 #' 
 #' # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
-#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", dp = 3, append_predictors = TRUE)
+#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 #' 
 #' # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", dp = 3, append_predictors = TRUE)
+#' elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 #' 
 #' elements::shutdown() 
 #' }
-predict_occ <- function(taxa_codes, predictors, pa = "Present", dp = 3, append_predictors = TRUE){
+predict_occ <- function(taxa_codes, predictors, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE){
   
   if(isFALSE(exists(x = "OccModels", envir = .GlobalEnv))){
     stop("Please run elements::startup() before using elements::predict_occ.")
@@ -50,7 +51,8 @@ predict_occ <- function(taxa_codes, predictors, pa = "Present", dp = 3, append_p
                            FUN = function(taxon){
                              result <- elements::predict_occ_taxon(taxon = taxon,
                                                                    predictors = predictors_list[[taxon]],
-                                                                   pa = pa, 
+                                                                   pa = pa,
+                                                                   limit = limit,
                                                                    dp = dp,
                                                                    append_predictors = append_predictors)
                              result[["taxon_code"]] <- taxon
@@ -66,6 +68,7 @@ predict_occ <- function(taxa_codes, predictors, pa = "Present", dp = 3, append_p
                              result <- elements::predict_occ_taxon(taxon = taxon,
                                                                    predictors = predictors,
                                                                    pa = pa, 
+                                                                   limit = limit,
                                                                    dp = dp,
                                                                    append_predictors = append_predictors)
                              result[["taxon_code"]] <- taxon
