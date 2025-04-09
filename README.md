@@ -18,6 +18,9 @@ Niche Models (ENMs) for the most prevalent vascular plants, bryophytes,
 and terricolous lichens in the European Vegetation Archive (EVA) (Chytrý
 et al., 2016).
 
+The code used to produce the models is available here
+<https://github.com/NERC-CEH/elementsAnalysis>.
+
 <details>
 <summary>
 <h2 style="display:inline-block">
@@ -48,9 +51,6 @@ Support Vector Machine (SVM) models, which form a hyperplane between the
 presence and absence hypervolumes, were trained and tested using using
 the `mlr3` ecosystem of R packages (Lang et al., 2019). The raw `e1071`
 (Meyer et al., 2024) SVM models are bundled in `elements`.
-
-The code used to produce the models is available here
-<https://github.com/NERC-CEH/elementsAnalysis>.
 
 For more information please see Marshall et al (in prep).
 
@@ -150,18 +150,6 @@ results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::Examp
     #> 204    0.01 silene_flos-cuculi
     #> 205    0.00 silene_flos-cuculi
     #> 206    0.97 silene_flos-cuculi
-
-``` r
-results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
-```
-
-    #>   Present         taxon_code
-    #> 1    0.00 stellaria_graminea
-    #> 2    0.40 stellaria_graminea
-    #> 3    0.26 stellaria_graminea
-    #> 4    0.74 stellaria_graminea
-    #> 5    0.06 stellaria_graminea
-    #> 6    0.02 stellaria_graminea
 
 ### Shutting down
 

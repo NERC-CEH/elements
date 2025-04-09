@@ -30,6 +30,8 @@ library(filehash)
 
 `elements` is a R package containing correlative, realised Ecological Niche Models (ENMs) for the most prevalent vascular plants, bryophytes, and terricolous lichens in the European Vegetation Archive (EVA) (Chytrý et al., 2016).
 
+The code used to produce the models is available here [https://github.com/NERC-CEH/elementsAnalysis](https://github.com/NERC-CEH/elementsAnalysis).
+
 <details>
 <summary><h2 style="display:inline-block">Methods</h2></summary>
 
@@ -52,8 +54,6 @@ The ENMs adhere to Hutchinsonian conceptualisation of the ecological niche as an
 Support Vector Machine (SVM) models, which form a hyperplane between the presence and absence hypervolumes,
 were trained and tested using using the `mlr3` ecosystem of R packages (Lang et al., 2019).
 The raw `e1071` (Meyer et al., 2024) SVM models are bundled in `elements`.
-
-The code used to produce the models is available here [https://github.com/NERC-CEH/elementsAnalysis](https://github.com/NERC-CEH/elementsAnalysis).
 
 For more information please see Marshall et al (in prep).
 
@@ -112,19 +112,11 @@ head(results)
 
 An additional helper function `elements::predict_occ` can generate predictions for multiple taxa, by either specifing the taxa to model in the 'taxa_codes' argument, or by setting 'taxa_codes' to NULL and including an additional column in the predictors data frame named 'taxon_code'.
 
-```{r use_predict_occ_dfr_1}
+```{r use_predict_occ_dfr}
 results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
 ```
 
-```{r print_predict_occ_dfr_1_results, echo=FALSE}
-head(results)
-```
-
-```{r use_predict_occ_dfr_2}
-results <- elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 2, append_predictors = FALSE)
-```
-
-```{r print_predict_occ_dfr_2_results, echo=FALSE}
+```{r print_predict_occ_dfr_results, echo=FALSE}
 head(results)
 ```
 
