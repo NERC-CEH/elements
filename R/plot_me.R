@@ -12,6 +12,13 @@
 #' 
 #' When inspecting the PDP plots, it is therefore important to pay more attention 
 #' to the shape of the response, rather than the absolute PDP value.
+#' 
+#' In some instances the ALE curves may reflect 'inverted' responses which are not ecologically realistic, 
+#' this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow, 
+#' or where there is a non-unimodal distribution. For example, *Gymnocarpium robertianum* has a extremely narrow distribution 
+#' of plot-mean S values, with a maximum value of 1.
+#' In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting 
+#' the shape of the univariate response.
 #'
 #' @param taxon The taxon_code, see `elements::TaxaBackbone`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
