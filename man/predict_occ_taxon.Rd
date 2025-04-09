@@ -20,7 +20,7 @@ predict_occ_taxon(
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 
-\item{limit}{A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Only applied if pa = "Present". Optional.}
+\item{limit}{A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.}
 
 \item{dp}{The number of decimal places to round the probability values to.}
 

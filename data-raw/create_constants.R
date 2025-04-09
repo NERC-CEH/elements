@@ -10,7 +10,7 @@ VariableNames <- tibble::tribble(
   "EIVEres.L.nw3", "L.nw", "Light.Niche.Width", "Light Niche Width", FALSE,
   "EIVEres.T", "T", "Temperature", "Temperature", FALSE,
   "EIVEres.T.nw3", "T.nw", "Temperature.Niche.Width", "Temperature Niche Width", FALSE,
-  "Salinity", "S", "Salinity", "Salinty", TRUE,
+  "Salinity", "S", "Salinity", "Salinity", TRUE,
   "Disturbance.Severity", "DS", "Disturbance.Severity", "Disturbance Severity", FALSE,
   "Disturbance.Severity.herblayer", "DSh", "Disturbance.Severity.Herb.Layer", "Herb Layer Disturbance Severity", FALSE,
   "Disturbance.Frequency", "DF", "Disturbance.Frequency", "Disturbance Frequency", FALSE,
@@ -27,20 +27,20 @@ VariableNames <- tibble::tribble(
   "SD_Soil.Disturbance", "SD.sd", "Soil.Disturbance.SD", "Soil Disturbance SD", FALSE,
   "bio05", "bio05", "Maximum.Temp.Warmest.Month", "Max Temp Warm Month", TRUE,
   "bio06", "bio06", "Minimum.Temp.Coldest.Month", "Min Temp Cold Month", TRUE,
-  "bio16", "bio16", "Precipitation.Wettest.Quarter", "Rainfall Wet Quarter", TRUE,
-  "bio17", "bio17", "Precipitation.Driest.Quarter", "Rainfall Dry Quarter", TRUE
+  "bio16", "bio16", "Precipitation.Wettest.Quarter", "Precipitation Wet Quarter", TRUE,
+  "bio17", "bio17", "Precipitation.Driest.Quarter", "Precipitation Dry Quarter", TRUE
 )
 
-rawname_to_code_lookup <- variable_names |>
-  dplyr::select(variable_code, raw_name) |>
-  tibble::deframe()
-
-code_to_plotname_lookup <- variable_names |>
-  dplyr::select(variable_code, variable_plot_name) |>
-  tibble::deframe()
-
-plotname_to_code_lookup <- variable_names |>
-  dplyr::select(variable_plot_name, variable_code) |>
-  tibble::deframe()
+# rawname_to_code_lookup <- VariableNames |>
+#   dplyr::select(variable_code, raw_name) |>
+#   tibble::deframe()
+# 
+# code_to_plotname_lookup <- VariableNames |>
+#   dplyr::select(variable_code, variable_plot_name) |>
+#   tibble::deframe()
+# 
+# plotname_to_code_lookup <- VariableNames |>
+#   dplyr::select(variable_plot_name, variable_code) |>
+#   tibble::deframe()
 
 usethis::use_data(VariableNames, overwrite = TRUE)
