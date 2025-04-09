@@ -68,17 +68,20 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
   if(n_vars == 1){
     ncols <- 1
     nrows <- 1
-  } else if(n_vars %in% c(2, 3, 4, 5)) {
+  } else if(n_vars == 2){
+    ncols <- 2
+    nrows <- 1
+  } else if(n_vars %in% c(3, 4)){
+    ncols <- 2
+    nrows <- 2
+  } else if(n_vars %in% c(5, 6)){
     ncols <- 2
     nrows <- 3
-  } else if(n_vars %in% c(6, 7, 8, 9, 10)) {
+  } else if(n_vars %in% c(7, 8, 9)){
     ncols <- 3
     nrows <- 3
-  } else if(n_vars == 10) {
+  } else if(n_vars %in% c(10, 11)){
     ncols <- 3
-    nrows <- 4
-  } else if(n_vars == 11) {
-    ncols <- 4
     nrows <- 4
   }
   

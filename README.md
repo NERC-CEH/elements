@@ -204,6 +204,27 @@ elements::plot_me(taxon = "stellaria_graminea",
 
 <img src="man/figures/README-me_plot_print-1.png" width="100%" />
 
+<details>
+<summary>
+<h3 style="display:inline-block">
+⚠ A note on ALE plots
+</h3>
+</summary>
+
+In some instances the ALE curves may reflect ‘inverted’ responses which
+are not ecologically realistic, this is most often seen in situations
+where the distribution of presences along a variable gradient is
+extremely narrow, or where there is a non-unimodal distribution. For
+example, *Gymnocarpium robertianum* has a extremely narrow distribution
+of plot-mean S values, with a maximum value of 1.
+
+In these instances it is important to also visualise the PDP plots,
+which should then be prioritised when inspecting the shape of the
+univariate response.
+
+<img src="man/figures/README-me_plot_gr_s_print-1.png" width="50%" /><img src="man/figures/README-me_plot_gr_s_print-2.png" width="50%" />
+
+</details>
 </details>
 <details>
 <summary>

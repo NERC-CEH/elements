@@ -172,6 +172,42 @@ elements::plot_me(taxon = "stellaria_graminea",
 me_plot
 ```
 
+<details>
+<summary><h3 style="display:inline-block">&#9888; A note on ALE plots</h3></summary>
+
+```{r get_gr_s_nw_max, include=FALSE}
+nw <- elements::NicheWidthData
+nw_gr_s_max <- nw[nw[["taxon_code"]] == "gymnocarpium_robertianum" & nw[["variable"]] == "S", ][["max"]]
+```
+
+In some instances the ALE curves may reflect 'inverted' responses which are not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow, or where there is a non-unimodal distribution. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
+
+In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting the shape of the univariate response.
+
+```{r me_plot_gr_s_create, include=FALSE}
+me_plot_gr_s_ale <- elements::plot_me(taxon = "gymnocarpium_robertianum", 
+                                      me_type = "ale", 
+                                      free_y = TRUE, 
+                                      presences = TRUE,
+                                      eivs = TRUE,
+                                      vars = c("S"))
+
+me_plot_gr_s_pdp <- elements::plot_me(taxon = "gymnocarpium_robertianum", 
+                                      me_type = "pdp", 
+                                      free_y = TRUE, 
+                                      presences = TRUE,
+                                      eivs = TRUE,
+                                      vars = c("S"))
+```
+
+```{r me_plot_gr_s_print, echo=FALSE, fig.dpi=800, fig.height=3.5, fig.width=3.5, out.width="50%"}
+me_plot_gr_s_ale
+me_plot_gr_s_pdp
+```
+
+
+</details>
+
 </details>
 
 <details>
