@@ -6,12 +6,29 @@
 #'
 #' @format A data frame with `r nrow(elements::ALEData)` rows and `r ncol(elements::ALEData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The ALE value.}
 #'   \item{variable}{The variable name.}
 #' }
 "ALEData"
+
+#' EuroSL data
+#' 
+#' Selected columns for the accepted taxa in the European European Species List (EuroSL) database.
+#'
+#' \code{EuroSL} 
+#'
+#' @format A data frame with `r nrow(elements::EuroSL)` rows and `r ncol(elements::EuroSL)` columns, the definitions of which are:
+#' \describe{
+#'   \item{TaxonUsageID}{The unique code identifying the taxon.}
+#'   \item{TaxonName}{The taxon name.}
+#'   \item{NameAuthor}{The author who described the taxon concept.}
+#'   \item{TaxonRank}{The rank of the taxon.}
+#'   \item{IsChildTaxonOfID}{The immediate parent taxon.}
+#'   \item{IsChildTaxonOf}{The unique code identifying the parent taxon.}
+#' }
+"EuroSL"
 
 #' Example predictor data
 #'
@@ -33,7 +50,7 @@
 #'   \item{bio06}{Minimum temperature in the coldest month}
 #'   \item{bio16}{Precipitation in the wettest quarter}
 #'   \item{bio17}{Precipitation in the driest quarter}
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #' }
 #' @references{
 #' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
@@ -66,7 +83,7 @@
 #'   \item{bio06}{Minimum temperature in the coldest month}
 #'   \item{bio16}{Precipitation in the wettest quarter}
 #'   \item{bio17}{Precipitation in the driest quarter}
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #' }
 #' @references{
 #' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
@@ -79,13 +96,32 @@
 #' }
 "ExampleData2"
 
+#' Information on the modelled taxa.
+#' 
+#' Information on the modelled taxa in `elements`, including the taxon_code values underpinning all functions and objects.
+#' 
+#' Note that further information will be included before v1 of the package is minted.
+#'
+#' \code{ModelTaxa} 
+#'
+#' @format A data frame with `r nrow(elements::ModelTaxa)` rows and `r ncol(elements::ModelTaxa)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_name}{The full taxon name, currently as present in the "Matched concept" column in the EVA.}
+#'   \item{taxon_code}{The taxon code, equivalent to the full taxon name but all lower case and with whitespace replaced with underscores.}
+#'   \item{eurosl_name}{The taxon name as it appears in EuroSL, where there is a match.}
+#'   \item{eurosl_status}{The taxonomic status of the eurosl_name.}
+#'   \item{eurosl_id}{The ID of the eurosl_name.}
+#'   \item{n_presences_eva}{The number of presences in suitable samples from the EVA.}
+#' }
+"ModelTaxa"
+
 #' Niche width data
 #'
 #' A dataset Niche width data for the modelled taxa.
 #'
-#' \code{NicheWidthData} 
+#' \code{NicheWidths} 
 #'
-#' @format A data frame with `r nrow(elements::NicheWidthData)` rows and `r ncol(elements::NicheWidthData)`, the definitions of which are:
+#' @format A data frame with `r nrow(elements::NicheWidths)` rows and `r ncol(elements::NicheWidths)`, the definitions of which are:
 #' \describe{
 #'   \item{variable}{The variable name.}
 #'   \item{mean}{The mean variable value.}
@@ -98,9 +134,9 @@
 #'   \item{q75}{The 75% quantile value.}
 #'   \item{q95}{The 95% quantile value.}
 #'   \item{q99}{The 99% quantile value.}
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #' }
-"NicheWidthData"
+"NicheWidths"
 
 #' Model performance measures
 #'
@@ -110,7 +146,7 @@
 #'
 #' @format A data frame with `r nrow(elements::PerformanceMeasures)` rows and `r ncol(elements::PerformanceMeasures)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #'   \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 #'   \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}
@@ -129,7 +165,7 @@
 #'
 #' @format A data frame with `r nrow(elements::PDPData)` rows and `r ncol(elements::PDPData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxaBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The PDP value.}
 #'   \item{variable}{The variable name.}

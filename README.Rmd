@@ -13,12 +13,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r load_packages, include = FALSE}
-library(e1071)
-library(elements)
-library(filehash)
-```
-
 # elements
 
 <!-- badges: start -->
@@ -84,14 +78,26 @@ Note: `elements` has two dependencies, `e1071` and `filehash`, which must also b
 
 ### Retrieving models
 
-Due to the total size of the ENMs currently included in `elements`
+```{r load_packages, include = FALSE}
+library(e1071)
+library(elements)
+library(filehash)
+```
+
+```{r load_packages_print, include = TRUE, eval=FALSE}
+library(e1071)
+library(elements)
+library(filehash)
+```
+
+Due to the total size of the `r nrow(elements::ModelTaxa)` ENMs currently included in `elements` (1.6GB when compressed, 7.3GB in memory)
 the ENMs are not exported in a .rda object. Instead they are made available through a `filehash` (Peng, 2005) database, which provides access to the ENMs without loading all models into memory.
 To access the ENMs a connection to this database must be initialised using `elements::startup`.
 
 ```{r retrieve_models}
 elements::startup()
 
-model <- OccModels[["stellaria_graminea"]]
+model <- Models[["stellaria_graminea"]]
 ```
 
 ```{r print_model, echo=FALSE}
@@ -148,7 +154,7 @@ pm_taxon <- pm[pm[["taxon_code"]] == "stellaria_graminea", c(1, 7, 8)]
 pm_taxon
 ```
 
-The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018) can also be viewed using the `elements::plot_me` function. By setting the 'presences' argument is TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
+The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018) can also be viewed using the `elements::plot_me` function. By setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
 
 ```{r me_plot_create, include=FALSE}
 me_plot <- elements::plot_me(taxon = "stellaria_graminea", 
@@ -176,11 +182,11 @@ me_plot
 <summary><h3 style="display:inline-block">&#9888; A note on ALE plots</h3></summary>
 
 ```{r get_gr_s_nw_max, include=FALSE}
-nw <- elements::NicheWidthData
+nw <- elements::NicheWidths
 nw_gr_s_max <- nw[nw[["taxon_code"]] == "gymnocarpium_robertianum" & nw[["variable"]] == "S", ][["max"]]
 ```
 
-In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow, or where there is a non-unimodal distribution. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
+In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
 
 In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting the shape of the univariate response.
 

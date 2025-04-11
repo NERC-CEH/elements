@@ -5,9 +5,9 @@
 \alias{PerformanceMeasures}
 \title{Model performance measures}
 \format{
-A data frame with 128 rows and 8 columns, the definitions of which are:
+A data frame with 6145 rows and 8 columns, the definitions of which are:
 \describe{
-\item{taxon_code}{The taxon, see \code{elements::TaxaBackbone}.}
+\item{taxon_code}{The taxon, see \code{elements::ModelTaxa}.}
 \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}

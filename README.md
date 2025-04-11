@@ -88,17 +88,23 @@ Usage
 
 ### Retrieving models
 
-Due to the total size of the ENMs currently included in `elements` the
-ENMs are not exported in a .rda object. Instead they are made available
-through a `filehash` (Peng, 2005) database, which provides access to the
-ENMs without loading all models into memory. To access the ENMs a
-connection to this database must be initialised using
-`elements::startup`.
+``` r
+library(e1071)
+library(elements)
+library(filehash)
+```
+
+Due to the total size of the 6145 ENMs currently included in `elements`
+(1.6GB when compressed, 7.3GB in memory) the ENMs are not exported in a
+.rda object. Instead they are made available through a `filehash` (Peng,
+2005) database, which provides access to the ENMs without loading all
+models into memory. To access the ENMs a connection to this database
+must be initialised using `elements::startup`.
 
 ``` r
 elements::startup()
 
-model <- OccModels[["stellaria_graminea"]]
+model <- Models[["stellaria_graminea"]]
 ```
 
     #> 
@@ -112,7 +118,7 @@ model <- OccModels[["stellaria_graminea"]]
     #>  SVM-Kernel:  radial 
     #>        cost:  0.1 
     #> 
-    #> Number of Support Vectors:  15039
+    #> Number of Support Vectors:  13870
 
 ### Using the models
 
@@ -126,12 +132,12 @@ results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors 
 ```
 
     #>   Present
-    #> 1    0.00
-    #> 2    0.40
-    #> 3    0.26
-    #> 4    0.74
-    #> 5    0.06
-    #> 6    0.02
+    #> 1    0.03
+    #> 2    0.03
+    #> 3    0.06
+    #> 4    0.25
+    #> 5    0.01
+    #> 6    0.01
 
 An additional helper function `elements::predict_occ` can generate
 predictions for multiple taxa, by either specifing the taxa to model in
@@ -144,12 +150,12 @@ results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::Examp
 ```
 
     #>     Present         taxon_code
-    #> 201    0.01 silene_flos-cuculi
-    #> 202    0.01 silene_flos-cuculi
-    #> 203    0.00 silene_flos-cuculi
-    #> 204    0.01 silene_flos-cuculi
+    #> 201    0.04 silene_flos-cuculi
+    #> 202    0.00 silene_flos-cuculi
+    #> 203    0.01 silene_flos-cuculi
+    #> 204    0.65 silene_flos-cuculi
     #> 205    0.00 silene_flos-cuculi
-    #> 206    0.97 silene_flos-cuculi
+    #> 206    0.01 silene_flos-cuculi
 
 ### Shutting down
 
@@ -182,13 +188,13 @@ pm <- elements::PerformanceMeasures
 pm_taxon <- pm[pm[["taxon_code"]] == "stellaria_graminea", c(1, 7, 8)]
 ```
 
-    #>           taxon_code Holdout.BalancedAccuracy STCV.BalancedAccuracy
-    #> 4 stellaria_graminea                0.8427822             0.8439437
+    #>              taxon_code Holdout.BalancedAccuracy STCV.BalancedAccuracy
+    #> 3627 stellaria_graminea                0.8564161             0.8504625
 
 The marginal effects of an ENM, in the form of Partial Dependency
 Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018)
 can also be viewed using the `elements::plot_me` function. By setting
-the ‘presences’ argument is TRUE a box and whiskers plot showing the
+the ‘presences’ argument to TRUE a box and whiskers plot showing the
 distribution of presences is overlaid and by setting the ‘eivs’ argument
 to TRUE a point and arrows showing the EIV and niche width values are
 overlaid, where available in `elements::VariableData`.
@@ -213,10 +219,11 @@ elements::plot_me(taxon = "stellaria_graminea",
 
 In some instances the ALE curves may appear ‘inverted’ and not
 ecologically realistic, this is most often seen in situations where the
-distribution of presences along a variable gradient is extremely narrow,
-or where there is a non-unimodal distribution. For example,
-*Gymnocarpium robertianum* has a extremely narrow distribution of
-plot-mean S values, with a maximum value of 1.
+distribution of presences along a variable gradient is extremely narrow
+and/or where there is a non-unimodal distribution, which causes
+extrapolation issues in the ALE calculations. For example, *Gymnocarpium
+robertianum* has a extremely narrow distribution of plot-mean S values,
+with a maximum value of 1.
 
 In these instances it is important to also visualise the PDP plots,
 which should then be prioritised when inspecting the shape of the

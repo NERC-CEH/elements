@@ -37,7 +37,7 @@
 #' }
 predict_occ <- function(taxa_codes, predictors, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE){
   
-  if(isFALSE(exists(x = "OccModels", envir = .GlobalEnv))){
+  if(isFALSE(exists(x = "Models", envir = .GlobalEnv))){
     stop("Please run elements::startup() before using elements::predict_occ.")
   }
   

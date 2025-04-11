@@ -4,10 +4,17 @@
 \alias{plot_me}
 \title{Plot the marginal effect values for a taxon and set of variables}
 \usage{
-plot_me(taxon, me_type, free_y, presences, eivs, vars)
+plot_me(
+  taxon,
+  me_type = "pdp",
+  free_y = TRUE,
+  presences = TRUE,
+  eivs = TRUE,
+  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")
+)
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::TaxaBackbone}.}
+\item{taxon}{The taxon_code, see \code{elements::ModelTaxa}.}
 
 \item{me_type}{A string representing the marginal effect plot type, one of "ale" or "pdp".}
 
@@ -37,6 +44,13 @@ has several impacts on the PDP plots:
 
 When inspecting the PDP plots, it is therefore important to pay more attention
 to the shape of the response, rather than the absolute PDP value.
+
+In some instances the ALE curves may reflect 'inverted' responses which are not ecologically realistic,
+this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow,
+or where there is a non-unimodal distribution. For example, \emph{Gymnocarpium robertianum} has a extremely narrow distribution
+of plot-mean S values, with a maximum value of 1.
+In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting
+the shape of the univariate response.
 }
 \examples{
 elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))

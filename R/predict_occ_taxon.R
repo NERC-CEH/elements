@@ -4,7 +4,7 @@
 #'
 #' NOTE: to use this function you must first run `elements::startup()`
 #'
-#' @param taxon The taxon_code, see `elements::TaxaBackbone`.
+#' @param taxon The taxon_code, see `elements::ModelTaxa`.
 #' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
 #' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.
@@ -22,11 +22,11 @@
 #' }
 predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE){
   
-  if(isFALSE(exists(x = "OccModels", envir = .GlobalEnv))){
+  if(isFALSE(exists(x = "Models", envir = .GlobalEnv))){
     stop("Please run elements::startup() before using elements::predict_occ.")
   }
   
-  model <- .GlobalEnv$OccModels[[taxon]]
+  model <- .GlobalEnv$Models[[taxon]]
   
   predictions <- e1071:::predict.svm(object = model, predictors, probability = TRUE)
   
@@ -34,7 +34,7 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, d
   
   if(!is.null(limit)){
     
-    nw <- elements::NicheWidthData
+    nw <- elements::NicheWidths
     nw_taxon <- subset(nw[nw[["taxon_code"]] == taxon, ], select = -taxon_code)
     # rownames(nw_taxon) <- nw_taxon[["variable"]]
     nw_taxon <- setNames(data.frame(t(nw_taxon[,-1])), nw_taxon[[1]])

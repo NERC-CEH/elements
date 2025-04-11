@@ -20,7 +20,7 @@
 #' In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting 
 #' the shape of the univariate response.
 #'
-#' @param taxon The taxon_code, see `elements::TaxaBackbone`.
+#' @param taxon The taxon_code, see `elements::ModelTaxa`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
 #' @param free_y A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.
 #' @param presences A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.
@@ -30,20 +30,20 @@
 #' @return A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 #' @export
 #'
-#' @examples elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' @examples elements::plot_me(taxon = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 #' 
 #' @references Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
-plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
+plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")){
   
-  backbone <- elements::TaxaBackbone
+  backbone <- elements::ModelTaxa
   
   # Check that a taxon is available
   if(isFALSE(taxon %in% backbone[["taxon_code"]])){
-    stop("The taxon supplied is not modelled, please select a taxon_code from the `elements::TaxaBackbone` taxon_code column.")
+    stop("The taxon supplied is not modelled, please select a taxon_code from the `elements::ModelTaxa` taxon_code column.")
   }
   
   # Retireve taxon name
-  taxon_name <- backbone[backbone[["taxon_code"]] == taxon, "taxon_name"]
+  taxon_name <- subset(backbone, taxon_code == taxon, select = taxon_name, drop = TRUE)
   
   # Retrieve data for taxon
   if(me_type == "ale"){
@@ -63,7 +63,7 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
   data_taxon <- data[data[["taxon_code"]] == taxon, ]
   
   if(isTRUE(presences)){
-    nw <- elements::NicheWidthData
+    nw <- elements::NicheWidths
     nw_taxon <- nw[nw[["taxon_code"]] == taxon, ]
   }
   
@@ -236,6 +236,7 @@ plot_me <- function(taxon, me_type, free_y, presences, eivs, vars){
       if(!is.null(eiv_val)){
         graphics::points(x = eiv_val, y = eiv_y, col = "blue", bg = "blue", pch = 21, )
       }
+      
       if(!is.null(eiv_nw)){
         graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
         graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)

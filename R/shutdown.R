@@ -9,7 +9,7 @@ shutdown <- function(){
   suppressWarnings({
     suppressMessages({
       invisible({
-        rm(OccModels, envir = .GlobalEnv)
+        rm(Models, envir = .GlobalEnv)
       })
     })
   })
