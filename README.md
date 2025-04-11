@@ -68,11 +68,10 @@ Installation
 </h2>
 </summary>
 
-You can install the development version of elements from Github with:
+To install elements run:
 
 ``` r
-if(!require("remotes")) install.packages("remotes")
-remotes::install_github("NERC-CEH/elements")
+install.packages(file.path("path_to_file", "elements_0.0.1.tar.gz"), repos = NULL, type = "source")
 ```
 
 Note: `elements` has two dependencies, `e1071` and `filehash`, which
