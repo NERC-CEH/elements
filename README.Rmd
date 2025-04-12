@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # elements
 
 <!-- badges: start -->
-[![Generic badge](https://img.shields.io/badge/Version-0.0.1-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-0.0.2-green.svg)]()
 [![License: CC BY 4.0](https://img.shields.io/badge/License-LGPL 3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
 <!-- badges: end -->
@@ -143,9 +143,7 @@ The performance measures can be retrieved from the `elements::PerformanceMeasure
 for example, below the balanced accuracy from the random holdout sample and the model tuning spatio-temporal cross-validation (Schratz et al., 2024) are displayed.
 
 ```{r performance_measures}
-pm <- elements::PerformanceMeasures
-
-pm_taxon <- pm[pm[["taxon_code"]] == "stellaria_graminea", c(1, 7, 8)]
+pm_taxon <- subset(elements::PerformanceMeasures, taxon_code == "stellaria_graminea", select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
 ```
 
 ```{r performance_measures_print, echo=FALSE}
@@ -154,17 +152,17 @@ pm_taxon
 
 The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018) can also be viewed using the `elements::plot_me` function. By setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
 
-```{r me_plot_create, include=FALSE}
-me_plot <- elements::plot_me(taxon = "stellaria_graminea", 
-                             me_type = "ale", 
-                             free_y = TRUE, 
-                             presences = TRUE,
-                             eivs = TRUE,
-                             vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```{r me_plot_taxon_create, include=FALSE}
+me_plot_taxon <- elements::plot_me(taxa = "stellaria_graminea", 
+                                   me_type = "ale", 
+                                   free_y = TRUE, 
+                                   presences = TRUE,
+                                   eivs = TRUE,
+                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
 
-```{r me_plot_code, eval=FALSE}
-elements::plot_me(taxon = "stellaria_graminea", 
+```{r me_plot_taxon_code, eval=FALSE}
+elements::plot_me(taxa = "stellaria_graminea", 
                   me_type = "ale", 
                   free_y = TRUE, 
                   presences = TRUE,
@@ -172,8 +170,28 @@ elements::plot_me(taxon = "stellaria_graminea",
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
 
-```{r me_plot_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
-me_plot
+```{r me_plot_taxon_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
+me_plot_taxon
+```
+
+Multiple taxa can be supplied in the "taxa" argument, in this case the ability to plot presence box and whisker plots and EIV points and arrows is disabled.
+
+```{r me_plot_taxa_create, include=FALSE}
+me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+                                  me_type = "pdp", 
+                                  normalise = TRUE,
+                                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxa_code, eval=FALSE}
+elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+                  me_type = "pdp", 
+                  normalise = TRUE,
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxa_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
+me_plot_taxa
 ```
 
 <details>
@@ -189,17 +207,18 @@ In some instances the ALE curves may appear 'inverted' and not ecologically real
 In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting the shape of the univariate response.
 
 ```{r me_plot_gr_s_create, include=FALSE}
-me_plot_gr_s_ale <- elements::plot_me(taxon = "gymnocarpium_robertianum", 
+me_plot_gr_s_ale <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
                                       me_type = "ale", 
                                       free_y = TRUE, 
                                       presences = TRUE,
                                       eivs = TRUE,
                                       vars = c("S"))
 
-me_plot_gr_s_pdp <- elements::plot_me(taxon = "gymnocarpium_robertianum", 
+me_plot_gr_s_pdp <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
                                       me_type = "pdp", 
                                       free_y = TRUE, 
                                       presences = TRUE,
+                                      normalise = FALSE,
                                       eivs = TRUE,
                                       vars = c("S"))
 ```

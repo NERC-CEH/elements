@@ -1,7 +1,13 @@
-#' Plot the marginal effect values for a taxon and set of variables
+#' Plot the marginal effect values for one or more taxa and set of variables
 #' 
-#' Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP)
-#' marginal effect/univariate response curves for a selected taxon and variables.
+#' @description 
+#' Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022)
+#' marginal effect curves for one or more taxa and a set of variables.
+#' 
+#' @details 
+#' If the number of taxa is one, setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is 
+#' overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, 
+#' where available in `elements::VariableData`.
 #' 
 #' The presence-absence imbalance in the training data varies by taxon.
 #' This 'ghost of imbalance' (Jiménez-Valverde & Lobo, 2006)
@@ -12,38 +18,67 @@
 #' 
 #' When inspecting the PDP plots, it is therefore important to pay more attention 
 #' to the shape of the response, rather than the absolute PDP value.
+#' However, by setting the normalise argument to TRUE, the PDP plot data is transformed
+#' using min-max normalisation/re-scaling.
 #' 
 #' In some instances the ALE curves may reflect 'inverted' responses which are not ecologically realistic, 
-#' this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow, 
-#' or where there is a non-unimodal distribution. For example, *Gymnocarpium robertianum* has a extremely narrow distribution 
-#' of plot-mean S values, with a maximum value of 1.
+#' this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow
+#' and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations.
+#' For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of 1.
 #' In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting 
 #' the shape of the univariate response.
 #'
-#' @param taxon The taxon_code, see `elements::ModelTaxa`.
+#' @param taxa A vector of one or more taxon_code strings, see `elements::ModelTaxa`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
 #' @param free_y A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.
 #' @param presences A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.
 #' @param eivs A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in `elements::VariableData`.
+#' @param normalise A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.
 #' @param vars A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".
 #'
 #' @return A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 #' @export
 #'
-#' @examples elements::plot_me(taxon = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' @examples 
+#' elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 #' 
-#' @references Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
-plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")){
-  
-  backbone <- elements::ModelTaxa
+#' elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' 
+#' @references 
+#' Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
+#' 
+#' Molnar, C., 2018. iml: An R package for Interpretable Machine Learning. Journal of Open Source Software 3, 786. https://doi.org/10.21105/joss.00786
+#'
+#' Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
+
+plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")){
   
   # Check that a taxon is available
-  if(isFALSE(taxon %in% backbone[["taxon_code"]])){
-    stop("The taxon supplied is not modelled, please select a taxon_code from the `elements::ModelTaxa` taxon_code column.")
+  if(isFALSE(taxa %in% elements::ModelTaxa[["taxon_code"]])){
+    absent_taxa <- paste0(setdiff(taxa, elements::ModelTaxa[["taxon_code"]]), collapse = ", ")
+    stop(paste0("The taxa: ", absent_taxa,  ", are not included. Please only select taxon_code values from the `elements::ModelTaxa` taxon_code column."))
   }
   
-  # Retireve taxon name
-  taxon_name <- subset(backbone, taxon_code == taxon, select = taxon_name, drop = TRUE)
+  # Get the number of taxa
+  n_taxa <- length(taxa)
+  
+  # Stop the function if more than 8 taxa are supplied
+  if(n_taxa > 8){
+    stop("Please select less than 8 taxa.")
+  }
+  
+  # Create a boolean identifying whether multiple taxa were supplied
+  multiple_taxa <- n_taxa > 1
+  
+  if(isTRUE(multiple_taxa)){
+    eivs <- FALSE 
+    presences <- FALSE
+  }
+  
+  # Retrieve taxon name
+  if(isFALSE(multiple_taxa)){
+    taxon_name <- subset(elements::ModelTaxa, taxon_code == taxa, select = taxon_name, drop = TRUE)
+  }
   
   # Retrieve data for taxon
   if(me_type == "ale"){
@@ -60,15 +95,37 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
     
   }
   
-  data_taxon <- data[data[["taxon_code"]] == taxon, ]
+  # Retrieve data for taxa
+  data_taxa <- subset(data, taxon_code %in% taxa)
+  
+  if(isTRUE(normalise) & me_type == "pdp"){
+    
+    data_taxa_split <- split(data_taxa, list(data_taxa$taxon_code, data_taxa$variable))
+    
+    data_taxa_norm <- lapply(data_taxa_split, 
+                             FUN = function(x){
+                               max_y <- max(x[["y"]])
+                               min_y <- min(x[["y"]]) 
+                               x[["y"]] <- (x[["y"]] - min_y) / (max_y - min_y)
+                               return(x)
+                             }
+                             )
+    
+    data_taxa_norm <- do.call(rbind, data_taxa_norm)
+    rownames(data_taxa_norm) <- NULL
+    
+    data_taxa <- data_taxa_norm
+   
+  }
+  
   
   if(isTRUE(presences)){
     nw <- elements::NicheWidths
-    nw_taxon <- nw[nw[["taxon_code"]] == taxon, ]
+    nw_taxon <- nw[nw[["taxon_code"]] == taxa, ]
   }
   
   # Retrieve available vars
-  available_vars <- intersect(vars, unique(data_taxon$variable))
+  available_vars <- intersect(vars, unique(data_taxa$variable))
   n_vars <- length(available_vars)
   
   # Calculate the number of columns and rows
@@ -96,10 +153,25 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
   graphics::plot.new()
   
   # Setup plot grid
-  suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), mar = c(3, 3, 1, 1) + 0.1, din = c(5, 5), no.readonly = TRUE))
+  if(isFALSE(multiple_taxa)){
+    
+    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), 
+                                   mar = c(3, 3, 1, 1) + 0.1, din = c(5, 5), 
+                                   xpd = FALSE,
+                                   no.readonly = TRUE))
+    
+  }else if(isTRUE(multiple_taxa)){
+    
+    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), 
+                                   mar = c(3, 3, 1, 1) + 0.1, din = c(6, 5), 
+                                   oma = c(0, 0, 0, 12),
+                                   xpd = FALSE,
+                                   no.readonly = TRUE))
+    
+  }
   
-  max_y_taxon <- max(data_taxon[["y"]])
-  min_y_taxon <- min(data_taxon[["y"]])
+  max_y_taxa <- max(data_taxa[["y"]])
+  min_y_taxa <- min(data_taxa[["y"]])
   
   if(isTRUE(eivs)){
     eiv_vals <- elements::VariableData
@@ -109,7 +181,7 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
   # For each variable in available_vars produce a plot
   for(var in available_vars){
       
-    data_var <- data_taxon[data_taxon[["variable"]] == var, ]
+    data_var <- subset(data_taxa, variable == var)
     
     max_y_var <- max(data_var[["y"]])
     min_y_var <- min(data_var[["y"]])
@@ -139,17 +211,17 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
       
       if(me_type == "pdp"){
         
-        bp_width <- diff(c(min_y_taxon, max_y_taxon)) / 10
+        bp_width <- diff(c(min_y_taxa, max_y_taxa)) / 10
         bp_hwidth <- bp_width / 2
         bp_centre <- max_y_var + bp_width
-        ylim <- c(0, max_y_taxon + (bp_width * 2))
+        ylim <- c(0, max_y_taxa + (bp_width * 2))
         
       } else if(me_type == "ale"){
         
-        bp_width <- diff(c(min_y_taxon, max_y_taxon)) / 10
+        bp_width <- diff(c(min_y_taxa, max_y_taxa)) / 10
         bp_hwidth <- bp_width / 2
         bp_centre <- max_y_var + bp_width
-        ylim <- c(min_y_taxon - bp_width, max_y_taxon + (bp_width * 2))
+        ylim <- c(min_y_taxa - bp_width, max_y_taxa + (bp_width * 2))
         
       }
       
@@ -173,13 +245,31 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
     }
     
     # Produce plot
-    if(isFALSE(presences) & isFALSE(eivs)){
+    if(isTRUE(multiple_taxa)){
+      
+      graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
+      
+      i <- 0
+      
+      for(taxon in taxa){
+        
+        i <- i + 1
+        
+        data_var_taxon <- subset(data_var, taxon_code == taxon)
+        
+        graphics::lines(x = data_var_taxon[["x"]], y = data_var_taxon[["y"]], col = palette.colors()[i + 1])
+       
+        graphics::abline(h = ab_line)
+        
+      }
+      
+    }else if(isFALSE(multiple_taxa) & isFALSE(presences) & isFALSE(eivs)){
       
       graphics::plot(x = data_var[["x"]], y = data_var[["y"]], xlab = var, ylab = ylab, type = "l", ylim = ylim)
       
       graphics::abline(h = ab_line)
       
-    }else if(isFALSE(presences) & isTRUE(eivs)){
+    }else if(isFALSE(multiple_taxa) & isFALSE(presences) & isTRUE(eivs)){
       
       graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
       
@@ -195,7 +285,7 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
       
-    }else if(isTRUE(presences) & isFALSE(eivs)){
+    }else if(isFALSE(multiple_taxa) & isTRUE(presences) & isFALSE(eivs)){
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
@@ -215,7 +305,7 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
       
-    }else if(isTRUE(presences) & isTRUE(eivs)){
+    }else if(isFALSE(multiple_taxa) & isTRUE(presences) & isTRUE(eivs)){
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
@@ -245,6 +335,23 @@ plot_me <- function(taxon, me_type = "pdp", free_y = TRUE, presences = TRUE, eiv
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
       
     }
+    
+  }
+  
+  if(isTRUE(multiple_taxa)){
+    
+    reset <- function() {
+      graphics::par(mfrow = c(1, 1), oma = rep(0, 4), mar = rep(0, 4), new = TRUE, xpd = TRUE)
+      graphics::plot(0:1, 0:1, type = "n", xlab = "", ylab = "", axes = FALSE)
+    }
+
+    reset()
+    
+    graphics::legend("right", title = "Taxon",
+                     inset = c(0, 0),
+                     cex = 0.75,
+                     legend = taxa, fill = palette.colors()[1:length(taxa) + 1],
+                     ncol = 1,  bty = "n")
     
   }
   

@@ -1,7 +1,7 @@
 Package: elements
 Title: Ecological Niche Models for the Plants of Europe
 Description: A R package containing Ecological Niche Models (ENMs) for the most prevalent plants, bryophytes and terricolous lichens in the European Vegetation Archive (EVA).
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(person(given = "Zeke",
                     family = "Marshall",
                     role = c("aut", "cre"),

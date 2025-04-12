@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.0.1-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.0.2-green.svg)]()
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-LGPL%203.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
@@ -181,13 +181,11 @@ accuracy from the random holdout sample and the model tuning
 spatio-temporal cross-validation (Schratz et al., 2024) are displayed.
 
 ``` r
-pm <- elements::PerformanceMeasures
-
-pm_taxon <- pm[pm[["taxon_code"]] == "stellaria_graminea", c(1, 7, 8)]
+pm_taxon <- subset(elements::PerformanceMeasures, taxon_code == "stellaria_graminea", select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
 ```
 
-    #>              taxon_code Holdout.BalancedAccuracy STCV.BalancedAccuracy
-    #> 3627 stellaria_graminea                0.8564161             0.8504625
+    #>      Holdout.BalancedAccuracy STCV.BalancedAccuracy
+    #> 3627                0.8564161             0.8504625
 
 The marginal effects of an ENM, in the form of Partial Dependency
 Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018)
@@ -198,7 +196,7 @@ to TRUE a point and arrows showing the EIV and niche width values are
 overlaid, where available in `elements::VariableData`.
 
 ``` r
-elements::plot_me(taxon = "stellaria_graminea", 
+elements::plot_me(taxa = "stellaria_graminea", 
                   me_type = "ale", 
                   free_y = TRUE, 
                   presences = TRUE,
@@ -206,7 +204,20 @@ elements::plot_me(taxon = "stellaria_graminea",
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
 
-<img src="man/figures/README-me_plot_print-1.png" width="100%" />
+<img src="man/figures/README-me_plot_taxon_print-1.png" width="100%" />
+
+Multiple taxa can be supplied in the “taxa” argument, in this case the
+ability to plot presence box and whisker plots and EIV points and arrows
+is disabled.
+
+``` r
+elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+                  me_type = "pdp", 
+                  normalise = TRUE,
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+<img src="man/figures/README-me_plot_taxa_print-1.png" width="100%" />
 
 <details>
 <summary>

@@ -2,19 +2,20 @@
 % Please edit documentation in R/plot_me.R
 \name{plot_me}
 \alias{plot_me}
-\title{Plot the marginal effect values for a taxon and set of variables}
+\title{Plot the marginal effect values for one or more taxa and set of variables}
 \usage{
 plot_me(
-  taxon,
+  taxa,
   me_type = "pdp",
   free_y = TRUE,
   presences = TRUE,
   eivs = TRUE,
+  normalise = TRUE,
   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")
 )
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::ModelTaxa}.}
+\item{taxa}{A vector of one or more taxon_code strings, see \code{elements::ModelTaxa}.}
 
 \item{me_type}{A string representing the marginal effect plot type, one of "ale" or "pdp".}
 
@@ -24,16 +25,22 @@ plot_me(
 
 \item{eivs}{A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in \code{elements::VariableData}.}
 
+\item{normalise}{A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.}
+
 \item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".}
 }
 \value{
 A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 }
 \description{
-Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP)
-marginal effect/univariate response curves for a selected taxon and variables.
+Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022)
+marginal effect curves for one or more taxa and a set of variables.
 }
 \details{
+If the number of taxa is one, setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is
+overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid,
+where available in \code{elements::VariableData}.
+
 The presence-absence imbalance in the training data varies by taxon.
 This 'ghost of imbalance' (Jiménez-Valverde & Lobo, 2006)
 has several impacts on the PDP plots:
@@ -44,18 +51,26 @@ has several impacts on the PDP plots:
 
 When inspecting the PDP plots, it is therefore important to pay more attention
 to the shape of the response, rather than the absolute PDP value.
+However, by setting the normalise argument to TRUE, the PDP plot data is transformed
+using min-max normalisation/re-scaling.
 
 In some instances the ALE curves may reflect 'inverted' responses which are not ecologically realistic,
-this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow,
-or where there is a non-unimodal distribution. For example, \emph{Gymnocarpium robertianum} has a extremely narrow distribution
-of plot-mean S values, with a maximum value of 1.
+this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow
+and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations.
+For example, \emph{Gymnocarpium robertianum} has a extremely narrow distribution of plot-mean S values, with a maximum value of 1.
 In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting
 the shape of the univariate response.
 }
 \examples{
-elements::plot_me(taxon = "stellaria_graminea", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+
+elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 
 }
 \references{
 Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
+
+Molnar, C., 2018. iml: An R package for Interpretable Machine Learning. Journal of Open Source Software 3, 786. https://doi.org/10.21105/joss.00786
+
+Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
 }
