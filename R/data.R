@@ -130,8 +130,10 @@
 #'   \item{median}{The median variable value.}
 #'   \item{q01}{The 1% quantile value.}
 #'   \item{q05}{The 5% quantile value.}
+#'   \item{q10}{The 10% quantile value.}
 #'   \item{q25}{The 25% quantile value.}
 #'   \item{q75}{The 75% quantile value.}
+#'   \item{q90}{The 90% quantile value.}
 #'   \item{q95}{The 95% quantile value.}
 #'   \item{q99}{The 99% quantile value.}
 #'   \item{taxon_code}{The taxon, see `elements::ModelTaxa`.}

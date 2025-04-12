@@ -1,3 +1,6 @@
+# elements 0.0.3 (xx/xx/2025)
+
+
 # elements 0.0.2 (12/04/2025)
 
 * Adding the ability to plot multiple taxa in `elements::plot_me` function.

@@ -7,7 +7,7 @@
 #' @param taxon The taxon_code, see `elements::ModelTaxa`.
 #' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
-#' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.
+#' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.
 #' @param dp The number of decimal places to round the probability values to.
 #' @param append_predictors A boolean. If TRUE return the predictors data frame with the results in an additional column.
 #'
@@ -53,6 +53,11 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, d
       
       lower <- nw_taxon["q05",]
       upper <- nw_taxon["q95",]
+      
+    } else if(limit == "q10_q90"){
+      
+      lower <- nw_taxon["q10",]
+      upper <- nw_taxon["q90",]
       
     } else if(limit == "q25_q75"){
       
