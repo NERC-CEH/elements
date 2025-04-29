@@ -11,7 +11,9 @@ plot_me(
   presences = TRUE,
   eivs = TRUE,
   normalise = TRUE,
-  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")
+  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"),
+  lmw = 15,
+  lts = 0.75
 )
 }
 \arguments{
@@ -28,6 +30,10 @@ plot_me(
 \item{normalise}{A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.}
 
 \item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".}
+
+\item{lmw}{The width of the outer margin containing the legend, passed to the "oma" argument of \code{graphics::par}. Adjust to ensure the legend is given enough room.}
+
+\item{lts}{The size of the legend text, passed to the "cex" argument of \code{graphics::legend}. Adjust to ensure the legend text size is appropriate.}
 }
 \value{
 A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.

@@ -50,3 +50,5 @@ rsconnect/
 
 # Models
 inst/extdata/Models
+inst/doc
+docs

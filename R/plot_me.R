@@ -35,6 +35,8 @@
 #' @param eivs A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in `elements::VariableData`.
 #' @param normalise A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.
 #' @param vars A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".
+#' @param lmw The width of the outer margin containing the legend, passed to the "oma" argument of `graphics::par`. Adjust to ensure the legend is given enough room.
+#' @param lts The size of the legend text, passed to the "cex" argument of `graphics::legend`. Adjust to ensure the legend text size is appropriate.
 #'
 #' @return A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 #' @export
@@ -51,43 +53,40 @@
 #'
 #' Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
 
-plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17")){
+plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
   
-  # Check that a taxon is available
   if(isFALSE(taxa %in% elements::ModelTaxa[["taxon_code"]])){
+    
     absent_taxa <- paste0(setdiff(taxa, elements::ModelTaxa[["taxon_code"]]), collapse = ", ")
-    stop(paste0("The taxa: ", absent_taxa,  ", are not included. Please only select taxon_code values from the `elements::ModelTaxa` taxon_code column."))
+    
+    stop(paste0("The taxa: ", absent_taxa, ", are not included. Please only select taxon_code values from the `elements::ModelTaxa` taxon_code column."))
+    
   }
   
-  # Get the number of taxa
   n_taxa <- length(taxa)
   
-  # Stop the function if more than 8 taxa are supplied
   if(n_taxa > 8){
     stop("Please select less than 8 taxa.")
   }
   
-  # Create a boolean identifying whether multiple taxa were supplied
   multiple_taxa <- n_taxa > 1
   
   if(isTRUE(multiple_taxa)){
-    eivs <- FALSE 
+    eivs <- FALSE
     presences <- FALSE
   }
   
-  # Retrieve taxon name
   if(isFALSE(multiple_taxa)){
     taxon_name <- subset(elements::ModelTaxa, taxon_code == taxa, select = taxon_name, drop = TRUE)
   }
   
-  # Retrieve data for taxon
   if(me_type == "ale"){
     
     data <- elements::ALEData
     ab_line <- 0
     ylab <- "ALE [-]"
     
-  } else if(me_type == "pdp"){
+  }else if(me_type == "pdp"){
     
     data <- elements::PDPData
     ab_line <- 0.5
@@ -95,7 +94,6 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     
   }
   
-  # Retrieve data for taxa
   data_taxa <- subset(data, taxon_code %in% taxa)
   
   if(isTRUE(normalise) & me_type == "pdp"){
@@ -105,67 +103,67 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     data_taxa_norm <- lapply(data_taxa_split, 
                              FUN = function(x){
                                max_y <- max(x[["y"]])
-                               min_y <- min(x[["y"]]) 
-                               x[["y"]] <- (x[["y"]] - min_y) / (max_y - min_y)
+                               min_y <- min(x[["y"]])
+                               x[["y"]] <- (x[["y"]] - min_y)/(max_y - min_y)
                                return(x)
-                             }
+                               }
                              )
     
     data_taxa_norm <- do.call(rbind, data_taxa_norm)
+    
     rownames(data_taxa_norm) <- NULL
     
     data_taxa <- data_taxa_norm
-   
+    
   }
-  
   
   if(isTRUE(presences)){
     nw <- elements::NicheWidths
     nw_taxon <- nw[nw[["taxon_code"]] == taxa, ]
   }
   
-  # Retrieve available vars
   available_vars <- intersect(vars, unique(data_taxa$variable))
   n_vars <- length(available_vars)
   
-  # Calculate the number of columns and rows
   if(n_vars == 1){
     ncols <- 1
     nrows <- 1
-  } else if(n_vars == 2){
+  }else if(n_vars == 2){
     ncols <- 2
     nrows <- 1
-  } else if(n_vars %in% c(3, 4)){
+  }else if(n_vars %in% c(3, 4)){
     ncols <- 2
     nrows <- 2
-  } else if(n_vars %in% c(5, 6)){
+  }else if(n_vars %in% c(5, 6)){
     ncols <- 2
     nrows <- 3
-  } else if(n_vars %in% c(7, 8, 9)){
+  }else if(n_vars %in% c(7, 8, 9)){
     ncols <- 3
     nrows <- 3
-  } else if(n_vars %in% c(10, 11)){
+  }else if(n_vars %in% c(10, 11)){
     ncols <- 3
     nrows <- 4
   }
   
-  # Reset plot
   graphics::plot.new()
   
-  # Setup plot grid
   if(isFALSE(multiple_taxa)){
     
-    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), 
-                                   mar = c(3, 3, 1, 1) + 0.1, din = c(5, 5), 
-                                   xpd = FALSE,
+    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), 
+                                   mgp = c(2, 1, 0), 
+                                   mar = c(3, 3, 1, 1) + 0.1, 
+                                   din = c(5, 5), 
+                                   xpd = FALSE, 
                                    no.readonly = TRUE))
     
-  }else if(isTRUE(multiple_taxa)){
+  }else if (isTRUE(multiple_taxa)) {
     
-    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), mgp = c(2, 1, 0), 
-                                   mar = c(3, 3, 1, 1) + 0.1, din = c(6, 5), 
-                                   oma = c(0, 0, 0, 12),
-                                   xpd = FALSE,
+    suppressWarnings(graphics::par(mfrow = c(nrows, ncols), 
+                                   mgp = c(2, 1, 0), 
+                                   mar = c(3, 3, 1, 1) + 0.1, 
+                                   din = c(6, 5), 
+                                   oma = c(0, 0, 0, lmw), 
+                                   xpd = FALSE, 
                                    no.readonly = TRUE))
     
   }
@@ -178,11 +176,9 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     eiv_vals_taxon <- eiv_vals[eiv_vals[["taxon_name"]] == taxon_name, ]
   }
   
-  # For each variable in available_vars produce a plot
   for(var in available_vars){
-      
-    data_var <- subset(data_taxa, variable == var)
     
+    data_var <- subset(data_taxa, variable == var)
     max_y_var <- max(data_var[["y"]])
     min_y_var <- min(data_var[["y"]])
     
@@ -190,75 +186,81 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
       if(me_type == "pdp"){
         
-        bp_width <- diff(c(min_y_var, max_y_var)) / 10
-        bp_hwidth <- bp_width / 2
+        bp_width <- diff(c(min_y_var, max_y_var))/10
+        bp_hwidth <- bp_width/2
         bp_centre <- max_y_var + bp_width
         ylim_upper <- max_y_var + (bp_width * 2)
         ylim <- c(0, ylim_upper)
         
-      } else if(me_type == "ale"){
+      }
+      
+      else if(me_type == "ale"){
         
-        bp_width <- diff(c(min_y_var, max_y_var)) / 10
-        bp_hwidth <- bp_width / 2
+        bp_width <- diff(c(min_y_var, max_y_var))/10
+        bp_hwidth <- bp_width/2
         bp_centre <- max_y_var + bp_width
         ylim <- c(min_y_var - bp_width, max_y_var + (bp_width * 2))
         
       }
       
-      eiv_y <- (max_y_var + (bp_centre - bp_hwidth)) / 2
+      eiv_y <- (max_y_var + (bp_centre - bp_hwidth))/2
       
-    } else if(isFALSE(free_y)){
+    }else if(isFALSE(free_y)){
       
       if(me_type == "pdp"){
         
-        bp_width <- diff(c(min_y_taxa, max_y_taxa)) / 10
-        bp_hwidth <- bp_width / 2
+        bp_width <- diff(c(min_y_taxa, max_y_taxa))/10
+        bp_hwidth <- bp_width/2
         bp_centre <- max_y_var + bp_width
         ylim <- c(0, max_y_taxa + (bp_width * 2))
         
-      } else if(me_type == "ale"){
+      }else if(me_type == "ale"){
         
-        bp_width <- diff(c(min_y_taxa, max_y_taxa)) / 10
-        bp_hwidth <- bp_width / 2
+        bp_width <- diff(c(min_y_taxa, max_y_taxa))/10
+        bp_hwidth <- bp_width/2
         bp_centre <- max_y_var + bp_width
         ylim <- c(min_y_taxa - bp_width, max_y_taxa + (bp_width * 2))
         
       }
       
-      eiv_y <- (max_y_var + (bp_centre - bp_hwidth)) / 2
+      eiv_y <- (max_y_var + (bp_centre - bp_hwidth))/2
       
     }
     
     if(isTRUE(eivs)){
-      
       if(nrow(eiv_vals_taxon) > 0 & var %in% c("M", "N", "R", "L")){
+        
         eiv_val <- eiv_vals_taxon[[var]]
-        eiv_nw <- eiv_vals_taxon[[paste0(var, ".nw")]] / 2
-      } else if(nrow(eiv_vals_taxon) > 0 & var %in% c("GP", "SD", "S")){
+        eiv_nw <- eiv_vals_taxon[[paste0(var, ".nw")]]/2
+        
+      }else if(nrow(eiv_vals_taxon) > 0 & var %in% c("GP", "SD", "S")){
+        
         eiv_val <- eiv_vals_taxon[[var]]
         eiv_nw <- NULL
-      } else {
+        
+      }else{
+        
         eiv_val <- NULL
         eiv_nw <- NULL
+        
       }
       
     }
     
-    # Produce plot
     if(isTRUE(multiple_taxa)){
       
       graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
       
       i <- 0
       
-      for(taxon in taxa){
+      for (taxon in taxa) {
         
         i <- i + 1
         
         data_var_taxon <- subset(data_var, taxon_code == taxon)
         
         graphics::lines(x = data_var_taxon[["x"]], y = data_var_taxon[["y"]], col = palette.colors()[i + 1])
-       
+        
         graphics::abline(h = ab_line)
         
       }
@@ -276,11 +278,18 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       graphics::abline(h = ab_line)
       
       if(!is.null(eiv_val)){
-        graphics::points(x = eiv_val, y = eiv_y, col = "blue", bg = "blue", pch = 21)
+        graphics::points(x = eiv_val, y = eiv_y, col = "blue", 
+                         bg = "blue", pch = 21)
       }
+      
       if(!is.null(eiv_nw)){
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, 
+                         col = "blue", bg = "blue", angle = 30, length = 0.1)
+        
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, 
+                         col = "blue", bg = "blue", angle = 30, length = 0.1)
+        
       }
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
@@ -293,16 +302,15 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
       graphics::abline(h = ab_line)
       
-      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$min, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Minimum
-      graphics::segments(x0 = nw_taxon_var$max, x1 = nw_taxon_var$max, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Maximum
-      graphics::segments(x0 = nw_taxon_var$median, x1 = nw_taxon_var$median, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Median
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q25, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # 25th percentile
-      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # 75th percentile
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre + bp_hwidth, y1 = bp_centre + bp_hwidth) # 25th & 75th percentile line upper
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre - bp_hwidth) # 25th & 75th percentile line lower
-      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$q25, y0 = bp_centre, y1 = bp_centre) # Centre line to 25th percentile
-      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$max, y0 = bp_centre, y1 = bp_centre) # Centre line from 75th percentile
-      
+      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$min, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$max, x1 = nw_taxon_var$max, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$median, x1 = nw_taxon_var$median, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q25, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$q75,  y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre + bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre - bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$q25, y0 = bp_centre, y1 = bp_centre)
+      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$max, y0 = bp_centre, y1 = bp_centre)
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
       
     }else if(isFALSE(multiple_taxa) & isTRUE(presences) & isTRUE(eivs)){
@@ -313,23 +321,34 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
       graphics::abline(h = ab_line)
       
-      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$min, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Minimum
-      graphics::segments(x0 = nw_taxon_var$max, x1 = nw_taxon_var$max, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Maximum
-      graphics::segments(x0 = nw_taxon_var$median, x1 = nw_taxon_var$median, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # Median
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q25, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # 25th percentile
-      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth) # 75th percentile
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre + bp_hwidth, y1 = bp_centre + bp_hwidth) # 25th & 75th percentile line upper
-      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre - bp_hwidth) # 25th & 75th percentile line lower
-      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$q25, y0 = bp_centre, y1 = bp_centre) # Centre line to 25th percentile
-      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$max, y0 = bp_centre, y1 = bp_centre) # Centre line from 75th percentile
+      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$min, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$max, x1 = nw_taxon_var$max, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$median, x1 = nw_taxon_var$median, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q25, y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$q75,  y0 = bp_centre - bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre + bp_hwidth, y1 = bp_centre + bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$q25, x1 = nw_taxon_var$q75, y0 = bp_centre - bp_hwidth, y1 = bp_centre - bp_hwidth)
+      graphics::segments(x0 = nw_taxon_var$min, x1 = nw_taxon_var$q25, y0 = bp_centre, y1 = bp_centre)
+      graphics::segments(x0 = nw_taxon_var$q75, x1 = nw_taxon_var$max, y0 = bp_centre, y1 = bp_centre)
+      
       
       if(!is.null(eiv_val)){
-        graphics::points(x = eiv_val, y = eiv_y, col = "blue", bg = "blue", pch = 21, )
+        
+        graphics::points(x = eiv_val, y = eiv_y, col = "blue", 
+                         bg = "blue", pch = 21, )
+        
       }
       
+      
       if(!is.null(eiv_nw)){
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val + eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
-        graphics::arrows(x0 = eiv_val, x1 = eiv_val - eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", bg = "blue", angle = 30, length = 0.1)
+        
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val + 
+                           eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", 
+                         bg = "blue", angle = 30, length = 0.1)
+        graphics::arrows(x0 = eiv_val, x1 = eiv_val - 
+                           eiv_nw, y0 = eiv_y, y1 = eiv_y, col = "blue", 
+                         bg = "blue", angle = 30, length = 0.1)
+        
       }
       
       graphics::lines(x = data_var[["x"]], y = data_var[["y"]])
@@ -340,22 +359,22 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
   
   if(isTRUE(multiple_taxa)){
     
-    reset <- function() {
+    reset <- function(){
       graphics::par(mfrow = c(1, 1), oma = rep(0, 4), mar = rep(0, 4), new = TRUE, xpd = TRUE)
       graphics::plot(0:1, 0:1, type = "n", xlab = "", ylab = "", axes = FALSE)
     }
-
+    
     reset()
     
-    graphics::legend("right", title = "Taxon",
-                     inset = c(0, 0),
-                     cex = 0.75,
-                     legend = taxa, fill = palette.colors()[1:length(taxa) + 1],
-                     ncol = 1,  bty = "n")
-    
+    graphics::legend("right", title = "Taxon", 
+                     inset = c(0, 0), 
+                     cex = lts, 
+                     legend = taxa, 
+                     fill = palette.colors()[1:length(taxa) + 1],
+                     ncol = 1, 
+                     bty = "n")
   }
   
-  # Record plot
   plot <- grDevices::recordPlot()
   
   return(plot)

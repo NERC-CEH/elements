@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.0.2-green.svg)]()
-[![License: CC BY
-4.0](https://img.shields.io/badge/License-LGPL%203.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
+badge](https://img.shields.io/badge/Version-0.0.3-green.svg)]()
+[![License: GPL
+v3.0](https://img.shields.io/badge/License-GPL%20v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
 <!-- badges: end -->
 
@@ -67,10 +67,23 @@ Installation
 </h2>
 </summary>
 
-To install elements run:
+The Github repository containing the `elements` package
+[(https://github.com/NERC-CEH/elements)](https://github.com/NERC-CEH/elements)
+includes all files apart from the “./inst/extdata/Models” object as it
+is above the 100MB limit. To retrieve the `elements` package including
+the “Models” object download the latest version from Zenodo here - .
+
+Alternatively, you can download the package using the `zen4R` R package
+from a particular DOI.
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.0.1.tar.gz"), repos = NULL, type = "source")
+zen4R::download_zenodo("10.5281/zenodo.<notyetinzotero>", path = "path_to_file")
+```
+
+After retrieving the package to install `elements` run:
+
+``` r
+install.packages(file.path("path_to_file", "elements_0.0.3.tar.gz"), repos = NULL, type = "source")
 ```
 
 Note: `elements` has two dependencies, `e1071` and `filehash`, which
@@ -80,7 +93,7 @@ must also be installed.
 <details>
 <summary>
 <h2 style="display:inline-block">
-Usage
+Model Usage
 </h2>
 </summary>
 
@@ -168,7 +181,7 @@ elements::shutdown()
 <details>
 <summary>
 <h2 style="display:inline-block">
-Inspecting Models
+Model Inspection
 </h2>
 </summary>
 

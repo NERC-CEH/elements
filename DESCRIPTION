@@ -1,14 +1,14 @@
 Package: elements
 Title: Ecological Niche Models for the Plants of Europe
 Description: A R package containing Ecological Niche Models (ENMs) for the most prevalent plants, bryophytes and terricolous lichens in the European Vegetation Archive (EVA).
-Version: 0.0.2
+Version: 0.0.3
 Authors@R: c(person(given = "Zeke",
                     family = "Marshall",
                     role = c("aut", "cre"),
                     email = "zekmar@ceh.ac.uk",
                     comment = c(ORCID = "0000-0001-9260-7827"))
              )
-License: LGPL (>= 3)
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
@@ -17,8 +17,10 @@ Imports:
   e1071 (>= 1.7-16),
   filehash (>= 2.4-6)
 Suggests:
-  testthat
-URL: https://github.com/NERC-CEH/elements
+    knitr,
+    rmarkdown,
+    testthat
+URL: https://github.com/NERC-CEH/elements, https://nerc-ceh.github.io/elements/
 BugReports: https://github.com/NERC-CEH/elements/issues
 Depends: 
     R (>= 4.4)
