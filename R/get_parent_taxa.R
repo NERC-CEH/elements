@@ -1,6 +1,6 @@
 #' Retrieve the parent taxa for a given taxon.
 #'
-#' @param taxon The name of a Taxon in the "TaxonName" column of the `elements::EuroSL` data frame, or the "taxon_name" column of the `elements::ModelTaxa` data frame.
+#' @param taxon The name of a Taxon in the "TaxonName" column of the `elements::EuroSL` data frame, or the "taxon_name" column of the `elements::TaxonomicBackbone` data frame.
 #'
 #' @returns A data frame in wide format containing the parent taxa for the specified taxon.
 #' @export

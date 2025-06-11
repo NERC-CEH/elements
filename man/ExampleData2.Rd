@@ -18,7 +18,7 @@ A data frame with 400 rows and 12 columns, the definitions of which are:
 \item{bio06}{Minimum temperature in the coldest month}
 \item{bio16}{Precipitation in the wettest quarter}
 \item{bio17}{Precipitation in the driest quarter}
-\item{taxon_code}{The taxon, see \code{elements::ModelTaxa}.}
+\item{taxon_code}{The taxon, see \code{elements::TaxonomicBackbone}.}
 }
 }
 \usage{

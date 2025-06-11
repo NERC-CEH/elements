@@ -5,7 +5,7 @@
 \alias{VariableData}
 \title{Environmental indicator value data}
 \format{
-A data frame with 9406 rows and 26 columns, the definitions of which are:
+A data frame with 9409 rows and 26 columns, the definitions of which are:
 \describe{
 \item{taxon_name}{The taxon name.}
 }

@@ -5,7 +5,7 @@
 \alias{NicheWidths}
 \title{Niche width data}
 \format{
-A data frame with 67617 rows and 14, the definitions of which are:
+A data frame with 67947 rows and 14, the definitions of which are:
 \describe{
 \item{variable}{The variable name.}
 \item{mean}{The mean variable value.}
@@ -20,7 +20,7 @@ A data frame with 67617 rows and 14, the definitions of which are:
 \item{q90}{The 90\% quantile value.}
 \item{q95}{The 95\% quantile value.}
 \item{q99}{The 99\% quantile value.}
-\item{taxon_code}{The taxon, see \code{elements::ModelTaxa}.}
+\item{taxon_code}{The taxon, see \code{elements::TaxonomicBackbone}.}
 }
 }
 \usage{

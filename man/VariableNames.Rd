@@ -3,22 +3,16 @@
 \docType{data}
 \name{VariableNames}
 \alias{VariableNames}
-\title{Environmental indicator value names}
+\title{Model variables codes}
 \format{
-A data frame with 29 rows and 5 columns, the definitions of which are:
-\describe{
-\item{raw_name}{The raw name of the variable as present in the parent dataset.}
-\item{variable_code}{The variable code, used throughout the \code{elements} R package.}
-\item{variable_name}{A 'tidy' variable name without spaces.}
-\item{variable_plot_name}{A 'tidy' variable name with spaces.}
-\item{model_var}{A boolean indicating whether the variable was included as a predictor.}
-}
+A vector containing  strings.
 }
 \usage{
 VariableNames
 }
 \description{
-A dataset containing a lookup for the Ecological Indicator Value (EIV) codes used throughout the \code{elements} package and full variable namesnames.
+A vector containing the environmental variable codes for the model variables;
+equivalent to the variable_code values in the \code{elements::VariableLookup} data frame for rows where model_var is TRUE.
 }
 \details{
 \code{VariableNames}

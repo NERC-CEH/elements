@@ -9,18 +9,21 @@ predict_occ_taxon(
   predictors,
   pa = "Present",
   limit = NULL,
+  holdopt = NULL,
   dp = 3,
   append_predictors = TRUE
 )
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::ModelTaxa}.}
+\item{taxon}{The taxon_code, see \code{elements::TaxonomicBackbone}.}
 
 \item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 
 \item{limit}{A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.}
+
+\item{holdopt}{Hold one or more variables at their optimum values. NULL by default, else a vector of variable codes, e.g. c("SD", "GP").}
 
 \item{dp}{The number of decimal places to round the probability values to.}
 
@@ -33,12 +36,25 @@ A data frame containing the probability of occurrence (Present and/or Absent), i
 Generate predictions for the probability of occurrence (presence and/or absence) for a given taxon.
 }
 \details{
+A number of optional arguments provide additional control over the use of the models.
+First, using the 'limit' argument the probabilities may be set to 0 if one or
+more of the predictor values are outside a stipulated quantile range,
+e.g. the 1\% and 99\% quantiles by setting the 'limit' argument to "q01_q99".
+This may be used to strictly enforce the assignment of probability values of 0.
+As the quantile values present in \code{elements::NicheWidths} are derived using all presences of each taxon in the EVA,
+they may better represent the upper and lower tolerances of a taxons ecological niche,
+especially for taxa where the presences were undersampled.
+Second, using the 'holdopt' argument one or more predictor variables can be held constant,
+e.g. to hold soil disturbance constant supply c("SD") to the 'holdopt' argument.
+This may be useful in instances where you wish to remove the influence of one or more variables
+on the model results.
+
 NOTE: to use this function you must first run \code{elements::startup()}
 }
 \examples{
 \dontrun{
 elements::startup()
-elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
+elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"), dp = 3, append_predictors = TRUE)
 elements::shutdown() 
 }
 }

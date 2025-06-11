@@ -1,5 +1,10 @@
-# elements 0.0.3 (xx/xx/2025)
+# elements 0.5.0 (11/06/2025)
 
+* Adding the most recent iteration of the models, which we re-trained on the EVA data and data from the GBNVPD not yet incorporated into the EVA.
+* Adding the 'holdopt' and 'limit' arguments to `elements::predict_occ_taxon` and `elements::predict_occ`.
+* Removing the `elements::ModelTaxa` object.
+* Adding the `elements::TaxonomicBackbone` object.
+* Changing the name of the `elements::VariableNames` object to `elements::VariableLookup` and adding a new object `elements::VariableNames` which contains a vector of the model variable names only.
 
 # elements 0.0.2 (12/04/2025)
 

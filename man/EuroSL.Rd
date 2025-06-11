@@ -19,7 +19,7 @@ A data frame with 53643 rows and 6 columns, the definitions of which are:
 EuroSL
 }
 \description{
-Selected columns for the accepted taxa in the European European Species List (EuroSL) database.
+Selected columns for the accepted taxa in the European Species List (EuroSL) database.
 }
 \details{
 \code{EuroSL}

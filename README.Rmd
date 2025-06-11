@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # elements
 
 <!-- badges: start -->
-[![Generic badge](https://img.shields.io/badge/Version-0.0.3-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-0.5.0-green.svg)]()
 [![License: GPL v3.0](https://img.shields.io/badge/License-GPL v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
 <!-- badges: end -->
@@ -75,8 +75,10 @@ zen4R::download_zenodo("10.5281/zenodo.<notyetinzotero>", path = "path_to_file")
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.0.3.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.5.0.tar.gz"), repos = NULL, type = "source")
 ```
+
+Downloading and installing the package may take a few minutes.
 
 Note: `elements` has two dependencies, `e1071` and `filehash`, which must also be installed.
 
@@ -99,7 +101,7 @@ library(elements)
 library(filehash)
 ```
 
-Due to the total size of the `r nrow(elements::ModelTaxa)` ENMs currently included in `elements` (1.6GB when compressed, 7.3GB in memory)
+Due to the total size of the `r nrow(elements::TaxonomicBackbone)` ENMs currently included in `elements` (1.8GB when compressed, 7.5GB in memory)
 the ENMs are not exported in a .rda object. Instead they are made available through a `filehash` (Peng, 2005) database, which provides access to the ENMs without loading all models into memory.
 To access the ENMs a connection to this database must be initialised using `elements::startup`.
 
@@ -134,6 +136,44 @@ results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::Examp
 ```{r print_predict_occ_dfr_results, echo=FALSE}
 head(results)
 ```
+
+Two helper arguments provide additional functionality in controlling model use.
+First, is the 'limit' argument, which assigns probability values of zero if one or more predictors are outside a specified range e.g. the 10% and 90% quantiles (see `elements::NicheWidths`).
+Second, is the 'holdopt' argument, which holds specified variable values at their optima (as defined by the mean value present in `elements::NicheWidths`).
+
+As a simple demonstration, below two sets of predictions for *Stellaria graminea* are generated, holding all variables apart from N at their optima: 1) with no limit set, and 2) with a limit set to the 1% and 99% quantiles.
+
+```{r limit_and_holdopt_demo}
+n_gradient <- data.frame("N" = seq(0, 10, 0.01))
+
+vary_N_no_limit <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
+                                               pa = "Present", limit = NULL, holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                               dp = 2, append_predictors = TRUE)
+
+vary_N_limit <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
+                                            pa = "Present", limit = "q01_q99", holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                            dp = 2, append_predictors = TRUE)
+```
+
+```{r limit_and_holdopt_demo_create_plots, include=FALSE}
+plot.new()
+graphics::plot(NULL, xlim = c(0, 10), ylim = c(0, 1), xlab = "N", ylab = "Probability", main = "No limitation", cex.lab = 0.75, cex.axis = 0.75, cex.main = 0.75)
+graphics::lines(x = vary_N_no_limit$N, y = vary_N_no_limit$Present)
+vary_N_no_limit_plot <- grDevices::recordPlot()
+
+plot.new()
+graphics::plot(NULL, xlim = c(0, 10), ylim = c(0, 1), xlab = "N", ylab = "Probability", main = "Limitation", cex.lab = 0.75, cex.axis = 0.75, cex.main = 0.75)
+graphics::lines(x = vary_N_limit$N, y = vary_N_limit$Present)
+vary_N_limit_plot <- grDevices::recordPlot()
+```
+
+```{r limit_and_holdopt_demo_plots, echo=FALSE, fig.dpi=800, fig.height=3.5, fig.width=3.5, out.width="50%"}
+vary_N_no_limit_plot
+vary_N_limit_plot
+```
+
+Please note that as ten out of the eleven variables are held at their optima the predicted probabilities will be high as the influence of unsuitable N values will be partially offset.
+Consequently, the shape of the response curves above will be wider than the corresponding PDP plot produced with the `elements::plot_me` function (see the **Model Inspection** section below).
 
 ### Shutting down
 

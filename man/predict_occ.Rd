@@ -9,6 +9,7 @@ predict_occ(
   predictors,
   pa = "Present",
   limit = NULL,
+  holdopt = NULL,
   dp = 3,
   append_predictors = TRUE
 )
@@ -21,6 +22,8 @@ predict_occ(
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 
 \item{limit}{A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Only applied if pa = "Present". Optional.}
+
+\item{holdopt}{Hold one or more variables at their optimum values. NULL by default, else a vector of variable codes, e.g. c("SD", "GP").}
 
 \item{dp}{The number of decimal places to round the probability values to.}
 
@@ -37,6 +40,19 @@ Generate predictions for the probability of occurrence (presence and/or absence)
 }
 }
 \details{
+A number of optional arguments provide additional control over the use of the models.
+First, using the 'limit' argument the probabilities may be set to 0 if one or
+more of the predictor values are outside a stipulated quantile range,
+e.g. the 1\% and 99\% quantiles by setting the 'limit' argument to "q01_q99".
+This may be used to strictly enforce the assignment of probability values of 0.
+As the quantile values present in \code{elements::NicheWidths} are derived using all presences of each taxon in the EVA,
+they may better represent the upper and lower tolerances of a taxons ecological niche,
+especially for taxa where the presences were undersampled.
+Second, using the 'holdopt' argument one or more predictor variables can be held constant,
+e.g. to hold soil disturbance constant supply c("SD") to the 'holdopt' argument.
+This may be useful in instances where you wish to remove the influence of one or more variables
+on the model results.
+
 If taxon codes are supplied in the 'taxa_codes' argument and there is a column in the predictors data frame named 'taxon_code',
 the taxa present in the 'taxa_codes' argument will be used and results will be calculated using the entire predictors data frame
 and the 'taxon_code' column will be replaced.
@@ -48,13 +64,13 @@ NOTE: to use this function you must first run \code{elements::startup()}
 elements::startup()
 
 # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
-elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = FALSE)
+elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"), dp = 3, append_predictors = FALSE)
 
 # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, holdopt = c("SD", "GP"), pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 
 # Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
+elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, holdopt = c("SD", "GP"), pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
 
 elements::shutdown() 
 }

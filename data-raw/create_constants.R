@@ -1,4 +1,4 @@
-VariableNames <- tibble::tribble(
+VariableLookup <- tibble::tribble(
   ~raw_name, ~variable_code, ~variable_name, ~variable_plot_name, ~model_var,
   "EIVEres.M", "M", "Soil.Moisture", "Soil Moisture", TRUE,
   "EIVEres.M.nw3", "M.nw", "Soil.Moisture.Niche.Width", "Soil Moisture Niche Width", FALSE,
@@ -29,18 +29,11 @@ VariableNames <- tibble::tribble(
   "bio06", "bio06", "Minimum.Temp.Coldest.Month", "Min Temp Cold Month", TRUE,
   "bio16", "bio16", "Precipitation.Wettest.Quarter", "Precipitation Wet Quarter", TRUE,
   "bio17", "bio17", "Precipitation.Driest.Quarter", "Precipitation Dry Quarter", TRUE
-)
+) |>
+  as.data.frame()
 
-# rawname_to_code_lookup <- VariableNames |>
-#   dplyr::select(variable_code, raw_name) |>
-#   tibble::deframe()
-# 
-# code_to_plotname_lookup <- VariableNames |>
-#   dplyr::select(variable_code, variable_plot_name) |>
-#   tibble::deframe()
-# 
-# plotname_to_code_lookup <- VariableNames |>
-#   dplyr::select(variable_plot_name, variable_code) |>
-#   tibble::deframe()
+usethis::use_data(VariableLookup, overwrite = TRUE, internal = FALSE)
 
-usethis::use_data(VariableNames, overwrite = TRUE)
+VariableNames <- sort(subset(VariableLookup, model_var == TRUE, select = "variable_code", drop = TRUE))
+
+usethis::use_data(VariableNames, overwrite = TRUE, internal = FALSE)

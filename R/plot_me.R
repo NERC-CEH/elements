@@ -28,7 +28,7 @@
 #' In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting 
 #' the shape of the univariate response.
 #'
-#' @param taxa A vector of one or more taxon_code strings, see `elements::ModelTaxa`.
+#' @param taxa A vector of one or more taxon_code strings, see `elements::TaxonomicBackbone`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
 #' @param free_y A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.
 #' @param presences A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.
@@ -55,11 +55,11 @@
 
 plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
   
-  if(isFALSE(taxa %in% elements::ModelTaxa[["taxon_code"]])){
+  if(isFALSE(taxa %in% elements::TaxonomicBackbone[["taxon_code"]])){
     
-    absent_taxa <- paste0(setdiff(taxa, elements::ModelTaxa[["taxon_code"]]), collapse = ", ")
+    absent_taxa <- paste0(setdiff(taxa, elements::TaxonomicBackbone[["taxon_code"]]), collapse = ", ")
     
-    stop(paste0("The taxa: ", absent_taxa, ", are not included. Please only select taxon_code values from the `elements::ModelTaxa` taxon_code column."))
+    stop(paste0("The taxa: ", absent_taxa, ", are not included. Please only select taxon_code values from the `elements::TaxonomicBackbone` taxon_code column."))
     
   }
   
@@ -77,7 +77,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
   }
   
   if(isFALSE(multiple_taxa)){
-    taxon_name <- subset(elements::ModelTaxa, taxon_code == taxa, select = taxon_name, drop = TRUE)
+    taxon_name <- subset(elements::TaxonomicBackbone, taxon_code == taxa, select = taxon_name, drop = TRUE)
   }
   
   if(me_type == "ale"){

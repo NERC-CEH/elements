@@ -7,7 +7,7 @@
 get_parent_taxa(taxon)
 }
 \arguments{
-\item{taxon}{The name of a Taxon in the "TaxonName" column of the \code{elements::EuroSL} data frame, or the "taxon_name" column of the \code{elements::ModelTaxa} data frame.}
+\item{taxon}{The name of a Taxon in the "TaxonName" column of the \code{elements::EuroSL} data frame, or the "taxon_name" column of the \code{elements::TaxonomicBackbone} data frame.}
 }
 \value{
 A data frame in wide format containing the parent taxa for the specified taxon.

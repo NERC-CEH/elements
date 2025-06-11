@@ -17,7 +17,7 @@ plot_me(
 )
 }
 \arguments{
-\item{taxa}{A vector of one or more taxon_code strings, see \code{elements::ModelTaxa}.}
+\item{taxa}{A vector of one or more taxon_code strings, see \code{elements::TaxonomicBackbone}.}
 
 \item{me_type}{A string representing the marginal effect plot type, one of "ale" or "pdp".}
 

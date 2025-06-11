@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.0.3-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.0-green.svg)]()
 [![License: GPL
 v3.0](https://img.shields.io/badge/License-GPL%20v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
@@ -21,10 +21,14 @@ The code used to produce the models is available here
 <https://github.com/NERC-CEH/elementsAnalysis>.
 
 <details>
+
 <summary>
+
 <h2 style="display:inline-block">
+
 Methods
 </h2>
+
 </summary>
 
 The ENMs adhere to Hutchinsonian conceptualisation of the ecological
@@ -54,17 +58,25 @@ the `mlr3` ecosystem of R packages (Lang et al., 2019). The raw `e1071`
 For more information please see Marshall et al (in prep).
 
 <hr width="100%" size="1">
+
 <p style="font-size: small !important">
+
 <sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023),
 <sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
 Service, 2021)
 </p>
+
 </details>
+
 <details>
+
 <summary>
+
 <h2 style="display:inline-block">
+
 Installation
 </h2>
+
 </summary>
 
 The Github repository containing the `elements` package
@@ -83,18 +95,25 @@ zen4R::download_zenodo("10.5281/zenodo.<notyetinzotero>", path = "path_to_file")
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.0.3.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.5.0.tar.gz"), repos = NULL, type = "source")
 ```
+
+Downloading and installing the package may take a few minutes.
 
 Note: `elements` has two dependencies, `e1071` and `filehash`, which
 must also be installed.
 
 </details>
+
 <details>
+
 <summary>
+
 <h2 style="display:inline-block">
+
 Model Usage
 </h2>
+
 </summary>
 
 ### Retrieving models
@@ -105,8 +124,8 @@ library(elements)
 library(filehash)
 ```
 
-Due to the total size of the 6145 ENMs currently included in `elements`
-(1.6GB when compressed, 7.3GB in memory) the ENMs are not exported in a
+Due to the total size of the 6177 ENMs currently included in `elements`
+(1.8GB when compressed, 7.5GB in memory) the ENMs are not exported in a
 .rda object. Instead they are made available through a `filehash` (Peng,
 2005) database, which provides access to the ENMs without loading all
 models into memory. To access the ENMs a connection to this database
@@ -127,9 +146,9 @@ model <- Models[["stellaria_graminea"]]
     #> Parameters:
     #>    SVM-Type:  C-classification 
     #>  SVM-Kernel:  radial 
-    #>        cost:  0.1 
+    #>        cost:  0.4 
     #> 
-    #> Number of Support Vectors:  13870
+    #> Number of Support Vectors:  13481
 
 ### Using the models
 
@@ -143,12 +162,12 @@ results <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors 
 ```
 
     #>   Present
-    #> 1    0.03
-    #> 2    0.03
-    #> 3    0.06
-    #> 4    0.25
-    #> 5    0.01
-    #> 6    0.01
+    #> 1    0.89
+    #> 2    0.02
+    #> 3    0.28
+    #> 4    0.55
+    #> 5    0.04
+    #> 6    0.40
 
 An additional helper function `elements::predict_occ` can generate
 predictions for multiple taxa, by either specifing the taxa to model in
@@ -161,12 +180,46 @@ results <- elements::predict_occ(taxa_codes = NULL, predictors = elements::Examp
 ```
 
     #>     Present         taxon_code
-    #> 201    0.04 silene_flos-cuculi
+    #> 201    0.00 silene_flos-cuculi
     #> 202    0.00 silene_flos-cuculi
-    #> 203    0.01 silene_flos-cuculi
-    #> 204    0.65 silene_flos-cuculi
+    #> 203    0.00 silene_flos-cuculi
+    #> 204    0.46 silene_flos-cuculi
     #> 205    0.00 silene_flos-cuculi
     #> 206    0.01 silene_flos-cuculi
+
+Two helper arguments provide additional functionality in controlling
+model use. First, is the ‘limit’ argument, which assigns probability
+values of zero if one or more predictors are outside a specified range
+e.g. the 10% and 90% quantiles (see `elements::NicheWidths`). Second, is
+the ‘holdopt’ argument, which holds specified variable values at their
+optima (as defined by the mean value present in
+`elements::NicheWidths`).
+
+As a simple demonstration, below two sets of predictions for *Stellaria
+graminea* are generated, holding all variables apart from N at their
+optima: 1) with no limit set, and 2) with a limit set to the 1% and 99%
+quantiles.
+
+``` r
+n_gradient <- data.frame("N" = seq(0, 10, 0.01))
+
+vary_N_no_limit <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
+                                               pa = "Present", limit = NULL, holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                               dp = 2, append_predictors = TRUE)
+
+vary_N_limit <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
+                                            pa = "Present", limit = "q01_q99", holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                            dp = 2, append_predictors = TRUE)
+```
+
+<img src="man/figures/README-limit_and_holdopt_demo_plots-1.png" width="50%" /><img src="man/figures/README-limit_and_holdopt_demo_plots-2.png" width="50%" />
+
+Please note that as ten out of the eleven variables are held at their
+optima the predicted probabilities will be high as the influence of
+unsuitable N values will be partially offset. Consequently, the shape of
+the response curves above will be wider than the corresponding PDP plot
+produced with the `elements::plot_me` function (see the **Model
+Inspection** section below).
 
 ### Shutting down
 
@@ -178,11 +231,16 @@ elements::shutdown()
 ```
 
 </details>
+
 <details>
+
 <summary>
+
 <h2 style="display:inline-block">
+
 Model Inspection
 </h2>
+
 </summary>
 
 Several datasets are available to examine the ENM model performance and
@@ -197,8 +255,8 @@ spatio-temporal cross-validation (Schratz et al., 2024) are displayed.
 pm_taxon <- subset(elements::PerformanceMeasures, taxon_code == "stellaria_graminea", select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
 ```
 
-    #>      Holdout.BalancedAccuracy STCV.BalancedAccuracy
-    #> 3627                0.8564161             0.8504625
+    #>    Holdout.BalancedAccuracy STCV.BalancedAccuracy
+    #> 85                0.8533579             0.8532125
 
 The marginal effects of an ENM, in the form of Partial Dependency
 Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018)
@@ -233,10 +291,14 @@ elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uligin
 <img src="man/figures/README-me_plot_taxa_print-1.png" width="100%" />
 
 <details>
+
 <summary>
+
 <h3 style="display:inline-block">
+
 ⚠ A note on ALE plots
 </h3>
+
 </summary>
 
 In some instances the ALE curves may appear ‘inverted’ and not
@@ -254,12 +316,18 @@ univariate response.
 <img src="man/figures/README-me_plot_gr_s_print-1.png" width="50%" /><img src="man/figures/README-me_plot_gr_s_print-2.png" width="50%" />
 
 </details>
+
 </details>
+
 <details>
+
 <summary>
+
 <h2 style="display:inline-block">
+
 References
 </h2>
+
 </summary>
 
 Chytrý, M., Hennekens, S.M., Jiménez-Alfaro, B., Knollová, I., Dengler,
