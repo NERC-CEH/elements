@@ -83,13 +83,14 @@ The Github repository containing the `elements` package
 [(https://github.com/NERC-CEH/elements)](https://github.com/NERC-CEH/elements)
 includes all files apart from the “./inst/extdata/Models” object as it
 is above the 100MB limit. To retrieve the `elements` package including
-the “Models” object download the latest version from Zenodo here - .
+the “Models” object download the latest version from Zenodo here -
+<https://zenodo.org/records/15639308>.
 
 Alternatively, you can download the package using the `zen4R` R package
 from a particular DOI.
 
 ``` r
-zen4R::download_zenodo("10.5281/zenodo.<notyetinzotero>", path = "path_to_file")
+zen4R::download_zenodo("10.5281/zenodo.15639308", path = "path_to_file")
 ```
 
 After retrieving the package to install `elements` run:
