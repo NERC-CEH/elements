@@ -50,7 +50,6 @@
 #'   \item{bio06}{Minimum temperature in the coldest month}
 #'   \item{bio16}{Precipitation in the wettest quarter}
 #'   \item{bio17}{Precipitation in the driest quarter}
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
 #' }
 #' @references{
 #' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
@@ -199,6 +198,31 @@
 #'
 #' @format A data frame with `r nrow(elements::VariableData)` rows and `r ncol(elements::VariableData)` columns, the definitions of which are:
 #' \describe{
+#'   \item{DF}{Disturbance frequency (Midolo et al., 2023)}
+#'   \item{DF.sd}{Disturbance frequency standard deviation (Midolo et al., 2023)}
+#'   \item{DFH.sd}{Disturbance frequency herb layer standard deviation (Midolo et al., 2023)}
+#'   \item{DFh}{Disturbance frequency herb layer (Midolo et al., 2023)}
+#'   \item{DS}{Disturbance severity (Midolo et al., 2023)}
+#'   \item{DS.sd}{Disturbance severity standard deviation (Midolo et al., 2023)}
+#'   \item{DSH.sd}{Disturbance severity herb layer standard deviation (Midolo et al., 2023)}
+#'   \item{DSh}{Disturbance severity herb layer (Midolo et al., 2023)}
+#'   \item{GP}{Grazing pressure (Midolo et al., 2023)}
+#'   \item{GP.sd}{Grazing pressure standard deviation (Midolo et al., 2023)}
+#'   \item{L}{Light (Dengler et al., 2023)}
+#'   \item{L.nw}{Light niche width (Dengler et al., 2023)}
+#'   \item{M}{Moisture (Dengler et al., 2023)}
+#'   \item{M.nw}{Moisture niche width (Dengler et al., 2023)}
+#'   \item{MF}{Mowing frequency (Midolo et al., 2023)}
+#'   \item{MF.sd}{Mowing frequency standard deviation (Midolo et al., 2023)}
+#'   \item{N}{Nitrogen (Dengler et al., 2023)}
+#'   \item{N.nw}{Nitrogen niche width (Dengler et al., 2023)}
+#'   \item{R}{Reaction (Dengler et al., 2023)}
+#'   \item{R.nw}{Reaction niche width (Dengler et al., 2023)}
+#'   \item{S}{Salinity (Tichý et al 2023)}
+#'   \item{SD}{Soil disturbance (Midolo et al., 2023)}
+#'   \item{SD.sd}{Soil disturbance standard deviation (Midolo et al., 2023)}
+#'   \item{T}{Temperature (Dengler et al., 2023)}
+#'   \item{T.nw}{Temperature niche width (Dengler et al., 2023)}
 #'   \item{taxon_name}{The taxon name.}
 #' }
 #' @references{

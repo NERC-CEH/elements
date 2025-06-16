@@ -1,3 +1,6 @@
+# https://github.com/r-lib/testthat/issues/86
+# Sys.setenv("R_TESTS" = "")
+
 # This file is part of the standard setup for testthat.
 # It is recommended that you do not modify it.
 #

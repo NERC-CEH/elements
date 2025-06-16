@@ -72,7 +72,7 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
       
     nw <- elements::NicheWidths
     nw_taxon <- subset(nw[nw[["taxon_code"]] == taxon, ], select = -taxon_code)
-    nw_taxon <- setNames(data.frame(t(nw_taxon[,-1])), nw_taxon[[1]])
+    nw_taxon <- stats::setNames(data.frame(t(nw_taxon[,-1])), nw_taxon[[1]])
     
     lower <- nw_taxon[unlist(strsplit(limit, "_"))[1], ]
     upper <- nw_taxon[unlist(strsplit(limit, "_"))[2], ]

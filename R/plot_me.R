@@ -259,7 +259,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
         
         data_var_taxon <- subset(data_var, taxon_code == taxon)
         
-        graphics::lines(x = data_var_taxon[["x"]], y = data_var_taxon[["y"]], col = palette.colors()[i + 1])
+        graphics::lines(x = data_var_taxon[["x"]], y = data_var_taxon[["y"]], col = grDevices::palette.colors()[i + 1])
         
         graphics::abline(h = ab_line)
         
@@ -370,7 +370,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
                      inset = c(0, 0), 
                      cex = lts, 
                      legend = taxa, 
-                     fill = palette.colors()[1:length(taxa) + 1],
+                     fill = grDevices::palette.colors()[1:length(taxa) + 1],
                      ncol = 1, 
                      bty = "n")
   }

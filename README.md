@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.5.0-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.1-green.svg)]()
 [![License: GPL
 v3.0](https://img.shields.io/badge/License-GPL%20v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
@@ -81,9 +81,14 @@ Installation
 
 The Github repository containing the `elements` package
 [(https://github.com/NERC-CEH/elements)](https://github.com/NERC-CEH/elements)
-includes all files apart from the “./inst/extdata/Models” object as it
-is above the 100MB limit. To retrieve the `elements` package including
-the “Models” object download the latest version from Zenodo here -
+includes all files apart from the “./inst/extdata/Models” object
+containing all the ENMs as it is above the 100MB limit. Two example
+models (Silene flos-cuculi and Stellaria graminea) are bundled in the
+“./inst/testdata/TestModels” object, which is present in the Github
+repository.
+
+To retrieve the `elements` package including the “Models” object
+download the latest version from Zenodo here -
 <https://zenodo.org/records/15639308>.
 
 Alternatively, you can download the package using the `zen4R` R package
@@ -96,7 +101,7 @@ zen4R::download_zenodo("10.5281/zenodo.15639308", path = "path_to_file")
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.5.0.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.5.1.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.
@@ -130,7 +135,13 @@ Due to the total size of the 6177 ENMs currently included in `elements`
 .rda object. Instead they are made available through a `filehash` (Peng,
 2005) database, which provides access to the ENMs without loading all
 models into memory. To access the ENMs a connection to this database
-must be initialised using `elements::startup`.
+must be initialised using `elements::startup`. As mentioned above the
+Github repository does not include the “./inst/extdata/Models” object
+containing all the ENMs, the `elements::startup` will check whether the
+“./inst/extdata/Models” is present and if it is not found will load the
+“./inst/testdata/TestModels” models instead. The models to load can also
+be accessed by passing “all” or “test” to the ‘models’ argument of
+`elements::startup`.
 
 ``` r
 elements::startup()
