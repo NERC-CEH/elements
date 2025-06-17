@@ -1,3 +1,7 @@
+# elements 0.5.2 (17/06/2025)
+
+* Bundling two additional example objects `elements::ExampleScenarios` and `elements::ExamplePlot`
+
 # elements 0.5.1 (16/06/2025)
 
 * Including test models (Silene flos-cuculi and Stellaria graminea) to ensure the package is functional (for these two taxa). These models are present in the "./inst/testdata/TestModels" object which is loaded if "./inst/extdata/Models" is not present, or if specified in the `elements::startup` function.

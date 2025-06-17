@@ -6,7 +6,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.5.1-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.2-green.svg)]()
 [![License: GPL
 v3.0](https://img.shields.io/badge/License-GPL%20v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
 [![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
@@ -89,19 +89,19 @@ repository.
 
 To retrieve the `elements` package including the “Models” object
 download the latest version from Zenodo here -
-<https://zenodo.org/records/15639308>.
+<https://zenodo.org/records/15639307>.
 
 Alternatively, you can download the package using the `zen4R` R package
 from a particular DOI.
 
 ``` r
-zen4R::download_zenodo("10.5281/zenodo.15639308", path = "path_to_file")
+zen4R::download_zenodo("10.5281/zenodo.15639307", path = "path_to_file")
 ```
 
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.5.1.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.5.2.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.
@@ -232,6 +232,19 @@ unsuitable N values will be partially offset. Consequently, the shape of
 the response curves above will be wider than the corresponding PDP plot
 produced with the `elements::plot_me` function (see the **Model
 Inspection** section below).
+
+### Scenarios
+
+`elements` is designed to be used to model scenarios of environmental
+change considering multiple interacting drivers. The object
+`elements::ExampleScenarios` provides a basic set of example scenarios:
+(A) Climate Change - RCP4.5, (A) Climate Change - RCP8.5, (B) Grazing
+Intensification (+0.025GP per year), (B) Grazing Reduction (-0.025GP per
+year), and (C) Nutrient Enrichment (+0.25N per year) along with a
+Baseline scenario. Below the predicted probabilities for the taxa in
+`elements::ExamplePlot` for Scenario C are displayed.
+
+<img src="man/figures/README-scenario_c_plot-1.png" width="80%" style="display: block; margin: auto;" />
 
 ### Shutting down
 

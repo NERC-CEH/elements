@@ -95,6 +95,48 @@
 #' }
 "ExampleData2"
 
+#' The EVA plot used to form the example scenarios
+#'
+#' A dataset containing the taxon presences and percentage cover for the EVA plot used to form the example scenarios present in `elements::ExampleScenarios`.
+#'
+#' \code{ExamplePlot} 
+#'
+#' @format A data frame with `r nrow(elements::ExamplePlot)` rows and `r ncol(elements::ExamplePlot)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_name}{The scientific names of the taxa present in the example plot.}
+#'   \item{taxon_code}{The taxon codes for the taxon_name values, see `elements::TaxonomicBackbone`.}
+#'   \item{cover_perc}{The percentage cover of the taxa present in example plot.}
+#' }
+"ExamplePlot"
+
+#' Predictor data for three example scenarios
+#'
+#' A dataset containing predictor data for five example scenarios, in three groups: 
+#' (A) Climate Change - RCP4.5 and (A) Climate Change - RCP8.5,
+#' (B) Grazing Intensification and (B) Grazing Reduction, abd
+#' (C) Nutrient Enrichment.
+#'
+#' \code{ExampleScenarios} 
+#'
+#' @format A data frame with `r nrow(elements::ExampleScenarios)` rows and `r ncol(elements::ExampleScenarios)` columns, the definitions of which are:
+#' \describe{
+#'   \item{L}{Light}
+#'   \item{M}{Soil Moisture}
+#'   \item{N}{Soil Nitrogen}
+#'   \item{R}{Reaction}
+#'   \item{S}{Salinity}
+#'   \item{SD}{Soil Disturbance}
+#'   \item{GP}{Grazing Pressure}
+#'   \item{bio05}{Maximum temperature in the warmest month}
+#'   \item{bio06}{Minimum temperature in the coldest month}
+#'   \item{bio16}{Precipitation in the wettest quarter}
+#'   \item{bio17}{Precipitation in the driest quarter}
+#'   \item{scenario}{The scenario name.}
+#'   \item{timeslice}{The scenario timeslice, either a year or period.}
+#'   \item{scenario_code}{The scenario code: a, b, or c.}
+#' }
+"ExampleScenarios"
+
 #' Niche width data
 #'
 #' A dataset Niche width data for the modelled taxa.
