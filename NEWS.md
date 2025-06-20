@@ -1,3 +1,10 @@
+# elements 0.5.3 (20/06/2025)
+
+* Removing superfluous code from `elements::predict_occ`.
+* Including example code running scenario c in the README.
+* Adding Zenodo README badge.
+* Adding function `elements::env_filter`, which filters a given set of taxa using a set of predictor variables to retain the most suitable taxa only.
+
 # elements 0.5.2 (17/06/2025)
 
 * Bundling two additional example objects `elements::ExampleScenarios` and `elements::ExamplePlot`

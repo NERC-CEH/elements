@@ -105,10 +105,12 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
   
   if(isTRUE(append_predictors)){
     
-    results_final <- cbind(predictors, results_final)#[, c(elements::VariableNames, pa)]
+    results_final <- cbind(predictors, results_final)
     
   }
   
   return(results_final)
+  
+  gc()
   
 }

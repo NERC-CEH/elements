@@ -94,15 +94,6 @@ predict_occ <- function(taxa_codes, predictors, pa = "Present", limit = NULL, ho
     
   } else if(!is.null(taxa_codes)){
     
-    if(!is.null(holdopt)){
-      
-      optima <- subset(elements::NicheWidths, 
-                       variable %in% holdopt & taxon_code %in% taxa_codes,
-                       select = c("taxon_code", "variable", "mean"), drop = FALSE)
-      
-      
-    }
-    
     # Apply
     results_list <- lapply(X = taxa_codes, 
                            FUN = function(taxon){

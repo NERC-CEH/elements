@@ -6,10 +6,13 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.5.2-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.3-green.svg)]()
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License: GPL
 v3.0](https://img.shields.io/badge/License-GPL%20v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
-[![Lifecycle:Experimental](https://img.shields.io/badge/Lifecycle-Experimental-339999)]()
 <!-- badges: end -->
 
 `elements` is a R package containing correlative, realised Ecological
@@ -101,7 +104,7 @@ zen4R::download_zenodo("10.5281/zenodo.15639307", path = "path_to_file")
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.5.2.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.5.3.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.
@@ -244,7 +247,60 @@ year), and (C) Nutrient Enrichment (+0.25N per year) along with a
 Baseline scenario. Below the predicted probabilities for the taxa in
 `elements::ExamplePlot` for Scenario C are displayed.
 
+``` r
+scenario_c_results <- elements::predict_occ(taxa_codes = elements::ExamplePlot$taxon_code,
+                                            predictors = subset(x = elements::ExampleScenarios, scenario_code == "c"),
+                                            append_predictors = TRUE)
+```
+
 <img src="man/figures/README-scenario_c_plot-1.png" width="80%" style="display: block; margin: auto;" />
+
+### Environmental filtering
+
+`elements` can also be used to filter species pools based on a given set
+of predictor values using the function `elements::env_filter`. Two sets
+of methods are available: 1) “svm” which generates predictions using
+`elements::predict_occ` and uses the resultant probability values; and
+2) “mean” and “median” which calculates the normalised euclidean
+distance between the values supplied in the ‘predictors’ argument and
+the mean or median niche positions as present in
+`elements::NicheWidths`.
+
+For example, below `elements::env_filter` is applied to all taxa in
+`elements::TaxonomicBackbone` using the svm method, with the predictors
+derived from the baseline environmental variable data from
+`elements::ExamplePlot` as present in `elements::ExampleScenarios[1,]`.
+
+``` r
+filter_results_svm <- elements::env_filter(predictors = elements::ExampleScenarios[1,], taxa = elements::TaxonomicBackbone$taxon_code, method = "svm")
+```
+
+    #>                         taxon_code Present rank
+    #> 1                 comarum_palustre   0.991    1
+    #> 2             hydrocotyle_vulgaris   0.982    2
+    #> 3         eriophorum_angustifolium   0.967    3
+    #> 4            menyanthes_trifoliata   0.965    4
+    #> 5                      carex_nigra   0.962    5
+    #> 6              ranunculus_flammula   0.958    6
+    #> 7             equisetum_fluviatile   0.952    7
+    #> 8               epilobium_palustre   0.950    8
+    #> 9           lysimachia_thyrsiflora   0.949    9
+    #> 10                  carex_rostrata   0.944   10
+    #> 11                 carex_canescens   0.933   11
+    #> 12      salix_repens_subsp._repens   0.933   12
+    #> 13             stellaria_palustris   0.933   13
+    #> 14 galium_palustre_subsp._palustre   0.928   14
+    #> 15                 viola_palustris   0.925   15
+    #> 16          calliergon_cordifolium   0.914   16
+    #> 17                  juncus_effusus   0.910   17
+    #> 18      potamogeton_polygonifolius   0.908   18
+    #> 19                  carex_echinata   0.898   19
+    #> 20         calamagrostis_canescens   0.893   20
+
+NOTE: The mean and median methods are only included for demonstrative
+purposes only and should not be used in practice as they do not consider
+the joint distribution of variables as expressed through the SVM model
+hypervolumes.
 
 ### Shutting down
 
