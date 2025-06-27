@@ -26,3 +26,6 @@ devtools::build_manual(pkg = ".", path = ".")
 
 # 9) Build pkgdown website
 devtools::build_site()
+
+# 10) Manually deploy website
+pkgdown::deploy_to_branch()
