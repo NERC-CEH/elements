@@ -1,0 +1,10 @@
+pandoc: '3.4'
+pkgdown: 2.0.9
+pkgdown_sha: ~
+articles:
+  installation: installation.html
+  model-inspection: model-inspection.html
+  model-usage: model-usage.html
+  references: references.html
+last_built: 2025-06-27T14:41Z
+
