@@ -1,0 +1,103 @@
+---
+title: "Model Inspection"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Several datasets are available to examine the ENM model performance and aid in model interpretation.
+
+The performance measures can be retrieved from the `elements::PerformanceMeasures` object; 
+for example, below the balanced accuracy from the random holdout sample and the model tuning spatio-temporal cross-validation (Schratz et al., 2024) are displayed.
+
+```{r performance_measures}
+pm_taxon <- subset(elements::PerformanceMeasures, taxon_code == "stellaria_graminea", select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
+```
+
+```{r performance_measures_print, echo=FALSE}
+pm_taxon
+```
+
+The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018) can also be viewed using the `elements::plot_me` function. By setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
+
+```{r me_plot_taxon_create, include=FALSE}
+me_plot_taxon <- elements::plot_me(taxa = "stellaria_graminea", 
+                                   me_type = "ale", 
+                                   free_y = TRUE, 
+                                   presences = TRUE,
+                                   eivs = TRUE,
+                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxon_code, eval=FALSE}
+elements::plot_me(taxa = "stellaria_graminea", 
+                  me_type = "ale", 
+                  free_y = TRUE, 
+                  presences = TRUE,
+                  eivs = TRUE,
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxon_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
+me_plot_taxon
+```
+
+Multiple taxa can be supplied in the "taxa" argument, in this case the ability to plot presence box and whisker plots and EIV points and arrows is disabled.
+
+```{r me_plot_taxa_create, include=FALSE}
+me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+                                  me_type = "pdp", 
+                                  normalise = TRUE,
+                                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxa_code, eval=FALSE}
+elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+                  me_type = "pdp", 
+                  normalise = TRUE,
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+```
+
+```{r me_plot_taxa_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
+me_plot_taxa
+```
+
+<details>
+<summary><h3 style="display:inline-block">&#9888; A note on ALE plots</h3></summary>
+
+```{r get_gr_s_nw_max, include=FALSE}
+nw <- elements::NicheWidths
+nw_gr_s_max <- nw[nw[["taxon_code"]] == "gymnocarpium_robertianum" & nw[["variable"]] == "S", ][["max"]]
+```
+
+In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
+
+In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting the shape of the univariate response.
+
+```{r me_plot_gr_s_create, include=FALSE}
+me_plot_gr_s_ale <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
+                                      me_type = "ale", 
+                                      free_y = TRUE, 
+                                      presences = TRUE,
+                                      eivs = TRUE,
+                                      vars = c("S"))
+
+me_plot_gr_s_pdp <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
+                                      me_type = "pdp", 
+                                      free_y = TRUE, 
+                                      presences = TRUE,
+                                      normalise = FALSE,
+                                      eivs = TRUE,
+                                      vars = c("S"))
+```
+
+```{r me_plot_gr_s_print, echo=FALSE, fig.dpi=800, fig.height=3.5, fig.width=3.5, out.width="50%"}
+me_plot_gr_s_ale
+me_plot_gr_s_pdp
+```
+
+</ details>

@@ -1,3 +1,9 @@
+# elements 0.5.4 (27/06/2025)
+
+* Adding pdf package manual.
+* Moving README content to articles.
+* Adding pkgdown website.
+
 # elements 0.5.3 (20/06/2025)
 
 * Removing superfluous code from `elements::predict_occ`.

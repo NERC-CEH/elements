@@ -9,14 +9,20 @@ devtools::build()
 # 3) test package
 devtools::test()
 
-# 4) install package
+# 4) check the package
+devtools::check(document = FALSE)
+
+# 5) install package
 devtools::install(pkg = ".")
 
-# 5) restart R
+# 6) restart R
 .rs.restartR()
 
-# 6) load package
+# 7) load package
 library(elements)
 
-# 7) check the package
-devtools::check(document = FALSE)
+# 8) Build package manual
+devtools::build_manual(pkg = ".", path = ".")
+
+# 9) Build pkgdown website
+devtools::build_site()
