@@ -32,7 +32,7 @@ env_filter <- function(predictors = elements::ExampleScenarios[1,], taxa = eleme
   if(method == "svm"){
     
     # Check whether elements::startup() has been run and the Models filehashDB1 object is in the global environment
-    if(isFALSE(exists(x = "Models", envir = .GlobalEnv))){
+    if(isFALSE(exists(x = "Models", envir = elementsEnv))){
       stop("Please run elements::startup() before using elements::env_filter when method = \"svm\".")
     }
     

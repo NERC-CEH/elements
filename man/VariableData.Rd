@@ -5,7 +5,7 @@
 \alias{VariableData}
 \title{Environmental indicator value data}
 \format{
-A data frame with 9409 rows and 26 columns, the definitions of which are:
+A data frame with 9406 rows and 26 columns, the definitions of which are:
 \describe{
 \item{DF}{Disturbance frequency (Midolo et al., 2023)}
 \item{DF.sd}{Disturbance frequency standard deviation (Midolo et al., 2023)}

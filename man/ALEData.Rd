@@ -5,7 +5,7 @@
 \alias{ALEData}
 \title{ALE data}
 \format{
-A data frame with 1411121 rows and 4 columns, the definitions of which are:
+A data frame with 1514450 rows and 4 columns, the definitions of which are:
 \describe{
 \item{taxon_code}{The taxon, see \code{elements::TaxonomicBackbone}.}
 \item{x}{The variable value.}

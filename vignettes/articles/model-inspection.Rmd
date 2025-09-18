@@ -49,14 +49,14 @@ me_plot_taxon
 Multiple taxa can be supplied in the "taxa" argument, in this case the ability to plot presence box and whisker plots and EIV points and arrows is disabled.
 
 ```{r me_plot_taxa_create, include=FALSE}
-me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
                                   me_type = "pdp", 
                                   normalise = TRUE,
                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
 ```
 
 ```{r me_plot_taxa_code, eval=FALSE}
-elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), 
+elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
                   me_type = "pdp", 
                   normalise = TRUE,
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))

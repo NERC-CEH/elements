@@ -2,8 +2,6 @@
 output: github_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -16,7 +14,7 @@ knitr::opts_chunk$set(
 # elements
 
 <!-- badges: start -->
-[![Generic badge](https://img.shields.io/badge/Version-0.5.4-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-0.5.5-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License: GPL v3.0](https://img.shields.io/badge/License-GPL v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)
@@ -55,6 +53,20 @@ For more information please see Marshall et al (in prep).
 <p style="font-size: small !important">
 <sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023), <sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change Service, 2021)
 </p>
+
+## Models
+
+At present there are `r nrow(elements::TaxonomicBackbone)` ENMs currently included in `elements`, the table below displays the number of taxa by Phylum.
+
+```{r phylum_plot, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="The number of taxa in elements by Phylum"}
+phylum_summary <- elements::TaxonomicBackbone |>
+  dplyr::summarise("n" = dplyr::n(),
+                   .by = phylum) |>
+  tidyr::pivot_wider(names_from = phylum,
+                     values_from = n)
+
+knitr::kable(phylum_summary, format = "html")
+```
 
 ## References
 

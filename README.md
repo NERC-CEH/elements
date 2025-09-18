@@ -1,12 +1,10 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # elements
 
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.5.4-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.5-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -59,6 +57,101 @@ For more information please see Marshall et al (in prep).
 <sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
 Service, 2021)
 </p>
+
+## Models
+
+At present there are 6631 ENMs currently included in `elements`, the
+table below displays the number of taxa by Phylum.
+
+<table>
+
+<thead>
+
+<tr>
+
+<th style="text-align:right;">
+
+Tracheophyta
+</th>
+
+<th style="text-align:right;">
+
+Bryophyta
+</th>
+
+<th style="text-align:right;">
+
+Ascomycota
+</th>
+
+<th style="text-align:right;">
+
+Marchantiophyta
+</th>
+
+<th style="text-align:right;">
+
+Charophyta
+</th>
+
+<th style="text-align:right;">
+
+Chlorophyta
+</th>
+
+<th style="text-align:right;">
+
+Cyanobacteria
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td style="text-align:right;">
+
+6081
+</td>
+
+<td style="text-align:right;">
+
+324
+</td>
+
+<td style="text-align:right;">
+
+126
+</td>
+
+<td style="text-align:right;">
+
+87
+</td>
+
+<td style="text-align:right;">
+
+11
+</td>
+
+<td style="text-align:right;">
+
+1
+</td>
+
+<td style="text-align:right;">
+
+1
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ## References
 

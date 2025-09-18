@@ -34,7 +34,7 @@ The models to load can also be accessed by passing "all" or "test" to the 'model
 ```{r retrieve_models}
 elements::startup()
 
-model <- Models[["stellaria_graminea"]]
+model <- elementsEnv$Models[["stellaria_graminea"]]
 ```
 
 ```{r print_model, echo=FALSE}

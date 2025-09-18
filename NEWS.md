@@ -1,3 +1,11 @@
+# elements 0.5.5 (18/09/2025)
+
+* Full model training re-run after addressing outstanding taxonomic alignment issues. Now at 6631 taxa.
+* Bundling imbalance information in `elements::Imbalances`
+* Re-creating `elements::TaxonomicBackbone` object, now using GBIF as EuroSL does not include lichen or hybrid taxa. I will also align this taxonomic backbone to the EIVE1.5 "Euro+Med augmented" taxonomy upon release of EIVE1.5.
+* Changing pkgdown site theme to sandstone.
+* Improving `elements::startup`, which now creates a new environment (elementsEnv) in the parent environment which contains the ENMs, rather than simply loading the ENMs directly into the global environment.
+
 # elements 0.5.4 (27/06/2025)
 
 * Adding pdf package manual.

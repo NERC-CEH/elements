@@ -4,7 +4,7 @@
 devtools::document()
 
 # 2) build package
-devtools::build()
+devtools::build(vignettes = FALSE)
 
 # 3) test package
 devtools::test()
@@ -24,8 +24,11 @@ library(elements)
 # 8) Build package manual
 devtools::build_manual(pkg = ".", path = ".")
 
-# 9) Build pkgdown website
+# 9) Build vignettes
+pkgdown::build_articles()
+
+# 10) Build pkgdown website
 devtools::build_site()
 
-# 10) Manually deploy website
+# 11) Manually deploy website
 pkgdown::deploy_to_branch()

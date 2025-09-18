@@ -13,23 +13,6 @@
 #' }
 "ALEData"
 
-#' EuroSL data
-#' 
-#' Selected columns for the accepted taxa in the European Species List (EuroSL) database.
-#'
-#' \code{EuroSL} 
-#'
-#' @format A data frame with `r nrow(elements::EuroSL)` rows and `r ncol(elements::EuroSL)` columns, the definitions of which are:
-#' \describe{
-#'   \item{TaxonUsageID}{The unique code identifying the taxon.}
-#'   \item{TaxonName}{The taxon name.}
-#'   \item{NameAuthor}{The author who described the taxon concept.}
-#'   \item{TaxonRank}{The rank of the taxon.}
-#'   \item{IsChildTaxonOfID}{The immediate parent taxon.}
-#'   \item{IsChildTaxonOf}{The unique code identifying the parent taxon.}
-#' }
-"EuroSL"
-
 #' Example predictor data
 #'
 #' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for one taxon: 
@@ -198,37 +181,23 @@
 
 #' Taxonomic backbone
 #' 
-#' The taxon names and codes for the modeled taxa in the EVA, with the associated taxon concept information from EuroSL, and parent taxa.
+#' The taxon names and codes for the modeled taxa in the EVA, with the associated taxon concept information retireved from GBIF.
 #'
 #' \code{TaxonomicBackbone} 
 #'
 #' @format A data frame with `r nrow(elements::TaxonomicBackbone)` rows and `r ncol(elements::TaxonomicBackbone)` columns, the definitions of which are:
 #' \describe{
+#'   \item{taxon_name}{The taxon names for the modelled taxa.}
 #'   \item{taxon_code}{The taxon codes used throughout the package, formed from the taxon_name values by coercing all letters to lower and replacing whitespace with underscores.}
-#'   \item{taxon_name}{The taxon names for the modelled taxa, as they appear in the EVA.}
-#'   \item{taxon_concept}{The acccepted taxon concepts for each taxon_name value, following the authority of the EuroSL - see `elements::EuroSL`}
-#'   \item{eurosl_status}{The taxonomic status of the taxon_name, following the authority of the EuroSL.}
-#'   \item{eurosl_id}{The EuroSL ID code for the taxon_name.}
-#'   \item{Species}{The Species name associated with the taxon_name.}
-#'   \item{Genus}{The parent Genus taxon associated with the taxon_name.}
-#'   \item{Tribe}{The parent Tribe taxon associated with the taxon_name.}
-#'   \item{Family}{The parent Family taxon associated with the taxon_name.}
-#'   \item{Order}{The parent Order taxon associated with the taxon_name.}
-#'   \item{Superorder}{The parent Superorder taxon associated with the taxon_name.}
-#'   \item{Class}{The parent Class taxon associated with the taxon_name.}
-#'   \item{Subdivision}{The parent Subdivision taxon associated with the taxon_name.}
-#'   \item{Phylum}{The parent Phylum taxon associated with the taxon_name.}
-#'   \item{Root}{The parent Root taxon associated with the taxon_name.}
-#'   \item{Section}{The Section name associated with the taxon_name.}
-#'   \item{Species Aggregate}{The Species Aggregate name associated with the taxon_name.}
-#'   \item{Subclass}{The parent Subclass taxon associated with the taxon_name.}
-#'   \item{Division}{The parent Division taxon associated with the taxon_name.}
-#'   \item{Suprageneric Taxon}{The parent Suprageneric Taxon taxon associated with the taxon_name.}
-#'   \item{Subfamily}{The parent Subfamily taxon associated with the taxon_name.}
-#'   \item{Subspecies}{The Subspecies name associated with the taxon_name.}
-#'   \item{Variety}{The Variety name associated with the taxon_name.}
-#'   \item{Coll. species}{The Coll. species name associated with the taxon_name.}
-#'   \item{n_presences_eva}{The number of presences of the taxon (taxon_name) in the EVA, only considering plots with valid coordinates and years.}
+#'   \item{scientificName}{The full scientific name of the taxon, which includes the author. Retrieved from GBIF.}
+#'   \item{canonicalName}{The full name of the taxon. Retrieved from GBIF.}
+#'   \item{species}{The accepted name for the taxon, following GBIF.}
+#'   \item{genus}{The parent Genus taxon associated with the Species.}
+#'   \item{family}{The parent Family taxon associated with the Species.}
+#'   \item{order}{The parent Order taxon associated with the Species.}
+#'   \item{class}{The parent Class taxon associated with the Species.}
+#'   \item{phylum}{The parent Phylum taxon associated with the Species.}
+#'   \item{kingdom}{The parent Kingdom taxon associated with the Species.}
 #' }
 "TaxonomicBackbone"
 
@@ -303,3 +272,20 @@
 #'
 #' @format A vector containing `r nrow(elements::VariableNames)` strings.
 "VariableNames"
+
+#' Presence-Absence Imbalances
+#'
+#' The number of presences and absences in the EVA, suitable samples within the EVA, and the training and test data, along with the presence-absence and absence-presence imbalance ratios.
+#'
+#' \code{Imbalances} 
+#'
+#' @format A data frame with `r nrow(elements::Imbalances)` rows and `r ncol(elements::Imbalances)` columns, the definitions of which are:
+#' \describe{
+#'   \item{Stage}{The plot selection 'stage'.}
+#'   \item{Absent}{The number of absences.}
+#'   \item{Present}{The number or presences.}
+#'   \item{PA_Imbalance}{The presence-absence imbalance ratio.}
+#'   \item{AP_Imbalance}{The absence-presence imbalance ratio.}
+#'   \item{taxon_code}{The taxon code, see `elements::TaxonomicBackbone`}
+#' }
+"Imbalances"

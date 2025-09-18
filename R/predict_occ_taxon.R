@@ -37,7 +37,7 @@
 predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, holdopt = NULL, dp = 3, append_predictors = TRUE){
   
   # Check whether elements::startup() has been run and the Models filehashDB1 object is in the global environment
-  if(isFALSE(exists(x = "Models", envir = .GlobalEnv))){
+  if(isFALSE(exists(x = "Models", envir = elementsEnv))){
     stop("Please run elements::startup() before using elements::predict_occ.")
   }
   
@@ -62,7 +62,7 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
     }
   }
   
-  model <- .GlobalEnv$Models[[taxon]]
+  model <- elementsEnv$Models[[taxon]]
   
   predictions <- e1071:::predict.svm(object = model, predictors, probability = TRUE)
   

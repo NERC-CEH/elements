@@ -5,7 +5,7 @@
 \alias{NicheWidths}
 \title{Niche width data}
 \format{
-A data frame with 67947 rows and 14, the definitions of which are:
+A data frame with 66374 rows and 14, the definitions of which are:
 \describe{
 \item{variable}{The variable name.}
 \item{mean}{The mean variable value.}

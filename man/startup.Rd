@@ -10,7 +10,7 @@ startup(models = NULL)
 \item{models}{One of "all", "test", or NULL, indicating whether the complete set of models should be loaded, or the test set of models. NULL by default, which loads all models.}
 }
 \value{
-A connection to the filehash database in the global environment containing the ENMs
+A connection to the filehash database containing the ENMs in an environment named elementsEnv within the parent environment.
 }
 \description{
 Initiliase a connection to the filehash database containing the Ecological Niche Models (ENMs)

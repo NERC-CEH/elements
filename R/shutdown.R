@@ -9,7 +9,7 @@ shutdown <- function(){
   suppressWarnings({
     suppressMessages({
       invisible({
-        rm(Models, envir = .GlobalEnv)
+        rm(elementsEnv, envir = parent.frame())
       })
     })
   })

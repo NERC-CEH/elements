@@ -1,0 +1,23 @@
+url: https://NERC-CEH.github.io/elements/
+destination: docs
+
+home:
+  title: Ecological niche models for the plants of Europe
+
+template:
+  bootstrap: 5
+  bootswatch: sandstone
+
+development:
+  mode: auto
+
+navbar:
+  title: elements
+  structure:
+    left:
+    - reference
+    - articles
+    - news
+    right:
+    - search
+    - github
