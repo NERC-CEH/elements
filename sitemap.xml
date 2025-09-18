@@ -1,96 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/404.html</loc>
   </url>
   <url>
-    <loc>/articles/index.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/articles/index.html</loc>
   </url>
   <url>
-    <loc>/articles/installation.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/articles/installation.html</loc>
   </url>
   <url>
-    <loc>/articles/model-inspection.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/articles/model-inspection.html</loc>
   </url>
   <url>
-    <loc>/articles/model-usage.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/articles/model-usage.html</loc>
   </url>
   <url>
-    <loc>/articles/references.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/articles/references.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/index.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/ALEData.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/ALEData.html</loc>
   </url>
   <url>
-    <loc>/reference/env_filter.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/env_filter.html</loc>
   </url>
   <url>
-    <loc>/reference/EuroSL.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/ExampleData1.html</loc>
   </url>
   <url>
-    <loc>/reference/ExampleData1.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/ExampleData2.html</loc>
   </url>
   <url>
-    <loc>/reference/ExampleData2.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/ExamplePlot.html</loc>
   </url>
   <url>
-    <loc>/reference/ExamplePlot.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/ExampleScenarios.html</loc>
   </url>
   <url>
-    <loc>/reference/ExampleScenarios.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/Imbalances.html</loc>
   </url>
   <url>
-    <loc>/reference/get_parent_taxa.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/NicheWidths.html</loc>
   </url>
   <url>
-    <loc>/reference/NicheWidths.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/PDPData.html</loc>
   </url>
   <url>
-    <loc>/reference/PDPData.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/PerformanceMeasures.html</loc>
   </url>
   <url>
-    <loc>/reference/PerformanceMeasures.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/plot_me.html</loc>
   </url>
   <url>
-    <loc>/reference/plot_me.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/predict_occ.html</loc>
   </url>
   <url>
-    <loc>/reference/predict_occ.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.html</loc>
   </url>
   <url>
-    <loc>/reference/predict_occ_taxon.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/shutdown.html</loc>
   </url>
   <url>
-    <loc>/reference/shutdown.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/startup.html</loc>
   </url>
   <url>
-    <loc>/reference/startup.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.html</loc>
   </url>
   <url>
-    <loc>/reference/TaxonomicBackbone.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/VariableData.html</loc>
   </url>
   <url>
-    <loc>/reference/VariableData.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/VariableLookup.html</loc>
   </url>
   <url>
-    <loc>/reference/VariableLookup.html</loc>
-  </url>
-  <url>
-    <loc>/reference/VariableNames.html</loc>
+    <loc>https://NERC-CEH.github.io/elements/reference/VariableNames.html</loc>
   </url>
 </urlset>
