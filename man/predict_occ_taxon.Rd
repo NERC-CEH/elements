@@ -11,7 +11,7 @@ predict_occ_taxon(
   limit = NULL,
   holdopt = NULL,
   dp = 3,
-  append_predictors = TRUE
+  append = "ids"
 )
 }
 \arguments{
@@ -27,10 +27,10 @@ predict_occ_taxon(
 
 \item{dp}{The number of decimal places to round the probability values to.}
 
-\item{append_predictors}{A boolean. If TRUE return the predictors data frame with the results in an additional column.}
+\item{append}{A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.}
 }
 \value{
-A data frame containing the probability of occurrence (Present and/or Absent), if specified, appended to the predictors data.
+A data frame containing the probability of occurrence (Present and/or Absent).
 }
 \description{
 Generate predictions for the probability of occurrence (presence and/or absence) for a given taxon.
@@ -54,7 +54,7 @@ NOTE: to use this function you must first run \code{elements::startup()}
 \examples{
 \dontrun{
 elements::startup()
-elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"), dp = 3, append_predictors = TRUE)
+elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1)
 elements::shutdown() 
 }
 }

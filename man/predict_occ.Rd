@@ -5,19 +5,19 @@
 \title{Generate predictions for the probability of occurrence for specified taxa}
 \usage{
 predict_occ(
-  taxa_codes,
+  taxa,
   predictors,
   pa = "Present",
   limit = NULL,
   holdopt = NULL,
   dp = 3,
-  append_predictors = TRUE
+  append = "ids"
 )
 }
 \arguments{
-\item{taxa_codes}{A vector of strings containing one or more taxa to generate predictions for. Optional.}
+\item{taxa}{A vector of strings containing one or more taxa to generate predictions for. See \code{elements::TaxonomicBackbone}. Optional.}
 
-\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and taxon}
+\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and optionally taxon}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 
@@ -27,15 +27,15 @@ predict_occ(
 
 \item{dp}{The number of decimal places to round the probability values to.}
 
-\item{append_predictors}{A boolean. If TRUE return the predictors data frame with the results in an additional column.}
+\item{append}{A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.}
 }
 \value{
-A data frame containing the probability of occurrence (Present and/or Absent) for each taxon, if specified, appended to the predictorsS data.
+A data frame containing the probability of occurrence (Present and/or Absent) for each taxon.
 }
 \description{
 Generate predictions for the probability of occurrence (presence and/or absence) using a data frame of predictors for a one or more taxa specified in either:
 \enumerate{
-\item the 'taxa_codes' argument, or
+\item the 'taxa' argument, or
 \item a column in the predictors data frame named 'taxon_code'
 }
 }
@@ -53,8 +53,8 @@ e.g. to hold soil disturbance constant supply c("SD") to the 'holdopt' argument.
 This may be useful in instances where you wish to remove the influence of one or more variables
 on the model results.
 
-If taxon codes are supplied in the 'taxa_codes' argument and there is a column in the predictors data frame named 'taxon_code',
-the taxa present in the 'taxa_codes' argument will be used and results will be calculated using the entire predictors data frame
+If taxon codes are supplied in the 'taxa' argument and there is a column in the predictors data frame named 'taxon_code',
+the taxa present in the 'taxa' argument will be used and results will be calculated using the entire predictors data frame
 and the 'taxon_code' column will be replaced.
 
 NOTE: to use this function you must first run \code{elements::startup()}
@@ -64,13 +64,13 @@ NOTE: to use this function you must first run \code{elements::startup()}
 elements::startup()
 
 # Generate predictions using a data frame containing taxon_codes in the 'taxon' column.
-elements::predict_occ(taxa_codes = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"), dp = 3, append_predictors = FALSE)
+elements::predict_occ(taxa = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
-# Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing only predictor variables.
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, holdopt = c("SD", "GP"), pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
+# Generate predictions for taxa specified in the 'taxa' argument using a data frame containing only predictor variables.
+elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
-# Generate predictions for taxa specified in the 'taxa_codes' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-elements::predict_occ(taxa_codes = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, holdopt = c("SD", "GP"), pa = "Present", limit = NULL, dp = 3, append_predictors = TRUE)
+# Generate predictions for taxa specified in the 'taxa' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
+elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
 elements::shutdown() 
 }

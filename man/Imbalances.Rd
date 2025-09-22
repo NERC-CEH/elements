@@ -5,7 +5,7 @@
 \alias{Imbalances}
 \title{Presence-Absence Imbalances}
 \format{
-A data frame with 18102 rows and 6 columns, the definitions of which are:
+A data frame with 19893 rows and 6 columns, the definitions of which are:
 \describe{
 \item{Stage}{The plot selection 'stage'.}
 \item{Absent}{The number of absences.}

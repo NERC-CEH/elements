@@ -23,18 +23,18 @@
 #' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75". Which if set assigns a probability of 0 to the Present column and/or 1 to the Absent column to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Optional.
 #' @param holdopt Hold one or more variables at their optimum values. NULL by default, else a vector of variable codes, e.g. c("SD", "GP").
 #' @param dp The number of decimal places to round the probability values to.
-#' @param append_predictors A boolean. If TRUE return the predictors data frame with the results in an additional column.
+#' @param append A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.
 #'
-#' @return A data frame containing the probability of occurrence (Present and/or Absent), if specified, appended to the predictors data.
+#' @return A data frame containing the probability of occurrence (Present and/or Absent).
 #' @export
 #' 
 #' @examples
 #' \dontrun{
 #' elements::startup()
-#' elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"), dp = 3, append_predictors = TRUE)
+#' elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1)
 #' elements::shutdown() 
 #' }
-predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, holdopt = NULL, dp = 3, append_predictors = TRUE){
+predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, holdopt = NULL, dp = 3, append = "ids"){
   
   # Check whether elements::startup() has been run and the Models filehashDB1 object is in the global environment
   if(isFALSE(exists(x = "Models", envir = elementsEnv))){
@@ -62,6 +62,10 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
     }
   }
   
+  ids_df <- predictors[setdiff(colnames(predictors), elements::VariableNames)]
+  
+  predictors_df <- predictors[elements::VariableNames]
+  
   model <- elementsEnv$Models[[taxon]]
   
   predictions <- e1071:::predict.svm(object = model, predictors, probability = TRUE)
@@ -69,30 +73,17 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
   predictions_df <- round(as.data.frame(attr(predictions, "probabilities")[, pa, drop = FALSE]), digits = dp)
   
   if(!is.null(limit)){
-      
-    nw <- elements::NicheWidths
-    nw_taxon <- subset(nw[nw[["taxon_code"]] == taxon, ], select = -taxon_code)
-    nw_taxon <- stats::setNames(data.frame(t(nw_taxon[,-1])), nw_taxon[[1]])
     
-    lower <- nw_taxon[unlist(strsplit(limit, "_"))[1], ]
-    upper <- nw_taxon[unlist(strsplit(limit, "_"))[2], ]
+    predictors_check_lim <- elements::envelope_filter_taxon(taxon = taxon, predictors = predictors, limit = limit)
     
-    vars <- colnames(lower)
+    predictions_limited <- cbind(predictors_check_lim, predictions_df)
+      
+    if(isTRUE("Present" %in% pa)){
+      predictions_limited[["Present"]] <- ifelse(predictions_limited[["within_limits"]] == FALSE, 0, predictions_limited[["Present"]])
+    }
     
-    predictions_limited <- cbind(predictors, predictions_df)
-    
-    for(var in vars){
-      
-      if(isTRUE("Present" %in% pa)){
-        predictions_limited[["Present"]] <- ifelse(predictions_limited[[var]] > upper[[var]], 0, predictions_limited[["Present"]])
-        predictions_limited[["Present"]] <- ifelse(predictions_limited[[var]] < lower[[var]], 0, predictions_limited[["Present"]])
-      }
-      
-      if(isTRUE("Absent" %in% pa)){
-        predictions_limited[["Absent"]] <- ifelse(predictions_limited[[var]] > upper[[var]], 1, predictions_limited[["Absent"]])
-        predictions_limited[["Absent"]] <- ifelse(predictions_limited[[var]] < lower[[var]], 1, predictions_limited[["Absent"]])
-      }
-      
+    if(isTRUE("Absent" %in% pa)){
+      predictions_limited[["Absent"]] <- ifelse(predictions_limited[["within_limits"]] == FALSE, 1, predictions_limited[["Absent"]])
     }
     
     results_final <- predictions_limited[pa]
@@ -103,14 +94,16 @@ predict_occ_taxon <- function(taxon, predictors, pa = "Present", limit = NULL, h
     
   }
   
-  if(isTRUE(append_predictors)){
-    
+  if(append == "all"){
     results_final <- cbind(predictors, results_final)
-    
+  } else if(append == "predictors"){
+    results_final <- cbind(predictors_df, results_final)
+  } else if(append == "ids"){
+    if(ncol(ids_df) > 0){
+      results_final <- cbind(ids_df, results_final)
+    }
   }
   
   return(results_final)
-  
-  gc()
   
 }

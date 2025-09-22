@@ -1,3 +1,14 @@
+# elements 0.5.6 (22/09/2025)
+
+* Adding two functions `elements::envelope_filter` and `elements::envelope_filter_taxon` which uses the distributional data present in `elements::NicheWidths` to apply envelope filters.
+  These functions are integrated into the `elements::env_filter` function as a pre-screening option.
+* Separating out the calculation of euclidean distance in the `elements::env_filter` function into two new functions: `elements::calc_distance_once` and `elements::calc_distance`.
+* Ensuring that all objects have data for the taxa present in the ENMs.
+* Changing the 'append_predictors' argument to 'append' in `elements::predict_occ_taxon`, `elements::predict_occ`, `elements::calc_distance_once`, and `elements::calc_distance`,
+  this argument now controls which columns are appended to the results, namely: "all": all columns supplied in the predictors dataframe; "predictors": all predictor variable columns (`elements::VariableNames`); or "ids": all non-predictor variable columns.
+* Adding three new objects `elements::EUNISDiagnosticTaxa`, `elements::EUNISConstantTaxa`, and `elements::EUNISDominantTaxa`, derived from https://doi.org/10.1111/avsc.12519.
+* Creating new pkgdown site article "Environmental Filtering".
+
 # elements 0.5.5 (18/09/2025)
 
 * Full model training re-run after addressing outstanding taxonomic alignment issues. Now at 6631 taxa.

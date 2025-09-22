@@ -1,0 +1,147 @@
+---
+title: "Scenario Development"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r load_packages, include = FALSE}
+library(e1071)
+library(elements)
+library(filehash)
+```
+
+```{r load_packages_print, include = TRUE, eval=FALSE}
+library(e1071)
+library(elements)
+library(filehash)
+```
+
+
+## Scenarios
+
+`elements` is designed to be used to model scenarios of environmental change considering multiple interacting drivers. The object `elements::ExampleScenarios` provides a basic set of example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change - RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per year) along with a Baseline scenario.
+Below the predicted probabilities for the taxa in `elements::ExamplePlot` for Scenario C are displayed.
+
+```{r scenario_c_results}
+elements::startup()
+
+scenario_results <- elements::predict_occ(taxa = elements::ExamplePlot$taxon_code,
+                                          predictors = elements::ExampleScenarios,
+                                          append = "ids")
+```
+
+```{r create_scenario_example_plot, include = FALSE}
+scenarios_len <- length(unique(scenario_results$taxon_code))
+scenario_col_pal <- ggsci::pal_uchicago("default")(scenarios_len)
+names(scenario_col_pal) <- unique(scenario_results$taxon_code)
+  
+scenario_example_plot <- ggplot2::ggplot() +
+  ggplot2::geom_line(data = scenario_results |> dplyr::filter(scenario != "Baseline"), 
+                     mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code, group = taxon_code), 
+                     position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::geom_point(data = scenario_results |> dplyr::filter(scenario != "Baseline"), 
+                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code, group = taxon_code), 
+                      position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::geom_point(data = scenario_results |> 
+                        dplyr::filter(scenario == "Baseline") |> 
+                        dplyr::distinct(taxon_code, timeslice, Present), 
+                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code), 
+                      position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::facet_wrap(dplyr::vars(scenario), ncol = 2,, scales = "free_x") + 
+  ggplot2::theme_classic() +
+  ggplot2::theme(strip.background = ggplot2::element_blank(),
+                 legend.position = "top") +
+  ggplot2::scale_color_manual(values = scenario_col_pal) +
+  ggplot2::guides(color = ggplot2::guide_legend(title = "Taxon", ncol = 2)) +
+  ggplot2::ylab(NULL)
+```
+
+```{r scenario_example_plot, echo=FALSE, dpi = 800, fig.height=10, fig.width=7, out.width="100%", fig.align='center'}
+scenario_example_plot
+```
+
+## Environmental Filtering
+
+In addition to modelling the response of individual taxa over time let's inspect how the constant taxa in EUNIS habitats respond to scenarios in `elements::ExampleScenarios`,
+by presenting the mean probability of each EUNIS habitats constant taxa.
+
+```{r calc_env_filter_eunis}
+eunis_taxa_models <- intersect(unique(elements::EUNISConstantTaxa$taxon_code), 
+                               elements::TaxonomicBackbone$taxon_code)
+
+predictors_scenanrios <- elements::ExampleScenarios |> 
+  dplyr::select(-scenario_code) |>
+  dplyr::distinct()
+
+eunis_filter_results <- elements::env_filter(predictors = predictors_scenanrios, 
+                                             taxa = eunis_taxa_models, 
+                                             screen = TRUE, method = "svm", 
+                                             limit = "min_max", 
+                                             exclude = NULL, threshold = NULL, 
+                                             append = "ids")
+```
+
+```{r q_summed_probs_plot, echo=FALSE, include=FALSE}
+eunis_filter_results_sum <- elements::EUNISConstantTaxa |>
+  dplyr::filter(taxon_code %in% eunis_taxa_models) |>
+  dplyr::group_by(eunis_code) |>
+  dplyr::mutate("n" = dplyr::n()) |>
+  dplyr::ungroup() |>
+  dplyr::inner_join(eunis_filter_results, by = "taxon_code", relationship = "many-to-many") |>
+  dplyr::summarise("sum" = sum(Present, na.rm = TRUE),
+                   .by = c("eunis_name", "eunis_code", "timeslice", "scenario", "n")) |>
+  dplyr::mutate("sum" = sum / n)
+
+top_eunis_names <- eunis_filter_results_sum |>
+  dplyr::group_by(timeslice, scenario) |>
+  dplyr::slice_max(sum, n = 1) |>
+  dplyr::ungroup() |>
+  dplyr::distinct(eunis_name) |>
+  dplyr::pull(eunis_name)
+  
+eunis_filter_results_sum_top <- eunis_filter_results_sum |>
+  dplyr::filter(eunis_name %in% top_eunis_names)
+
+eunis_len <- length(top_eunis_names)
+eunis_col_pal <- unname(Polychrome::kelly.colors()[-1][1:eunis_len])
+names(eunis_col_pal) <- top_eunis_names
+```
+
+The mean probability for the constant taxa in top EUNIS wetland habitat in the baseline (Q24 - Intermediate fen and soft-water spring mire and S92 - Salix fen scrub)
+decreases in all example scenarios.
+
+```{r q_summed_probs_adj_plot, echo=FALSE, include=FALSE}
+eunis_filter_results_adj_plot <- ggplot2::ggplot() +
+  ggplot2::geom_line(data = eunis_filter_results_sum_top |> dplyr::filter(scenario != "Baseline"), 
+                     mapping = ggplot2::aes(x = timeslice, y = sum, color = eunis_name, group = eunis_name), 
+                     position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::geom_point(data = eunis_filter_results_sum_top |> dplyr::filter(scenario != "Baseline"), 
+                      mapping = ggplot2::aes(x = timeslice, y = sum, color = eunis_name, group = eunis_name), 
+                      position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::geom_point(data = eunis_filter_results_sum_top |>
+                        dplyr::filter(scenario == "Baseline") |>
+                        dplyr::distinct(eunis_name, timeslice, sum),
+                      mapping = ggplot2::aes(x = timeslice, y = sum, color = eunis_name),
+                      position = ggplot2::position_dodge(width = 0.1)) +
+  ggplot2::ylim(c(0, 1)) +
+  ggplot2::facet_wrap(dplyr::vars(scenario), ncol = 2,, scales = "free_x") + 
+  ggplot2::theme_classic() +
+  ggplot2::theme(strip.background = ggplot2::element_blank(),
+                 legend.position = "top") +
+  ggplot2::scale_color_manual(values = eunis_col_pal) +
+  ggplot2::guides(color = ggplot2::guide_legend(title = "EUNIS", ncol = 2)) +
+  ggplot2::ylab(NULL)
+```
+
+```{r scenario_eunisQ_weighted_plot, echo=FALSE, dpi = 800, fig.height=10, fig.width=7, out.width="100%", fig.align='center'}
+eunis_filter_results_adj_plot
+```
+
+```{r shutdown}
+elements::shutdown()
+```

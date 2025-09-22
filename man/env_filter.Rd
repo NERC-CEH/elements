@@ -5,19 +5,22 @@
 \title{Retrieve the most suitable taxa for a given set of environmental variable values}
 \usage{
 env_filter(
-  predictors = elements::ExampleScenarios[1, ],
+  predictors,
   taxa = elements::TaxonomicBackbone$taxon_code,
+  screen = TRUE,
   method = "svm",
-  limit = NULL,
+  limit = "min_max",
   exclude = NULL,
   threshold = NULL,
-  toptaxa = NULL
+  append = "ids"
 )
 }
 \arguments{
 \item{predictors}{A data frame of predictors. Must include atleast one the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17. Columns not included must then be included in the 'exclude' argument.}
 
 \item{taxa}{A vector of strings containing one or more taxa to generate predictions for.}
+
+\item{screen}{A boolean (TRUE/FALSE) indicating whether to use the \code{elements::envelope_filter} function to check whether taxa are within distibutional limits prior to applying the more computationally expensive \code{elements::predict_occ} or \code{elements::calc_distance} functions.}
 
 \item{method}{One of "svm", "mean", or "median".}
 
@@ -27,7 +30,7 @@ env_filter(
 
 \item{threshold}{A probability threshold to use as a cut off in the environmental filter. Only applicable when 'method' = "svm".}
 
-\item{toptaxa}{The number of top taxa, as defined by their probability when 'method' = "svm" or euclidean distance when when 'method' = "mean" or "median".}
+\item{append}{A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.}
 }
 \value{
 A dataframe containing three columns: taxon_code, rank, and Present (if 'method' = "svm") or Distance (if 'method' = "mean" or "median").
@@ -47,5 +50,5 @@ however, if there are a large number of taxa-predictor combinations the mean and
 NOTE: The "mean" and "median" methods do not produce realistic results and so are currently included for demonstrative purposes only.
 }
 \examples{
-elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios[1,], taxa = elements::TaxonomicBackbone$taxon_code, method = "svm", threshold = 0.5)
+elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::TaxonomicBackbone$taxon_code, method = "svm", threshold = 0.5)
 }

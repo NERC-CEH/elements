@@ -13,11 +13,46 @@ development:
 
 navbar:
   title: elements
+  
   structure:
     left:
     - reference
     - articles
+    - background
     - news
     right:
     - search
     - github
+    
+  components:
+    reference:
+      icon: fa-gears
+      text: "Reference"
+      href: reference/index.html
+
+    articles:
+      icon: fa-graduation-cap
+      text: "Articles"
+      menu:
+        - text: "Installation"
+          icon: fa-book
+          href: articles/installation.html
+        - text: "Model Inspection"
+          icon: fa-book
+          href: articles/model-inspection.html
+        - text: "Model Usage"
+          icon: fa-book
+          href: articles/model-usage.html
+        - text: "Scenario Development"
+          icon: fa-book
+          href: articles/scenario-development.html
+          
+    background:
+      text: "Bibliography"
+      icon: fa-book
+      href: articles/references.html
+
+    news:
+      icon: fa-newspaper-o
+      text: "News"
+      href: news/index.html

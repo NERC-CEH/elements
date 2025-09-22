@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.5.5-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.5.6-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
