@@ -132,7 +132,7 @@ example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change -
 RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing
 Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per
 year) along with a Baseline scenario. Below the predicted probabilities
-for the taxa in <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> for Scenario C are
+for the taxa in <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> for the scenarios are
 displayed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/startup.html">startup</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -149,7 +149,8 @@ displayed.</p>
 <p>In addition to modelling the response of individual taxa over time
 let’s inspect how the constant taxa in EUNIS habitats respond to
 scenarios in <code><a href="../reference/ExampleScenarios.html">elements::ExampleScenarios</a></code>, by presenting the
-mean probability of each EUNIS habitats constant taxa.</p>
+mean of the probabilities of each EUNIS habitats constant taxa, for the
+top EUNIS habiats.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eunis_taxa_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/EUNISConstantTaxa.html">EUNISConstantTaxa</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span>, </span>
 <span>                               <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span></span>
@@ -164,9 +165,9 @@ mean probability of each EUNIS habitats constant taxa.</p>
 <span>                                             limit <span class="op">=</span> <span class="st">"min_max"</span>, </span>
 <span>                                             exclude <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="cn">NULL</span>, </span>
 <span>                                             append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
-<p>The mean probability for the constant taxa in top EUNIS wetland
-habitat in the baseline (Q24 - Intermediate fen and soft-water spring
-mire and S92 - Salix fen scrub) decreases in all example scenarios.</p>
+<p>The mean probability for the constant taxa in the top EUNIS habitat
+in the baseline (Q24 - Intermediate fen and soft-water spring mire)
+decreases in all example scenarios.</p>
 <p><img src="scenario-development_files/figure-html/scenario_eunisQ_weighted_plot-1.png" width="100%" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/shutdown.html">shutdown</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
