@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,19 +36,54 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
+  <a class="nav-link" href="../reference/index.html">
+    <span class="fa fa-gears"></span>
+     
+    Reference
+  </a>
 </li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation.html">Installation</a>
-    <a class="dropdown-item" href="../articles/model-inspection.html">Model Inspection</a>
-    <a class="dropdown-item" href="../articles/model-usage.html">Model Usage</a>
-    <a class="dropdown-item" href="../articles/references.html">References</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+    <span class="fa fa-graduation-cap"></span>
+     
+    Articles
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
+    <a class="dropdown-item" href="../articles/installation.html">
+      <span class="fa fa-book"></span>
+       
+      Installation
+    </a>
+    <a class="dropdown-item" href="../articles/model-inspection.html">
+      <span class="fa fa-book"></span>
+       
+      Model Inspection
+    </a>
+    <a class="dropdown-item" href="../articles/model-usage.html">
+      <span class="fa fa-book"></span>
+       
+      Model Usage
+    </a>
+    <a class="dropdown-item" href="../articles/scenario-development.html">
+      <span class="fa fa-book"></span>
+       
+      Scenario Development
+    </a>
   </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../articles/references.html">
+    <span class="fa fa-book"></span>
+     
+    Bibliography
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    News
+  </a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -83,9 +118,9 @@
 
     
     
-<div class="section level3">
-<h3 id="retrieving-models">Retrieving models<a class="anchor" aria-label="anchor" href="#retrieving-models"></a>
-</h3>
+<div class="section level2">
+<h2 id="retrieving-models">Retrieving Models<a class="anchor" aria-label="anchor" href="#retrieving-models"></a>
+</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">e1071</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/NERC-CEH/elements" class="external-link">elements</a></span><span class="op">)</span></span>
@@ -121,16 +156,16 @@ be accessed by passing “all” or “test” to the ‘models’ argument of
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Number of Support Vectors:  12724</span></span></code></pre>
 </div>
-<div class="section level3">
-<h3 id="using-the-models">Using the models<a class="anchor" aria-label="anchor" href="#using-the-models"></a>
-</h3>
+<div class="section level2">
+<h2 id="generating-predictions">Generating Predictions<a class="anchor" aria-label="anchor" href="#generating-predictions"></a>
+</h2>
 <p>The raw ENMs retrieved using the method above can be used as regular
 <code>e1071</code> SVM model objects. Alternatively, the helper function
 <code><a href="../reference/predict_occ_taxon.html">elements::predict_occ_taxon</a></code> retrieves a model using the
 method above, generates predictions, and formats the results as a data
 frame.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData1.html">ExampleData1</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append_predictors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData1.html">ExampleData1</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   Present</span></span>
 <span><span class="co">#&gt; 1    0.30</span></span>
 <span><span class="co">#&gt; 2    0.00</span></span>
@@ -140,18 +175,18 @@ frame.</p>
 <span><span class="co">#&gt; 6    0.08</span></span></code></pre>
 <p>An additional helper function <code><a href="../reference/predict_occ.html">elements::predict_occ</a></code> can
 generate predictions for multiple taxa, by either specifing the taxa to
-model in the ‘taxa_codes’ argument, or by setting ‘taxa_codes’ to NULL
-and including an additional column in the predictors data frame named
+model in the ‘taxa’ argument, or by setting ‘taxa’ to NULL and including
+an additional column in the predictors data frame named
 ‘taxon_code’.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa_codes <span class="op">=</span> <span class="cn">NULL</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData2.html">ExampleData2</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append_predictors <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;     Present         taxon_code</span></span>
-<span><span class="co">#&gt; 201    0.70 silene_flos-cuculi</span></span>
-<span><span class="co">#&gt; 202    0.00 silene_flos-cuculi</span></span>
-<span><span class="co">#&gt; 203    0.12 silene_flos-cuculi</span></span>
-<span><span class="co">#&gt; 204    0.00 silene_flos-cuculi</span></span>
-<span><span class="co">#&gt; 205    0.00 silene_flos-cuculi</span></span>
-<span><span class="co">#&gt; 206    0.00 silene_flos-cuculi</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="cn">NULL</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData2.html">ExampleData2</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, holdopt <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;             taxon_code Present</span></span>
+<span><span class="co">#&gt; 201 silene_flos-cuculi    0.70</span></span>
+<span><span class="co">#&gt; 202 silene_flos-cuculi    0.00</span></span>
+<span><span class="co">#&gt; 203 silene_flos-cuculi    0.12</span></span>
+<span><span class="co">#&gt; 204 silene_flos-cuculi    0.00</span></span>
+<span><span class="co">#&gt; 205 silene_flos-cuculi    0.00</span></span>
+<span><span class="co">#&gt; 206 silene_flos-cuculi    0.00</span></span></code></pre>
 <p>Two helper arguments provide additional functionality in controlling
 model use. First, is the ‘limit’ argument, which assigns probability
 values of zero if one or more predictors are outside a specified range
@@ -168,40 +203,22 @@ the 1% and 99% quantiles.</p>
 <span></span>
 <span><span class="va">vary_N_no_limit</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="va">n_gradient</span>,</span>
 <span>                                               pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
-<span>                                               dp <span class="op">=</span> <span class="fl">2</span>, append_predictors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                                               dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"predictors"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">vary_N_limit</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="va">n_gradient</span>,</span>
-<span>                                            pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="st">"q01_q99"</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
-<span>                                            dp <span class="op">=</span> <span class="fl">2</span>, append_predictors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="model-usage_files/figure-html/limit_and_holdopt_demo_plots-1.png" width="50%"><img src="model-usage_files/figure-html/limit_and_holdopt_demo_plots-2.png" width="50%"></p>
+<span><span class="va">vary_N_q01_q99</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="va">n_gradient</span>,</span>
+<span>                                              pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="st">"q01_q99"</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
+<span>                                              dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"predictors"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="model-usage_files/figure-html/limit_and_holdopt_demo_plots-1.png" width="100%"></p>
 <p>Please note that as ten out of the eleven variables are held at their
 optima the predicted probabilities will be high as the influence of
 unsuitable N values will be partially offset. Consequently, the shape of
 the response curves above will be wider than the corresponding PDP plot
 produced with the <code><a href="../reference/plot_me.html">elements::plot_me</a></code> function (see the
-<strong>Model Inspection</strong> section below).</p>
+<strong>Model Inspection</strong>).</p>
 </div>
-<div class="section level3">
-<h3 id="scenarios">Scenarios<a class="anchor" aria-label="anchor" href="#scenarios"></a>
-</h3>
-<p><code>elements</code> is designed to be used to model scenarios of
-environmental change considering multiple interacting drivers. The
-object <code><a href="../reference/ExampleScenarios.html">elements::ExampleScenarios</a></code> provides a basic set of
-example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change -
-RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing
-Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per
-year) along with a Baseline scenario. Below the predicted probabilities
-for the taxa in <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> for Scenario C are
-displayed.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">scenario_c_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa_codes <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExamplePlot.html">ExamplePlot</a></span><span class="op">$</span><span class="va">taxon_code</span>,</span>
-<span>                                            predictors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span>, <span class="va">scenario_code</span> <span class="op">==</span> <span class="st">"c"</span><span class="op">)</span>,</span>
-<span>                                            append_predictors <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="model-usage_files/figure-html/scenario_c_plot-1.png" width="80%" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
-<h3 id="environmental-filtering">Environmental filtering<a class="anchor" aria-label="anchor" href="#environmental-filtering"></a>
-</h3>
+<div class="section level2">
+<h2 id="environmental-filtering">Environmental filtering<a class="anchor" aria-label="anchor" href="#environmental-filtering"></a>
+</h2>
 <p><code>elements</code> can also be used to filter species pools based
 on a given set of predictor values using the function
 <code><a href="../reference/env_filter.html">elements::env_filter</a></code>. Two sets of methods are available: 1)
@@ -211,46 +228,66 @@ values; and 2) “mean” and “median” which calculates the normalised
 euclidean distance between the values supplied in the ‘predictors’
 argument and the mean or median niche positions as present in
 <code><a href="../reference/NicheWidths.html">elements::NicheWidths</a></code>.</p>
-<p>For example, below <code><a href="../reference/env_filter.html">elements::env_filter</a></code> is applied to
-all taxa in <code><a href="../reference/TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code> using the svm
-method, with the predictors derived from the baseline environmental
-variable data from <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> as present in
-<code>elements::ExampleScenarios[1,]</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">filter_results_svm</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/env_filter.html">env_filter</a></span><span class="op">(</span>predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>, method <span class="op">=</span> <span class="st">"svm"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;                         taxon_code Present rank</span></span>
-<span><span class="co">#&gt; 1                 comarum_palustre   0.990    1</span></span>
-<span><span class="co">#&gt; 2                      carex_nigra   0.966    2</span></span>
-<span><span class="co">#&gt; 3            menyanthes_trifoliata   0.965    3</span></span>
-<span><span class="co">#&gt; 4                   carex_rostrata   0.964    4</span></span>
-<span><span class="co">#&gt; 5         eriophorum_angustifolium   0.964    5</span></span>
-<span><span class="co">#&gt; 6               epilobium_palustre   0.962    6</span></span>
-<span><span class="co">#&gt; 7           lysimachia_thyrsiflora   0.951    7</span></span>
-<span><span class="co">#&gt; 8             hydrocotyle_vulgaris   0.942    8</span></span>
-<span><span class="co">#&gt; 9  galium_palustre_subsp._palustre   0.936    9</span></span>
-<span><span class="co">#&gt; 10             ranunculus_flammula   0.935   10</span></span>
-<span><span class="co">#&gt; 11          calliergon_cordifolium   0.932   11</span></span>
-<span><span class="co">#&gt; 12      salix_repens_subsp._repens   0.932   12</span></span>
-<span><span class="co">#&gt; 13                 carex_canescens   0.930   13</span></span>
-<span><span class="co">#&gt; 14                 viola_palustris   0.930   14</span></span>
-<span><span class="co">#&gt; 15            equisetum_fluviatile   0.922   15</span></span>
-<span><span class="co">#&gt; 16                    salix_aurita   0.916   16</span></span>
-<span><span class="co">#&gt; 17            triglochin_palustris   0.916   17</span></span>
-<span><span class="co">#&gt; 18                  juncus_effusus   0.914   18</span></span>
-<span><span class="co">#&gt; 19                 typha_latifolia   0.914   19</span></span>
-<span><span class="co">#&gt; 20              lotus_pedunculatus   0.905   20</span></span></code></pre>
 <p>NOTE: The mean and median methods are only included for demonstrative
 purposes only and should not be used in practice as they do not consider
 the joint distribution of variables as expressed through the SVM model
 hypervolumes.</p>
-</div>
+<p>The option to apply the <code><a href="../reference/envelope_filter.html">elements::envelope_filter</a></code>
+function, which first screens the supplied taxa to check whether the
+predictor values are within a given range as supplied to the ‘limit’
+argument (“min_max”, “q01_q99”, “q05_q95”, “q10_q90”, “q25_q75”), is
+controlled by the ‘screen’ argument; <code><a href="../reference/env_filter.html">elements::env_filter</a></code>
+will then only run the more computationally expensive
+<code><a href="../reference/predict_occ.html">elements::predict_occ</a></code> or
+<code><a href="../reference/calc_distance.html">elements::calc_distance</a></code> functions for the taxa within the
+limits. This is highly recommended as it usually results in a 95%
+reduction in the number of taxa being supplied to
+<code><a href="../reference/predict_occ.html">elements::predict_occ</a></code> or
+<code><a href="../reference/calc_distance.html">elements::calc_distance</a></code>, greatly improving performance.</p>
+<p>For example, below <code><a href="../reference/env_filter.html">elements::env_filter</a></code> is applied to
+all taxa in <code><a href="../reference/TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code> using the svm
+method, with the predictors derived from
+<code><a href="../reference/ExampleScenarios.html">elements::ExampleScenarios</a></code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">filter_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/env_filter.html">env_filter</a></span><span class="op">(</span>predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
+<span>                                       taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>, </span>
+<span>                                       screen <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"svm"</span>, limit <span class="op">=</span> <span class="st">"min_max"</span>, </span>
+<span>                                       exclude <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>                                       append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;    scenario timeslice scenario_code                              taxon_code</span></span>
+<span><span class="co">#&gt; 1  Baseline      2007             a                              abies_alba</span></span>
+<span><span class="co">#&gt; 2  Baseline      2007             a                    abietinella_abietina</span></span>
+<span><span class="co">#&gt; 3  Baseline      2007             a                          acer_campestre</span></span>
+<span><span class="co">#&gt; 4  Baseline      2007             a                            acer_negundo</span></span>
+<span><span class="co">#&gt; 5  Baseline      2007             a                        acer_platanoides</span></span>
+<span><span class="co">#&gt; 6  Baseline      2007             a                     acer_pseudoplatanus</span></span>
+<span><span class="co">#&gt; 7  Baseline      2007             a                    achillea_millefolium</span></span>
+<span><span class="co">#&gt; 8  Baseline      2007             a achillea_millefolium_subsp._millefolium</span></span>
+<span><span class="co">#&gt; 9  Baseline      2007             a                       achillea_ptarmica</span></span>
+<span><span class="co">#&gt; 10 Baseline      2007             a                       aconitum_napellus</span></span>
+<span><span class="co">#&gt;    Present</span></span>
+<span><span class="co">#&gt; 1    0.004</span></span>
+<span><span class="co">#&gt; 2    0.000</span></span>
+<span><span class="co">#&gt; 3    0.001</span></span>
+<span><span class="co">#&gt; 4    0.000</span></span>
+<span><span class="co">#&gt; 5    0.000</span></span>
+<span><span class="co">#&gt; 6    0.010</span></span>
+<span><span class="co">#&gt; 7    0.006</span></span>
+<span><span class="co">#&gt; 8    0.010</span></span>
+<span><span class="co">#&gt; 9    0.611</span></span>
+<span><span class="co">#&gt; 10   0.001</span></span></code></pre>
+<p>In practice, given the limited size of regional species pools and/or
+interest in a particular group of taxa only it is often more practical
+to supply a reduced list of taxa to
+<code><a href="../reference/env_filter.html">elements::env_filter</a></code>.</p>
 <div class="section level3">
 <h3 id="shutting-down">Shutting down<a class="anchor" aria-label="anchor" href="#shutting-down"></a>
 </h3>
-<p>At the end of the analyis run <code><a href="../reference/shutdown.html">elements::shutdown</a></code> to
+<p>At the end of the analysis run <code><a href="../reference/shutdown.html">elements::shutdown</a></code> to
 close the connection to the filehash database.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/shutdown.html">shutdown</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -19,6 +19,9 @@
     <loc>https://NERC-CEH.github.io/elements/articles/references.html</loc>
   </url>
   <url>
+    <loc>https://NERC-CEH.github.io/elements/articles/scenario-development.html</loc>
+  </url>
+  <url>
     <loc>https://NERC-CEH.github.io/elements/authors.html</loc>
   </url>
   <url>
@@ -34,7 +37,28 @@
     <loc>https://NERC-CEH.github.io/elements/reference/ALEData.html</loc>
   </url>
   <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/calc_distance.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/calc_distance_once.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/envelope_filter.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/envelope_filter_taxon.html</loc>
+  </url>
+  <url>
     <loc>https://NERC-CEH.github.io/elements/reference/env_filter.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/EUNISConstantTaxa.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/EUNISDiagnosticTaxa.html</loc>
+  </url>
+  <url>
+    <loc>https://NERC-CEH.github.io/elements/reference/EUNISDominantTaxa.html</loc>
   </url>
   <url>
     <loc>https://NERC-CEH.github.io/elements/reference/ExampleData1.html</loc>

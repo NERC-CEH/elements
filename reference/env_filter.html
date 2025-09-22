@@ -20,7 +20,7 @@ To sets of methods are available:
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,19 +29,54 @@ To sets of methods are available:
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
+  <a class="nav-link" href="../reference/index.html">
+    <span class="fa fa-gears"></span>
+     
+    Reference
+  </a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation.html">Installation</a>
-    <a class="dropdown-item" href="../articles/model-inspection.html">Model Inspection</a>
-    <a class="dropdown-item" href="../articles/model-usage.html">Model Usage</a>
-    <a class="dropdown-item" href="../articles/references.html">References</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+    <span class="fa fa-graduation-cap"></span>
+     
+    Articles
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
+    <a class="dropdown-item" href="../articles/installation.html">
+      <span class="fa fa-book"></span>
+       
+      Installation
+    </a>
+    <a class="dropdown-item" href="../articles/model-inspection.html">
+      <span class="fa fa-book"></span>
+       
+      Model Inspection
+    </a>
+    <a class="dropdown-item" href="../articles/model-usage.html">
+      <span class="fa fa-book"></span>
+       
+      Model Usage
+    </a>
+    <a class="dropdown-item" href="../articles/scenario-development.html">
+      <span class="fa fa-book"></span>
+       
+      Scenario Development
+    </a>
   </div>
 </li>
 <li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../articles/references.html">
+    <span class="fa fa-book"></span>
+     
+    Bibliography
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    News
+  </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -73,13 +108,14 @@ To sets of methods are available:</p><ol><li><p>"svm" which generates prediction
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">env_filter</span><span class="op">(</span></span>
-<span>  predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="ExampleScenarios.html">ExampleScenarios</a></span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>,</span>
+<span>  <span class="va">predictors</span>,</span>
 <span>  taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>,</span>
+<span>  screen <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  method <span class="op">=</span> <span class="st">"svm"</span>,</span>
-<span>  limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  limit <span class="op">=</span> <span class="st">"min_max"</span>,</span>
 <span>  exclude <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  toptaxa <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  append <span class="op">=</span> <span class="st">"ids"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -91,6 +127,10 @@ To sets of methods are available:</p><ol><li><p>"svm" which generates prediction
 
 <dt>taxa</dt>
 <dd><p>A vector of strings containing one or more taxa to generate predictions for.</p></dd>
+
+
+<dt>screen</dt>
+<dd><p>A boolean (TRUE/FALSE) indicating whether to use the <code><a href="envelope_filter.html">elements::envelope_filter</a></code> function to check whether taxa are within distibutional limits prior to applying the more computationally expensive <code><a href="predict_occ.html">elements::predict_occ</a></code> or <code><a href="calc_distance.html">elements::calc_distance</a></code> functions.</p></dd>
 
 
 <dt>method</dt>
@@ -109,8 +149,8 @@ To sets of methods are available:</p><ol><li><p>"svm" which generates prediction
 <dd><p>A probability threshold to use as a cut off in the environmental filter. Only applicable when 'method' = "svm".</p></dd>
 
 
-<dt>toptaxa</dt>
-<dd><p>The number of top taxa, as defined by their probability when 'method' = "svm" or euclidean distance when when 'method' = "mean" or "median".</p></dd>
+<dt>append</dt>
+<dd><p>A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -128,9 +168,9 @@ however, if there are a large number of taxa-predictor combinations the mean and
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="startup.html">startup</a></span><span class="op">(</span><span class="op">)</span>; <span class="fu">elements</span><span class="fu">::</span><span class="fu">env_filter</span><span class="op">(</span>predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="ExampleScenarios.html">ExampleScenarios</a></span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>, taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>, method <span class="op">=</span> <span class="st">"svm"</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="startup.html">startup</a></span><span class="op">(</span><span class="op">)</span>; <span class="fu">elements</span><span class="fu">::</span><span class="fu">env_filter</span><span class="op">(</span>predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="ExampleScenarios.html">ExampleScenarios</a></span>, taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>, method <span class="op">=</span> <span class="st">"svm"</span>, threshold <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> elements startup completed.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in elements::predict_occ(taxa_codes = taxa, predictors = predictors,     limit = limit, holdopt = exclude, append_predictors = FALSE):</span> All model variables (L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17) must either be present in the predictors data frame or passed to holdopt.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in elements::predict_occ(taxa = NULL, predictors = inside_range,     limit = NULL, holdopt = exclude, append = append):</span> All model variables (L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17) must either be present in the predictors data frame or passed to holdopt.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

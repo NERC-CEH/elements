@@ -6,7 +6,8 @@ articles:
   model-inspection: model-inspection.html
   model-usage: model-usage.html
   references: references.html
-last_built: 2025-09-18T08:25Z
+  scenario-development: scenario-development.html
+last_built: 2025-09-22T08:37Z
 urls:
   reference: https://NERC-CEH.github.io/elements/reference
   article: https://NERC-CEH.github.io/elements/articles

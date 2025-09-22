@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.5.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,19 +19,54 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
+  <a class="nav-link" href="../reference/index.html">
+    <span class="fa fa-gears"></span>
+     
+    Reference
+  </a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/installation.html">Installation</a>
-    <a class="dropdown-item" href="../articles/model-inspection.html">Model Inspection</a>
-    <a class="dropdown-item" href="../articles/model-usage.html">Model Usage</a>
-    <a class="dropdown-item" href="../articles/references.html">References</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--articles">
+    <span class="fa fa-graduation-cap"></span>
+     
+    Articles
+  </a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--articles">
+    <a class="dropdown-item" href="../articles/installation.html">
+      <span class="fa fa-book"></span>
+       
+      Installation
+    </a>
+    <a class="dropdown-item" href="../articles/model-inspection.html">
+      <span class="fa fa-book"></span>
+       
+      Model Inspection
+    </a>
+    <a class="dropdown-item" href="../articles/model-usage.html">
+      <span class="fa fa-book"></span>
+       
+      Model Usage
+    </a>
+    <a class="dropdown-item" href="../articles/scenario-development.html">
+      <span class="fa fa-book"></span>
+       
+      Scenario Development
+    </a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/references.html">
+    <span class="fa fa-book"></span>
+     
+    Bibliography
+  </a>
+</li>
 <li class="active nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
+  <a class="nav-link" href="../news/index.html">
+    <span class="fa fa-newspaper-o"></span>
+     
+    News
+  </a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -53,6 +88,15 @@
       <small>Source: <a href="https://github.com/NERC-CEH/elements/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.5.6" id="elements-056-22092025">elements 0.5.6 (22/09/2025)<a class="anchor" aria-label="anchor" href="#elements-056-22092025"></a></h2>
+<ul><li>Adding two functions <code><a href="../reference/envelope_filter.html">elements::envelope_filter</a></code> and <code><a href="../reference/envelope_filter_taxon.html">elements::envelope_filter_taxon</a></code> which uses the distributional data present in <code><a href="../reference/NicheWidths.html">elements::NicheWidths</a></code> to apply envelope filters. These functions are integrated into the <code><a href="../reference/env_filter.html">elements::env_filter</a></code> function as a pre-screening option.</li>
+<li>Separating out the calculation of euclidean distance in the <code><a href="../reference/env_filter.html">elements::env_filter</a></code> function into two new functions: <code><a href="../reference/calc_distance_once.html">elements::calc_distance_once</a></code> and <code><a href="../reference/calc_distance.html">elements::calc_distance</a></code>.</li>
+<li>Ensuring that all objects have data for the taxa present in the ENMs.</li>
+<li>Changing the ‘append_predictors’ argument to ‘append’ in <code><a href="../reference/predict_occ_taxon.html">elements::predict_occ_taxon</a></code>, <code><a href="../reference/predict_occ.html">elements::predict_occ</a></code>, <code><a href="../reference/calc_distance_once.html">elements::calc_distance_once</a></code>, and <code><a href="../reference/calc_distance.html">elements::calc_distance</a></code>, this argument now controls which columns are appended to the results, namely: “all”: all columns supplied in the predictors dataframe; “predictors”: all predictor variable columns (<code><a href="../reference/VariableNames.html">elements::VariableNames</a></code>); or “ids”: all non-predictor variable columns.</li>
+<li>Adding three new objects <code><a href="../reference/EUNISDiagnosticTaxa.html">elements::EUNISDiagnosticTaxa</a></code>, <code><a href="../reference/EUNISConstantTaxa.html">elements::EUNISConstantTaxa</a></code>, and <code><a href="../reference/EUNISDominantTaxa.html">elements::EUNISDominantTaxa</a></code>, derived from <a href="https://doi.org/10.1111/avsc.12519" class="external-link uri">https://doi.org/10.1111/avsc.12519</a>.</li>
+<li>Creating new pkgdown site article “Environmental Filtering”.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.5.5" id="elements-055-18092025">elements 0.5.5 (18/09/2025)<a class="anchor" aria-label="anchor" href="#elements-055-18092025"></a></h2>
 <ul><li>Full model training re-run after addressing outstanding taxonomic alignment issues. Now at 6631 taxa.</li>
