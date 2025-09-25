@@ -1,3 +1,7 @@
+# elements 0.5.7 (25/09/2025)
+
+* Fixing issue where `elements::env_filter` does not work when there are no taxa-predictor combinations screened out.
+
 # elements 0.5.6 (22/09/2025)
 
 * Adding two functions `elements::envelope_filter` and `elements::envelope_filter_taxon` which uses the distributional data present in `elements::NicheWidths` to apply envelope filters.

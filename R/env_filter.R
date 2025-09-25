@@ -42,11 +42,9 @@ env_filter <- function(predictors, taxa = elements::TaxonomicBackbone$taxon_code
     inside_range <- merge(predictors, data.frame("taxon_code" = taxa))
     
     outside_range <- inside_range[0,]
-    
   }
   
-  taxa_results_outside_range <- outside_range
-  
+  # Retrieve probabilities/distances
   if(method == "svm"){
     
     # Check whether elements::startup() has been run and the Models filehashDB1 object is in the global environment
@@ -54,14 +52,13 @@ env_filter <- function(predictors, taxa = elements::TaxonomicBackbone$taxon_code
       stop("Please run elements::startup() before using elements::env_filter when method = \"svm\".")
     }
     
-    # Retrieve probabilities for all taxa and predictors
     taxa_results_inside_range <- elements::predict_occ(taxa = NULL,
                                                        predictors = inside_range,
                                                        limit = NULL,
                                                        holdopt = exclude,
                                                        append = append)
     
-    if(nrow(outside_range) > 0){taxa_results_outside_range["Present"] <- 0}
+    if(nrow(outside_range) > 0){outside_range["Present"] <- 0}
     
   } else if(method %in% c("mean", "median")){
     
@@ -71,28 +68,29 @@ env_filter <- function(predictors, taxa = elements::TaxonomicBackbone$taxon_code
                                                          method = method,
                                                          append = append)
     
-    if(nrow(outside_range) > 0){taxa_results_outside_range["distance"] <- Inf}
+    if(nrow(outside_range) > 0){outside_range["distance"] <- Inf}
     
   }
   
-  taxa_results_outside_range <- taxa_results_outside_range[, colnames(taxa_results_inside_range)]
-  
-  taxa_results_all <- rbind(taxa_results_inside_range, taxa_results_outside_range)
+  # Collate results
+  if(nrow(outside_range) > 0){
+    taxa_results_outside_range <- outside_range[, colnames(taxa_results_inside_range)]
+    taxa_results_all <- rbind(taxa_results_inside_range, taxa_results_outside_range)
+  } else {
+    taxa_results_all <- taxa_results_inside_range
+  }
   
   # Subset taxa
   if(!is.null(threshold)){
-    
     taxa_results_filtered <- subset(taxa_results_all, Present >= threshold)
-    
   } else if(is.null(threshold)) {
-    
     taxa_results_filtered <- taxa_results_all
-    
   }
     
   # Sort
   rownames(taxa_results_filtered) <- NULL
   
+  # Return
   return(taxa_results_filtered)
   
 }

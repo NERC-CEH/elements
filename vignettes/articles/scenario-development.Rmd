@@ -21,36 +21,36 @@ library(elements)
 library(filehash)
 ```
 
-
 ## Scenarios
 
 `elements` is designed to be used to model scenarios of environmental change considering multiple interacting drivers. The object `elements::ExampleScenarios` provides a basic set of example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change - RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per year) along with a Baseline scenario.
-Below the predicted probabilities for the taxa in `elements::ExamplePlot` for Scenario C are displayed.
+Below the predicted probabilities for the taxa in `elements::ExamplePlot` for the scenarios are displayed.
 
-```{r scenario_c_results}
+```{r scenario_results}
 elements::startup()
 
 scenario_results <- elements::predict_occ(taxa = elements::ExamplePlot$taxon_code,
                                           predictors = elements::ExampleScenarios,
-                                          append = "ids")
+                                          append = "ids") |>
+  dplyr::left_join(elements::TaxonomicBackbone |> dplyr::select(taxon_name, taxon_code), by = "taxon_code")
 ```
 
 ```{r create_scenario_example_plot, include = FALSE}
-scenarios_len <- length(unique(scenario_results$taxon_code))
+scenarios_len <- length(unique(scenario_results$taxon_name))
 scenario_col_pal <- ggsci::pal_uchicago("default")(scenarios_len)
-names(scenario_col_pal) <- unique(scenario_results$taxon_code)
+names(scenario_col_pal) <- unique(scenario_results$taxon_name)
   
 scenario_example_plot <- ggplot2::ggplot() +
   ggplot2::geom_line(data = scenario_results |> dplyr::filter(scenario != "Baseline"), 
-                     mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code, group = taxon_code), 
+                     mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_name, group = taxon_name), 
                      position = ggplot2::position_dodge(width = 0.1)) +
   ggplot2::geom_point(data = scenario_results |> dplyr::filter(scenario != "Baseline"), 
-                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code, group = taxon_code), 
+                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_name, group = taxon_name), 
                       position = ggplot2::position_dodge(width = 0.1)) +
   ggplot2::geom_point(data = scenario_results |> 
                         dplyr::filter(scenario == "Baseline") |> 
-                        dplyr::distinct(taxon_code, timeslice, Present), 
-                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_code), 
+                        dplyr::distinct(taxon_name, timeslice, Present), 
+                      mapping = ggplot2::aes(x = timeslice, y = Present, color = taxon_name), 
                       position = ggplot2::position_dodge(width = 0.1)) +
   ggplot2::facet_wrap(dplyr::vars(scenario), ncol = 2,, scales = "free_x") + 
   ggplot2::theme_classic() +
@@ -68,7 +68,7 @@ scenario_example_plot
 ## Environmental Filtering
 
 In addition to modelling the response of individual taxa over time let's inspect how the constant taxa in EUNIS habitats respond to scenarios in `elements::ExampleScenarios`,
-by presenting the mean probability of each EUNIS habitats constant taxa.
+by presenting the mean of the probabilities of each EUNIS habitats constant taxa, for the top EUNIS habiats.
 
 ```{r calc_env_filter_eunis}
 eunis_taxa_models <- intersect(unique(elements::EUNISConstantTaxa$taxon_code), 
@@ -112,7 +112,7 @@ eunis_col_pal <- unname(Polychrome::kelly.colors()[-1][1:eunis_len])
 names(eunis_col_pal) <- top_eunis_names
 ```
 
-The mean probability for the constant taxa in top EUNIS wetland habitat in the baseline (Q24 - Intermediate fen and soft-water spring mire and S92 - Salix fen scrub)
+The mean probability for the constant taxa in the top EUNIS habitat in the baseline (Q24 - Intermediate fen and soft-water spring mire)
 decreases in all example scenarios.
 
 ```{r q_summed_probs_adj_plot, echo=FALSE, include=FALSE}

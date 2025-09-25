@@ -22,7 +22,7 @@ devtools::install(pkg = ".")
 library(elements)
 
 # 8) Build package manual
-devtools::build_manual(pkg = ".", path = ".")
+# devtools::build_manual(pkg = ".", path = ".")
 
 # 9) Build vignettes
 pkgdown::build_articles()
