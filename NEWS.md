@@ -1,3 +1,10 @@
+# elements 0.6.0 (26/09/2025)
+
+* Adding object `elements::Gradients` which contains sequences of values between the minima and maxima for each environmental variable in `elements::VariableNames`.
+* Adding object `elements::HOAData` which contains predictions for each variable along its gradient (see `elements::Gradients`) produced using the `elements::predict_occ` function with the 'holdopt' argument set to all other variables.
+* Incorporating the `elements::HOAData` object into `elements::plot_me`, which can be selected for plotting by setting thr 'me_type' argument to "hoa".
+* Ensuring that the X axis limits in the `elements::plot_me` extend to the minima and maxima of the gradients as present in `elements::Gradients`.
+
 # elements 0.5.7 (25/09/2025)
 
 * Fixing issue where `elements::env_filter` does not work when there are no taxa-predictor combinations screened out.

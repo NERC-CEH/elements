@@ -1,8 +1,8 @@
 #' Plot the marginal effect values for one or more taxa and set of variables
 #' 
 #' @description 
-#' Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022)
-#' marginal effect curves for one or more taxa and a set of variables.
+#' Plot the Accumulated Local Effect (ALE), Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022),
+#' or hold-at-optima (HOA) marginal effect curves for one or more taxa and a set of variables.
 #' 
 #' @details 
 #' If the number of taxa is one, setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is 
@@ -29,7 +29,7 @@
 #' the shape of the univariate response.
 #'
 #' @param taxa A vector of one or more taxon_code strings, see `elements::TaxonomicBackbone`.
-#' @param me_type A string representing the marginal effect plot type, one of "ale" or "pdp".
+#' @param me_type A string representing the marginal effect plot type, one of "ale", "pdp", or "hoa".
 #' @param free_y A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.
 #' @param presences A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.
 #' @param eivs A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in `elements::VariableData`.
@@ -53,7 +53,7 @@
 #'
 #' Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
 
-plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
+plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = FALSE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
   
   if(isFALSE(taxa %in% elements::TaxonomicBackbone[["taxon_code"]])){
     
@@ -91,6 +91,12 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     data <- elements::PDPData
     ab_line <- 0.5
     ylab <- "PDP [-]"
+    
+  }else if(me_type == "hoa"){
+    
+    data <- elements::HOAData
+    ab_line <- 0.5
+    ylab <- "Present [-]"
     
   }
   
@@ -181,10 +187,12 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     data_var <- subset(data_taxa, variable == var)
     max_y_var <- max(data_var[["y"]])
     min_y_var <- min(data_var[["y"]])
+    min_x <- min(elements::Gradients[[var]])
+    max_x <- max(elements::Gradients[[var]])
     
     if(isTRUE(free_y)){
       
-      if(me_type == "pdp"){
+      if(me_type %in% c("pdp", "hoa")){
         
         bp_width <- diff(c(min_y_var, max_y_var))/10
         bp_hwidth <- bp_width/2
@@ -207,7 +215,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
     }else if(isFALSE(free_y)){
       
-      if(me_type == "pdp"){
+      if(me_type %in% c("pdp", "hoa")){
         
         bp_width <- diff(c(min_y_taxa, max_y_taxa))/10
         bp_hwidth <- bp_width/2
@@ -249,7 +257,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
     
     if(isTRUE(multiple_taxa)){
       
-      graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
       
       i <- 0
       
@@ -273,7 +281,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
     }else if(isFALSE(multiple_taxa) & isFALSE(presences) & isTRUE(eivs)){
       
-      graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
       
       graphics::abline(h = ab_line)
       
@@ -298,7 +306,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
-      graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
       
       graphics::abline(h = ab_line)
       
@@ -317,7 +325,7 @@ plot_me <- function(taxa, me_type = "pdp", free_y = TRUE, presences = TRUE, eivs
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
-      graphics::plot(NULL, xlim = c(min(data_var[["x"]]), max(data_var[["x"]])), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
       
       graphics::abline(h = ab_line)
       

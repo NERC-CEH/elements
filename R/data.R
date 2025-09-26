@@ -149,6 +149,44 @@
 #' }
 "ExamplePlot"
 
+#' Univariate gradient intervals for each environmental variable
+#'
+#' A named list containing univariate gradient intervals for each environmental variable in `elements::VariableNames`.
+#'
+#' \code{Gradients} 
+#'
+#' @format A named list with `length(elements::Gradients)` items.
+#' \describe{
+#'   \item{L}{Light - 0:10}
+#'   \item{M}{Soil Moisture - 0:10}
+#'   \item{N}{Soil Nitrogen - 0:10}
+#'   \item{R}{Reaction - 0:10}
+#'   \item{S}{Salinity - 0:10}
+#'   \item{SD}{Soil Disturbance - 0:1}
+#'   \item{GP}{Grazing Pressure - 0:1}
+#'   \item{bio05}{Maximum temperature in the warmest month - 5:55}
+#'   \item{bio06}{Minimum temperature in the coldest month - -12:22}
+#'   \item{bio16}{Precipitation in the wettest quarter - 0:1700}
+#'   \item{bio17}{Precipitation in the driest quarter - 0:640}
+#' }
+"Gradients"
+
+#' HOA data
+#'
+#' A dataset containing the a set of predictions for each variable along its gradient (see `elements::Gradients`) 
+#' produced using the `elements::predict_occ` function with the 'holdopt' argument set to all other variables.
+#'
+#' \code{HOAData} 
+#'
+#' @format A data frame with `r nrow(elements::HOAData)` rows and `r ncol(elements::HOAData)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{x}{The variable value.}
+#'   \item{y}{The PDP value.}
+#'   \item{variable}{The variable name, see `elements::VariableNames`.}
+#' }
+"HOAData"
+
 #' Predictor data for three example scenarios
 #'
 #' A dataset containing predictor data for five example scenarios, in three groups: 

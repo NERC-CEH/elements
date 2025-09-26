@@ -6,11 +6,11 @@
 \usage{
 plot_me(
   taxa,
-  me_type = "pdp",
+  me_type = "hoa",
   free_y = TRUE,
   presences = TRUE,
   eivs = TRUE,
-  normalise = TRUE,
+  normalise = FALSE,
   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"),
   lmw = 15,
   lts = 0.75
@@ -19,7 +19,7 @@ plot_me(
 \arguments{
 \item{taxa}{A vector of one or more taxon_code strings, see \code{elements::TaxonomicBackbone}.}
 
-\item{me_type}{A string representing the marginal effect plot type, one of "ale" or "pdp".}
+\item{me_type}{A string representing the marginal effect plot type, one of "ale", "pdp", or "hoa".}
 
 \item{free_y}{A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.}
 
@@ -39,8 +39,8 @@ plot_me(
 A composite plot showing the marginal effects and optionally the distribution of presences for selected model variables.
 }
 \description{
-Plot the Accumulated Local Effect (ALE) or Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022)
-marginal effect curves for one or more taxa and a set of variables.
+Plot the Accumulated Local Effect (ALE), Partial Dependence Profile (PDP) (Molnar, 2018; Molnar, 2022),
+or hold-at-optima (HOA) marginal effect curves for one or more taxa and a set of variables.
 }
 \details{
 If the number of taxa is one, setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is

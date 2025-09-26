@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 # elements
 
 <!-- badges: start -->
-[![Generic badge](https://img.shields.io/badge/Version-0.5.7-green.svg)]()
+[![Generic badge](https://img.shields.io/badge/Version-0.6.0-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![License: GPL v3.0](https://img.shields.io/badge/License-GPL v3.0-lightgrey.svg)](https://opensource.org/license/lgpl-3-0)

@@ -37,3 +37,19 @@ usethis::use_data(VariableLookup, overwrite = TRUE, internal = FALSE)
 VariableNames <- sort(subset(VariableLookup, model_var == TRUE, select = "variable_code", drop = TRUE))
 
 usethis::use_data(VariableNames, overwrite = TRUE, internal = FALSE)
+
+Gradients <- list(
+  "bio05" = seq(5, 55, 0.5),
+  "bio06" = seq(-12, 22, 0.5),
+  "bio16" = seq(0, 1700, 20),
+  "bio17" = seq(0, 650, 20),
+  "GP" = seq(0, 1, 0.01),    
+  "L" = seq(0, 10, 0.1),    
+  "M" = seq(0, 10, 0.1),     
+  "N" = seq(0, 10, 0.1),     
+  "R" = seq(0, 10, 0.1),     
+  "S" = seq(0, 10, 0.1),     
+  "SD" = seq(0, 1, 0.01)
+)
+
+usethis::use_data(Gradients, overwrite = TRUE, internal = FALSE)

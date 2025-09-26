@@ -15,14 +15,17 @@ The performance measures can be retrieved from the `elements::PerformanceMeasure
 for example, below the balanced accuracy from the random holdout sample and the model tuning spatio-temporal cross-validation (Schratz et al., 2024) are displayed.
 
 ```{r performance_measures}
-pm_taxon <- subset(elements::PerformanceMeasures, taxon_code == "stellaria_graminea", select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
+pm_taxon <- subset(elements::PerformanceMeasures, 
+                   taxon_code == "stellaria_graminea", 
+                   select = c("Holdout.BalancedAccuracy", "STCV.BalancedAccuracy"))
 ```
 
 ```{r performance_measures_print, echo=FALSE}
 pm_taxon
 ```
 
-The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP) and Accumulated Local Effect (ALE) plots (Molnar, 2018) can also be viewed using the `elements::plot_me` function. By setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
+The marginal effects of an ENM, in the form of Partial Dependency Profile (PDP), Accumulated Local Effect (ALE) (Molnar, 2018), or Hold-At-Optima (HOA) plots can also be viewed using the `elements::plot_me` function.
+By setting the 'presences' argument to TRUE a box and whiskers plot showing the distribution of presences is overlaid and by setting the 'eivs' argument to TRUE a point and arrows showing the EIV and niche width values are overlaid, where available in `elements::VariableData`.
 
 ```{r me_plot_taxon_create, include=FALSE}
 me_plot_taxon <- elements::plot_me(taxa = "stellaria_graminea", 
@@ -76,7 +79,7 @@ nw_gr_s_max <- nw[nw[["taxon_code"]] == "gymnocarpium_robertianum" & nw[["variab
 
 In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
 
-In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting the shape of the univariate response.
+In these instances it is important to also visualise the PDP or HOA plots, which should then be prioritised when inspecting the shape of the univariate response.
 
 ```{r me_plot_gr_s_create, include=FALSE}
 me_plot_gr_s_ale <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
