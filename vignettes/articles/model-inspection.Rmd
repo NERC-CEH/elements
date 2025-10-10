@@ -1,5 +1,8 @@
 ---
 title: "Model Inspection"
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r, include = FALSE}
@@ -73,23 +76,29 @@ me_plot_taxa
 <summary><h3 style="display:inline-block">&#9888; A note on ALE plots</h3></summary>
 
 ```{r get_gr_s_nw_max, include=FALSE}
+# elements::ALEData |>
+#   dplyr::filter(variable == "S" & x > 8 & y > 0) |>
+#   dplyr::distinct(taxon_code)
+
+invert_example_taxon <- "torilis_japonica"
+
 nw <- elements::NicheWidths
-nw_gr_s_max <- nw[nw[["taxon_code"]] == "gymnocarpium_robertianum" & nw[["variable"]] == "S", ][["max"]]
+nw_gr_s_max <- nw[nw[["taxon_code"]] == invert_example_taxon & nw[["variable"]] == "S", ][["max"]]
 ```
 
-In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Gymnocarpium robertianum* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
+In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Torilis japonica* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
 
 In these instances it is important to also visualise the PDP or HOA plots, which should then be prioritised when inspecting the shape of the univariate response.
 
 ```{r me_plot_gr_s_create, include=FALSE}
-me_plot_gr_s_ale <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
+me_plot_gr_s_ale <- elements::plot_me(taxa = invert_example_taxon, 
                                       me_type = "ale", 
                                       free_y = TRUE, 
                                       presences = TRUE,
                                       eivs = TRUE,
                                       vars = c("S"))
 
-me_plot_gr_s_pdp <- elements::plot_me(taxa = "gymnocarpium_robertianum", 
+me_plot_gr_s_pdp <- elements::plot_me(taxa = invert_example_taxon, 
                                       me_type = "pdp", 
                                       free_y = TRUE, 
                                       presences = TRUE,

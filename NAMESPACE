@@ -2,9 +2,12 @@
 
 export(calc_distance)
 export(calc_distance_once)
+export(calc_overlap)
 export(env_filter)
 export(envelope_filter)
 export(envelope_filter_taxon)
+export(extract_svs)
+export(plot_be)
 export(plot_me)
 export(predict_occ)
 export(predict_occ_taxon)

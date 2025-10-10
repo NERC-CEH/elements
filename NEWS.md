@@ -1,3 +1,9 @@
+# elements 0.6.5 (10/10/2025)
+* Adding function `elements::plot_be` which creates a bivariate probability/habitat suitability plot.
+* Adding function `elements::calc_overlap` which calculates pairwise niche overlap values for a set of taxa.
+* Adding function `elements::extract_svs` which extracts the support vectors from a model. PROTOTYPE.
+* Ensuring the full variable names are passed to the x axes in `elements::plot_me`.
+
 # elements 0.6.0 (26/09/2025)
 
 * Adding object `elements::Gradients` which contains sequences of values between the minima and maxima for each environmental variable in `elements::VariableNames`.

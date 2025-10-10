@@ -17,16 +17,10 @@ which is present in the Github repository.
 To retrieve the `elements` package including the "Models" object download the latest
 version from Zenodo here - https://zenodo.org/records/15639307.
 
-Alternatively, you can download the package using the `zen4R` R package from a particular DOI.
-
-``` r
-zen4R::download_zenodo("10.5281/zenodo.15639307", path = "path_to_file")
-```
-
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.5.7.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.6.5.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.

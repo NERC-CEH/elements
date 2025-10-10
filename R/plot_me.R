@@ -52,7 +52,6 @@
 #' Molnar, C., 2018. iml: An R package for Interpretable Machine Learning. Journal of Open Source Software 3, 786. https://doi.org/10.21105/joss.00786
 #'
 #' Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
-
 plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = FALSE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
   
   if(isFALSE(taxa %in% elements::TaxonomicBackbone[["taxon_code"]])){
@@ -189,6 +188,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
     min_y_var <- min(data_var[["y"]])
     min_x <- min(elements::Gradients[[var]])
     max_x <- max(elements::Gradients[[var]])
+    xlab <- subset(elements::VariableLookup, variable_code == var, select = variable_plot_name, drop = TRUE)
     
     if(isTRUE(free_y)){
       
@@ -257,7 +257,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
     
     if(isTRUE(multiple_taxa)){
       
-      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = xlab, ylab = ylab)
       
       i <- 0
       
@@ -275,13 +275,13 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
       
     }else if(isFALSE(multiple_taxa) & isFALSE(presences) & isFALSE(eivs)){
       
-      graphics::plot(x = data_var[["x"]], y = data_var[["y"]], xlab = var, ylab = ylab, type = "l", ylim = ylim)
+      graphics::plot(x = data_var[["x"]], y = data_var[["y"]], xlab = xlab, ylab = ylab, type = "l", ylim = ylim)
       
       graphics::abline(h = ab_line)
       
     }else if(isFALSE(multiple_taxa) & isFALSE(presences) & isTRUE(eivs)){
       
-      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = xlab, ylab = ylab)
       
       graphics::abline(h = ab_line)
       
@@ -306,7 +306,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
-      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = xlab, ylab = ylab)
       
       graphics::abline(h = ab_line)
       
@@ -325,7 +325,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
       
       nw_taxon_var <- nw_taxon[nw_taxon[["variable"]] == var, ]
       
-      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = var, ylab = ylab)
+      graphics::plot(NULL, xlim = c(min_x, max_x), ylim = ylim, xlab = xlab, ylab = ylab)
       
       graphics::abline(h = ab_line)
       

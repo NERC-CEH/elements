@@ -129,6 +129,16 @@ head(filter_results, n = 10)
 
 In practice, given the limited size of regional species pools and/or interest in a particular group of taxa only it is often more practical to supply a reduced list of taxa to `elements::env_filter`.
 
+## Niche overlap
+
+The ability to calculate the niche overlap between taxa is provided through the
+`elements::calc_overlap` function, below the niche overlaps for the taxa present
+in `elements::ExamplePlot` are displayed.
+
+```{r calc_overlap_example}
+elements::calc_overlap(taxa = elements::ExamplePlot$taxon_code)
+```
+
 ### Shutting down
 
 At the end of the analysis run `elements::shutdown` to close the connection to the filehash database.
