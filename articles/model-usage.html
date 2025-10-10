@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -280,12 +280,70 @@ method, with the predictors derived from
 interest in a particular group of taxa only it is often more practical
 to supply a reduced list of taxa to
 <code><a href="../reference/env_filter.html">elements::env_filter</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="niche-overlap">Niche overlap<a class="anchor" aria-label="anchor" href="#niche-overlap"></a>
+</h2>
+<p>The ability to calculate the niche overlap between taxa is provided
+through the <code><a href="../reference/calc_overlap.html">elements::calc_overlap</a></code> function, below the
+niche overlaps for the taxa present in
+<code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> are displayed.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_overlap.html">calc_overlap</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExamplePlot.html">ExamplePlot</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                       taxon_code_1                    taxon_code_2     bio05</span></span>
+<span><span class="co">#&gt; 1                   carex_rostrata            equisetum_fluviatile 0.7984720</span></span>
+<span><span class="co">#&gt; 2                   carex_rostrata galium_palustre_subsp._palustre 0.4059045</span></span>
+<span><span class="co">#&gt; 3                   carex_rostrata            hydrocotyle_vulgaris 0.8042741</span></span>
+<span><span class="co">#&gt; 4                   carex_rostrata                  juncus_effusus 0.9302291</span></span>
+<span><span class="co">#&gt; 5                   carex_rostrata              silene_flos-cuculi 0.9093952</span></span>
+<span><span class="co">#&gt; 6             equisetum_fluviatile galium_palustre_subsp._palustre 0.4842810</span></span>
+<span><span class="co">#&gt; 7             equisetum_fluviatile            hydrocotyle_vulgaris 0.9733592</span></span>
+<span><span class="co">#&gt; 8             equisetum_fluviatile                  juncus_effusus 0.7400291</span></span>
+<span><span class="co">#&gt; 9             equisetum_fluviatile              silene_flos-cuculi 0.8300000</span></span>
+<span><span class="co">#&gt; 10 galium_palustre_subsp._palustre            hydrocotyle_vulgaris 0.4838433</span></span>
+<span><span class="co">#&gt; 11 galium_palustre_subsp._palustre                  juncus_effusus 0.3815489</span></span>
+<span><span class="co">#&gt; 12 galium_palustre_subsp._palustre              silene_flos-cuculi 0.4322660</span></span>
+<span><span class="co">#&gt; 13            hydrocotyle_vulgaris                  juncus_effusus 0.7464114</span></span>
+<span><span class="co">#&gt; 14            hydrocotyle_vulgaris              silene_flos-cuculi 0.8429724</span></span>
+<span><span class="co">#&gt; 15                  juncus_effusus              silene_flos-cuculi 0.8774864</span></span>
+<span><span class="co">#&gt;        bio06     bio16     bio17        GP         L         M         N</span></span>
+<span><span class="co">#&gt; 1  0.9508165 0.8646692 0.9679521 0.9330221 0.9177191 0.9859956 0.9087003</span></span>
+<span><span class="co">#&gt; 2  0.5589917 0.5345070 0.6526700 0.7958151 0.8637831 0.8059747 0.8368732</span></span>
+<span><span class="co">#&gt; 3  0.4958352 0.8772536 0.9298835 0.8233937 0.9408814 0.8527154 0.7959497</span></span>
+<span><span class="co">#&gt; 4  0.8174718 0.8920871 0.8994400 0.7778546 0.6906364 0.7477916 0.7653981</span></span>
+<span><span class="co">#&gt; 5  0.7801884 0.8989554 0.8376162 0.6387957 0.7775627 0.6899930 0.7078518</span></span>
+<span><span class="co">#&gt; 6  0.5559881 0.6463602 0.6603021 0.8535725 0.9395305 0.8008478 0.8357246</span></span>
+<span><span class="co">#&gt; 7  0.5317166 0.7622296 0.9550447 0.8821249 0.9558124 0.8484588 0.7097871</span></span>
+<span><span class="co">#&gt; 8  0.8537812 0.7811755 0.9117982 0.7750401 0.6922234 0.7417205 0.8346659</span></span>
+<span><span class="co">#&gt; 9  0.8173268 0.8592286 0.8498862 0.6932758 0.7939871 0.6842776 0.6711643</span></span>
+<span><span class="co">#&gt; 10 0.5700415 0.4657140 0.6472210 0.9606211 0.9135255 0.9515090 0.7180730</span></span>
+<span><span class="co">#&gt; 11 0.5640959 0.4670157 0.7116144 0.8264154 0.6542173 0.9204206 0.8778027</span></span>
+<span><span class="co">#&gt; 12 0.4840813 0.5397094 0.7196321 0.7819975 0.8330738 0.8768373 0.7667796</span></span>
+<span><span class="co">#&gt; 13 0.6734040 0.9186961 0.9033886 0.7997763 0.6977821 0.8855433 0.6026008</span></span>
+<span><span class="co">#&gt; 14 0.6403164 0.8347175 0.8631591 0.7834384 0.7905790 0.8312628 0.8382111</span></span>
+<span><span class="co">#&gt; 15 0.8862317 0.8178107 0.9084447 0.6578603 0.5293092 0.8928177 0.6469301</span></span>
+<span><span class="co">#&gt;            R         S        SD</span></span>
+<span><span class="co">#&gt; 1  0.8246382 0.7872328 0.9158313</span></span>
+<span><span class="co">#&gt; 2  0.8040562 0.8043534 0.8987824</span></span>
+<span><span class="co">#&gt; 3  0.8871041 0.8247424 0.6848494</span></span>
+<span><span class="co">#&gt; 4  0.7773587 0.9377029 0.7576864</span></span>
+<span><span class="co">#&gt; 5  0.5544196 0.8498583 0.6250893</span></span>
+<span><span class="co">#&gt; 6  0.8463295 0.6759460 0.9748328</span></span>
+<span><span class="co">#&gt; 7  0.8427747 0.7103888 0.7534833</span></span>
+<span><span class="co">#&gt; 8  0.6385519 0.7895008 0.8225939</span></span>
+<span><span class="co">#&gt; 9  0.6685698 0.9357196 0.7044176</span></span>
+<span><span class="co">#&gt; 10 0.7682118 0.9483410 0.7593500</span></span>
+<span><span class="co">#&gt; 11 0.7214530 0.8562657 0.8291566</span></span>
+<span><span class="co">#&gt; 12 0.6704826 0.7385938 0.7251285</span></span>
+<span><span class="co">#&gt; 13 0.6687731 0.8823358 0.9231511</span></span>
+<span><span class="co">#&gt; 14 0.5392033 0.7726525 0.8202322</span></span>
+<span><span class="co">#&gt; 15 0.4400763 0.8535100 0.8038593</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="shutting-down">Shutting down<a class="anchor" aria-label="anchor" href="#shutting-down"></a>
 </h3>
 <p>At the end of the analysis run <code><a href="../reference/shutdown.html">elements::shutdown</a></code> to
 close the connection to the filehash database.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/shutdown.html">shutdown</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
