@@ -28,13 +28,13 @@
 #' In these instances it is important to also visualise the PDP plots, which should then be prioritised when inspecting 
 #' the shape of the univariate response.
 #'
-#' @param taxa A vector of one or more taxon_code strings, see `elements::TaxonomicBackbone`.
+#' @param taxa A vector of one or more taxon_code strings, see `elements::ModelledTaxaCodes`.
 #' @param me_type A string representing the marginal effect plot type, one of "ale", "pdp", or "hoa".
 #' @param free_y A boolean. If TRUE the Y axis scales are independent and free for all subplots. If FALSE the Y axis scales are fixed between all subplots.
 #' @param presences A boolean. If TRUE a box and whiskers plot showing the distribution of presences along each variable will be displayed.
 #' @param eivs A boolean. If TRUE a point representing the EIV value and arrows representing the EIV niche widths for the taxon will be displayed, where available in `elements::VariableData`.
 #' @param normalise A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.
-#' @param vars A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".
+#' @param vars A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", and "prec_sm".
 #' @param lmw The width of the outer margin containing the legend, passed to the "oma" argument of `graphics::par`. Adjust to ensure the legend is given enough room.
 #' @param lts The size of the legend text, passed to the "cex" argument of `graphics::legend`. Adjust to ensure the legend text size is appropriate.
 #'
@@ -42,9 +42,9 @@
 #' @export
 #'
 #' @examples 
-#' elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 #' 
-#' elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+#' elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 #' 
 #' @references 
 #' Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
@@ -52,13 +52,13 @@
 #' Molnar, C., 2018. iml: An R package for Interpretable Machine Learning. Journal of Open Source Software 3, 786. https://doi.org/10.21105/joss.00786
 #'
 #' Molnar, C., 2022. Interpretable Machine Learning: A Guide For Making Black Box Models Explainable. Independently published, Munich, Germany.
-plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = FALSE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"), lmw = 15, lts = 0.75){
+plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs = TRUE, normalise = FALSE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"), lmw = 15, lts = 0.75){
   
-  if(isFALSE(taxa %in% elements::TaxonomicBackbone[["taxon_code"]])){
+  if(isFALSE(taxa %in% elements::ModelledTaxaCodes)){
     
-    absent_taxa <- paste0(setdiff(taxa, elements::TaxonomicBackbone[["taxon_code"]]), collapse = ", ")
+    absent_taxa <- paste0(setdiff(taxa, elements::ModelledTaxaCodes), collapse = ", ")
     
-    stop(paste0("The taxa: ", absent_taxa, ", are not included. Please only select taxon_code values from the `elements::TaxonomicBackbone` taxon_code column."))
+    stop(paste0("The taxa: ", absent_taxa, ", are not included. Please only select taxon_code values from the `elements::ModelledTaxaCodes` taxon_code column."))
     
   }
   

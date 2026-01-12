@@ -6,16 +6,16 @@
 \usage{
 calc_distance(
   predictors,
-  taxa = elements::TaxonomicBackbone$taxon_code,
+  taxa = elements::ModelledTaxaCodes,
   vars = elements::VariableNames,
   method = "median",
   append = "ids"
 )
 }
 \arguments{
-\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and optionally taxon}
+\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm, and optionally taxon}
 
-\item{taxa}{A vector of strings containing one or more taxa to calculate distances for. See \code{elements::TaxonomicBackbone}.}
+\item{taxa}{A vector of strings containing one or more taxa to calculate distances for. See \code{elements::ModelledTaxaCodes}.}
 
 \item{vars}{A vector of variable names, one or more of \code{elements::VariableNames}.}
 

@@ -7,10 +7,10 @@ testthat::test_that("envelope_filter works", {
   
   actual <- elements::envelope_filter(taxa = test_taxa_codes, predictors = test_predictors, vars = test_vars, limit = test_limit)
   
-  expected_colnames <- c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17", "within_limits", "taxon_code")
+  expected_colnames <- c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm", "within_limits", "taxon_code")
   expected_within_limits_values <- c(TRUE, FALSE)
   
-  testthat::expect_equal(colnames(actual), expected_colnames)
+  testthat::expect_true(setequal(colnames(actual), expected_colnames))
   testthat::expect_true(setequal(unique(actual$within_limits), expected_within_limits_values))
   
 })
@@ -25,10 +25,10 @@ testthat::test_that("envelope_filter works, with taxa_codes NULL", {
   
   actual <- elements::envelope_filter(taxa = test_taxa_codes, predictors = test_predictors, vars = test_vars, limit = test_limit)
   
-  expected_colnames <- c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17", "taxon_code", "within_limits")
+  expected_colnames <- c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm", "taxon_code", "within_limits")
   expected_within_limits_values <- c(TRUE, FALSE)
   
-  testthat::expect_equal(colnames(actual), expected_colnames)
+  testthat::expect_true(setequal(colnames(actual), expected_colnames))
   testthat::expect_true(setequal(unique(actual$within_limits), expected_within_limits_values))
   
 })

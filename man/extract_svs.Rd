@@ -7,7 +7,7 @@
 extract_svs(taxon)
 }
 \arguments{
-\item{taxon}{A string containing the taxon code for a taxon, see \code{elements::TaxonomicBackbone}.}
+\item{taxon}{A string containing the taxon code for a taxon, see \code{elements::ModelledTaxaCodes}.}
 }
 \value{
 A data frame containing 11 columns, containing the support vector points for each variable in \code{length(elements::VariableNames)}

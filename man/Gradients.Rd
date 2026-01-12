@@ -14,10 +14,10 @@ A named list with \code{length(elements::Gradients)} items.
 \item{S}{Salinity - 0:10}
 \item{SD}{Soil Disturbance - 0:1}
 \item{GP}{Grazing Pressure - 0:1}
-\item{bio05}{Maximum temperature in the warmest month - 5:55}
-\item{bio06}{Minimum temperature in the coldest month - -12:22}
-\item{bio16}{Precipitation in the wettest quarter - 0:1700}
-\item{bio17}{Precipitation in the driest quarter - 0:640}
+\item{tmax_sm}{Maximum temperature in the warmest month - 5:55}
+\item{tmin_wt}{Minimum temperature in the coldest month - -12:22}
+\item{prec_wt}{Precipitation in the wettest quarter - 0:1700}
+\item{prec_sm}{Precipitation in the driest quarter - 0:640}
 }
 }
 \usage{

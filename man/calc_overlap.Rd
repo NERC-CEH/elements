@@ -15,9 +15,9 @@ calc_overlap(
 )
 }
 \arguments{
-\item{taxa}{A vector of strings containing taxon codes, see \code{elements::TaxonomicBackbone}.}
+\item{taxa}{A vector of strings containing taxon codes, see \code{elements::ModelledTaxaCodes}.}
 
-\item{taxa_comp}{A vector of string containing taxon codes, see \code{elements::TaxonomicBackbone}.}
+\item{taxa_comp}{A vector of string containing taxon codes, see \code{elements::ModelledTaxaCodes}.}
 
 \item{data}{A data frame containing the univariate responses of the taxa supplied in the 'taxa' and 'taxa_comp' arguments for the variables supplied in the 'vars' argument. \code{elements::HOAData} by default.}
 

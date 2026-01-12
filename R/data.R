@@ -6,7 +6,7 @@
 #'
 #' @format A data frame with `r nrow(elements::ALEData)` rows and `r ncol(elements::ALEData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The ALE value.}
 #'   \item{variable}{The variable name.}
@@ -25,7 +25,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon code as it appears in `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{phi_100}{The phi coefficient of association between the taxon and EUNIS habitat, a measure of fidelity.}
 #' }
 #' 
@@ -44,7 +44,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon code as it appears in `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{perc_occ_freq}{The percentage occurrence frequency of the taxon in the EUNIS habitat.}
 #' }
 #' 
@@ -63,7 +63,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon code as it appears in `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{perc_freq_dom}{The percentage frequency of plots in which the species occurs with a cover larger than 25%.}
 #' }
 #' 
@@ -86,10 +86,10 @@
 #'   \item{S}{Salinity}
 #'   \item{SD}{Soil Disturbance}
 #'   \item{GP}{Grazing Pressure}
-#'   \item{bio05}{Maximum temperature in the warmest month}
-#'   \item{bio06}{Minimum temperature in the coldest month}
-#'   \item{bio16}{Precipitation in the wettest quarter}
-#'   \item{bio17}{Precipitation in the driest quarter}
+#'   \item{tmax_sm}{Maximum temperature in the warmest month}
+#'   \item{tmin_wt}{Minimum temperature in the coldest month}
+#'   \item{prec_wt}{Precipitation in the wettest quarter}
+#'   \item{prec_sm}{Precipitation in the driest quarter}
 #' }
 #' @references{
 #' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
@@ -118,11 +118,11 @@
 #'   \item{S}{Salinity}
 #'   \item{SD}{Soil Disturbance}
 #'   \item{GP}{Grazing Pressure}
-#'   \item{bio05}{Maximum temperature in the warmest month}
-#'   \item{bio06}{Minimum temperature in the coldest month}
-#'   \item{bio16}{Precipitation in the wettest quarter}
-#'   \item{bio17}{Precipitation in the driest quarter}
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{tmax_sm}{Maximum temperature in the warmest month}
+#'   \item{tmin_wt}{Minimum temperature in the coldest month}
+#'   \item{prec_wt}{Precipitation in the wettest quarter}
+#'   \item{prec_sm}{Precipitation in the driest quarter}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #' }
 #' @references{
 #' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
@@ -144,7 +144,7 @@
 #' @format A data frame with `r nrow(elements::ExamplePlot)` rows and `r ncol(elements::ExamplePlot)` columns, the definitions of which are:
 #' \describe{
 #'   \item{taxon_name}{The scientific names of the taxa present in the example plot.}
-#'   \item{taxon_code}{The taxon codes for the taxon_name values, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{cover_perc}{The percentage cover of the taxa present in example plot.}
 #' }
 "ExamplePlot"
@@ -164,10 +164,10 @@
 #'   \item{S}{Salinity - 0:10}
 #'   \item{SD}{Soil Disturbance - 0:1}
 #'   \item{GP}{Grazing Pressure - 0:1}
-#'   \item{bio05}{Maximum temperature in the warmest month - 5:55}
-#'   \item{bio06}{Minimum temperature in the coldest month - -12:22}
-#'   \item{bio16}{Precipitation in the wettest quarter - 0:1700}
-#'   \item{bio17}{Precipitation in the driest quarter - 0:640}
+#'   \item{tmax_sm}{Maximum temperature in the warmest month - 5:55}
+#'   \item{tmin_wt}{Minimum temperature in the coldest month - -12:22}
+#'   \item{prec_wt}{Precipitation in the wettest quarter - 0:1700}
+#'   \item{prec_sm}{Precipitation in the driest quarter - 0:640}
 #' }
 "Gradients"
 
@@ -180,7 +180,7 @@
 #'
 #' @format A data frame with `r nrow(elements::HOAData)` rows and `r ncol(elements::HOAData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The PDP value.}
 #'   \item{variable}{The variable name, see `elements::VariableNames`.}
@@ -205,13 +205,15 @@
 #'   \item{S}{Salinity}
 #'   \item{SD}{Soil Disturbance}
 #'   \item{GP}{Grazing Pressure}
-#'   \item{bio05}{Maximum temperature in the warmest month}
-#'   \item{bio06}{Minimum temperature in the coldest month}
-#'   \item{bio16}{Precipitation in the wettest quarter}
-#'   \item{bio17}{Precipitation in the driest quarter}
-#'   \item{scenario}{The scenario name.}
+#'   \item{tmax_sm}{Maximum temperature in the warmest month}
+#'   \item{tmin_wt}{Minimum temperature in the coldest month}
+#'   \item{prec_wt}{Precipitation in the wettest quarter}
+#'   \item{prec_sm}{Precipitation in the driest quarter}
+#'   \item{scenario_code}{The scenario code.}
+#'   \item{scenario_stage}{The scenario stage, either 1) baseline, or 2) projection.}
+#'   \item{climate_scenario}{The SSP climate scenario.}
 #'   \item{timeslice}{The scenario timeslice, either a year or period.}
-#'   \item{scenario_code}{The scenario code: a, b, or c.}
+#'   \item{scenario_name}{The scenario name.}
 #' }
 "ExampleScenarios"
 
@@ -236,7 +238,7 @@
 #'   \item{q90}{The 90% quantile value.}
 #'   \item{q95}{The 95% quantile value.}
 #'   \item{q99}{The 99% quantile value.}
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #' }
 "NicheWidths"
 
@@ -248,7 +250,7 @@
 #'
 #' @format A data frame with `r nrow(elements::PerformanceMeasures)` rows and `r ncol(elements::PerformanceMeasures)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 #'   \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}
@@ -267,7 +269,7 @@
 #'
 #' @format A data frame with `r nrow(elements::PDPData)` rows and `r ncol(elements::PDPData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::TaxonomicBackbone`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The PDP value.}
 #'   \item{variable}{The variable name.}
@@ -276,17 +278,18 @@
 
 #' Taxonomic backbone
 #' 
-#' The taxon names and codes for the modeled taxa in the EVA, with the associated taxon concept information retireved from GBIF.
+#' The taxon names and codes for taxa with more than 30 presences in the EVA, with the associated taxon concept information retireved from GBIF.
+#' For taxa which were successfully modelled see `elements::ModellingTaxaLookup`.
 #'
 #' \code{TaxonomicBackbone} 
 #'
 #' @format A data frame with `r nrow(elements::TaxonomicBackbone)` rows and `r ncol(elements::TaxonomicBackbone)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_name}{The taxon names for the modelled taxa.}
+#'   \item{taxon_name}{Taxon names.}
 #'   \item{taxon_code}{The taxon codes used throughout the package, formed from the taxon_name values by coercing all letters to lower and replacing whitespace with underscores.}
 #'   \item{scientificName}{The full scientific name of the taxon, which includes the author. Retrieved from GBIF.}
 #'   \item{canonicalName}{The full name of the taxon. Retrieved from GBIF.}
-#'   \item{species}{The accepted name for the taxon, following GBIF.}
+#'   \item{rank}{The rank of the taxon.}
 #'   \item{genus}{The parent Genus taxon associated with the Species.}
 #'   \item{family}{The parent Family taxon associated with the Species.}
 #'   \item{order}{The parent Order taxon associated with the Species.}
@@ -381,6 +384,37 @@
 #'   \item{Present}{The number or presences.}
 #'   \item{PA_Imbalance}{The presence-absence imbalance ratio.}
 #'   \item{AP_Imbalance}{The absence-presence imbalance ratio.}
-#'   \item{taxon_code}{The taxon code, see `elements::TaxonomicBackbone`}
+#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
 #' }
 "Imbalances"
+
+
+#' A lookup between the taxon names, taxon codes and success of selected workflow steps
+#' 
+#' A lookup between the taxon names, taxon codes and success of selected workflow steps
+#' in the model-fitting process. 
+#' 
+#' \code{ModellingTaxaLookup} 
+#'
+#' @format A data frame with `r nrow(elements::ModellingTaxaLookup)` rows and `r ncol(elements::ModellingTaxaLookup)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_name}{Taxon names.}
+#'   \item{taxon_code}{The taxon code, see `elements::TaxonomicBackbone`}
+#'   \item{imbalance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::Imbalances`.}
+#'   \item{nichewidth}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::NicheWidths`.}
+#'   \item{performance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::PerformanceMeasures`.}
+#'   \item{ale}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::ALEData`.}
+#'   \item{pdp}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::PDPData`.}
+#'   \item{model}{A boolean (TRUE/FALSE) representing whether ... were successfully fitted.}
+#' }
+"ModellingTaxaLookup"
+
+#' Taxon codes for taxa with models
+#' 
+#' Taxon codes for taxa which were successfully modelled as present in the taxon_code
+#' column of `elements::ModellingTaxaLookup`.
+#'
+#' \code{ModelledTaxaCodes} 
+#'
+#' @format A vector containing `r nrow(elements::ModelledTaxaCodes)` strings.
+"ModelledTaxaCodes"

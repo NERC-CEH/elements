@@ -7,8 +7,8 @@
 #' "D" - Schoener's D (Schoener, 1968)
 #' "I" - Warren's I (Warren et al., 2008)
 #'
-#' @param taxa A vector of strings containing taxon codes, see `elements::TaxonomicBackbone`.
-#' @param taxa_comp A vector of string containing taxon codes, see `elements::TaxonomicBackbone`.
+#' @param taxa A vector of strings containing taxon codes, see `elements::ModelledTaxaCodes`.
+#' @param taxa_comp A vector of string containing taxon codes, see `elements::ModelledTaxaCodes`.
 #' @param data A data frame containing the univariate responses of the taxa supplied in the 'taxa' and 'taxa_comp' arguments for the variables supplied in the 'vars' argument. `elements::HOAData` by default.
 #' @param vars A vector of strings containing the variables for which to calculate the overlap, one or more of `elements::VariableNames`.
 #' @param method A string, one of "D" or "I" indicating the overlap method (see description).

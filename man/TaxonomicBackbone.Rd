@@ -5,13 +5,13 @@
 \alias{TaxonomicBackbone}
 \title{Taxonomic backbone}
 \format{
-A data frame with 6631 rows and 13 columns, the definitions of which are:
+A data frame with 11612 rows and 11 columns, the definitions of which are:
 \describe{
-\item{taxon_name}{The taxon names for the modelled taxa.}
+\item{taxon_name}{Taxon names.}
 \item{taxon_code}{The taxon codes used throughout the package, formed from the taxon_name values by coercing all letters to lower and replacing whitespace with underscores.}
 \item{scientificName}{The full scientific name of the taxon, which includes the author. Retrieved from GBIF.}
 \item{canonicalName}{The full name of the taxon. Retrieved from GBIF.}
-\item{species}{The accepted name for the taxon, following GBIF.}
+\item{rank}{The rank of the taxon.}
 \item{genus}{The parent Genus taxon associated with the Species.}
 \item{family}{The parent Family taxon associated with the Species.}
 \item{order}{The parent Order taxon associated with the Species.}
@@ -24,7 +24,8 @@ A data frame with 6631 rows and 13 columns, the definitions of which are:
 TaxonomicBackbone
 }
 \description{
-The taxon names and codes for the modeled taxa in the EVA, with the associated taxon concept information retireved from GBIF.
+The taxon names and codes for taxa with more than 30 presences in the EVA, with the associated taxon concept information retireved from GBIF.
+For taxa which were successfully modelled see \code{elements::ModellingTaxaLookup}.
 }
 \details{
 \code{TaxonomicBackbone}

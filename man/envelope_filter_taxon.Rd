@@ -12,9 +12,9 @@ envelope_filter_taxon(
 )
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::TaxonomicBackbone}.}
+\item{taxon}{The taxon_code, see \code{elements::ModelledTaxaCodes}.}
 
-\item{predictors}{A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17}
+\item{predictors}{A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm}
 
 \item{vars}{A vector of strings, containing one or more variables as present in \code{elements::VariableNames}, which must also be present in the predictors data frame.}
 

@@ -3,7 +3,7 @@
 #' Extract the support vectors from the SVM model for a taxon
 #' and descale them.
 #'
-#' @param taxon A string containing the taxon code for a taxon, see `elements::TaxonomicBackbone`.
+#' @param taxon A string containing the taxon code for a taxon, see `elements::ModelledTaxaCodes`.
 #'
 #' @returns A data frame containing `r length(elements::VariableNames)` columns, containing the support vector points for each variable in `length(elements::VariableNames)`
 #' @export

@@ -1,9 +1,17 @@
+load("./data/ModellingTaxaLookup.rda")
+load("./data/VariableNames.rda")
+load("./data/Gradients.rda")
+
+elements::startup()
+
+taxa_hoa <- elementsEnv$Models |> names()
+
 calc_hoa_curve_data <- function(taxon, variable){
   
   gradient <- as.data.frame(Gradients[variable])
   
   hoa_pred <- elements::predict_occ_taxon(taxon = taxon, predictors = gradient,
-                                          pa = "Present", limit = NULL, holdopt = setdiff(elements::VariableNames, variable),
+                                          pa = "Present", limit = NULL, holdopt = setdiff(VariableNames, variable),
                                           dp = 2, append = "ids")
   hoa_pred[["variable"]] <- variable
   hoa_pred[["taxon_code"]] <- taxon
@@ -14,15 +22,15 @@ calc_hoa_curve_data <- function(taxon, variable){
   
 }
 
-combinations <- expand.grid(elements::TaxonomicBackbone$taxon_code, elements::VariableNames)
+combinations <- expand.grid(taxa_hoa, VariableNames)
 
 HOAData_list <- mapply(X = combinations[[1]], 
                        Y = combinations[[2]],
-                       FUN = function(X, Y){calc_hoa_curve_data(taxon = as.character(X), variable = as.character(Y))},
+                       FUN = purrr::possibly(function(X, Y){calc_hoa_curve_data(taxon = as.character(X), variable = as.character(Y))}, NA),
                        SIMPLIFY = FALSE)
 
 HOAData <- do.call(rbind, HOAData_list)
 
-HOAData <- HOAData[, c(colnames(elements::PDPData))]
+# HOAData <- HOAData[, c(colnames(elements::PDPData))]
 
-usethis::use_data(HOAData, overwrite = TRUE, internal = FALSE)
+usethis::use_data(HOAData, overwrite = TRUE, internal = FALSE, compress = "xz")

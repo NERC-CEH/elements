@@ -23,7 +23,7 @@ library(elements)
 library(filehash)
 ```
 
-Due to the total size of the `r nrow(elements::TaxonomicBackbone)` ENMs currently included in `elements` (1.8GB when compressed, 7.5GB in memory)
+Due to the total size of the `r nrow(elements::ModelledTaxaCodes)` ENMs currently included in `elements` (1.8GB when compressed, 7.5GB in memory)
 the ENMs are not exported in a .rda object. Instead they are made available through a `filehash` (Peng, 2005) database, which provides access to the ENMs without loading all models into memory.
 To access the ENMs a connection to this database must be initialised using `elements::startup`.
 As mentioned above the Github repository does not include the "./inst/extdata/Models" object containing all the ENMs, 
@@ -73,11 +73,11 @@ As a simple demonstration, below two sets of predictions for *Stellaria graminea
 n_gradient <- data.frame("N" = seq(0, 10, 0.01))
 
 vary_N_no_limit <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
-                                               pa = "Present", limit = NULL, holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                               pa = "Present", limit = NULL, holdopt = c("tmax_sm", "tmin_wt", "prec_wt", "prec_sm", "GP", "L", "M", "R", "S", "SD"),
                                                dp = 2, append = "predictors")
 
 vary_N_q01_q99 <- elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = n_gradient,
-                                              pa = "Present", limit = "q01_q99", holdopt = c("bio05", "bio06", "bio16", "bio17", "GP", "L", "M", "R", "S", "SD"),
+                                              pa = "Present", limit = "q01_q99", holdopt = c("tmax_sm", "tmin_wt", "prec_wt", "prec_sm", "GP", "L", "M", "R", "S", "SD"),
                                               dp = 2, append = "predictors")
 ```
 
@@ -113,11 +113,11 @@ NOTE: The mean and median methods are only included for demonstrative purposes o
 
 The option to apply the `elements::envelope_filter` function, which first screens the supplied taxa to check whether the predictor values are within a given range as supplied to the 'limit' argument ("min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75"), is controlled by the 'screen' argument; `elements::env_filter` will then only run the more computationally expensive `elements::predict_occ` or `elements::calc_distance` functions for the taxa within the limits. This is highly recommended as it usually results in a 95% reduction in the number of taxa being supplied to `elements::predict_occ` or `elements::calc_distance`, greatly improving performance.
 
-For example, below `elements::env_filter` is applied to all taxa in `elements::TaxonomicBackbone` using the svm method, with the predictors derived from `elements::ExampleScenarios`.
+For example, below `elements::env_filter` is applied to all taxa in `elements::ModelledTaxaCodes` using the svm method, with the predictors derived from `elements::ExampleScenarios`.
 
 ```{r calc_filter_results}
 filter_results <- elements::env_filter(predictors = elements::ExampleScenarios[1,],
-                                       taxa = elements::TaxonomicBackbone$taxon_code, 
+                                       taxa = elements::ModelledTaxaCodes,
                                        screen = TRUE, method = "svm", limit = "min_max", 
                                        exclude = NULL, threshold = NULL, 
                                        append = "ids")

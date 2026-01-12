@@ -11,13 +11,14 @@ plot_me(
   presences = TRUE,
   eivs = TRUE,
   normalise = FALSE,
-  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"),
+  vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt",
+    "prec_sm"),
   lmw = 15,
   lts = 0.75
 )
 }
 \arguments{
-\item{taxa}{A vector of one or more taxon_code strings, see \code{elements::TaxonomicBackbone}.}
+\item{taxa}{A vector of one or more taxon_code strings, see \code{elements::ModelledTaxaCodes}.}
 
 \item{me_type}{A string representing the marginal effect plot type, one of "ale", "pdp", or "hoa".}
 
@@ -29,7 +30,7 @@ plot_me(
 
 \item{normalise}{A boolean. If TRUE and me_type == "pdp" the y axes are normalised using min-max re-scaling.}
 
-\item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", and "bio17".}
+\item{vars}{A vector of variables. Must include atleast one of the following columns: "L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", and "prec_sm".}
 
 \item{lmw}{The width of the outer margin containing the legend, passed to the "oma" argument of \code{graphics::par}. Adjust to ensure the legend is given enough room.}
 
@@ -68,9 +69,9 @@ In these instances it is important to also visualise the PDP plots, which should
 the shape of the univariate response.
 }
 \examples{
-elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 
-elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 
 }
 \references{

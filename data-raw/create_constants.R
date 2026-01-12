@@ -1,3 +1,35 @@
+load("./data/ModellingTaxaLookup.rda")
+
+ModellingTaxaLookup <- ModellingTaxaLookup |>
+  dplyr::mutate(
+    "model" = dplyr::case_when(
+      taxon_code %in% c("agrostis_capillaris", "anthoxanthum_odoratum", "avenella_flexuosa",
+                        "calluna_vulgaris", "dactylis_glomerata", "festuca_rubra",
+                        "holcus_lanatus", "plantago_lanceolata", "ranunculus_repens",
+                        "rumex_acetosa", "urtica_dioica") ~ TRUE,
+      TRUE ~ model
+    )
+  )
+
+usethis::use_data(ModelledTaxaCodes, overwrite = TRUE, internal = FALSE, compress = "xz")
+
+ModelledTaxaCodes <- ModellingTaxaLookup |>
+  dplyr::mutate(
+    "model" = dplyr::case_when(
+      taxon_code %in% c("agrostis_capillaris", "anthoxanthum_odoratum", "avenella_flexuosa",
+                        "calluna_vulgaris", "dactylis_glomerata", "festuca_rubra",
+                        "holcus_lanatus", "plantago_lanceolata", "ranunculus_repens",
+                        "rumex_acetosa", "urtica_dioica") ~ TRUE,
+      TRUE ~ model
+    )
+  ) |>
+  dplyr::filter(model == TRUE) |>
+  dplyr::distinct(taxon_code) |>
+  dplyr::pull(taxon_code) |>
+  sort()
+
+usethis::use_data(ModelledTaxaCodes, overwrite = TRUE, internal = FALSE, compress = "xz")
+
 VariableLookup <- tibble::tribble(
   ~raw_name, ~variable_code, ~variable_name, ~variable_plot_name, ~model_var,
   "EIVEres.M", "M", "Soil.Moisture", "Soil Moisture", TRUE,
@@ -25,24 +57,24 @@ VariableLookup <- tibble::tribble(
   "SD_Mowing.Frequency", "MF.sd", "Mowing.Frequency.SD", "Mowing Frequency SD", FALSE,
   "SD_Grazing.Pressure", "GP.sd", "Grazing.Pressure.SD", "Grazing Pressure SD", FALSE,
   "SD_Soil.Disturbance", "SD.sd", "Soil.Disturbance.SD", "Soil Disturbance SD", FALSE,
-  "bio05", "bio05", "Maximum.Temp.Warmest.Month", "Max Temp Warm Month", TRUE,
-  "bio06", "bio06", "Minimum.Temp.Coldest.Month", "Min Temp Cold Month", TRUE,
-  "bio16", "bio16", "Precipitation.Wettest.Quarter", "Precipitation Wet Quarter", TRUE,
-  "bio17", "bio17", "Precipitation.Driest.Quarter", "Precipitation Dry Quarter", TRUE
-) |>
+  "tmax_sm", "tmax_sm", "Max.Summer.Temp", "Max Summer Temp", TRUE,
+  "tmin_wt", "tmin_wt", "Min.Winter.Temp", "Min Winter Temp", TRUE,
+  "prec_sm", "prec_sm", "Summer.Precipitation", "Summer Precipitation", TRUE,
+  "prec_wt", "prec_wt", "Winter.Precipitation", "Winter Precipitation", TRUE
+  ) |>
   as.data.frame()
 
-usethis::use_data(VariableLookup, overwrite = TRUE, internal = FALSE)
+usethis::use_data(VariableLookup, overwrite = TRUE, internal = FALSE, compress = "xz")
 
 VariableNames <- sort(subset(VariableLookup, model_var == TRUE, select = "variable_code", drop = TRUE))
 
-usethis::use_data(VariableNames, overwrite = TRUE, internal = FALSE)
+usethis::use_data(VariableNames, overwrite = TRUE, internal = FALSE, compress = "xz")
 
 Gradients <- list(
-  "bio05" = seq(5, 55, 0.5),
-  "bio06" = seq(-12, 22, 0.5),
-  "bio16" = seq(0, 1700, 20),
-  "bio17" = seq(0, 650, 20),
+  "tmax_sm" = seq(-5, 55, 0.5),
+  "tmin_wt" = seq(-30, 15, 0.5),
+  "prec_sm" = seq(0, 800, 20),
+  "prec_wt" = seq(0, 1700, 20),
   "GP" = seq(0, 1, 0.01),    
   "L" = seq(0, 10, 0.1),    
   "M" = seq(0, 10, 0.1),     
@@ -52,4 +84,4 @@ Gradients <- list(
   "SD" = seq(0, 1, 0.01)
 )
 
-usethis::use_data(Gradients, overwrite = TRUE, internal = FALSE)
+usethis::use_data(Gradients, overwrite = TRUE, internal = FALSE, compress = "xz")

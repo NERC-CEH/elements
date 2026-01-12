@@ -23,8 +23,8 @@
 #'
 #' NOTE: to use this function you must first run `elements::startup()`
 #'
-#' @param taxa A vector of strings containing one or more taxa to generate predictions for. See `elements::TaxonomicBackbone`. Optional.
-#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and optionally taxon
+#' @param taxa A vector of strings containing one or more taxa to generate predictions for. See `elements::ModelledTaxaCodes`. Optional.
+#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm, and optionally taxon
 #' @param pa One of "Present", "Absent", or c("Present", "Absent").
 #' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q25_q75". Which if set assigns a probability of 0 to a set of predictors if one or more of those predictors are outside the stipulated quantile ranges. Only applied if pa = "Present". Optional.
 #' @param holdopt Hold one or more variables at their optimum values. NULL by default, else a vector of variable codes, e.g. c("SD", "GP").
@@ -58,7 +58,7 @@ predict_occ <- function(taxa, predictors, pa = "Present", limit = NULL, holdopt 
   
   # Check whether all variables names are present in either 1) the predictors data frame, or 2) the holdopt argument
   if(!all(sort(unique(c(colnames(predictors[names(predictors) %in% elements::VariableNames]), holdopt))) == elements::VariableNames)){
-    stop("All model variables (L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17) must either be present in the predictors data frame or passed to holdopt.")
+    stop("All model variables (L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm) must either be present in the predictors data frame or passed to holdopt.")
   }
   
   # Check whether the limit argument is correct.

@@ -1,4 +1,17 @@
+# elements 0.7.0 (12/01/2025)
+
+* Adding models argument to `elements::predict_occ_taxon`.
+* Adding `elements::ModellingTaxaLookup` object.
+* Adding object `elements::ModelledTaxaCodes` which contains the taxon codes for modelled taxa.
+* Changing `filehash` database format to RDS.
+* Re-fitting models. Key changes include:
+    * Decreasing the minimum presence threshold to 30.
+    * Changing the source of climate data to ClimateEU.
+    * Altering the hyper-parameter tuning ranges.
+    * Changing spatio-temporal cross-validation technique to blockCV.
+
 # elements 0.6.5 (10/10/2025)
+
 * Adding function `elements::plot_be` which creates a bivariate probability/habitat suitability plot.
 * Adding function `elements::calc_overlap` which calculates pairwise niche overlap values for a set of taxa.
 * Adding function `elements::extract_svs` which extracts the support vectors from a model. PROTOTYPE.

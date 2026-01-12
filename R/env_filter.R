@@ -10,7 +10,7 @@
 #' 
 #' NOTE: The "mean" and "median" methods do not produce realistic results and so are currently included for demonstrative purposes only.
 #'
-#' @param predictors A data frame of predictors. Must include atleast one the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17. Columns not included must then be included in the 'exclude' argument.
+#' @param predictors A data frame of predictors. Must include atleast one the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm. Columns not included must then be included in the 'exclude' argument.
 #' @param taxa A vector of strings containing one or more taxa to generate predictions for.
 #' @param screen A boolean (TRUE/FALSE) indicating whether to use the `elements::envelope_filter` function to check whether taxa are within distibutional limits prior to applying the more computationally expensive `elements::predict_occ` or `elements::calc_distance` functions.
 #' @param method One of "svm", "mean", or "median".
@@ -23,8 +23,8 @@
 #' @export
 #'
 #' @examples
-#' elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::TaxonomicBackbone$taxon_code, method = "svm", threshold = 0.5)
-env_filter <- function(predictors, taxa = elements::TaxonomicBackbone$taxon_code, screen = TRUE, method = "svm", limit = "min_max", exclude = NULL, threshold = NULL, append = "ids"){
+#' elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::ModelledTaxaCodes[1:100], method = "svm", threshold = 0.5)
+env_filter <- function(predictors, taxa = elements::ModelledTaxaCodes, screen = TRUE, method = "svm", limit = "min_max", exclude = NULL, threshold = NULL, append = "ids"){
   
   if(screen == TRUE){
     

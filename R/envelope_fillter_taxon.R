@@ -9,8 +9,8 @@
 #' computationally expensive SVM models in `elements::predict_occ` function
 #' and to a lesser extent the euclidean distance `elements::calc_distance` function.
 #'
-#' @param taxon The taxon_code, see `elements::TaxonomicBackbone`.
-#' @param predictors A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
+#' @param taxon The taxon_code, see `elements::ModelledTaxaCodes`.
+#' @param predictors A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm
 #' @param vars A vector of strings, containing one or more variables as present in `elements::VariableNames`, which must also be present in the predictors data frame.
 #' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75". 
 #'

@@ -28,7 +28,7 @@ library(elements)
 pkgdown::build_articles()
 
 # 10) Build pkgdown website
-devtools::build_site()
+pkgdown::build_site(examples = FALSE, install = FALSE)
 
 # 11) Manually deploy website
 pkgdown::deploy_to_branch()

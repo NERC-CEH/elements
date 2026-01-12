@@ -6,7 +6,7 @@
 \usage{
 env_filter(
   predictors,
-  taxa = elements::TaxonomicBackbone$taxon_code,
+  taxa = elements::ModelledTaxaCodes,
   screen = TRUE,
   method = "svm",
   limit = "min_max",
@@ -16,7 +16,7 @@ env_filter(
 )
 }
 \arguments{
-\item{predictors}{A data frame of predictors. Must include atleast one the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17. Columns not included must then be included in the 'exclude' argument.}
+\item{predictors}{A data frame of predictors. Must include atleast one the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm. Columns not included must then be included in the 'exclude' argument.}
 
 \item{taxa}{A vector of strings containing one or more taxa to generate predictions for.}
 
@@ -50,5 +50,5 @@ however, if there are a large number of taxa-predictor combinations the mean and
 NOTE: The "mean" and "median" methods do not produce realistic results and so are currently included for demonstrative purposes only.
 }
 \examples{
-elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::TaxonomicBackbone$taxon_code, method = "svm", threshold = 0.5)
+elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::ModelledTaxaCodes[1:100], method = "svm", threshold = 0.5)
 }

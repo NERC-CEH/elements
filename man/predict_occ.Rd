@@ -15,9 +15,9 @@ predict_occ(
 )
 }
 \arguments{
-\item{taxa}{A vector of strings containing one or more taxa to generate predictions for. See \code{elements::TaxonomicBackbone}. Optional.}
+\item{taxa}{A vector of strings containing one or more taxa to generate predictions for. See \code{elements::ModelledTaxaCodes}. Optional.}
 
-\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and optionally taxon}
+\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm, and optionally taxon}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 

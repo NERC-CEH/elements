@@ -19,14 +19,13 @@ testthat::test_that("calc_overlap works", {
   
   actual_taxa_comp_I <- elements::calc_overlap(taxa = test_taxa, 
                                                taxa_comp = test_taxa_comp,
-                                               method = "I")
+                                               method = "I",
+                                               average = TRUE)
   
-  expected_colnames <- c("taxon_code_1", "taxon_code_2", elements::VariableNames)
-  
-  testthat::expect_equal(colnames(actual_taxa_D), expected_colnames)
-  testthat::expect_equal(colnames(actual_taxa_I), expected_colnames)
-  testthat::expect_equal(colnames(actual_taxa_comp_D), expected_colnames)
-  testthat::expect_equal(colnames(actual_taxa_comp_I), expected_colnames)
+  testthat::expect_equal(colnames(actual_taxa_D), c("taxon_code_1", "taxon_code_2", elements::VariableNames))
+  testthat::expect_equal(colnames(actual_taxa_I), c("taxon_code_1", "taxon_code_2", elements::VariableNames))
+  testthat::expect_equal(colnames(actual_taxa_comp_D), c("taxon_code_1", "taxon_code_2", "overlap"))
+  testthat::expect_equal(colnames(actual_taxa_comp_I), c("taxon_code_1", "taxon_code_2", "overlap"))
   
   testthat::expect_equal(nrow(actual_taxa_D), nrow(t(combn(test_taxa, m = 2))))
   testthat::expect_equal(nrow(actual_taxa_I), nrow(t(combn(test_taxa, m = 2))))

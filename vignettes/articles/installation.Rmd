@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
 
 The Github repository containing the `elements` package [(https://github.com/NERC-CEH/elements)](https://github.com/NERC-CEH/elements) 
 includes all files apart from the "./inst/extdata/Models" object containing all the ENMs as it is above the 100MB limit.
-Two example models (Silene flos-cuculi and Stellaria graminea) are bundled in the "./inst/testdata/TestModels" object,
+Models for the taxa present in the `elements::ExamplePlot` are bundled in the "./inst/testdata/TestModels" object,
 which is present in the Github repository.
 
 To retrieve the `elements` package including the "Models" object download the latest
@@ -20,7 +20,7 @@ version from Zenodo here - https://zenodo.org/records/15639307.
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.6.5.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.7.0.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.

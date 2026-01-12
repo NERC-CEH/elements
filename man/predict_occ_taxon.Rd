@@ -7,6 +7,7 @@
 predict_occ_taxon(
   taxon,
   predictors,
+  models = elementsEnv$Models,
   pa = "Present",
   limit = NULL,
   holdopt = NULL,
@@ -15,9 +16,11 @@ predict_occ_taxon(
 )
 }
 \arguments{
-\item{taxon}{The taxon_code, see \code{elements::TaxonomicBackbone}.}
+\item{taxon}{The taxon_code, see \code{elements::ModelledTaxaCodes}.}
 
-\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17}
+\item{predictors}{A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm}
+
+\item{models}{description}
 
 \item{pa}{One of "Present", "Absent", or c("Present", "Absent").}
 

@@ -8,7 +8,7 @@
 A data frame with 6 rows and 3 columns, the definitions of which are:
 \describe{
 \item{taxon_name}{The scientific names of the taxa present in the example plot.}
-\item{taxon_code}{The taxon codes for the taxon_name values, see \code{elements::TaxonomicBackbone}.}
+\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
 \item{cover_perc}{The percentage cover of the taxa present in example plot.}
 }
 }

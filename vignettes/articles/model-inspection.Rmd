@@ -36,7 +36,7 @@ me_plot_taxon <- elements::plot_me(taxa = "stellaria_graminea",
                                    free_y = TRUE, 
                                    presences = TRUE,
                                    eivs = TRUE,
-                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 ```
 
 ```{r me_plot_taxon_code, eval=FALSE}
@@ -45,7 +45,7 @@ elements::plot_me(taxa = "stellaria_graminea",
                   free_y = TRUE, 
                   presences = TRUE,
                   eivs = TRUE,
-                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 ```
 
 ```{r me_plot_taxon_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}
@@ -58,14 +58,14 @@ Multiple taxa can be supplied in the "taxa" argument, in this case the ability t
 me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
                                   me_type = "pdp", 
                                   normalise = TRUE,
-                                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+                                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 ```
 
 ```{r me_plot_taxa_code, eval=FALSE}
 elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
                   me_type = "pdp", 
                   normalise = TRUE,
-                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "bio05", "bio06", "bio16", "bio17"))
+                  vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 ```
 
 ```{r me_plot_taxa_print, echo=FALSE, fig.dpi=800, fig.height=7, fig.width=7}

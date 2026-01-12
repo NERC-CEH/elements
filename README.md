@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.6.5-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.7.0-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -37,10 +37,10 @@ consist of:
   - **SD** - Soil Disturbance<sup>2</sup>
   - **S** - Salinity<sup>3</sup>
 - Four bioclimatic variables:
-  - **bio05** - Maximum temperature in the warmest month<sup>4</sup>
-  - **bio06** - Minimum temperature in the coldest month<sup>4</sup>
-  - **bio16** - Precipitation in the wettest quarter<sup>4</sup>
-  - **bio17** - Precipitation in the driest quarter<sup>4</sup>
+  - **tmin_wt** - Minimum Winter Temperature<sup>4</sup>
+  - **tmax_sm** - Maximum Summer Temperature<sup>4</sup>
+  - **prec_wt** - Winter Precipitation<sup>4</sup>
+  - **prec_sm** - Summer Precipitation<sup>4</sup>
 
 Support Vector Machine (SVM) models, which form a hyperplane between the
 presence and absence hypervolumes, were trained and tested using using
@@ -54,104 +54,12 @@ For more information please see Marshall et al (in prep).
 <p style="font-size: small !important">
 
 <sup>1</sup>(Dengler et al., 2023), <sup>2</sup>(Midolo et al., 2023),
-<sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Copernicus Climate Change
-Service, 2021)
+<sup>3</sup>(Tichy et al., 2023), <sup>4</sup>(Marchi et al., 2020)
 </p>
 
 ## Models
 
-At present there are 6631 ENMs currently included in `elements`, the
-table below displays the number of taxa by Phylum.
-
-<table>
-
-<thead>
-
-<tr>
-
-<th style="text-align:right;">
-
-Tracheophyta
-</th>
-
-<th style="text-align:right;">
-
-Bryophyta
-</th>
-
-<th style="text-align:right;">
-
-Ascomycota
-</th>
-
-<th style="text-align:right;">
-
-Marchantiophyta
-</th>
-
-<th style="text-align:right;">
-
-Charophyta
-</th>
-
-<th style="text-align:right;">
-
-Chlorophyta
-</th>
-
-<th style="text-align:right;">
-
-Cyanobacteria
-</th>
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<tr>
-
-<td style="text-align:right;">
-
-6081
-</td>
-
-<td style="text-align:right;">
-
-324
-</td>
-
-<td style="text-align:right;">
-
-126
-</td>
-
-<td style="text-align:right;">
-
-87
-</td>
-
-<td style="text-align:right;">
-
-11
-</td>
-
-<td style="text-align:right;">
-
-1
-</td>
-
-<td style="text-align:right;">
-
-1
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
+At present there are 9489 ENMs currently included in `elements`.
 
 ## References
 
@@ -179,10 +87,6 @@ Vegetation Archive (EVA): an integrated database of European vegetation
 plots. Applied Vegetation Science 19, 173–180.
 <https://doi.org/10.1111/avsc.12191>
 
-Copernicus Climate Change Service, 2021. Downscaled bioclimatic
-indicators for selected regions from 1950 to 2100 derived from climate
-projections. <https://doi.org/10.24381/CDS.0AB27596>
-
 Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P.,
 Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R.,
 Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T.,
@@ -201,6 +105,11 @@ Lang, M., Binder, M., Richter, J., Schratz, P., Pfisterer, F., Coors,
 S., Au, Q., Casalicchio, G., Kotthoff, L., Bischl, B., 2019. mlr3: A
 modern object-oriented machine learning framework in R. Journal of Open
 Source Software 4, 1903. <https://doi.org/10.21105/joss.01903>
+
+Marchi, M., Castellanos-Acuña, D., Hamann, A., Wang, T., Ray, D.,
+Menzel, A., 2020. ClimateEU, scale-free climate normals, historical time
+series, and future projections for Europe. Sci Data 7, 428.
+<https://doi.org/10.1038/s41597-020-00763-0>
 
 Meyer, D., Dimitriadou, E., Hornik, K., Weingessel, A., Leisch, F.,
 2024. e1071: Misc Functions of the Department of Statistics, Probability

@@ -8,8 +8,8 @@
 #' of predictor data for the suitability of multiple taxa before applying the more
 #' computationally expensive SVM models in `elements::predict_occ` and `elements::predict_occ_taxon`.
 #'
-#' @param taxa A vector of strings containing one or more taxon codes. See `elements::TaxonomicBackbone`. Optional
-#' @param predictors A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17
+#' @param taxa A vector of strings containing one or more taxon codes. See `elements::ModelledTaxaCodes`. Optional
+#' @param predictors A data frame of predictors. Must include one or more of the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm
 #' @param vars A vector of strings, containing one or more variables as present in `elements::VariableNames`, which must also be present in the predictors data frame.
 #' @param limit A string representing the niche width quantiles, one of "min_max", "q01_q99", "q05_q95", "q10_q90", "q25_q75". 
 #'

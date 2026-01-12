@@ -3,14 +3,14 @@
 #' Generate a plot containing the bivariate probability distribution of a taxon for two variables
 #' generated using the Hold-At-Optima (HOA) method present in `elements::predict_occ`.
 #'
-#' @param taxon A string containing a taxon name as present in `elements::TaxonomicBackbone`.
+#' @param taxon A string containing a taxon name as present in `elements::ModelledTaxaCodes`.
 #' @param vars A vector of strings containing two variable names as present in `elements::VariableNames`
 #'
 #' @returns A plot containing the bivariate probability distribution of a taxon for two variables.
 #' @export
 #'
 #' @examples
-#' elements::startup(); elements::plot_be(taxon = "carex_rostrata", vars = c("bio05", "bio06"))
+#' elements::startup(); elements::plot_be(taxon = "carex_rostrata", vars = c("tmax_sm", "tmin_wt"))
 plot_be <- function(taxon, vars){
   
   dat <- setNames(expand.grid(elements::Gradients[[vars[1]]], elements::Gradients[[vars[2]]]), vars)

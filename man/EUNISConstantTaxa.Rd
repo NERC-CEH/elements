@@ -11,7 +11,7 @@ A tibble with 9108 rows and 5 columns.
 \item{eunis_code}{The EUNIS habitat code.}
 \item{eunis_name}{The EUNIS habitat name.}
 \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-\item{taxon_code}{The taxon code as it appears in \code{elements::TaxonomicBackbone}.}
+\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
 \item{perc_occ_freq}{The percentage occurrence frequency of the taxon in the EUNIS habitat.}
 }
 }

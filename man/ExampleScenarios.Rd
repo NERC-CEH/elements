@@ -5,7 +5,7 @@
 \alias{ExampleScenarios}
 \title{Predictor data for three example scenarios}
 \format{
-A data frame with 26 rows and 14 columns, the definitions of which are:
+A data frame with 36 rows and 16 columns, the definitions of which are:
 \describe{
 \item{L}{Light}
 \item{M}{Soil Moisture}
@@ -14,13 +14,15 @@ A data frame with 26 rows and 14 columns, the definitions of which are:
 \item{S}{Salinity}
 \item{SD}{Soil Disturbance}
 \item{GP}{Grazing Pressure}
-\item{bio05}{Maximum temperature in the warmest month}
-\item{bio06}{Minimum temperature in the coldest month}
-\item{bio16}{Precipitation in the wettest quarter}
-\item{bio17}{Precipitation in the driest quarter}
-\item{scenario}{The scenario name.}
+\item{tmax_sm}{Maximum temperature in the warmest month}
+\item{tmin_wt}{Minimum temperature in the coldest month}
+\item{prec_wt}{Precipitation in the wettest quarter}
+\item{prec_sm}{Precipitation in the driest quarter}
+\item{scenario_code}{The scenario code.}
+\item{scenario_stage}{The scenario stage, either 1) baseline, or 2) projection.}
+\item{climate_scenario}{The SSP climate scenario.}
 \item{timeslice}{The scenario timeslice, either a year or period.}
-\item{scenario_code}{The scenario code: a, b, or c.}
+\item{scenario_name}{The scenario name.}
 }
 }
 \usage{

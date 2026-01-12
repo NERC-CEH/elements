@@ -7,7 +7,7 @@
 plot_be(taxon, vars)
 }
 \arguments{
-\item{taxon}{A string containing a taxon name as present in \code{elements::TaxonomicBackbone}.}
+\item{taxon}{A string containing a taxon name as present in \code{elements::ModelledTaxaCodes}.}
 
 \item{vars}{A vector of strings containing two variable names as present in \code{elements::VariableNames}}
 }
@@ -19,5 +19,5 @@ Generate a plot containing the bivariate probability distribution of a taxon for
 generated using the Hold-At-Optima (HOA) method present in \code{elements::predict_occ}.
 }
 \examples{
-elements::startup(); elements::plot_be(taxon = "carex_rostrata", vars = c("bio05", "bio06"))
+elements::startup(); elements::plot_be(taxon = "carex_rostrata", vars = c("tmax_sm", "tmin_wt"))
 }

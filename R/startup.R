@@ -16,13 +16,13 @@ startup <- function(models = NULL){
     if((isTRUE(is.null(models)) | isTRUE(models == "all")) & file.exists(system.file("extdata", "Models", package = "elements"))){
       
       assign(x = "Models",
-             value = filehash::dbInit(system.file("extdata", "Models", package = "elements")),
+             value = filehash::dbInit(system.file("extdata", "Models", package = "elements"), type = "RDS"),
              envir = elementsEnv)
       
     } else if(isTRUE(models == "test") | !file.exists(system.file("extdata", "Models", package = "elements"))) {
       
       assign(x = "Models",
-             value = filehash::dbInit(system.file("testdata", "TestModels", package = "elements")),
+             value = filehash::dbInit(system.file("testdata", "TestModels", package = "elements"), type = "RDS"),
              envir = elementsEnv)
       
     }

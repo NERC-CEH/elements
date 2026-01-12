@@ -14,11 +14,11 @@ A data frame with 400 rows and 12 columns, the definitions of which are:
 \item{S}{Salinity}
 \item{SD}{Soil Disturbance}
 \item{GP}{Grazing Pressure}
-\item{bio05}{Maximum temperature in the warmest month}
-\item{bio06}{Minimum temperature in the coldest month}
-\item{bio16}{Precipitation in the wettest quarter}
-\item{bio17}{Precipitation in the driest quarter}
-\item{taxon_code}{The taxon, see \code{elements::TaxonomicBackbone}.}
+\item{tmax_sm}{Maximum temperature in the warmest month}
+\item{tmin_wt}{Minimum temperature in the coldest month}
+\item{prec_wt}{Precipitation in the wettest quarter}
+\item{prec_sm}{Precipitation in the driest quarter}
+\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
 }
 }
 \usage{

@@ -1,7 +1,7 @@
 #' Calculate the euclidean distance between one set of environmental predictor variables and mutliple taxa
 #'
-#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17, and optionally taxon
-#' @param taxa A vector of strings containing one or more taxa to calculate distances for. See `elements::TaxonomicBackbone`.
+#' @param predictors A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm, and optionally taxon
+#' @param taxa A vector of strings containing one or more taxa to calculate distances for. See `elements::ModelledTaxaCodes`.
 #' @param vars A vector of variable names, one or more of `elements::VariableNames`.
 #' @param method One of "median" or "mean" indicating whether to measure the euclidean distance from the predictor variables to the median or mean values.
 #' @param append A string, one of "all", "predictors", or "ids" representing which columns from the predictors data frame to return with the results.
@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' elements::calc_distance_once(predictors = elements::ExampleScenarios[1,])
-calc_distance_once <- function(predictors, taxa = elements::TaxonomicBackbone$taxon_code, vars = elements::VariableNames, method = "median", append = "ids"){
+calc_distance_once <- function(predictors, taxa = ModelledTaxaCodes, vars = elements::VariableNames, method = "median", append = "ids"){
 
   if(nrow(predictors) > 1){
     stop("Only one row of predictors can be provided. Use elements::calc_distance for more than one row.")
