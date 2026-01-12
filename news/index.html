@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,6 +88,19 @@
       <small>Source: <a href="https://github.com/NERC-CEH/elements/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.7.0" id="elements-070-12012025">elements 0.7.0 (12/01/2025)<a class="anchor" aria-label="anchor" href="#elements-070-12012025"></a></h2>
+<ul><li>Adding models argument to <code><a href="../reference/predict_occ_taxon.html">elements::predict_occ_taxon</a></code>.</li>
+<li>Adding <code><a href="../reference/ModellingTaxaLookup.html">elements::ModellingTaxaLookup</a></code> object.</li>
+<li>Adding object <code><a href="../reference/ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code> which contains the taxon codes for modelled taxa.</li>
+<li>Changing <code>filehash</code> database format to RDS.</li>
+<li>Re-fitting models. Key changes include:
+<ul><li>Decreasing the minimum presence threshold to 30.</li>
+<li>Changing the source of climate data to ClimateEU.</li>
+<li>Altering the hyper-parameter tuning ranges.</li>
+<li>Changing spatio-temporal cross-validation technique to blockCV.</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.6.5" id="elements-065-10102025">elements 0.6.5 (10/10/2025)<a class="anchor" aria-label="anchor" href="#elements-065-10102025"></a></h2>
 <ul><li>Adding function <code><a href="../reference/plot_be.html">elements::plot_be</a></code> which creates a bivariate probability/habitat suitability plot.</li>

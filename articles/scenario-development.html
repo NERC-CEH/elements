@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -154,10 +154,9 @@ mean of the probabilities of each EUNIS habitats constant taxa, for the
 top EUNIS habiats.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eunis_taxa_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/EUNISConstantTaxa.html">EUNISConstantTaxa</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span>, </span>
-<span>                               <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span></span>
+<span>                               <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ModelledTaxaCodes.html">ModelledTaxaCodes</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">predictors_scenanrios</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">scenario_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">eunis_filter_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/env_filter.html">env_filter</a></span><span class="op">(</span>predictors <span class="op">=</span> <span class="va">predictors_scenanrios</span>, </span>

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,7 +130,7 @@ displayed.</p>
 <span>                   <span class="va">taxon_code</span> <span class="op">==</span> <span class="st">"stellaria_graminea"</span>, </span>
 <span>                   select <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Holdout.BalancedAccuracy"</span>, <span class="st">"STCV.BalancedAccuracy"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;      Holdout.BalancedAccuracy STCV.BalancedAccuracy</span></span>
-<span><span class="co">#&gt; 5897                0.8600405             0.8599187</span></span></code></pre>
+<span><span class="co">#&gt; 8441                0.8579423             0.8001017</span></span></code></pre>
 <p>The marginal effects of an ENM, in the form of Partial Dependency
 Profile (PDP), Accumulated Local Effect (ALE) (Molnar, 2018), or
 Hold-At-Optima (HOA) plots can also be viewed using the
@@ -145,7 +145,7 @@ available in <code><a href="../reference/VariableData.html">elements::VariableDa
 <span>                  free_y <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                  presences <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                  eivs <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span>, <span class="st">"GP"</span>, <span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span>, <span class="st">"GP"</span>, <span class="st">"tmax_sm"</span>, <span class="st">"tmin_wt"</span>, <span class="st">"prec_wt"</span>, <span class="st">"prec_sm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-inspection_files/figure-html/me_plot_taxon_print-1.png" width="5600"></p>
 <p>Multiple taxa can be supplied in the “taxa” argument, in this case
 the ability to plot presence box and whisker plots and EIV points and
@@ -154,7 +154,7 @@ arrows is disabled.</p>
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/plot_me.html">plot_me</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"galium_boreale"</span>, <span class="st">"galium_saxatile"</span>, <span class="st">"galium_uliginosum"</span>, <span class="st">"galium_sterneri"</span>, <span class="st">"galium_aparine"</span><span class="op">)</span>, </span>
 <span>                  me_type <span class="op">=</span> <span class="st">"pdp"</span>, </span>
 <span>                  normalise <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span>, <span class="st">"GP"</span>, <span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>                  vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"N"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span>, <span class="st">"GP"</span>, <span class="st">"tmax_sm"</span>, <span class="st">"tmin_wt"</span>, <span class="st">"prec_wt"</span>, <span class="st">"prec_sm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-inspection_files/figure-html/me_plot_taxa_print-1.png" width="5600"></p>
 <details><summary><h3 style="display:inline-block">
 ⚠ A note on ALE plots

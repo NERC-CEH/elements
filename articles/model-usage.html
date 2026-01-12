@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">e1071</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/NERC-CEH/elements" class="external-link">elements</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rdpeng/filehash" class="external-link">filehash</a></span><span class="op">)</span></span></code></pre></div>
-<p>Due to the total size of the 6631 ENMs currently included in
+<p>Due to the total size of the ENMs currently included in
 <code>elements</code> (1.8GB when compressed, 7.5GB in memory) the ENMs
 are not exported in a .rda object. Instead they are made available
 through a <code>filehash</code> (Peng, 2005) database, which provides
@@ -145,16 +145,17 @@ be accessed by passing “all” or “test” to the ‘models’ argument of
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">elementsEnv</span><span class="op">$</span><span class="va">Models</span><span class="op">[[</span><span class="st">"stellaria_graminea"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Call:</span></span>
-<span><span class="co">#&gt; svm(formula = Presence ~ L + M + N + R + S + SD + GP + bio05 + bio06 + </span></span>
-<span><span class="co">#&gt;     bio16 + bio17, data = data, type = "C-classification", probability = TRUE)</span></span>
+<span><span class="co">#&gt; svm(formula = Presence ~ L + M + N + R + S + SD + GP + tmax_sm + </span></span>
+<span><span class="co">#&gt;     tmin_wt + prec_sm + prec_wt, data = data, type = "C-classification", </span></span>
+<span><span class="co">#&gt;     probability = TRUE)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Parameters:</span></span>
 <span><span class="co">#&gt;    SVM-Type:  C-classification </span></span>
 <span><span class="co">#&gt;  SVM-Kernel:  radial </span></span>
-<span><span class="co">#&gt;        cost:  0.6 </span></span>
+<span><span class="co">#&gt;        cost:  0.23 </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Number of Support Vectors:  12724</span></span></code></pre>
+<span><span class="co">#&gt; Number of Support Vectors:  30545</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="generating-predictions">Generating Predictions<a class="anchor" aria-label="anchor" href="#generating-predictions"></a>
@@ -167,12 +168,12 @@ frame.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData1.html">ExampleData1</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;   Present</span></span>
-<span><span class="co">#&gt; 1    0.30</span></span>
-<span><span class="co">#&gt; 2    0.00</span></span>
-<span><span class="co">#&gt; 3    0.00</span></span>
-<span><span class="co">#&gt; 4    0.70</span></span>
-<span><span class="co">#&gt; 5    0.01</span></span>
-<span><span class="co">#&gt; 6    0.08</span></span></code></pre>
+<span><span class="co">#&gt; 1    0.03</span></span>
+<span><span class="co">#&gt; 2    0.25</span></span>
+<span><span class="co">#&gt; 3    0.06</span></span>
+<span><span class="co">#&gt; 4    0.08</span></span>
+<span><span class="co">#&gt; 5    0.07</span></span>
+<span><span class="co">#&gt; 6    0.74</span></span></code></pre>
 <p>An additional helper function <code><a href="../reference/predict_occ.html">elements::predict_occ</a></code> can
 generate predictions for multiple taxa, by either specifing the taxa to
 model in the ‘taxa’ argument, or by setting ‘taxa’ to NULL and including
@@ -181,12 +182,12 @@ an additional column in the predictors data frame named
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="cn">NULL</span>, predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleData2.html">ExampleData2</a></span>, pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, holdopt <span class="op">=</span> <span class="cn">NULL</span>, dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;             taxon_code Present</span></span>
-<span><span class="co">#&gt; 201 silene_flos-cuculi    0.70</span></span>
-<span><span class="co">#&gt; 202 silene_flos-cuculi    0.00</span></span>
-<span><span class="co">#&gt; 203 silene_flos-cuculi    0.12</span></span>
-<span><span class="co">#&gt; 204 silene_flos-cuculi    0.00</span></span>
-<span><span class="co">#&gt; 205 silene_flos-cuculi    0.00</span></span>
-<span><span class="co">#&gt; 206 silene_flos-cuculi    0.00</span></span></code></pre>
+<span><span class="co">#&gt; 201 silene_flos-cuculi    0.01</span></span>
+<span><span class="co">#&gt; 202 silene_flos-cuculi    0.02</span></span>
+<span><span class="co">#&gt; 203 silene_flos-cuculi    0.04</span></span>
+<span><span class="co">#&gt; 204 silene_flos-cuculi    0.02</span></span>
+<span><span class="co">#&gt; 205 silene_flos-cuculi    0.01</span></span>
+<span><span class="co">#&gt; 206 silene_flos-cuculi    0.08</span></span></code></pre>
 <p>Two helper arguments provide additional functionality in controlling
 model use. First, is the ‘limit’ argument, which assigns probability
 values of zero if one or more predictors are outside a specified range
@@ -202,11 +203,11 @@ the 1% and 99% quantiles.</p>
 <code class="sourceCode R"><span><span class="va">n_gradient</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="st">"N"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">10</span>, <span class="fl">0.01</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">vary_N_no_limit</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="va">n_gradient</span>,</span>
-<span>                                               pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
+<span>                                               pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="cn">NULL</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tmax_sm"</span>, <span class="st">"tmin_wt"</span>, <span class="st">"prec_wt"</span>, <span class="st">"prec_sm"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
 <span>                                               dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"predictors"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">vary_N_q01_q99</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ_taxon.html">predict_occ_taxon</a></span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"stellaria_graminea"</span>, predictors <span class="op">=</span> <span class="va">n_gradient</span>,</span>
-<span>                                              pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="st">"q01_q99"</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span>, <span class="st">"bio16"</span>, <span class="st">"bio17"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
+<span>                                              pa <span class="op">=</span> <span class="st">"Present"</span>, limit <span class="op">=</span> <span class="st">"q01_q99"</span>, holdopt <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tmax_sm"</span>, <span class="st">"tmin_wt"</span>, <span class="st">"prec_wt"</span>, <span class="st">"prec_sm"</span>, <span class="st">"GP"</span>, <span class="st">"L"</span>, <span class="st">"M"</span>, <span class="st">"R"</span>, <span class="st">"S"</span>, <span class="st">"SD"</span><span class="op">)</span>,</span>
 <span>                                              dp <span class="op">=</span> <span class="fl">2</span>, append <span class="op">=</span> <span class="st">"predictors"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="model-usage_files/figure-html/limit_and_holdopt_demo_plots-1.png" width="100%"></p>
 <p>Please note that as ten out of the eleven variables are held at their
@@ -245,37 +246,37 @@ reduction in the number of taxa being supplied to
 <code><a href="../reference/predict_occ.html">elements::predict_occ</a></code> or
 <code><a href="../reference/calc_distance.html">elements::calc_distance</a></code>, greatly improving performance.</p>
 <p>For example, below <code><a href="../reference/env_filter.html">elements::env_filter</a></code> is applied to
-all taxa in <code><a href="../reference/TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code> using the svm
+all taxa in <code><a href="../reference/ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code> using the svm
 method, with the predictors derived from
 <code><a href="../reference/ExampleScenarios.html">elements::ExampleScenarios</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filter_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/env_filter.html">env_filter</a></span><span class="op">(</span>predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span>,</span>
-<span>                                       taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/TaxonomicBackbone.html">TaxonomicBackbone</a></span><span class="op">$</span><span class="va">taxon_code</span>, </span>
+<span>                                       taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ModelledTaxaCodes.html">ModelledTaxaCodes</a></span>,</span>
 <span>                                       screen <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"svm"</span>, limit <span class="op">=</span> <span class="st">"min_max"</span>, </span>
 <span>                                       exclude <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="cn">NULL</span>, </span>
 <span>                                       append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt;    scenario timeslice scenario_code                              taxon_code</span></span>
-<span><span class="co">#&gt; 1  Baseline      2007             a                              abies_alba</span></span>
-<span><span class="co">#&gt; 2  Baseline      2007             a                    abietinella_abietina</span></span>
-<span><span class="co">#&gt; 3  Baseline      2007             a                          acer_campestre</span></span>
-<span><span class="co">#&gt; 4  Baseline      2007             a                            acer_negundo</span></span>
-<span><span class="co">#&gt; 5  Baseline      2007             a                        acer_platanoides</span></span>
-<span><span class="co">#&gt; 6  Baseline      2007             a                     acer_pseudoplatanus</span></span>
-<span><span class="co">#&gt; 7  Baseline      2007             a                    achillea_millefolium</span></span>
-<span><span class="co">#&gt; 8  Baseline      2007             a achillea_millefolium_subsp._millefolium</span></span>
-<span><span class="co">#&gt; 9  Baseline      2007             a                       achillea_ptarmica</span></span>
-<span><span class="co">#&gt; 10 Baseline      2007             a                       aconitum_napellus</span></span>
-<span><span class="co">#&gt;    Present</span></span>
-<span><span class="co">#&gt; 1    0.004</span></span>
-<span><span class="co">#&gt; 2    0.000</span></span>
-<span><span class="co">#&gt; 3    0.001</span></span>
-<span><span class="co">#&gt; 4    0.000</span></span>
-<span><span class="co">#&gt; 5    0.000</span></span>
-<span><span class="co">#&gt; 6    0.010</span></span>
-<span><span class="co">#&gt; 7    0.006</span></span>
-<span><span class="co">#&gt; 8    0.010</span></span>
-<span><span class="co">#&gt; 9    0.611</span></span>
-<span><span class="co">#&gt; 10   0.001</span></span></code></pre>
+<pre><code><span><span class="co">#&gt;    scenario_code scenario_stage climate_scenario timeslice  scenario_name</span></span>
+<span><span class="co">#&gt; 1            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 2            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 3            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 4            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 5            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 6            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 7            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 8            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 9            a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt; 10           a.i       baseline       historical      2007 Climate Change</span></span>
+<span><span class="co">#&gt;              taxon_code Present</span></span>
+<span><span class="co">#&gt; 1            abies_alba   0.021</span></span>
+<span><span class="co">#&gt; 2  abietinella_abietina   0.020</span></span>
+<span><span class="co">#&gt; 3        acer_campestre   0.037</span></span>
+<span><span class="co">#&gt; 4          acer_negundo   0.005</span></span>
+<span><span class="co">#&gt; 5      acer_platanoides   0.033</span></span>
+<span><span class="co">#&gt; 6   acer_pseudoplatanus   0.046</span></span>
+<span><span class="co">#&gt; 7        acer_tataricum   0.002</span></span>
+<span><span class="co">#&gt; 8  achillea_millefolium   0.068</span></span>
+<span><span class="co">#&gt; 9     achillea_ptarmica   0.322</span></span>
+<span><span class="co">#&gt; 10   aconogonon_alpinum   0.002</span></span></code></pre>
 <p>In practice, given the limited size of regional species pools and/or
 interest in a particular group of taxa only it is often more practical
 to supply a reduced list of taxa to
@@ -290,54 +291,54 @@ niche overlaps for the taxa present in
 <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> are displayed.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/calc_overlap.html">calc_overlap</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExamplePlot.html">ExamplePlot</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                       taxon_code_1                    taxon_code_2     bio05</span></span>
-<span><span class="co">#&gt; 1                   carex_rostrata            equisetum_fluviatile 0.7984720</span></span>
-<span><span class="co">#&gt; 2                   carex_rostrata galium_palustre_subsp._palustre 0.4059045</span></span>
-<span><span class="co">#&gt; 3                   carex_rostrata            hydrocotyle_vulgaris 0.8042741</span></span>
-<span><span class="co">#&gt; 4                   carex_rostrata                  juncus_effusus 0.9302291</span></span>
-<span><span class="co">#&gt; 5                   carex_rostrata              silene_flos-cuculi 0.9093952</span></span>
-<span><span class="co">#&gt; 6             equisetum_fluviatile galium_palustre_subsp._palustre 0.4842810</span></span>
-<span><span class="co">#&gt; 7             equisetum_fluviatile            hydrocotyle_vulgaris 0.9733592</span></span>
-<span><span class="co">#&gt; 8             equisetum_fluviatile                  juncus_effusus 0.7400291</span></span>
-<span><span class="co">#&gt; 9             equisetum_fluviatile              silene_flos-cuculi 0.8300000</span></span>
-<span><span class="co">#&gt; 10 galium_palustre_subsp._palustre            hydrocotyle_vulgaris 0.4838433</span></span>
-<span><span class="co">#&gt; 11 galium_palustre_subsp._palustre                  juncus_effusus 0.3815489</span></span>
-<span><span class="co">#&gt; 12 galium_palustre_subsp._palustre              silene_flos-cuculi 0.4322660</span></span>
-<span><span class="co">#&gt; 13            hydrocotyle_vulgaris                  juncus_effusus 0.7464114</span></span>
-<span><span class="co">#&gt; 14            hydrocotyle_vulgaris              silene_flos-cuculi 0.8429724</span></span>
-<span><span class="co">#&gt; 15                  juncus_effusus              silene_flos-cuculi 0.8774864</span></span>
-<span><span class="co">#&gt;        bio06     bio16     bio17        GP         L         M         N</span></span>
-<span><span class="co">#&gt; 1  0.9508165 0.8646692 0.9679521 0.9330221 0.9177191 0.9859956 0.9087003</span></span>
-<span><span class="co">#&gt; 2  0.5589917 0.5345070 0.6526700 0.7958151 0.8637831 0.8059747 0.8368732</span></span>
-<span><span class="co">#&gt; 3  0.4958352 0.8772536 0.9298835 0.8233937 0.9408814 0.8527154 0.7959497</span></span>
-<span><span class="co">#&gt; 4  0.8174718 0.8920871 0.8994400 0.7778546 0.6906364 0.7477916 0.7653981</span></span>
-<span><span class="co">#&gt; 5  0.7801884 0.8989554 0.8376162 0.6387957 0.7775627 0.6899930 0.7078518</span></span>
-<span><span class="co">#&gt; 6  0.5559881 0.6463602 0.6603021 0.8535725 0.9395305 0.8008478 0.8357246</span></span>
-<span><span class="co">#&gt; 7  0.5317166 0.7622296 0.9550447 0.8821249 0.9558124 0.8484588 0.7097871</span></span>
-<span><span class="co">#&gt; 8  0.8537812 0.7811755 0.9117982 0.7750401 0.6922234 0.7417205 0.8346659</span></span>
-<span><span class="co">#&gt; 9  0.8173268 0.8592286 0.8498862 0.6932758 0.7939871 0.6842776 0.6711643</span></span>
-<span><span class="co">#&gt; 10 0.5700415 0.4657140 0.6472210 0.9606211 0.9135255 0.9515090 0.7180730</span></span>
-<span><span class="co">#&gt; 11 0.5640959 0.4670157 0.7116144 0.8264154 0.6542173 0.9204206 0.8778027</span></span>
-<span><span class="co">#&gt; 12 0.4840813 0.5397094 0.7196321 0.7819975 0.8330738 0.8768373 0.7667796</span></span>
-<span><span class="co">#&gt; 13 0.6734040 0.9186961 0.9033886 0.7997763 0.6977821 0.8855433 0.6026008</span></span>
-<span><span class="co">#&gt; 14 0.6403164 0.8347175 0.8631591 0.7834384 0.7905790 0.8312628 0.8382111</span></span>
-<span><span class="co">#&gt; 15 0.8862317 0.8178107 0.9084447 0.6578603 0.5293092 0.8928177 0.6469301</span></span>
-<span><span class="co">#&gt;            R         S        SD</span></span>
-<span><span class="co">#&gt; 1  0.8246382 0.7872328 0.9158313</span></span>
-<span><span class="co">#&gt; 2  0.8040562 0.8043534 0.8987824</span></span>
-<span><span class="co">#&gt; 3  0.8871041 0.8247424 0.6848494</span></span>
-<span><span class="co">#&gt; 4  0.7773587 0.9377029 0.7576864</span></span>
-<span><span class="co">#&gt; 5  0.5544196 0.8498583 0.6250893</span></span>
-<span><span class="co">#&gt; 6  0.8463295 0.6759460 0.9748328</span></span>
-<span><span class="co">#&gt; 7  0.8427747 0.7103888 0.7534833</span></span>
-<span><span class="co">#&gt; 8  0.6385519 0.7895008 0.8225939</span></span>
-<span><span class="co">#&gt; 9  0.6685698 0.9357196 0.7044176</span></span>
-<span><span class="co">#&gt; 10 0.7682118 0.9483410 0.7593500</span></span>
-<span><span class="co">#&gt; 11 0.7214530 0.8562657 0.8291566</span></span>
-<span><span class="co">#&gt; 12 0.6704826 0.7385938 0.7251285</span></span>
-<span><span class="co">#&gt; 13 0.6687731 0.8823358 0.9231511</span></span>
-<span><span class="co">#&gt; 14 0.5392033 0.7726525 0.8202322</span></span>
-<span><span class="co">#&gt; 15 0.4400763 0.8535100 0.8038593</span></span></code></pre></div>
+<span><span class="co">#&gt;                       taxon_code_1                    taxon_code_2        GP</span></span>
+<span><span class="co">#&gt; 1                   carex_rostrata            equisetum_fluviatile 0.7214768</span></span>
+<span><span class="co">#&gt; 2                   carex_rostrata galium_palustre_subsp._palustre 0.8363951</span></span>
+<span><span class="co">#&gt; 3                   carex_rostrata            hydrocotyle_vulgaris 0.8881867</span></span>
+<span><span class="co">#&gt; 4                   carex_rostrata                  juncus_effusus 0.7757002</span></span>
+<span><span class="co">#&gt; 5                   carex_rostrata              silene_flos-cuculi 0.7454230</span></span>
+<span><span class="co">#&gt; 6             equisetum_fluviatile galium_palustre_subsp._palustre 0.7898207</span></span>
+<span><span class="co">#&gt; 7             equisetum_fluviatile            hydrocotyle_vulgaris 0.7940598</span></span>
+<span><span class="co">#&gt; 8             equisetum_fluviatile                  juncus_effusus 0.9170747</span></span>
+<span><span class="co">#&gt; 9             equisetum_fluviatile              silene_flos-cuculi 0.5435305</span></span>
+<span><span class="co">#&gt; 10 galium_palustre_subsp._palustre            hydrocotyle_vulgaris 0.8869708</span></span>
+<span><span class="co">#&gt; 11 galium_palustre_subsp._palustre                  juncus_effusus 0.8073129</span></span>
+<span><span class="co">#&gt; 12 galium_palustre_subsp._palustre              silene_flos-cuculi 0.6764641</span></span>
+<span><span class="co">#&gt; 13            hydrocotyle_vulgaris                  juncus_effusus 0.7661815</span></span>
+<span><span class="co">#&gt; 14            hydrocotyle_vulgaris              silene_flos-cuculi 0.6705272</span></span>
+<span><span class="co">#&gt; 15                  juncus_effusus              silene_flos-cuculi 0.6206947</span></span>
+<span><span class="co">#&gt;            L         M         N   prec_sm   prec_wt         R         S</span></span>
+<span><span class="co">#&gt; 1  0.7019289 0.7653469 0.7580541 0.7176748 0.6973665 0.8166178 0.7107549</span></span>
+<span><span class="co">#&gt; 2  0.7453617 0.8966472 0.8877305 0.6650737 0.6928014 0.9209143 0.8004903</span></span>
+<span><span class="co">#&gt; 3  0.8583172 0.8997119 0.8192811 0.8803404 0.6878805 0.7909851 0.6780486</span></span>
+<span><span class="co">#&gt; 4  0.6630992 0.7802450 0.7328599 0.7242175 0.8028249 0.8776274 0.9099244</span></span>
+<span><span class="co">#&gt; 5  0.8016116 0.6011772 0.7273055 0.8601537 0.8501649 0.7312728 0.8835696</span></span>
+<span><span class="co">#&gt; 6  0.8603687 0.7431525 0.7500407 0.5177036 0.4843814 0.7957846 0.6828651</span></span>
+<span><span class="co">#&gt; 7  0.8159822 0.7956703 0.6578178 0.7196383 0.9497895 0.9453407 0.5714592</span></span>
+<span><span class="co">#&gt; 8  0.8518272 0.7689862 0.8182046 0.9794560 0.8724973 0.7291969 0.7011042</span></span>
+<span><span class="co">#&gt; 9  0.5847399 0.4424183 0.5340497 0.8231144 0.7904267 0.6222805 0.7425152</span></span>
+<span><span class="co">#&gt; 10 0.8275578 0.9348687 0.7156526 0.7474427 0.4821835 0.7561528 0.8451622</span></span>
+<span><span class="co">#&gt; 11 0.8116754 0.8401339 0.8229316 0.5252077 0.5704317 0.8127146 0.7111169</span></span>
+<span><span class="co">#&gt; 12 0.6468140 0.6382254 0.7093616 0.6213255 0.6412937 0.7721620 0.7261270</span></span>
+<span><span class="co">#&gt; 13 0.7074216 0.8769743 0.5664275 0.7183427 0.8718478 0.7442617 0.5947429</span></span>
+<span><span class="co">#&gt; 14 0.7220341 0.6106629 0.6729223 0.8382208 0.7762921 0.5809344 0.6147410</span></span>
+<span><span class="co">#&gt; 15 0.5672006 0.5883891 0.6175172 0.8221031 0.8292024 0.6390688 0.9058863</span></span>
+<span><span class="co">#&gt;           SD   tmax_sm   tmin_wt</span></span>
+<span><span class="co">#&gt; 1  0.6158546 0.5878702 0.6209539</span></span>
+<span><span class="co">#&gt; 2  0.8161466 0.5504271 0.6054813</span></span>
+<span><span class="co">#&gt; 3  0.6543901 0.7730851 0.7574574</span></span>
+<span><span class="co">#&gt; 4  0.7287424 0.8100591 0.8836285</span></span>
+<span><span class="co">#&gt; 5  0.6906799 0.8616340 0.8790914</span></span>
+<span><span class="co">#&gt; 6  0.6765197 0.3324481 0.3615850</span></span>
+<span><span class="co">#&gt; 7  0.8617632 0.6452016 0.5806407</span></span>
+<span><span class="co">#&gt; 8  0.8330254 0.7166949 0.5909182</span></span>
+<span><span class="co">#&gt; 9  0.4890992 0.6427807 0.6376136</span></span>
+<span><span class="co">#&gt; 10 0.7678227 0.4476872 0.5183362</span></span>
+<span><span class="co">#&gt; 11 0.8011935 0.4468069 0.6051843</span></span>
+<span><span class="co">#&gt; 12 0.6733674 0.4586788 0.5356794</span></span>
+<span><span class="co">#&gt; 13 0.9241939 0.7829824 0.8560658</span></span>
+<span><span class="co">#&gt; 14 0.5518042 0.8428999 0.7555202</span></span>
+<span><span class="co">#&gt; 15 0.6126248 0.8808119 0.8054637</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="shutting-down">Shutting down<a class="anchor" aria-label="anchor" href="#shutting-down"></a>
 </h3>

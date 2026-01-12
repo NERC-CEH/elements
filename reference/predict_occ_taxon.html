@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,6 +98,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">predict_occ_taxon</span><span class="op">(</span></span>
 <span>  <span class="va">taxon</span>,</span>
 <span>  <span class="va">predictors</span>,</span>
+<span>  models <span class="op">=</span> <span class="va">elementsEnv</span><span class="op">$</span><span class="va">Models</span>,</span>
 <span>  pa <span class="op">=</span> <span class="st">"Present"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  holdopt <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -109,11 +110,15 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>taxon</dt>
-<dd><p>The taxon_code, see <code><a href="TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code>.</p></dd>
+<dd><p>The taxon_code, see <code><a href="ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code>.</p></dd>
 
 
 <dt>predictors</dt>
-<dd><p>A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, bio05, bio06, bio16, and bio17</p></dd>
+<dd><p>A data frame of predictors. Must include the following columns: L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm</p></dd>
+
+
+<dt>models</dt>
+<dd><p>description</p></dd>
 
 
 <dt>pa</dt>

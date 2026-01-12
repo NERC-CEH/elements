@@ -20,7 +20,7 @@ Two methods are curently provided:
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -124,11 +124,11 @@ Two methods are curently provided:
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>taxa</dt>
-<dd><p>A vector of strings containing taxon codes, see <code><a href="TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code>.</p></dd>
+<dd><p>A vector of strings containing taxon codes, see <code><a href="ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code>.</p></dd>
 
 
 <dt>taxa_comp</dt>
-<dd><p>A vector of string containing taxon codes, see <code><a href="TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code>.</p></dd>
+<dd><p>A vector of string containing taxon codes, see <code><a href="ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code>.</p></dd>
 
 
 <dt>data</dt>
@@ -166,13 +166,20 @@ Warren, D.L., Glor, R.E., Turelli, M., 2008. ENVIRONMENTAL NICHE EQUIVALENCY VER
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu">calc_overlap</span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"carex_arenaria"</span>, <span class="st">"carex_divulsa"</span>, <span class="st">"carex_hirta"</span>, <span class="st">"carex_sylvatica"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     taxon_code_1    taxon_code_2     bio05     bio06     bio16     bio17        GP         L         M         N         R         S        SD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 carex_arenaria   carex_divulsa 0.1712193 0.4645794 0.5491408 0.5950306 0.7176495 0.5878543 0.8115673 0.5197329 0.4670727 0.6067204 0.7036407</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 carex_arenaria     carex_hirta 0.4504825 0.5580613 0.8870818 0.6769176 0.7574082 0.8109810 0.5582423 0.7042565 0.5214336 0.5615397 0.7288062</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 carex_arenaria carex_sylvatica 0.6305706 0.4761445 0.5306642 0.5528317 0.7495325 0.4710773 0.4700700 0.6397971 0.4598479 0.4570692 0.7330286</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  carex_divulsa     carex_hirta 0.7171230 0.5469514 0.5267771 0.7878075 0.7270656 0.5813232 0.5455349 0.7629162 0.8770224 0.8175112 0.8631793</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  carex_divulsa carex_sylvatica 0.5125660 0.6670865 0.7725601 0.7372212 0.8534908 0.6871001 0.4434238 0.8183531 0.9196262 0.8010941 0.8094193</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    carex_hirta carex_sylvatica 0.7930880 0.8505613 0.5910256 0.8477201 0.7400087 0.4146582 0.8299671 0.9322808 0.9087748 0.8388405 0.7913364</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     taxon_code_1    taxon_code_2        GP         L         M         N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 carex_arenaria   carex_divulsa 0.5031094 0.5402679 0.5681454 0.5734668</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 carex_arenaria     carex_hirta 0.8185350 0.6410148 0.6815202 0.6983207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 carex_arenaria carex_sylvatica 0.5638163 0.4227360 0.5603619 0.5551791</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  carex_divulsa     carex_hirta 0.6008920 0.7384367 0.5164395 0.7911835</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  carex_divulsa carex_sylvatica 0.8477718 0.2251651 0.4554916 0.7987596</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6    carex_hirta carex_sylvatica 0.6389779 0.3144370 0.7831350 0.8347743</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     prec_sm   prec_wt         R         S        SD   tmax_sm   tmin_wt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.6760245 0.6781436 0.3934124 0.4617990 0.6277570 0.3461276 0.4650646</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.4944303 0.6551107 0.6013968 0.5287972 0.6876318 0.6669901 0.7775983</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.3866701 0.7497361 0.5331587 0.5019139 0.7325371 0.6321778 0.7302398</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.5196927 0.5048234 0.6258151 0.7188923 0.6190086 0.5470688 0.5017872</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.4350060 0.6057045 0.6838383 0.9088337 0.8248326 0.5153713 0.4652367</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.7947072 0.7531000 0.9024395 0.7778183 0.6280408 0.8064970 0.8504291</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

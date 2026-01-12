@@ -12,7 +12,7 @@ generated using the Hold-At-Optima (HOA) method present in elements::predict_occ
     
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.6.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.7.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,7 +104,7 @@ generated using the Hold-At-Optima (HOA) method present in <code><a href="predic
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>taxon</dt>
-<dd><p>A string containing a taxon name as present in <code><a href="TaxonomicBackbone.html">elements::TaxonomicBackbone</a></code>.</p></dd>
+<dd><p>A string containing a taxon name as present in <code><a href="ModelledTaxaCodes.html">elements::ModelledTaxaCodes</a></code>.</p></dd>
 
 
 <dt>vars</dt>
@@ -120,9 +120,9 @@ generated using the Hold-At-Optima (HOA) method present in <code><a href="predic
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="startup.html">startup</a></span><span class="op">(</span><span class="op">)</span>; <span class="fu">elements</span><span class="fu">::</span><span class="fu">plot_be</span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"carex_rostrata"</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio05"</span>, <span class="st">"bio06"</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="startup.html">startup</a></span><span class="op">(</span><span class="op">)</span>; <span class="fu">elements</span><span class="fu">::</span><span class="fu">plot_be</span><span class="op">(</span>taxon <span class="op">=</span> <span class="st">"carex_rostrata"</span>, vars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tmax_sm"</span>, <span class="st">"tmin_wt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> elements startup completed.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in elements::predict_occ(taxa = taxon, predictors = dat, holdopt = setdiff(elements::VariableNames,     vars)):</span> All model variables (L, M, N, R, S, SD, GP, bio05, bio06, bio16, bio17) must either be present in the predictors data frame or passed to holdopt.</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in elements::predict_occ(taxa = taxon, predictors = dat, holdopt = setdiff(elements::VariableNames,     vars)):</span> All model variables (L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm) must either be present in the predictors data frame or passed to holdopt.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
