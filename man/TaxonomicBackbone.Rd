@@ -5,27 +5,24 @@
 \alias{TaxonomicBackbone}
 \title{Taxonomic backbone}
 \format{
-A data frame with 11612 rows and 11 columns, the definitions of which are:
+A data frame with 18652 rows and 9 columns, the definitions of which are:
 \describe{
-\item{taxon_name}{Taxon names.}
-\item{taxon_code}{The taxon codes used throughout the package, formed from the taxon_name values by coercing all letters to lower and replacing whitespace with underscores.}
-\item{scientificName}{The full scientific name of the taxon, which includes the author. Retrieved from GBIF.}
-\item{canonicalName}{The full name of the taxon. Retrieved from GBIF.}
-\item{rank}{The rank of the taxon.}
-\item{genus}{The parent Genus taxon associated with the Species.}
-\item{family}{The parent Family taxon associated with the Species.}
-\item{order}{The parent Order taxon associated with the Species.}
-\item{class}{The parent Class taxon associated with the Species.}
-\item{phylum}{The parent Phylum taxon associated with the Species.}
-\item{kingdom}{The parent Kingdom taxon associated with the Species.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}.}
+\item{taxon_code_no_suffix}{The taxon code with no 'aggr' suffix.}
+\item{Root}{The Root taxon.}
+\item{Phylum}{The parent Phylum taxon associated with the Species.}
+\item{Subdivision}{The parent Subdivision taxon associated with the Species.}
+\item{Class}{The parent Class taxon associated with the Species.}
+\item{Superorder}{The parent Superorder taxon associated with the Species.}
+\item{Family}{The parent Family taxon associated with the Species.}
+\item{Genus}{The parent Genus taxon associated with the Species.}
 }
 }
 \usage{
 TaxonomicBackbone
 }
 \description{
-The taxon names and codes for taxa with more than 30 presences in the EVA, with the associated taxon concept information retireved from GBIF.
-For taxa which were successfully modelled see \code{elements::ModellingTaxaLookup}.
+The higher taxa associated with the modelled taxa, retrieved from EuroSL.
 }
 \details{
 \code{TaxonomicBackbone}

@@ -44,7 +44,7 @@
 #' @examples 
 #' elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 #' 
-#' elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
+#' elements::plot_me(taxa = c("ajuga_reptans", "poa_nemoralis_aggr", "galium_odoratum"), me_type = "pdp", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 #' 
 #' @references 
 #' Jiménez-Valverde, A., Lobo, J.M., 2006. The ghost of unbalanced species distribution data in geographical model predictions. Diversity and Distributions 12, 521–524. https://doi.org/10.1111/j.1366-9516.2006.00267.x
@@ -73,10 +73,6 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
   if(isTRUE(multiple_taxa)){
     eivs <- FALSE
     presences <- FALSE
-  }
-  
-  if(isFALSE(multiple_taxa)){
-    taxon_name <- subset(elements::TaxonomicBackbone, taxon_code == taxa, select = taxon_name, drop = TRUE)
   }
   
   if(me_type == "ale"){
@@ -178,7 +174,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
   
   if(isTRUE(eivs)){
     eiv_vals <- elements::VariableData
-    eiv_vals_taxon <- eiv_vals[eiv_vals[["taxon_name"]] == taxon_name, ]
+    eiv_vals_taxon <- subset(elements::VariableData, taxon_code == taxa)
   }
   
   for(var in available_vars){
@@ -188,7 +184,7 @@ plot_me <- function(taxa, me_type = "hoa", free_y = TRUE, presences = TRUE, eivs
     min_y_var <- min(data_var[["y"]])
     min_x <- min(elements::Gradients[[var]])
     max_x <- max(elements::Gradients[[var]])
-    xlab <- subset(elements::VariableLookup, variable_code == var, select = variable_plot_name, drop = TRUE)
+    xlab <- subset(elements::VariableNamesLookup, variable_code == var, select = variable_plot_name, drop = TRUE)
     
     if(isTRUE(free_y)){
       

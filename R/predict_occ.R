@@ -42,10 +42,10 @@
 #' elements::predict_occ(taxa = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 #' 
 #' # Generate predictions for taxa specified in the 'taxa' argument using a data frame containing only predictor variables.
-#' elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
+#' elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi_aggr"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 #' 
 #' # Generate predictions for taxa specified in the 'taxa' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-#' elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
+#' elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi_aggr"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 #' 
 #' elements::shutdown() 
 #' }
@@ -57,7 +57,7 @@ predict_occ <- function(taxa, predictors, pa = "Present", limit = NULL, holdopt 
   }
   
   # Check whether all variables names are present in either 1) the predictors data frame, or 2) the holdopt argument
-  if(!all(sort(unique(c(colnames(predictors[names(predictors) %in% elements::VariableNames]), holdopt))) == elements::VariableNames)){
+  if(!setequal(c(intersect(names(predictors), elements::VariableNames), holdopt), elements::VariableNames)){
     stop("All model variables (L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm) must either be present in the predictors data frame or passed to holdopt.")
   }
   

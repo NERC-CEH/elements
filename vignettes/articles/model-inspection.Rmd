@@ -55,14 +55,14 @@ me_plot_taxon
 Multiple taxa can be supplied in the "taxa" argument, in this case the ability to plot presence box and whisker plots and EIV points and arrows is disabled.
 
 ```{r me_plot_taxa_create, include=FALSE}
-me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
+me_plot_taxa <- elements::plot_me(taxa = c("galium_boreale_aggr", "galium_saxatile_aggr", "galium_uliginosum", "galium_sterneri", "galium_aparine_aggr"),
                                   me_type = "pdp", 
                                   normalise = TRUE,
                                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 ```
 
 ```{r me_plot_taxa_code, eval=FALSE}
-elements::plot_me(taxa = c("galium_boreale", "galium_saxatile", "galium_uliginosum", "galium_sterneri", "galium_aparine"), 
+elements::plot_me(taxa = c("galium_boreale_aggr", "galium_saxatile_aggr", "galium_uliginosum", "galium_sterneri", "galium_aparine_aggr"),
                   me_type = "pdp", 
                   normalise = TRUE,
                   vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
@@ -80,13 +80,13 @@ me_plot_taxa
 #   dplyr::filter(variable == "S" & x > 8 & y > 0) |>
 #   dplyr::distinct(taxon_code)
 
-invert_example_taxon <- "torilis_japonica"
+invert_example_taxon <- "erica_tetralix"
 
 nw <- elements::NicheWidths
 nw_gr_s_max <- nw[nw[["taxon_code"]] == invert_example_taxon & nw[["variable"]] == "S", ][["max"]]
 ```
 
-In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Torilis japonica* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
+In some instances the ALE curves may appear 'inverted' and not ecologically realistic, this is most often seen in situations where the distribution of presences along a variable gradient is extremely narrow and/or where there is a non-unimodal distribution, which causes extrapolation issues in the ALE calculations. For example, *Erica tetralix* has a extremely narrow distribution of plot-mean S values, with a maximum value of `r nw_gr_s_max`.
 
 In these instances it is important to also visualise the PDP or HOA plots, which should then be prioritised when inspecting the shape of the univariate response.
 

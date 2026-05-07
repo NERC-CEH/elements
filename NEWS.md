@@ -1,3 +1,15 @@
+# elements 0.8.0 (07/05/2026)
+
+* Now modelling taxa at the species and species aggregate ranks only, aggregating subspecies and varieties into aggregates, see `elements::ModellingTaxaLookup`.
+* Adding object `elements::MaximumProbabilities` containing the maximum predicted probability for each taxon using its training data.
+* Adding True Skill Statistic to `elements::PerformanceMetrics`.
+* Changing the name of the `elements::VariableLookup` object to `elements::VariableNamesLookup`.
+* Re-training models to using plots which were previously exluded due to a lack of coordinate precision value, but which are specified in their respective documentation as having a precision of less than 1000m.
+* Now using EuroSL as the taxonomic backbone, however this does not include lichens - to be revised!
+* Moving calculation of HOAData to elementsWorkflow.
+* Updating vignettes with new scenario data.
+* Updating documentation to reflect use of ClimateEU.
+
 # elements 0.7.0 (12/01/2025)
 
 * Adding models argument to `elements::predict_occ_taxon`.

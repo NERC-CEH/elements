@@ -20,7 +20,7 @@ version from Zenodo here - https://zenodo.org/records/15639307.
 After retrieving the package to install `elements` run:
 
 ``` r
-install.packages(file.path("path_to_file", "elements_0.7.0.tar.gz"), repos = NULL, type = "source")
+install.packages(file.path("path_to_file", "elements_0.8.0.tar.gz"), repos = NULL, type = "source")
 ```
 
 Downloading and installing the package may take a few minutes.

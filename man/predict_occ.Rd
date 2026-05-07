@@ -67,10 +67,10 @@ elements::startup()
 elements::predict_occ(taxa = NULL, predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
 # Generate predictions for taxa specified in the 'taxa' argument using a data frame containing only predictor variables.
-elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
+elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi_aggr"), predictors = elements::ExampleData1, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
 # Generate predictions for taxa specified in the 'taxa' argument using a data frame containing both predictor variables and a 'taxon_code' column (which is ignored and overwritten).
-elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
+elements::predict_occ(taxa = c("stellaria_graminea", "silene_flos-cuculi_aggr"), predictors = elements::ExampleData2, pa = "Present", limit = NULL, holdopt = c("SD", "GP"))
 
 elements::shutdown() 
 }

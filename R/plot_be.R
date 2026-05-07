@@ -25,8 +25,8 @@ plot_be <- function(taxon, vars){
   
   z_mat <- xtabs(z ~ x + y, plot_dat)
   
-  xlab <- subset(elements::VariableLookup, variable_code == vars[1], select = variable_plot_name, drop = TRUE)
-  ylab <- subset(elements::VariableLookup, variable_code == vars[2], select = variable_plot_name, drop = TRUE)
+  xlab <- subset(elements::VariableNamesLookup, variable_code == vars[1], select = variable_plot_name, drop = TRUE)
+  ylab <- subset(elements::VariableNamesLookup, variable_code == vars[2], select = variable_plot_name, drop = TRUE)
   
   filled.contour(x = elements::Gradients[[vars[1]]],
                  y = elements::Gradients[[vars[2]]],

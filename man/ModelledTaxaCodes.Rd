@@ -5,7 +5,7 @@
 \alias{ModelledTaxaCodes}
 \title{Taxon codes for taxa with models}
 \format{
-A vector containing  strings.
+A vector containing 8897 strings.
 }
 \usage{
 ModelledTaxaCodes

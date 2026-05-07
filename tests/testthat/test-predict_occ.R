@@ -2,7 +2,7 @@ testthat::test_that("predict_occ works", {
   
   elements::startup()
   
-  test_taxa <- c("stellaria_graminea", "silene_flos-cuculi")
+  test_taxa <- c("stellaria_graminea", "silene_flos-cuculi_aggr")
   
   test_predictors_1 <- elements::ExampleData1
   test_predictors_2 <- elements::ExampleData2
@@ -36,7 +36,7 @@ testthat::test_that("predict_occ works, holding GP and SD at optima", {
   
   elements::startup()
   
-  test_taxa <- c("stellaria_graminea", "silene_flos-cuculi")
+  test_taxa <- c("stellaria_graminea", "silene_flos-cuculi_aggr")
   
   test_predictors_1 <- elements::ExampleData1
   test_predictors_2 <- elements::ExampleData2
@@ -57,14 +57,14 @@ testthat::test_that("predict_occ works, holding GP and SD at optima", {
                                 variable == "SD" & taxon_code == "stellaria_graminea",
                                 select = c("mean"), drop = TRUE))
   
-  testthat::expect_equal(unique(actual[actual[["taxon_code"]] == "silene_flos-cuculi", ][["GP"]]), 
+  testthat::expect_equal(unique(actual[actual[["taxon_code"]] == "silene_flos-cuculi_aggr", ][["GP"]]), 
                          subset(elements::NicheWidths, 
-                                variable == "GP" & taxon_code == "silene_flos-cuculi",
+                                variable == "GP" & taxon_code == "silene_flos-cuculi_aggr",
                                 select = c("mean"), drop = TRUE))
   
-  testthat::expect_equal(unique(actual[actual[["taxon_code"]] == "silene_flos-cuculi", ][["SD"]]), 
+  testthat::expect_equal(unique(actual[actual[["taxon_code"]] == "silene_flos-cuculi_aggr", ][["SD"]]), 
                          subset(elements::NicheWidths, 
-                                variable == "SD" & taxon_code == "silene_flos-cuculi",
+                                variable == "SD" & taxon_code == "silene_flos-cuculi_aggr",
                                 select = c("mean"), drop = TRUE))
   
   

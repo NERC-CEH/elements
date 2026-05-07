@@ -5,9 +5,9 @@
 \alias{HOAData}
 \title{HOA data}
 \format{
-A data frame with 9924544 rows and 4 columns, the definitions of which are:
+A data frame with 9306262 rows and 4 columns, the definitions of which are:
 \describe{
-\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}.}
 \item{x}{The variable value.}
 \item{y}{The PDP value.}
 \item{variable}{The variable name, see \code{elements::VariableNames}.}

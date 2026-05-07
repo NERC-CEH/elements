@@ -3,26 +3,20 @@
 \docType{data}
 \name{ModellingTaxaLookup}
 \alias{ModellingTaxaLookup}
-\title{A lookup between the taxon names, taxon codes and success of selected workflow steps}
+\title{Modelling Taxa Lookup}
 \format{
-A data frame with 11228 rows and 8 columns, the definitions of which are:
+A data frame with 14315 rows and 3 columns, the definitions of which are:
 \describe{
-\item{taxon_name}{Taxon names.}
-\item{taxon_code}{The taxon code, see \code{elements::TaxonomicBackbone}}
-\item{imbalance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see \code{elements::Imbalances}.}
-\item{nichewidth}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see \code{elements::NicheWidths}.}
-\item{performance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see \code{elements::PerformanceMeasures}.}
-\item{ale}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see \code{elements::ALEData}.}
-\item{pdp}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see \code{elements::PDPData}.}
-\item{model}{A boolean (TRUE/FALSE) representing whether ... were successfully fitted.}
+\item{taxon}{The taxon name as present in the EVA.}
+\item{taxon_name}{The aggregated taxon name for use in \code{elements}.}
+\item{taxon_code}{The aggregated taxon code, see \code{elements::ModelledTaxaCodes}.}
 }
 }
 \usage{
 ModellingTaxaLookup
 }
 \description{
-A lookup between the taxon names, taxon codes and success of selected workflow steps
-in the model-fitting process.
+A lookup between the EVA taxon names, aggregated taxon names, and taxon codes used in the \code{elements} package.
 }
 \details{
 \code{ModellingTaxaLookup}

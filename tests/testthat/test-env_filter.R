@@ -6,9 +6,7 @@ testthat::test_that("env_filter works with svm method and screen = TRUE", {
   test_taxa <- elements::ModelledTaxaCodes[sample(1:length(elements::ModelledTaxaCodes), 20)]
   test_method <- "svm"
   
-  tictoc::tic()
   actual <- elements::env_filter(predictors = test_predictors, taxa = test_taxa, method = test_method, screen = TRUE)
-  tictoc::toc()
   
   elements::shutdown()
   
@@ -28,9 +26,7 @@ testthat::test_that("env_filter works with svm method and screen = FALSE", {
   test_taxa <- elements::ModelledTaxaCodes[sample(1:length(elements::ModelledTaxaCodes), 20)]
   test_method <- "svm"
   
-  tictoc::tic()
   actual <- elements::env_filter(predictors = test_predictors, taxa = test_taxa, method = test_method, screen = FALSE)
-  tictoc::toc()
   
   elements::shutdown()
   

@@ -1,6 +1,6 @@
 testthat::test_that("envelope_filter works", {
   
-  test_taxa_codes <- c("stellaria_graminea", "silene_flos-cuculi")
+  test_taxa_codes <- c("stellaria_graminea", "silene_flos-cuculi_aggr")
   test_predictors <- elements::ExampleData1
   test_vars <- elements::VariableNames
   test_limit <- "q01_q99"

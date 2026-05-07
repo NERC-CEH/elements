@@ -12,7 +12,7 @@ VariableNames
 }
 \description{
 A vector containing the environmental variable codes for the model variables;
-equivalent to the variable_code values in the \code{elements::VariableLookup} data frame for rows where model_var is TRUE.
+equivalent to the variable_code values in the \code{elements::VariableNamesLookup} data frame for rows where model_var is TRUE.
 }
 \details{
 \code{VariableNames}

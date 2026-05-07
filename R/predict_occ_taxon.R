@@ -43,7 +43,7 @@ predict_occ_taxon <- function(taxon, predictors, models = elementsEnv$Models, pa
   }
   
   # Check whether all variables names are present in either 1) the predictors data frame, or 2) the holdopt argument
-  if(!all(sort(unique(c(colnames(predictors[names(predictors) %in% elements::VariableNames]), holdopt))) == elements::VariableNames)){
+  if(!setequal(c(intersect(names(predictors), elements::VariableNames), holdopt), elements::VariableNames)){
     stop("All model variables (L, M, N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, prec_sm) must either be present in the predictors data frame or passed to holdopt.")
   }
   

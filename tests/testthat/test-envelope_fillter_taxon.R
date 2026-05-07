@@ -1,6 +1,6 @@
 testthat::test_that("envelope_filter_taxon works", {
   
-  test_taxon <- "carex_flacca"
+  test_taxon <- "carex_flacca_aggr"
   test_predictors <- elements::ExampleData1
   test_vars <- elements::VariableNames
   test_limit <- "q01_q99"

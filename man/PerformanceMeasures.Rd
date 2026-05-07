@@ -5,15 +5,16 @@
 \alias{PerformanceMeasures}
 \title{Model performance measures}
 \format{
-A data frame with 9492 rows and 8 columns, the definitions of which are:
+A data frame with 8897 rows and 9 columns, the definitions of which are:
 \describe{
-\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}.}
 \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}
 \item{Holdout.Sensitivity}{The Sensitivity, calculated using the random holdout sample test data.}
 \item{Holdout.Specificity}{The Specificity, calculated using the random holdout sample test data.}
 \item{Holdout.BalancedAccuracy}{The Balanced Accuracy, calculated using the random holdout sample test data.}
+\item{Holdout.TrueSkillStatistic}{The True Skill Statistic, calculated using the random holdout sample test data.}
 \item{STCV.BalancedAccuracy}{The Balanced Accuracy, calculated during the modelling fitting process which used spatio-temporal 10-fold cross-validation.}
 }
 }

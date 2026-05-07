@@ -32,7 +32,7 @@ elements::startup()
 scenario_results <- elements::predict_occ(taxa = elements::ExamplePlot$taxon_code,
                                           predictors = elements::ExampleScenarios,
                                           append = "ids") |>
-  dplyr::left_join(elements::TaxonomicBackbone |> dplyr::select(taxon_name, taxon_code), by = "taxon_code")
+  dplyr::left_join(elements::ModellingTaxaLookup |> dplyr::distinct(taxon_name, taxon_code), by = "taxon_code")
 ```
 
 ```{r create_scenario_example_plot, include = FALSE}

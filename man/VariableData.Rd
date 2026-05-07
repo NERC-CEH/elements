@@ -5,8 +5,10 @@
 \alias{VariableData}
 \title{Environmental indicator value data}
 \format{
-A data frame with 9406 rows and 26 columns, the definitions of which are:
+A data frame with 9406 rows and 27 columns, the definitions of which are:
 \describe{
+\item{taxon_name}{The taxon name.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}. Not all modelled taxa have EIV values from the original datasets.}
 \item{DF}{Disturbance frequency (Midolo et al., 2023)}
 \item{DF.sd}{Disturbance frequency standard deviation (Midolo et al., 2023)}
 \item{DFH.sd}{Disturbance frequency herb layer standard deviation (Midolo et al., 2023)}
@@ -32,7 +34,6 @@ A data frame with 9406 rows and 26 columns, the definitions of which are:
 \item{SD.sd}{Soil disturbance standard deviation (Midolo et al., 2023)}
 \item{T}{Temperature (Dengler et al., 2023)}
 \item{T.nw}{Temperature niche width (Dengler et al., 2023)}
-\item{taxon_name}{The taxon name.}
 }
 }
 \usage{
@@ -46,7 +47,7 @@ A dataset containing a combined dataset of Environmental Indicator Values (EIVs)
 }
 \references{
 {
-Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+Marchi, M., Castellanos-Acuña, D., Hamann, A., Wang, T., Ray, D., Menzel, A., 2020. ClimateEU, scale-free climate normals, historical time series, and future projections for Europe. Sci Data 7, 428. https://doi.org/10.1038/s41597-020-00763-0
 
 Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
 

@@ -5,9 +5,9 @@
 \alias{ALEData}
 \title{ALE data}
 \format{
-A data frame with 2167063 rows and 4 columns, the definitions of which are:
+A data frame with 2031453 rows and 4 columns, the definitions of which are:
 \describe{
-\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}.}
 \item{x}{The variable value.}
 \item{y}{The ALE value.}
 \item{variable}{The variable name.}

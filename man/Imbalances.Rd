@@ -5,14 +5,14 @@
 \alias{Imbalances}
 \title{Presence-Absence Imbalances}
 \format{
-A data frame with 30363 rows and 6 columns, the definitions of which are:
+A data frame with 28683 rows and 6 columns, the definitions of which are:
 \describe{
 \item{Stage}{The plot selection 'stage'.}
 \item{Absent}{The number of absences.}
 \item{Present}{The number or presences.}
 \item{PA_Imbalance}{The presence-absence imbalance ratio.}
 \item{AP_Imbalance}{The absence-presence imbalance ratio.}
-\item{taxon_code}{The taxon, see \code{elements::ModellingTaxaLookup}.}
+\item{taxon_code}{The taxon, see \code{elements::ModelledTaxaCodes}.}
 }
 }
 \usage{

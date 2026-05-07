@@ -6,12 +6,32 @@
 #'
 #' @format A data frame with `r nrow(elements::ALEData)` rows and `r ncol(elements::ALEData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The ALE value.}
 #'   \item{variable}{The variable name.}
 #' }
 "ALEData"
+
+#' Model Object Availability
+#'
+#' A data frame containing boolean (TRUE/FALSE) values indicating the objects/information
+#' available for each modelled taxon.
+#'
+#' \code{ALEDaModelObjectAvailabilityta} 
+#'
+#' @format A data frame with `r nrow(elements::ModelObjectAvailability)` rows and `r ncol(elements::ModelObjectAvailability)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
+#'   \item{imbalance}{A boolean value indicating whether the taxon has data in `elements::Imbalances`.}
+#'   \item{nichewidth}{A boolean value indicating whether the taxon has data in `elements::NicheWidths`.}
+#'   \item{performance}{A boolean value indicating whether the taxon has data in `elements::PerformanceMeasures`.}
+#'   \item{ale}{A boolean value indicating whether the taxon has data in `elements::ALEData`.}
+#'   \item{pdp}{A boolean value indicating whether the taxon has data in `elements::PDPData`.}
+#'   \item{hoa}{A boolean value indicating whether the taxon has data in `elements::HOAData`.}
+#'   \item{model}{A boolean value indicating whether the taxon has a ecological niche model as present in ./inst/extdata/Models.}
+#' }
+"ModelObjectAvailability"
 
 #' EUNISDiagnosticTaxa
 #'
@@ -25,7 +45,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{phi_100}{The phi coefficient of association between the taxon and EUNIS habitat, a measure of fidelity.}
 #' }
 #' 
@@ -44,7 +64,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{perc_occ_freq}{The percentage occurrence frequency of the taxon in the EUNIS habitat.}
 #' }
 #' 
@@ -63,7 +83,7 @@
 #'   \item{eunis_code}{The EUNIS habitat code.}
 #'   \item{eunis_name}{The EUNIS habitat name.}
 #'   \item{taxon_name}{The name of the taxon as it appears in Chytrý et al (2020).}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{perc_freq_dom}{The percentage frequency of plots in which the species occurs with a cover larger than 25%.}
 #' }
 #' 
@@ -92,7 +112,7 @@
 #'   \item{prec_sm}{Precipitation in the driest quarter}
 #' }
 #' @references{
-#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' Marchi, M., Castellanos-Acuña, D., Hamann, A., Wang, T., Ray, D., Menzel, A., 2020. ClimateEU, scale-free climate normals, historical time series, and future projections for Europe. Sci Data 7, 428. https://doi.org/10.1038/s41597-020-00763-0
 #' 
 #' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
 #' 
@@ -105,7 +125,7 @@
 #' Example predictor data
 #'
 #' A dataset containing a randomised sample of 100 presences and 100 absences from the training and test data for two taxa: 
-#' Stellaria graminea (stellaria_graminea) and Silene flos-cuculi (silene_flos-cuculi).
+#' Stellaria graminea (stellaria_graminea) and Silene flos-cuculi (silene_flos-cuculi_aggr).
 #'
 #' \code{ExampleData2} 
 #'
@@ -122,10 +142,10 @@
 #'   \item{tmin_wt}{Minimum temperature in the coldest month}
 #'   \item{prec_wt}{Precipitation in the wettest quarter}
 #'   \item{prec_sm}{Precipitation in the driest quarter}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #' }
 #' @references{
-#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' Marchi, M., Castellanos-Acuña, D., Hamann, A., Wang, T., Ray, D., Menzel, A., 2020. ClimateEU, scale-free climate normals, historical time series, and future projections for Europe. Sci Data 7, 428. https://doi.org/10.1038/s41597-020-00763-0
 #' 
 #' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
 #' 
@@ -143,8 +163,8 @@
 #'
 #' @format A data frame with `r nrow(elements::ExamplePlot)` rows and `r ncol(elements::ExamplePlot)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_name}{The scientific names of the taxa present in the example plot.}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon}{The scientific names of the taxa present in the example plot.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{cover_perc}{The percentage cover of the taxa present in example plot.}
 #' }
 "ExamplePlot"
@@ -164,10 +184,10 @@
 #'   \item{S}{Salinity - 0:10}
 #'   \item{SD}{Soil Disturbance - 0:1}
 #'   \item{GP}{Grazing Pressure - 0:1}
-#'   \item{tmax_sm}{Maximum temperature in the warmest month - 5:55}
-#'   \item{tmin_wt}{Minimum temperature in the coldest month - -12:22}
+#'   \item{tmax_sm}{Maximum temperature in the warmest month - -5:55}
+#'   \item{tmin_wt}{Minimum temperature in the coldest month - -30:15}
 #'   \item{prec_wt}{Precipitation in the wettest quarter - 0:1700}
-#'   \item{prec_sm}{Precipitation in the driest quarter - 0:640}
+#'   \item{prec_sm}{Precipitation in the driest quarter - 0:800}
 #' }
 "Gradients"
 
@@ -180,7 +200,7 @@
 #'
 #' @format A data frame with `r nrow(elements::HOAData)` rows and `r ncol(elements::HOAData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The PDP value.}
 #'   \item{variable}{The variable name, see `elements::VariableNames`.}
@@ -238,7 +258,7 @@
 #'   \item{q90}{The 90% quantile value.}
 #'   \item{q95}{The 95% quantile value.}
 #'   \item{q99}{The 99% quantile value.}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #' }
 "NicheWidths"
 
@@ -250,13 +270,14 @@
 #'
 #' @format A data frame with `r nrow(elements::PerformanceMeasures)` rows and `r ncol(elements::PerformanceMeasures)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{Holdout.PrecisionRecallAreaUnderCurve}{The Precision-Recall Area Under the Curve (PRAUC), calculated using the random holdout sample test data.}
 #'   \item{Holdout.Precision}{The Precision, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Recall}{The Recall, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Sensitivity}{The Sensitivity, calculated using the random holdout sample test data.}
 #'   \item{Holdout.Specificity}{The Specificity, calculated using the random holdout sample test data.}
 #'   \item{Holdout.BalancedAccuracy}{The Balanced Accuracy, calculated using the random holdout sample test data.}
+#'   \item{Holdout.TrueSkillStatistic}{The True Skill Statistic, calculated using the random holdout sample test data.}
 #'   \item{STCV.BalancedAccuracy}{The Balanced Accuracy, calculated during the modelling fitting process which used spatio-temporal 10-fold cross-validation.}
 #' }
 "PerformanceMeasures"
@@ -269,33 +290,44 @@
 #'
 #' @format A data frame with `r nrow(elements::PDPData)` rows and `r ncol(elements::PDPData)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{x}{The variable value.}
 #'   \item{y}{The PDP value.}
 #'   \item{variable}{The variable name.}
 #' }
 "PDPData"
 
+#' Maximum Probabilities
+#'
+#' A data frame containing the maximum predicted probability values for each taxon using the training data as predictors.
+#' As SVM models were used there is limited embodied rarity and so these values are usally close to 1.
+#'
+#' \code{MaximumProbabilities} 
+#'
+#' @format A data frame with `r nrow(elements::MaximumProbabilities)` rows and `r ncol(elements::MaximumProbabilities)` columns, the definitions of which are:
+#' \describe{
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
+#'   \item{Present}{The maxmimum probability of presence.}
+#' }
+"MaximumProbabilities"
+
 #' Taxonomic backbone
 #' 
-#' The taxon names and codes for taxa with more than 30 presences in the EVA, with the associated taxon concept information retireved from GBIF.
-#' For taxa which were successfully modelled see `elements::ModellingTaxaLookup`.
+#' The higher taxa associated with the modelled taxa, retrieved from EuroSL.
 #'
 #' \code{TaxonomicBackbone} 
 #'
 #' @format A data frame with `r nrow(elements::TaxonomicBackbone)` rows and `r ncol(elements::TaxonomicBackbone)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_name}{Taxon names.}
-#'   \item{taxon_code}{The taxon codes used throughout the package, formed from the taxon_name values by coercing all letters to lower and replacing whitespace with underscores.}
-#'   \item{scientificName}{The full scientific name of the taxon, which includes the author. Retrieved from GBIF.}
-#'   \item{canonicalName}{The full name of the taxon. Retrieved from GBIF.}
-#'   \item{rank}{The rank of the taxon.}
-#'   \item{genus}{The parent Genus taxon associated with the Species.}
-#'   \item{family}{The parent Family taxon associated with the Species.}
-#'   \item{order}{The parent Order taxon associated with the Species.}
-#'   \item{class}{The parent Class taxon associated with the Species.}
-#'   \item{phylum}{The parent Phylum taxon associated with the Species.}
-#'   \item{kingdom}{The parent Kingdom taxon associated with the Species.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
+#'   \item{taxon_code_no_suffix}{The taxon code with no 'aggr' suffix.}
+#'   \item{Root}{The Root taxon.}
+#'   \item{Phylum}{The parent Phylum taxon associated with the Species.}
+#'   \item{Subdivision}{The parent Subdivision taxon associated with the Species.}
+#'   \item{Class}{The parent Class taxon associated with the Species.}
+#'   \item{Superorder}{The parent Superorder taxon associated with the Species.}
+#'   \item{Family}{The parent Family taxon associated with the Species.}
+#'   \item{Genus}{The parent Genus taxon associated with the Species.}
 #' }
 "TaxonomicBackbone"
 
@@ -307,6 +339,8 @@
 #'
 #' @format A data frame with `r nrow(elements::VariableData)` rows and `r ncol(elements::VariableData)` columns, the definitions of which are:
 #' \describe{
+#'   \item{taxon_name}{The taxon name.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`. Not all modelled taxa have EIV values from the original datasets.}
 #'   \item{DF}{Disturbance frequency (Midolo et al., 2023)}
 #'   \item{DF.sd}{Disturbance frequency standard deviation (Midolo et al., 2023)}
 #'   \item{DFH.sd}{Disturbance frequency herb layer standard deviation (Midolo et al., 2023)}
@@ -332,10 +366,9 @@
 #'   \item{SD.sd}{Soil disturbance standard deviation (Midolo et al., 2023)}
 #'   \item{T}{Temperature (Dengler et al., 2023)}
 #'   \item{T.nw}{Temperature niche width (Dengler et al., 2023)}
-#'   \item{taxon_name}{The taxon name.}
 #' }
 #' @references{
-#' Copernicus Climate Change Service, 2021. Downscaled bioclimatic indicators for selected regions from 1950 to 2100 derived from climate projections. https://doi.org/10.24381/CDS.0AB27596
+#' Marchi, M., Castellanos-Acuña, D., Hamann, A., Wang, T., Ray, D., Menzel, A., 2020. ClimateEU, scale-free climate normals, historical time series, and future projections for Europe. Sci Data 7, 428. https://doi.org/10.1038/s41597-020-00763-0
 #' 
 #' Dengler, J., Jansen, F., Chusova, O., Hüllbusch, E., Nobis, M.P., Meerbeek, K.V., Axmanová, I., Bruun, H.H., Chytrý, M., Guarino, R., Karrer, G., Moeys, K., Raus, T., Steinbauer, M.J., Tichý, L., Tyler, T., Batsatsashvili, K., Bita-Nicolae, C., Didukh, Y., Diekmann, M., Englisch, T., Fernández-Pascual, E., Frank, D., Graf, U., Hájek, M., Jelaska, S.D., Jiménez-Alfaro, B., Julve, P., Nakhutsrishvili, G., Ozinga, W.A., Ruprecht, E.-K., Šilc, U., Theurillat, J.-P., Gillet, F., 2023. Ecological Indicator Values for Europe (EIVE) 1.0. Vegetation Classification and Survey 4, 7–29. https://doi.org/10.3897/VCS.98324
 #' 
@@ -349,9 +382,9 @@
 #'
 #' A dataset containing a lookup for the Ecological Indicator Value (EIV) and bioclimatic variable codes used throughout the `elements` package and full variable namesnames.
 #'
-#' \code{VariableLookup} 
+#' \code{VariableNamesLookup} 
 #'
-#' @format A data frame with `r nrow(elements::VariableLookup)` rows and `r ncol(elements::VariableLookup)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::VariableNamesLookup)` rows and `r ncol(elements::VariableNamesLookup)` columns, the definitions of which are:
 #' \describe{
 #'   \item{raw_name}{The raw name of the variable as present in the parent dataset.}
 #'   \item{variable_code}{The variable code, used throughout the `elements` R package.}
@@ -359,12 +392,12 @@
 #'   \item{variable_plot_name}{A 'tidy' variable name with spaces.}
 #'   \item{model_var}{A boolean indicating whether the variable was included as a predictor.}
 #' }
-"VariableLookup"
+"VariableNamesLookup"
 
 #' Model variables codes
 #'
 #' A vector containing the environmental variable codes for the model variables; 
-#' equivalent to the variable_code values in the `elements::VariableLookup` data frame for rows where model_var is TRUE.
+#' equivalent to the variable_code values in the `elements::VariableNamesLookup` data frame for rows where model_var is TRUE.
 #'
 #' \code{VariableNames} 
 #'
@@ -384,28 +417,21 @@
 #'   \item{Present}{The number or presences.}
 #'   \item{PA_Imbalance}{The presence-absence imbalance ratio.}
 #'   \item{AP_Imbalance}{The absence-presence imbalance ratio.}
-#'   \item{taxon_code}{The taxon, see `elements::ModellingTaxaLookup`.}
+#'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #' }
 "Imbalances"
 
-
-#' A lookup between the taxon names, taxon codes and success of selected workflow steps
+#' Modelling Taxa Lookup
 #' 
-#' A lookup between the taxon names, taxon codes and success of selected workflow steps
-#' in the model-fitting process. 
+#' A lookup between the EVA taxon names, aggregated taxon names, and taxon codes used in the `elements` package.
 #' 
 #' \code{ModellingTaxaLookup} 
 #'
 #' @format A data frame with `r nrow(elements::ModellingTaxaLookup)` rows and `r ncol(elements::ModellingTaxaLookup)` columns, the definitions of which are:
 #' \describe{
-#'   \item{taxon_name}{Taxon names.}
-#'   \item{taxon_code}{The taxon code, see `elements::TaxonomicBackbone`}
-#'   \item{imbalance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::Imbalances`.}
-#'   \item{nichewidth}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::NicheWidths`.}
-#'   \item{performance}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::PerformanceMeasures`.}
-#'   \item{ale}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::ALEData`.}
-#'   \item{pdp}{A boolean (TRUE/FALSE) representing whether ... were successfully calculated, see `elements::PDPData`.}
-#'   \item{model}{A boolean (TRUE/FALSE) representing whether ... were successfully fitted.}
+#'   \item{taxon}{The taxon name as present in the EVA.}
+#'   \item{taxon_name}{The aggregated taxon name for use in `elements`.}
+#'   \item{taxon_code}{The aggregated taxon code, see `elements::ModelledTaxaCodes`.}
 #' }
 "ModellingTaxaLookup"
 
@@ -416,5 +442,5 @@
 #'
 #' \code{ModelledTaxaCodes} 
 #'
-#' @format A vector containing `r nrow(elements::ModelledTaxaCodes)` strings.
+#' @format A vector containing `r length(elements::ModelledTaxaCodes)` strings.
 "ModelledTaxaCodes"
