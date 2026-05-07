@@ -1,14 +1,13 @@
-pandoc: 3.6.3
-pkgdown: 2.0.9
+pandoc: 3.8.3
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
-  installation: installation.html
-  model-inspection: model-inspection.html
-  model-usage: model-usage.html
-  references: references.html
-  scenario-development: scenario-development.html
-last_built: 2026-01-12T16:15Z
+  articles/installation: installation.html
+  articles/model-inspection: model-inspection.html
+  articles/model-usage: model-usage.html
+  articles/references: references.html
+  articles/scenario-development: scenario-development.html
+last_built: 2026-05-07T12:45Z
 urls:
   reference: https://NERC-CEH.github.io/elements/reference
   article: https://NERC-CEH.github.io/elements/articles
-

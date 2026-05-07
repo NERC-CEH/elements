@@ -1,138 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/404.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/installation.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/model-inspection.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/model-usage.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/references.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/articles/scenario-development.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/index.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ALEData.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/calc_distance.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/calc_distance_once.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/calc_overlap.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/envelope_filter.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/envelope_filter_taxon.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/env_filter.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/EUNISConstantTaxa.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/EUNISDiagnosticTaxa.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/EUNISDominantTaxa.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ExampleData1.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ExampleData2.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ExamplePlot.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ExampleScenarios.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/extract_svs.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/Gradients.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/HOAData.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/Imbalances.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ModelledTaxaCodes.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/ModellingTaxaLookup.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/NicheWidths.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/PDPData.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/PerformanceMeasures.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/plot_be.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/plot_me.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/predict_occ.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/shutdown.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/startup.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/VariableData.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/VariableLookup.html</loc>
-  </url>
-  <url>
-    <loc>https://NERC-CEH.github.io/elements/reference/VariableNames.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://NERC-CEH.github.io/elements/404.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/index.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/installation.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/model-inspection.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/model-usage.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/references.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/articles/scenario-development.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/authors.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/index.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/LICENSE.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/news/index.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ALEData.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/calc_distance.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/calc_distance_once.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/calc_overlap.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/envelope_filter.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/envelope_filter_taxon.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/env_filter.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/EUNISConstantTaxa.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/EUNISDiagnosticTaxa.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/EUNISDominantTaxa.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ExampleData1.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ExampleData2.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ExamplePlot.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ExampleScenarios.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/extract_svs.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/Gradients.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/HOAData.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/Imbalances.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/index.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/MaximumProbabilities.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ModelledTaxaCodes.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ModellingTaxaLookup.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/ModelObjectAvailability.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/NicheWidths.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/PDPData.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/PerformanceMeasures.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/plot_be.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/plot_me.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/predict_occ.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/shutdown.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/startup.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/VariableData.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/VariableNames.html</loc></url>
+<url><loc>https://NERC-CEH.github.io/elements/reference/VariableNamesLookup.html</loc></url>
 </urlset>
+

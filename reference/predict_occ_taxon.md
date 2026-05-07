@@ -1,0 +1,97 @@
+# Generate predictions for the probability of occurrence
+
+Generate predictions for the probability of occurrence (presence and/or
+absence) for a given taxon.
+
+## Usage
+
+``` r
+predict_occ_taxon(
+  taxon,
+  predictors,
+  models = elementsEnv$Models,
+  pa = "Present",
+  limit = NULL,
+  holdopt = NULL,
+  dp = 3,
+  append = "ids"
+)
+```
+
+## Arguments
+
+- taxon:
+
+  The taxon_code, see
+  [`elements::ModelledTaxaCodes`](https://NERC-CEH.github.io/elements/reference/ModelledTaxaCodes.md).
+
+- predictors:
+
+  A data frame of predictors. Must include the following columns: L, M,
+  N, R, S, SD, GP, tmax_sm, tmin_wt, prec_wt, and prec_sm
+
+- models:
+
+  description
+
+- pa:
+
+  One of "Present", "Absent", or c("Present", "Absent").
+
+- limit:
+
+  A string representing the niche width quantiles, one of "min_max",
+  "q01_q99", "q05_q95", "q10_q90", "q25_q75". Which if set assigns a
+  probability of 0 to the Present column and/or 1 to the Absent column
+  to a set of predictors if one or more of those predictors are outside
+  the stipulated quantile ranges. Optional.
+
+- holdopt:
+
+  Hold one or more variables at their optimum values. NULL by default,
+  else a vector of variable codes, e.g. c("SD", "GP").
+
+- dp:
+
+  The number of decimal places to round the probability values to.
+
+- append:
+
+  A string, one of "all", "predictors", or "ids" representing which
+  columns from the predictors data frame to return with the results.
+
+## Value
+
+A data frame containing the probability of occurrence (Present and/or
+Absent).
+
+## Details
+
+A number of optional arguments provide additional control over the use
+of the models. First, using the 'limit' argument the probabilities may
+be set to 0 if one or more of the predictor values are outside a
+stipulated quantile range, e.g. the 1% and 99% quantiles by setting the
+'limit' argument to "q01_q99". This may be used to strictly enforce the
+assignment of probability values of 0. As the quantile values present in
+[`elements::NicheWidths`](https://NERC-CEH.github.io/elements/reference/NicheWidths.md)
+are derived using all presences of each taxon in the EVA, they may
+better represent the upper and lower tolerances of a taxons ecological
+niche, especially for taxa where the presences were undersampled.
+Second, using the 'holdopt' argument one or more predictor variables can
+be held constant, e.g. to hold soil disturbance constant supply c("SD")
+to the 'holdopt' argument. This may be useful in instances where you
+wish to remove the influence of one or more variables on the model
+results.
+
+NOTE: to use this function you must first run
+[`elements::startup()`](https://NERC-CEH.github.io/elements/reference/startup.md)
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+elements::startup()
+elements::predict_occ_taxon(taxon = "stellaria_graminea", predictors = elements::ExampleData1)
+elements::shutdown() 
+} # }
+```

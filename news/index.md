@@ -1,0 +1,206 @@
+# Changelog
+
+## elements 0.8.0 (07/05/2026)
+
+- Now modelling taxa at the species and species aggregate ranks only,
+  aggregating subspecies and varieties into aggregates, see
+  [`elements::ModellingTaxaLookup`](https://NERC-CEH.github.io/elements/reference/ModellingTaxaLookup.md).
+- Adding object
+  [`elements::MaximumProbabilities`](https://NERC-CEH.github.io/elements/reference/MaximumProbabilities.md)
+  containing the maximum predicted probability for each taxon using its
+  training data.
+- Adding True Skill Statistic to `elements::PerformanceMetrics`.
+- Changing the name of the `elements::VariableLookup` object to
+  [`elements::VariableNamesLookup`](https://NERC-CEH.github.io/elements/reference/VariableNamesLookup.md).
+- Re-training models to using plots which were previously exluded due to
+  a lack of coordinate precision value, but which are specified in their
+  respective documentation as having a precision of less than 1000m.
+- Now using EuroSL as the taxonomic backbone, however this does not
+  include lichens - to be revised!
+- Moving calculation of HOAData to elementsWorkflow.
+- Updating vignettes with new scenario data.
+- Updating documentation to reflect use of ClimateEU.
+
+## elements 0.7.0 (12/01/2025)
+
+- Adding models argument to
+  [`elements::predict_occ_taxon`](https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.md).
+- Adding
+  [`elements::ModellingTaxaLookup`](https://NERC-CEH.github.io/elements/reference/ModellingTaxaLookup.md)
+  object.
+- Adding object
+  [`elements::ModelledTaxaCodes`](https://NERC-CEH.github.io/elements/reference/ModelledTaxaCodes.md)
+  which contains the taxon codes for modelled taxa.
+- Changing `filehash` database format to RDS.
+- Re-fitting models. Key changes include:
+  - Decreasing the minimum presence threshold to 30.
+  - Changing the source of climate data to ClimateEU.
+  - Altering the hyper-parameter tuning ranges.
+  - Changing spatio-temporal cross-validation technique to blockCV.
+
+## elements 0.6.5 (10/10/2025)
+
+- Adding function
+  [`elements::plot_be`](https://NERC-CEH.github.io/elements/reference/plot_be.md)
+  which creates a bivariate probability/habitat suitability plot.
+- Adding function
+  [`elements::calc_overlap`](https://NERC-CEH.github.io/elements/reference/calc_overlap.md)
+  which calculates pairwise niche overlap values for a set of taxa.
+- Adding function
+  [`elements::extract_svs`](https://NERC-CEH.github.io/elements/reference/extract_svs.md)
+  which extracts the support vectors from a model. PROTOTYPE.
+- Ensuring the full variable names are passed to the x axes in
+  [`elements::plot_me`](https://NERC-CEH.github.io/elements/reference/plot_me.md).
+
+## elements 0.6.0 (26/09/2025)
+
+- Adding object
+  [`elements::Gradients`](https://NERC-CEH.github.io/elements/reference/Gradients.md)
+  which contains sequences of values between the minima and maxima for
+  each environmental variable in
+  [`elements::VariableNames`](https://NERC-CEH.github.io/elements/reference/VariableNames.md).
+- Adding object
+  [`elements::HOAData`](https://NERC-CEH.github.io/elements/reference/HOAData.md)
+  which contains predictions for each variable along its gradient (see
+  [`elements::Gradients`](https://NERC-CEH.github.io/elements/reference/Gradients.md))
+  produced using the
+  [`elements::predict_occ`](https://NERC-CEH.github.io/elements/reference/predict_occ.md)
+  function with the ‘holdopt’ argument set to all other variables.
+- Incorporating the
+  [`elements::HOAData`](https://NERC-CEH.github.io/elements/reference/HOAData.md)
+  object into
+  [`elements::plot_me`](https://NERC-CEH.github.io/elements/reference/plot_me.md),
+  which can be selected for plotting by setting thr ‘me_type’ argument
+  to “hoa”.
+- Ensuring that the X axis limits in the
+  [`elements::plot_me`](https://NERC-CEH.github.io/elements/reference/plot_me.md)
+  extend to the minima and maxima of the gradients as present in
+  [`elements::Gradients`](https://NERC-CEH.github.io/elements/reference/Gradients.md).
+
+## elements 0.5.7 (25/09/2025)
+
+- Fixing issue where
+  [`elements::env_filter`](https://NERC-CEH.github.io/elements/reference/env_filter.md)
+  does not work when there are no taxa-predictor combinations screened
+  out.
+
+## elements 0.5.6 (22/09/2025)
+
+- Adding two functions
+  [`elements::envelope_filter`](https://NERC-CEH.github.io/elements/reference/envelope_filter.md)
+  and
+  [`elements::envelope_filter_taxon`](https://NERC-CEH.github.io/elements/reference/envelope_filter_taxon.md)
+  which uses the distributional data present in
+  [`elements::NicheWidths`](https://NERC-CEH.github.io/elements/reference/NicheWidths.md)
+  to apply envelope filters. These functions are integrated into the
+  [`elements::env_filter`](https://NERC-CEH.github.io/elements/reference/env_filter.md)
+  function as a pre-screening option.
+- Separating out the calculation of euclidean distance in the
+  [`elements::env_filter`](https://NERC-CEH.github.io/elements/reference/env_filter.md)
+  function into two new functions:
+  [`elements::calc_distance_once`](https://NERC-CEH.github.io/elements/reference/calc_distance_once.md)
+  and
+  [`elements::calc_distance`](https://NERC-CEH.github.io/elements/reference/calc_distance.md).
+- Ensuring that all objects have data for the taxa present in the ENMs.
+- Changing the ‘append_predictors’ argument to ‘append’ in
+  [`elements::predict_occ_taxon`](https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.md),
+  [`elements::predict_occ`](https://NERC-CEH.github.io/elements/reference/predict_occ.md),
+  [`elements::calc_distance_once`](https://NERC-CEH.github.io/elements/reference/calc_distance_once.md),
+  and
+  [`elements::calc_distance`](https://NERC-CEH.github.io/elements/reference/calc_distance.md),
+  this argument now controls which columns are appended to the results,
+  namely: “all”: all columns supplied in the predictors dataframe;
+  “predictors”: all predictor variable columns
+  ([`elements::VariableNames`](https://NERC-CEH.github.io/elements/reference/VariableNames.md));
+  or “ids”: all non-predictor variable columns.
+- Adding three new objects
+  [`elements::EUNISDiagnosticTaxa`](https://NERC-CEH.github.io/elements/reference/EUNISDiagnosticTaxa.md),
+  [`elements::EUNISConstantTaxa`](https://NERC-CEH.github.io/elements/reference/EUNISConstantTaxa.md),
+  and
+  [`elements::EUNISDominantTaxa`](https://NERC-CEH.github.io/elements/reference/EUNISDominantTaxa.md),
+  derived from <https://doi.org/10.1111/avsc.12519>.
+- Creating new pkgdown site article “Environmental Filtering”.
+
+## elements 0.5.5 (18/09/2025)
+
+- Full model training re-run after addressing outstanding taxonomic
+  alignment issues. Now at 6631 taxa.
+- Bundling imbalance information in
+  [`elements::Imbalances`](https://NERC-CEH.github.io/elements/reference/Imbalances.md)
+- Re-creating
+  [`elements::TaxonomicBackbone`](https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.md)
+  object, now using GBIF as EuroSL does not include lichen or hybrid
+  taxa. I will also align this taxonomic backbone to the EIVE1.5
+  “Euro+Med augmented” taxonomy upon release of EIVE1.5.
+- Changing pkgdown site theme to sandstone.
+- Improving
+  [`elements::startup`](https://NERC-CEH.github.io/elements/reference/startup.md),
+  which now creates a new environment (elementsEnv) in the parent
+  environment which contains the ENMs, rather than simply loading the
+  ENMs directly into the global environment.
+
+## elements 0.5.4 (27/06/2025)
+
+- Adding pdf package manual.
+- Moving README content to articles.
+- Adding pkgdown website.
+
+## elements 0.5.3 (20/06/2025)
+
+- Removing superfluous code from
+  [`elements::predict_occ`](https://NERC-CEH.github.io/elements/reference/predict_occ.md).
+- Including example code running scenario c in the README.
+- Adding Zenodo README badge.
+- Adding function
+  [`elements::env_filter`](https://NERC-CEH.github.io/elements/reference/env_filter.md),
+  which filters a given set of taxa using a set of predictor variables
+  to retain the most suitable taxa only.
+
+## elements 0.5.2 (17/06/2025)
+
+- Bundling two additional example objects
+  [`elements::ExampleScenarios`](https://NERC-CEH.github.io/elements/reference/ExampleScenarios.md)
+  and
+  [`elements::ExamplePlot`](https://NERC-CEH.github.io/elements/reference/ExamplePlot.md)
+
+## elements 0.5.1 (16/06/2025)
+
+- Including test models (Silene flos-cuculi and Stellaria graminea) to
+  ensure the package is functional (for these two taxa). These models
+  are present in the “./inst/testdata/TestModels” object which is loaded
+  if “./inst/extdata/Models” is not present, or if specified in the
+  [`elements::startup`](https://NERC-CEH.github.io/elements/reference/startup.md)
+  function.
+
+## elements 0.5.0 (11/06/2025)
+
+- Adding the most recent iteration of the models, which we re-trained on
+  the EVA data and data from the GBNVPD not yet incorporated into the
+  EVA.
+- Adding the ‘holdopt’ and ‘limit’ arguments to
+  [`elements::predict_occ_taxon`](https://NERC-CEH.github.io/elements/reference/predict_occ_taxon.md)
+  and
+  [`elements::predict_occ`](https://NERC-CEH.github.io/elements/reference/predict_occ.md).
+- Removing the `elements::ModelTaxa` object.
+- Adding the
+  [`elements::TaxonomicBackbone`](https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.md)
+  object.
+- Changing the name of the
+  [`elements::VariableNames`](https://NERC-CEH.github.io/elements/reference/VariableNames.md)
+  object to `elements::VariableLookup` and adding a new object
+  [`elements::VariableNames`](https://NERC-CEH.github.io/elements/reference/VariableNames.md)
+  which contains a vector of the model variable names only.
+
+## elements 0.0.2 (12/04/2025)
+
+- Adding the ability to plot multiple taxa in
+  [`elements::plot_me`](https://NERC-CEH.github.io/elements/reference/plot_me.md)
+  function.
+- Adding the argument “normalise” to the
+  [`elements::plot_me`](https://NERC-CEH.github.io/elements/reference/plot_me.md)
+  function, which re-scales the y axis values in PDP plots using min-max
+  scaling.
+
+## elements 0.0.1 (11/04/2025)
+
+- First working version with all modelled taxa included.
