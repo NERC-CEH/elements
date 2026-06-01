@@ -102,10 +102,7 @@ and so are currently included for demonstrative purposes only.
 ``` r
 elements::startup(); elements::env_filter(predictors = elements::ExampleScenarios, taxa = elements::ModelledTaxaCodes[1:100], method = "svm", threshold = 0.5)
 #> elements startup completed.
-#>   scenario_code scenario_stage climate_scenario timeslice
-#> 1           b.i     projection             <NA>      2008
-#> 2           b.i     projection             <NA>      2009
-#>             scenario_name        taxon_code Present
-#> 1 Grazing Intensification achillea_ptarmica   0.524
-#> 2 Grazing Intensification achillea_ptarmica   0.552
+#> [1] scenario_code    scenario_stage   climate_scenario timeslice       
+#> [5] scenario_name    taxon_code       Present         
+#> <0 rows> (or 0-length row.names)
 ```

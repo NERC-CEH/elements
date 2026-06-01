@@ -55,4 +55,4 @@ A data frame with 8897 rows and 8 columns, the definitions of which are:
 
 ## Details
 
-`ALEDaModelObjectAvailabilityta`
+`ModelObjectAvailability`

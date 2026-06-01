@@ -1,5 +1,25 @@
 # Changelog
 
+## elements 0.8.1 (01/06/2026)
+
+- Changing `elements::ExamplePlot` to
+  [`elements::ExamplePlots`](https://NERC-CEH.github.io/elements/reference/ExamplePlots.md),
+  which now includes a set of vegetation plots not in the EVA and which
+  weren’t included in the training data.
+- Altering taxa in TestModels to include all 26 taxa now present in the
+  [`elements::ExamplePlots`](https://NERC-CEH.github.io/elements/reference/ExamplePlots.md)
+  and Stellaria graminea + Silene flos-cuculi.
+- Adding additional example scenarios which includes Climate Change +
+  Nutrient + Grazing permutations.
+- Altering
+  [`elements::TaxonomicBackbone`](https://NERC-CEH.github.io/elements/reference/TaxonomicBackbone.md),
+  now based on GBIF taxonomy (so as to include lichen taxa, otherwise
+  absent in EuroSL).
+- Ensuring that
+  [`elements::ModellingTaxaLookup`](https://NERC-CEH.github.io/elements/reference/ModellingTaxaLookup.md)
+  only includes taxon_code entries for taxa in
+  [`elements::ModelledTaxaCodes`](https://NERC-CEH.github.io/elements/reference/ModelledTaxaCodes.md).
+
 ## elements 0.8.0 (07/05/2026)
 
 - Now modelling taxa at the species and species aggregate ranks only,
@@ -160,8 +180,7 @@
 
 - Bundling two additional example objects
   [`elements::ExampleScenarios`](https://NERC-CEH.github.io/elements/reference/ExampleScenarios.md)
-  and
-  [`elements::ExamplePlot`](https://NERC-CEH.github.io/elements/reference/ExamplePlot.md)
+  and `elements::ExamplePlot`
 
 ## elements 0.5.1 (16/06/2025)
 

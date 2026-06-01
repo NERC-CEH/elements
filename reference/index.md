@@ -29,8 +29,8 @@
   : Example predictor data
 - [`ExampleData2`](https://NERC-CEH.github.io/elements/reference/ExampleData2.md)
   : Example predictor data
-- [`ExamplePlot`](https://NERC-CEH.github.io/elements/reference/ExamplePlot.md)
-  : The EVA plot used to form the example scenarios
+- [`ExamplePlots`](https://NERC-CEH.github.io/elements/reference/ExamplePlots.md)
+  : A set of example vegetation plots
 - [`ExampleScenarios`](https://NERC-CEH.github.io/elements/reference/ExampleScenarios.md)
   : Predictor data for three example scenarios
 - [`extract_svs()`](https://NERC-CEH.github.io/elements/reference/extract_svs.md)

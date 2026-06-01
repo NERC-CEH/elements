@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">elements</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,17 +79,26 @@
 <p><code>elements</code> is designed to be used to model scenarios of
 environmental change considering multiple interacting drivers. The
 object <code><a href="../reference/ExampleScenarios.html">elements::ExampleScenarios</a></code> provides a basic set of
-example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change -
-RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing
-Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per
-year) along with a Baseline scenario. Below the predicted probabilities
-for the taxa in <code><a href="../reference/ExamplePlot.html">elements::ExamplePlot</a></code> for the scenarios are
-displayed.</p>
+example scenarios for the RF1 plot in
+<code><a href="../reference/ExamplePlots.html">elements::ExamplePlots</a></code>: (A) Climate Change: a.i - ssp126,
+a.ii - ssp245, a.iii - ssp370, a.iv - ssp585. (B) Grazing: b.i - Grazing
+intensification, b.i - Grazing reduction (C) Nutrient: c.i - Nutrient
+Enrichment, c.ii - Nutrient Reduction (D) Interactions: d.i - Climate
+Change + Nutrient Reduction + Grazing Reduction, d.ii - Climate Change +
+Nutrient Addition + Grazing Reduction, d.iii - Climate Change + Nutrient
+Reduction + Grazing Intensification, d.iv - Climate Change + Nutrient
+Addition + Grazing Intensification Below the predicted probabilities for
+the taxa in plot RF1 in <code><a href="../reference/ExamplePlots.html">elements::ExamplePlots</a></code> for all
+scenarios are displayed.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/startup.html">startup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; elements startup completed.</span></span>
 <span></span>
-<span><span class="va">scenario_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExamplePlot.html">ExamplePlot</a></span><span class="op">$</span><span class="va">taxon_code</span>,</span>
+<span><span class="va">rf1_taxa</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExamplePlots.html">ExamplePlots</a></span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">plot_id</span> <span class="op">==</span> <span class="st">"RF1"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">scenario_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/predict_occ.html">predict_occ</a></span><span class="op">(</span>taxa <span class="op">=</span> <span class="va">rf1_taxa</span>,</span>
 <span>                                          predictors <span class="op">=</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span>,</span>
 <span>                                          append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ModellingTaxaLookup.html">ModellingTaxaLookup</a></span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_name</span>, <span class="va">taxon_code</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"taxon_code"</span><span class="op">)</span></span></code></pre></div>
@@ -104,17 +113,34 @@ scenarios in <code><a href="../reference/ExampleScenarios.html">elements::Exampl
 mean of the probabilities of each EUNIS habitats constant taxa, for the
 top EUNIS habiats.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">eunis_taxa_models</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">intersect</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/EUNISConstantTaxa.html">EUNISConstantTaxa</a></span><span class="op">$</span><span class="va">taxon_code</span><span class="op">)</span>, </span>
-<span>                               <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ModelledTaxaCodes.html">ModelledTaxaCodes</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">eunis_taxa_codes</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/EUNISDiagnosticTaxa.html">EUNISDiagnosticTaxa</a></span> <span class="op">|&gt;</span> <span class="co"># elements::EUNISConstantTaxa</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="st">"taxon_match"</span> <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">taxon_code</span>, pattern <span class="op">=</span> <span class="st">"_aggr\\.$"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span><span class="st">"eunis_taxon_code"</span> <span class="op">=</span> <span class="st">"taxon_code"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">elements_codes</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ModellingTaxaLookup.html">ModellingTaxaLookup</a></span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="st">"taxon_match"</span> <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove</a></span><span class="op">(</span>string <span class="op">=</span> <span class="va">taxon_code</span>, pattern <span class="op">=</span> <span class="st">"_aggr$"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">elements_eunis_models_tbl</span> <span class="op">&lt;-</span> <span class="va">elements_codes</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span><span class="va">eunis_taxa_codes</span>, by <span class="op">=</span> <span class="st">"taxon_match"</span><span class="op">)</span> </span>
+<span></span>
+<span><span class="va">elements_eunis_models</span> <span class="op">&lt;-</span> <span class="va">elements_eunis_models_tbl</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sets.html" class="external-link">setdiff</a></span><span class="op">(</span><span class="st">"glyceria_maxima"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">predictors_scenanrios</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="va"><a href="../reference/ExampleScenarios.html">ExampleScenarios</a></span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">eunis_filter_results</span> <span class="op">&lt;-</span> <span class="fu">elements</span><span class="fu">::</span><span class="fu"><a href="../reference/env_filter.html">env_filter</a></span><span class="op">(</span>predictors <span class="op">=</span> <span class="va">predictors_scenanrios</span>, </span>
-<span>                                             taxa <span class="op">=</span> <span class="va">eunis_taxa_models</span>, </span>
-<span>                                             screen <span class="op">=</span> <span class="cn">TRUE</span>, method <span class="op">=</span> <span class="st">"svm"</span>, </span>
+<span>                                             taxa <span class="op">=</span> <span class="va">elements_eunis_models</span>, </span>
+<span>                                             screen <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                                             method <span class="op">=</span> <span class="st">"svm"</span>, </span>
 <span>                                             limit <span class="op">=</span> <span class="st">"min_max"</span>, </span>
-<span>                                             exclude <span class="op">=</span> <span class="cn">NULL</span>, threshold <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>                                             exclude <span class="op">=</span> <span class="cn">NULL</span>, </span>
+<span>                                             threshold <span class="op">=</span> <span class="cn">NULL</span>, </span>
 <span>                                             append <span class="op">=</span> <span class="st">"ids"</span><span class="op">)</span></span></code></pre></div>
 <p>The mean probability for the constant taxa in the top EUNIS habitat
 in the baseline (Q24 - Intermediate fen and soft-water spring mire)

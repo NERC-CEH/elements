@@ -5,7 +5,7 @@ The Github repository containing the `elements` package
 includes all files apart from the “./inst/extdata/Models” object
 containing all the ENMs as it is above the 100MB limit. Models for the
 taxa present in the
-[`elements::ExamplePlot`](https://NERC-CEH.github.io/elements/reference/ExamplePlot.md)
+[`elements::ExamplePlots`](https://NERC-CEH.github.io/elements/reference/ExamplePlots.md)
 are bundled in the “./inst/testdata/TestModels” object, which is present
 in the Github repository.
 

@@ -43,7 +43,7 @@ For more information please see Marshall et al (in prep).
 
 ## Models
 
-At present there are 9489 ENMs currently included in `elements`.
+At present there are 8897 ENMs currently included in `elements`.
 
 ## References
 

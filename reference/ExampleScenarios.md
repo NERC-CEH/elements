@@ -1,9 +1,14 @@
 # Predictor data for three example scenarios
 
-A dataset containing predictor data for five example scenarios, in three
-groups: (A) Climate Change - RCP4.5 and (A) Climate Change - RCP8.5, (B)
-Grazing Intensification and (B) Grazing Reduction, abd (C) Nutrient
-Enrichment.
+A dataset containing predictor data for four sets of example scenarios:
+(A) Climate Change: a.i - ssp126, a.ii - ssp245, a.iii - ssp370, a.iv -
+ssp585. (B) Grazing: b.i - Grazing intensification, b.i - Grazing
+reduction (C) Nutrient: c.i - Nutrient Enrichment, c.ii - Nutrient
+Reduction (D) Interactions: d.i - Climate Change + Nutrient Reduction +
+Grazing Reduction, d.ii - Climate Change + Nutrient Addition + Grazing
+Reduction, d.iii - Climate Change + Nutrient Reduction + Grazing
+Intensification, d.iv - Climate Change + Nutrient Addition + Grazing
+Intensification
 
 ## Usage
 
@@ -13,7 +18,7 @@ ExampleScenarios
 
 ## Format
 
-A data frame with 36 rows and 16 columns, the definitions of which are:
+A data frame with 48 rows and 16 columns, the definitions of which are:
 
 - L:
 
