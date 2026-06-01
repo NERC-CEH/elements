@@ -18,7 +18,7 @@
 #' A data frame containing boolean (TRUE/FALSE) values indicating the objects/information
 #' available for each modelled taxon.
 #'
-#' \code{ALEDaModelObjectAvailabilityta} 
+#' \code{ModelObjectAvailability} 
 #'
 #' @format A data frame with `r nrow(elements::ModelObjectAvailability)` rows and `r ncol(elements::ModelObjectAvailability)` columns, the definitions of which are:
 #' \describe{
@@ -155,19 +155,22 @@
 #' }
 "ExampleData2"
 
-#' The EVA plot used to form the example scenarios
+#' A set of example vegetation plots
 #'
-#' A dataset containing the taxon presences and percentage cover for the EVA plot used to form the example scenarios present in `elements::ExampleScenarios`.
+#' A dataset containing the taxon presences and percentage cover for a set of vegetation plots recorded in a spring-fed calcareous fen - Redcar Field, County Durham, United Kingdom.
+#' These plots are not currently included in the EVA and were not included in the model training data, therefore representing an independent sample.
+#' These plots are used to form the example scenarios present in `elements::ExampleScenarios`.
 #'
-#' \code{ExamplePlot} 
+#' \code{ExamplePlots} 
 #'
-#' @format A data frame with `r nrow(elements::ExamplePlot)` rows and `r ncol(elements::ExamplePlot)` columns, the definitions of which are:
+#' @format A data frame with `r nrow(elements::ExamplePlots)` rows and `r ncol(elements::ExamplePlots)` columns, the definitions of which are:
 #' \describe{
+#'   \item{plot_id}{The plot id.}
 #'   \item{taxon}{The scientific names of the taxa present in the example plot.}
 #'   \item{taxon_code}{The taxon, see `elements::ModelledTaxaCodes`.}
 #'   \item{cover_perc}{The percentage cover of the taxa present in example plot.}
 #' }
-"ExamplePlot"
+"ExamplePlots"
 
 #' Univariate gradient intervals for each environmental variable
 #'
@@ -209,10 +212,14 @@
 
 #' Predictor data for three example scenarios
 #'
-#' A dataset containing predictor data for five example scenarios, in three groups: 
-#' (A) Climate Change - RCP4.5 and (A) Climate Change - RCP8.5,
-#' (B) Grazing Intensification and (B) Grazing Reduction, abd
-#' (C) Nutrient Enrichment.
+#' A dataset containing predictor data for four sets of example scenarios: 
+#' (A) Climate Change: a.i - ssp126, a.ii - ssp245, a.iii - ssp370, a.iv - ssp585.
+#' (B) Grazing: b.i - Grazing intensification, b.i - Grazing reduction
+#' (C) Nutrient: c.i - Nutrient Enrichment, c.ii - Nutrient Reduction
+#' (D) Interactions: d.i - Climate Change + Nutrient Reduction + Grazing Reduction, 
+#' d.ii - Climate Change + Nutrient Addition + Grazing Reduction,
+#' d.iii - Climate Change + Nutrient Reduction + Grazing Intensification, 
+#' d.iv - Climate Change + Nutrient Addition + Grazing Intensification
 #'
 #' \code{ExampleScenarios} 
 #'

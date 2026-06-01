@@ -25,6 +25,6 @@ A data frame containing boolean (TRUE/FALSE) values indicating the objects/infor
 available for each modelled taxon.
 }
 \details{
-\code{ALEDaModelObjectAvailabilityta}
+\code{ModelObjectAvailability}
 }
 \keyword{datasets}

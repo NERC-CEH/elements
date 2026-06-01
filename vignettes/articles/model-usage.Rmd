@@ -133,10 +133,10 @@ In practice, given the limited size of regional species pools and/or interest in
 
 The ability to calculate the niche overlap between taxa is provided through the
 `elements::calc_overlap` function, below the niche overlaps for the taxa present
-in `elements::ExamplePlot` are displayed.
+in `elements::ExamplePlots` are displayed.
 
 ```{r calc_overlap_example}
-elements::calc_overlap(taxa = elements::ExamplePlot$taxon_code)
+elements::calc_overlap(taxa = elements::ExamplePlots$taxon_code)
 ```
 
 ### Shutting down

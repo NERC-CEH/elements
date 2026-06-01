@@ -1,3 +1,11 @@
+# elements 0.8.1 (01/06/2026)
+
+* Changing `elements::ExamplePlot` to `elements::ExamplePlots`, which now includes a set of vegetation plots not in the EVA and which weren't included in the training data.
+* Altering taxa in TestModels to include all 26 taxa now present in the `elements::ExamplePlots` and Stellaria graminea + Silene flos-cuculi.
+* Adding additional example scenarios which includes Climate Change + Nutrient + Grazing permutations.
+* Altering `elements::TaxonomicBackbone`, now based on GBIF taxonomy (so as to include lichen taxa, otherwise absent in EuroSL).
+* Ensuring that `elements::ModellingTaxaLookup` only includes taxon_code entries for taxa in `elements::ModelledTaxaCodes`.
+
 # elements 0.8.0 (07/05/2026)
 
 * Now modelling taxa at the species and species aggregate ranks only, aggregating subspecies and varieties into aggregates, see `elements::ModellingTaxaLookup`.

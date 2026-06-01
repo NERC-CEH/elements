@@ -17,6 +17,8 @@ testthat:::test_that("startup works, models set to all", {
   
   models_names <- names(elementsEnv$Models)
   
+  setdiff(models_names, elements::ModelledTaxaCodes)
+  
   testthat::expect_true(setequal(models_names, elements::ModelledTaxaCodes))
   
   elements::shutdown()
@@ -29,7 +31,7 @@ testthat:::test_that("startup works, models set to test", {
   
   models_names <- names(elementsEnv$Models)
   
-  testthat::expect_true(setequal(models_names, elements::ExamplePlot$taxon_code))
+  testthat::expect_true(setequal(models_names, c(elements::ExamplePlots$taxon_code, c("stellaria_graminea", "silene_flos-cuculi_aggr"))))
   
   elements::shutdown()
   

@@ -71,7 +71,7 @@ the shape of the univariate response.
 \examples{
 elements::plot_me(taxa = "ajuga_reptans", me_type = "ale", free_y = FALSE, presences = TRUE, eivs = TRUE, normalise = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 
-elements::plot_me(taxa = c("galium_boreale", "galium_sylvaticum", "galium_uliginosum"), me_type = "ale", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
+elements::plot_me(taxa = c("ajuga_reptans", "poa_nemoralis_aggr", "galium_odoratum"), me_type = "pdp", free_y = FALSE, presences = TRUE, normalise = TRUE, eivs = TRUE, vars = c("L", "M", "N", "R", "S", "SD", "GP", "tmax_sm", "tmin_wt", "prec_wt", "prec_sm"))
 
 }
 \references{

@@ -4,7 +4,7 @@
 <!-- badges: start -->
 
 [![Generic
-badge](https://img.shields.io/badge/Version-0.7.0-green.svg)]()
+badge](https://img.shields.io/badge/Version-0.8.1-green.svg)]()
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15639307.svg)](https://doi.org/10.5281/zenodo.15639307)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
@@ -59,7 +59,7 @@ For more information please see Marshall et al (in prep).
 
 ## Models
 
-At present there are 9489 ENMs currently included in `elements`.
+At present there are 8897 ENMs currently included in `elements`.
 
 ## References
 

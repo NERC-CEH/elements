@@ -23,13 +23,25 @@ library(filehash)
 
 ## Scenarios
 
-`elements` is designed to be used to model scenarios of environmental change considering multiple interacting drivers. The object `elements::ExampleScenarios` provides a basic set of example scenarios: (A) Climate Change - RCP4.5, (A) Climate Change - RCP8.5, (B) Grazing Intensification (+0.025GP per year), (B) Grazing Reduction (-0.025GP per year), and (C) Nutrient Enrichment (+0.25N per year) along with a Baseline scenario.
-Below the predicted probabilities for the taxa in `elements::ExamplePlot` for the scenarios are displayed.
+`elements` is designed to be used to model scenarios of environmental change considering multiple interacting drivers. The object `elements::ExampleScenarios` provides a basic set of example scenarios
+for the RF1 plot in `elements::ExamplePlots`: 
+(A) Climate Change: a.i - ssp126, a.ii - ssp245, a.iii - ssp370, a.iv - ssp585.
+(B) Grazing: b.i - Grazing intensification, b.i - Grazing reduction
+(C) Nutrient: c.i - Nutrient Enrichment, c.ii - Nutrient Reduction
+(D) Interactions: d.i - Climate Change + Nutrient Reduction + Grazing Reduction, 
+d.ii - Climate Change + Nutrient Addition + Grazing Reduction, 
+d.iii - Climate Change + Nutrient Reduction + Grazing Intensification, 
+d.iv - Climate Change + Nutrient Addition + Grazing Intensification
+Below the predicted probabilities for the taxa in plot RF1 in `elements::ExamplePlots` for all scenarios are displayed.
 
 ```{r scenario_results}
 elements::startup()
 
-scenario_results <- elements::predict_occ(taxa = elements::ExamplePlot$taxon_code,
+rf1_taxa <- elements::ExamplePlots |>
+  dplyr::filter(plot_id == "RF1") |>
+  dplyr::pull(taxon_code)
+
+scenario_results <- elements::predict_occ(taxa = rf1_taxa,
                                           predictors = elements::ExampleScenarios,
                                           append = "ids") |>
   dplyr::left_join(elements::ModellingTaxaLookup |> dplyr::distinct(taxon_name, taxon_code), by = "taxon_code")
@@ -37,13 +49,12 @@ scenario_results <- elements::predict_occ(taxa = elements::ExamplePlot$taxon_cod
 
 ```{r create_scenario_example_plot, include = FALSE}
 scenarios_len <- length(unique(scenario_results$taxon_name))
-scenario_col_pal <- ggsci::pal_uchicago("default")(scenarios_len)
+scenario_col_pal <- sample(paletteer::paletteer_d("khroma::smoothrainbow") |> as.character(), scenarios_len)
 names(scenario_col_pal) <- unique(scenario_results$taxon_name)
 
-scenario_full_names <- c("a.i" = "Climate Change: SSP1-2.6", "a.ii" = "Climate Change: SSP2-4.5",
-                         "a.iii" = "Climate Change: SSP3-7.0", "a.iv" = "Climate Change: SSP5-8.5",
-                         "b.i" = "Grazing Intensification", "b.ii" = "Grazing Reduction",
-                         "c.i" = "Nutrient Enrichment", "c.ii" = "Nutrient Reduction")
+scenario_full_names <- elements::ExampleScenarios |>
+  dplyr::distinct(scenario_code, scenario_name) |>
+  tibble::deframe()
   
 scenario_example_plot <- ggplot2::ggplot() +
   ggplot2::geom_line(data = scenario_results |> dplyr::filter(scenario_stage != "baseline"), 
@@ -61,6 +72,7 @@ scenario_example_plot <- ggplot2::ggplot() +
                       ncol = 2,
                       labeller = ggplot2::as_labeller(scenario_full_names),
                       scales = "free_x") + 
+  ggplot2::expand_limits(y = 0) +
   ggplot2::theme_classic() +
   ggplot2::theme(strip.background = ggplot2::element_blank(),
                  legend.key.spacing.y = ggplot2::unit(0.05, "cm"),
@@ -81,23 +93,40 @@ In addition to modelling the response of individual taxa over time let's inspect
 by presenting the mean of the probabilities of each EUNIS habitats constant taxa, for the top EUNIS habiats.
 
 ```{r calc_env_filter_eunis}
-eunis_taxa_models <- intersect(unique(elements::EUNISConstantTaxa$taxon_code), 
-                               elements::ModelledTaxaCodes)
+eunis_taxa_codes <- elements::EUNISDiagnosticTaxa |> # elements::EUNISConstantTaxa
+  tibble::as_tibble() |>
+  dplyr::distinct(taxon_code) |>
+  dplyr::mutate("taxon_match" = stringr::str_remove(string = taxon_code, pattern = "_aggr\\.$")) |>
+  dplyr::rename("eunis_taxon_code" = "taxon_code")
+
+elements_codes <- elements::ModellingTaxaLookup |>
+  tibble::as_tibble() |>
+  dplyr::distinct(taxon_code) |>
+  dplyr::mutate("taxon_match" = stringr::str_remove(string = taxon_code, pattern = "_aggr$"))
+
+elements_eunis_models_tbl <- elements_codes |>
+  dplyr::inner_join(eunis_taxa_codes, by = "taxon_match") 
+
+elements_eunis_models <- elements_eunis_models_tbl |>
+  dplyr::pull(taxon_code) |>
+  setdiff("glyceria_maxima")
 
 predictors_scenanrios <- elements::ExampleScenarios |> 
   dplyr::distinct()
 
 eunis_filter_results <- elements::env_filter(predictors = predictors_scenanrios, 
-                                             taxa = eunis_taxa_models, 
-                                             screen = TRUE, method = "svm", 
+                                             taxa = elements_eunis_models, 
+                                             screen = FALSE,
+                                             method = "svm", 
                                              limit = "min_max", 
-                                             exclude = NULL, threshold = NULL, 
+                                             exclude = NULL, 
+                                             threshold = NULL, 
                                              append = "ids")
 ```
 
 ```{r q_summed_probs_plot, echo=FALSE, include=FALSE}
 eunis_filter_results_sum <- elements::EUNISConstantTaxa |>
-  dplyr::filter(taxon_code %in% eunis_taxa_models) |>
+  dplyr::filter(taxon_code %in% elements_eunis_models_tbl$eunis_taxon_code) |>
   dplyr::group_by(eunis_code) |>
   dplyr::mutate("n" = dplyr::n()) |>
   dplyr::ungroup() |>
@@ -108,9 +137,10 @@ eunis_filter_results_sum <- elements::EUNISConstantTaxa |>
 
 top_eunis_names <- eunis_filter_results_sum |>
   dplyr::group_by(timeslice, scenario_stage, scenario_code) |>
-  dplyr::slice_max(sum, n = 1) |>
+  dplyr::slice_max(sum, n = 2) |>
   dplyr::ungroup() |>
   dplyr::distinct(eunis_name) |>
+  dplyr::filter(eunis_name != c("Wet inland cliff")) |>
   dplyr::pull(eunis_name)
   
 eunis_filter_results_sum_top <- eunis_filter_results_sum |>
@@ -137,7 +167,7 @@ eunis_filter_results_adj_plot <- ggplot2::ggplot() +
                         dplyr::distinct(eunis_name, timeslice, sum),
                       mapping = ggplot2::aes(x = timeslice, y = sum, color = eunis_name),
                       position = ggplot2::position_dodge(width = 0.1)) +
-  ggplot2::ylim(c(0, 1)) +
+  ggplot2::expand_limits(y = 0) +
   ggplot2::facet_wrap(dplyr::vars(scenario_code), 
                       ncol = 2,
                       labeller = ggplot2::as_labeller(scenario_full_names),
