@@ -26,21 +26,6 @@ RF1 in
 [`elements::ExamplePlots`](https://NERC-CEH.github.io/elements/reference/ExamplePlots.md)
 for all scenarios are displayed.
 
-``` r
-
-elements::startup()
-#> elements startup completed.
-
-rf1_taxa <- elements::ExamplePlots |>
-  dplyr::filter(plot_id == "RF1") |>
-  dplyr::pull(taxon_code)
-
-scenario_results <- elements::predict_occ(taxa = rf1_taxa,
-                                          predictors = elements::ExampleScenarios,
-                                          append = "ids") |>
-  dplyr::left_join(elements::ModellingTaxaLookup |> dplyr::distinct(taxon_name, taxon_code), by = "taxon_code")
-```
-
 ![](scenario-development_files/figure-html/scenario_example_plot-1.png)
 
 ## Environmental Filtering
@@ -50,39 +35,6 @@ inspect how the constant taxa in EUNIS habitats respond to scenarios in
 [`elements::ExampleScenarios`](https://NERC-CEH.github.io/elements/reference/ExampleScenarios.md),
 by presenting the mean of the probabilities of each EUNIS habitats
 constant taxa, for the top EUNIS habiats.
-
-``` r
-
-eunis_taxa_codes <- elements::EUNISDiagnosticTaxa |> # elements::EUNISConstantTaxa
-  tibble::as_tibble() |>
-  dplyr::distinct(taxon_code) |>
-  dplyr::mutate("taxon_match" = stringr::str_remove(string = taxon_code, pattern = "_aggr\\.$")) |>
-  dplyr::rename("eunis_taxon_code" = "taxon_code")
-
-elements_codes <- elements::ModellingTaxaLookup |>
-  tibble::as_tibble() |>
-  dplyr::distinct(taxon_code) |>
-  dplyr::mutate("taxon_match" = stringr::str_remove(string = taxon_code, pattern = "_aggr$"))
-
-elements_eunis_models_tbl <- elements_codes |>
-  dplyr::inner_join(eunis_taxa_codes, by = "taxon_match") 
-
-elements_eunis_models <- elements_eunis_models_tbl |>
-  dplyr::pull(taxon_code) |>
-  setdiff("glyceria_maxima")
-
-predictors_scenanrios <- elements::ExampleScenarios |> 
-  dplyr::distinct()
-
-eunis_filter_results <- elements::env_filter(predictors = predictors_scenanrios, 
-                                             taxa = elements_eunis_models, 
-                                             screen = FALSE,
-                                             method = "svm", 
-                                             limit = "min_max", 
-                                             exclude = NULL, 
-                                             threshold = NULL, 
-                                             append = "ids")
-```
 
 The mean probability for the constant taxa in the top EUNIS habitat in
 the baseline (Q24 - Intermediate fen and soft-water spring mire)
